@@ -1,0 +1,8 @@
+--- !<test.test.YamlFileModel>
+invoice: 34843
+tax  : 251.42
+total: 4443.52
+person:
+    given  : Chris
+    family : Dumars
+
