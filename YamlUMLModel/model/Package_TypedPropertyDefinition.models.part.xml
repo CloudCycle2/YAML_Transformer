@@ -1,0 +1,7 @@
+<Package Abstract="false" ConnectToCodeModel="1" Documentation_plain="" Id="uFhKMFKFS_nqHAZH" Leaf="false" Name="TypedPropertyDefinition" PmAuthor="Def" PmCreateDateTime="2014-12-02T19:45:14.909" PmLastModified="2014-12-02T20:09:22.212" QualityReason="2&#9;2&#10;5&#9;5" QualityScore="26" Root="false" UserIDLastNumericValue="0" Visibility="public"><SubDiagrams><ClassDiagram Idref="QTIKMFKFS_nqHAYN"/>
+			</SubDiagrams><ModelChildren><Class Abstract="false" Active="false" BusinessKeyMutable="true" BusinessModel="false" ConnectToCodeModel="1" Documentation_plain="" Id="5IsKMFKFS_nqHAYZ" Leaf="false" Name="TypedProperty" PmAuthor="Def" PmCreateDateTime="2014-12-02T19:43:50.695" PmLastModified="2014-12-02T20:09:22.214" QualityReason="2&#9;2" QualityScore="97" Root="false" UserIDLastNumericValue="0" Visibility="public"><ModelChildren><Attribute Abstract="false" Aggregation="None" AllowEmptyName="false" ConnectToCodeModel="1" Derived="false" DerivedUnion="false" Documentation_plain="" HasGetter="false" HasSetter="false" Id="x08KMFKFS_nqHAYc" IsID="false" Leaf="false" Multiplicity="Unspecified" Name="description" PmAuthor="Def" PmCreateDateTime="2014-12-02T19:43:59.331" PmLastModified="2014-12-02T19:46:19.659" QualityScore="-1" ReadOnly="false" Scope="instance" Type="String" TypeModifier="" UserIDLastNumericValue="0" Visibility="private" Visible="true"/>
+					</ModelChildren><MasterView><Class Idref="ZIsKMFKFS_nqHAYY" Name="TypedProperty"/>
+					</MasterView>
+				</Class>
+			</ModelChildren>
+		</Package>
