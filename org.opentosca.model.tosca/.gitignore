@@ -1,3 +1,6 @@
 .gradle/
 bin/
 build/
+.idea/
+org.opentosca.model.tosca.iml
+build.properties
