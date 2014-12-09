@@ -1,4 +1,4 @@
-package de.opentosca.yamlconverter.main;
+package org.opentosca.yamlconverter.main;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,9 +6,8 @@ import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.opentosca.model.tosca.TDefinitions;
-
-import de.opentosca.yamlconverter.main.interfaces.ItoscaBean2BeanConverter;
-import de.opentosca.yamlconverter.main.interfaces.YamlRootElement;
+import org.opentosca.model.yaml.YamlRootElement;
+import org.opentosca.yamlconverter.main.interfaces.ItoscaBean2BeanConverter;
 
 /**
  * This Converter uses Dozer to convert between XML and YAML beans.

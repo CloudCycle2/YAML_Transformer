@@ -1,4 +1,4 @@
-package de.opentosca.yamlconverter.main.interfaces;
+package org.opentosca.yamlconverter.main.interfaces;
 
 import org.opentosca.model.tosca.TDefinitions;
 

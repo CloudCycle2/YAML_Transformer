@@ -1,7 +1,10 @@
-package de.opentosca.yamlconverter.main;
+package org.opentosca.yamlconverter.main;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -10,10 +13,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.opentosca.model.tosca.TDefinitions;
-
-import de.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
+import org.xml.sax.SAXException;
 
 /**
  * This converter uses JAXB to convert between Tosca XML and Tosca XML beans.
@@ -22,6 +28,7 @@ import de.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
  *
  */
 public class JAXBConverter implements ItoscaXML2XMLbeanConverter {
+	Schema toscaXSD = null;
 
 	@Override
 	public String xmlbean2xml(TDefinitions root) {
@@ -31,10 +38,10 @@ public class JAXBConverter implements ItoscaXML2XMLbeanConverter {
 			JAXBContext jaxbContext = JAXBContext
 					.newInstance(TDefinitions.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			jaxbMarshaller.setSchema(getToscaSchema());
 
 			// output pretty printed
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
 			jaxbMarshaller.marshal(root, stream);
 
 			return stream.toString();
@@ -54,6 +61,8 @@ public class JAXBConverter implements ItoscaXML2XMLbeanConverter {
 					.newInstance(TDefinitions.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			jaxbUnmarshaller.setSchema(getToscaSchema());
+			
 			TDefinitions xroot = (TDefinitions) jaxbUnmarshaller
 					.unmarshal(stream);
 			return xroot;
@@ -67,6 +76,26 @@ public class JAXBConverter implements ItoscaXML2XMLbeanConverter {
 	private ByteArrayInputStream string2InputStream(String xmlstring) {
 		return new ByteArrayInputStream(
 				xmlstring.getBytes(StandardCharsets.UTF_8));
+	}
+
+	public Schema getToscaSchema(){
+		if (toscaXSD == null){
+			try {
+				SchemaFactory fac = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
+				InputStream is = new FileInputStream(new File("TOSCA-v1.0.xsd"));
+				StreamSource ss = new StreamSource(is);
+				toscaXSD = fac.newSchema(ss);
+			} catch (FileNotFoundException e){
+				// file not found
+				System.err.println("Schema file for the report not found");
+			} catch (SAXException e) {
+				// Error during parsing the schema file
+				System.err.println("Schema file for the report could not be parsed:");
+				e.printStackTrace();
+			}			
+		}
+
+		return toscaXSD;
 	}
 
 }

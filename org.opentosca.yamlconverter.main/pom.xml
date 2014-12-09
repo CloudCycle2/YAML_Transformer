@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.opentosca.yaml.transformer</groupId>
-	<artifactId>core</artifactId>
+	<groupId>org.opentosca</groupId>
+	<artifactId>org.opentosca.yamlconverter.main</artifactId>
 	<version>0.1</version>
 
 	<dependencies>
@@ -13,6 +13,11 @@
 			<groupId>org.opentosca</groupId>
 			<artifactId>org.opentosca.model.tosca</artifactId>
 			<version>0.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opentosca</groupId>
+			<artifactId>org.opentosca.yamlconverter.yamlmodel</artifactId>
+			<version>0.0.1</version>
 		</dependency>
 	</dependencies>
 
