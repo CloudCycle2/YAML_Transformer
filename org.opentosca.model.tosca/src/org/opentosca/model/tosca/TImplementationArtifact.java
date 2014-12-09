@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.namespace.QName;
 
-import org.opentosca.model.staticresources.StaticTOSCANamespaces;
+//import org.opentosca.model.staticresources.StaticTOSCANamespaces;
 
 /**
  * <p>
@@ -75,9 +75,9 @@ public class TImplementationArtifact extends TExtensibleElements {
 	 * 
 	 */
 	public String getName() {
-		if (null == this.name) {
-			return this.getOtherAttributes().get(new QName(StaticTOSCANamespaces.nsToscaExtension, "name"));
-		}
+//		if (null == this.name) {
+//			return this.getOtherAttributes().get(new QName(StaticTOSCANamespaces.nsToscaExtension, "name"));
+//		}
 		
 		return this.name;
 	}

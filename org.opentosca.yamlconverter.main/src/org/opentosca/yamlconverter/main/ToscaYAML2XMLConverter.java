@@ -1,11 +1,12 @@
-package de.opentosca.yamlconverter.main;
+package org.opentosca.yamlconverter.main;
 
 import org.opentosca.model.tosca.TDefinitions;
-
-import de.opentosca.yamlconverter.main.interfaces.ItoscaBean2BeanConverter;
-import de.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
-import de.opentosca.yamlconverter.main.interfaces.ItoscaYAML2XMLConverter;
-import de.opentosca.yamlconverter.main.interfaces.ItoscaYAML2YAMLbeanConverter;
+import org.opentosca.model.yaml.YamlRootElement;
+import org.opentosca.yamlconverter.main.exceptions.ConverterException;
+import org.opentosca.yamlconverter.main.interfaces.ItoscaBean2BeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.ItoscaYAML2XMLConverter;
+import org.opentosca.yamlconverter.main.interfaces.ItoscaYAML2YAMLbeanConverter;
 
 /**
  * This Converter can convert Tosca YAML to Tosca XML (bi-directional) by the
@@ -20,14 +21,14 @@ public class ToscaYAML2XMLConverter implements ItoscaYAML2XMLConverter {
 	private ItoscaXML2XMLbeanConverter x2xb = new JAXBConverter();
 
 	@Override
-	public String yaml2xml(String yamlstring) {
+	public String yaml2xml(String yamlstring) throws ConverterException {
 		YamlRootElement yroot = y2yb.yaml2yamlbean(yamlstring);
 		TDefinitions xroot = b2b.yamlb2xmlb(yroot);
 		return x2xb.xmlbean2xml(xroot);
 	}
 
 	@Override
-	public String xml2yaml(String xmlstring) {
+	public String xml2yaml(String xmlstring) throws ConverterException {
 		TDefinitions xroot = x2xb.xml2xmlbean(xmlstring);
 		YamlRootElement yroot = b2b.xmlb2yamlb(xroot);
 		return y2yb.yamlbean2yaml(yroot);

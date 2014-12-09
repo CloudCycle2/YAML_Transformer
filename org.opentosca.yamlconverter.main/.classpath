@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="libs/jaxb-impl.jar"/>
 	<classpathentry kind="lib" path="libs/dozer-5.3.2.jar"/>
 	<classpathentry kind="lib" path="libs/yamlbeans-1.08.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.opentosca.yamlconverter.yamlmodel"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
