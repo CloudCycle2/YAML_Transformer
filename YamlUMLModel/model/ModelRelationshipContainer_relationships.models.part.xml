@@ -1,0 +1,346 @@
+<ModelRelationshipContainer Documentation_plain="" Id="exSu0FKFS_nqHAUw"
+    Name="relationships" PmAuthor="Def"
+    PmCreateDateTime="2014-12-02T15:43:55.230"
+    PmLastModified="2014-12-10T08:27:55.343" QualityScore="-1" UserIDLastNumericValue="0">
+    <ModelChildren>
+        <ModelRelationshipContainer Documentation_plain=""
+            Id="nLsYzFKFS_nqHAXL" Name="Generalization" PmAuthor="Def"
+            PmCreateDateTime="2014-12-10T08:27:55.193"
+            PmLastModified="2014-12-10T09:03:23.762" QualityScore="-1" UserIDLastNumericValue="0">
+            <ModelChildren>
+                <Generalization ConnectToCodeModel="1"
+                    Documentation_plain="" From="VbmozFKFS_nqHAVB"
+                    Id="6DfozFKFS_nqHAWY" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-10T08:26:53.463"
+                    PmLastModified="2014-12-10T08:50:04.096"
+                    QualityScore="100" Substitutable="false"
+                    To="5IsKMFKFS_nqHAYZ" UserIDLastNumericValue="0" Visibility="Unspecified">
+                    <MasterView>
+                        <Generalization Idref="35_ozFKFS_nqHAWZ"/>
+                    </MasterView>
+                </Generalization>
+                <Generalization ConnectToCodeModel="1"
+                    Documentation_plain="" From="VbmozFKFS_nqHAVB"
+                    Id="VXEYzFKFS_nqHAW5" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-10T08:27:35.082"
+                    PmLastModified="2014-12-10T08:50:04.097"
+                    QualityScore="100" Substitutable="false"
+                    To="pnfIzFKFS_nqHAUg" UserIDLastNumericValue="0" Visibility="Unspecified">
+                    <MasterView>
+                        <Generalization Idref="0IkYzFKFS_nqHAW6"/>
+                    </MasterView>
+                </Generalization>
+                <Generalization ConnectToCodeModel="1"
+                    Documentation_plain="" From="VbmozFKFS_nqHAVB"
+                    Id="LJ3YzFKFS_nqHAZr" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-10T08:31:02.580"
+                    PmLastModified="2014-12-10T08:50:04.097"
+                    QualityScore="100" Substitutable="false"
+                    To="1qjYzFKFS_nqHAY0" UserIDLastNumericValue="0" Visibility="Unspecified">
+                    <MasterView>
+                        <Generalization Idref="h53YzFKFS_nqHAZs"/>
+                    </MasterView>
+                </Generalization>
+                <Generalization ConnectToCodeModel="1"
+                    Documentation_plain="" From="dmh4zFKFS_nqHAaq"
+                    Id="6VG0zFKFS_nqHAlC" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-10T08:50:30.295"
+                    PmLastModified="2014-12-10T09:00:13.110"
+                    QualityScore="100" Substitutable="false"
+                    To="woK0zFKFS_nqHAk6" UserIDLastNumericValue="0" Visibility="Unspecified">
+                    <MasterView>
+                        <Generalization Idref="ENG0zFKFS_nqHAlD"/>
+                    </MasterView>
+                </Generalization>
+                <Generalization ConnectToCodeModel="1"
+                    Documentation_plain="" From="VbmozFKFS_nqHAVB"
+                    Id="IziczFKFS_nqHAoc" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-10T09:03:08.612"
+                    PmLastModified="2014-12-10T09:27:34.181"
+                    QualityScore="100" Substitutable="false"
+                    To="dmh4zFKFS_nqHAaq" UserIDLastNumericValue="0" Visibility="Unspecified">
+                    <MasterView>
+                        <Generalization Idref="_HiczFKFS_nqHAod"/>
+                    </MasterView>
+                </Generalization>
+            </ModelChildren>
+        </ModelRelationshipContainer>
+        <ModelRelationshipContainer Documentation_plain=""
+            Id="JFSu0FKFS_nqHAUy" Name="Association" PmAuthor="Def"
+            PmCreateDateTime="2014-12-02T15:43:55.556"
+            PmLastModified="2014-12-10T08:50:04.095" QualityScore="-1" UserIDLastNumericValue="0">
+            <ModelChildren>
+                <Association Abstract="false" Derived="false"
+                    Direction="From To" Documentation_plain=""
+                    EndRelationshipFromMetaModelElement="5IsKMFKFS_nqHAYZ"
+                    EndRelationshipToMetaModelElement="5IsKMFKFS_nqHAYZ"
+                    Id="rgqKMFKFS_nqHAYr" Leaf="false" Name="default"
+                    OrderingInProfile="-1" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-02T19:44:23.285"
+                    PmLastModified="2014-12-10T08:50:04.099"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    UserIDLastNumericValue="0" Visibility="Unspecified">
+                    <FromEnd>
+                        <AssociationEnd AggregationKind="None"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            EndModelElement="5IsKMFKFS_nqHAYZ"
+                            Id="rgqKMFKFS_nqHAYs"
+                            JavaCodeAttributeName="" Leaf="false"
+                            Multiplicity="1" Navigable="Navigable"
+                            PmAuthor="Def"
+                            PmCreateDateTime="2014-12-02T19:44:23.285"
+                            ProvidePropertyGetterMethod="false"
+                            ProvidePropertySetterMethod="false"
+                            QualityScore="-1" ReadOnly="false"
+                            Static="false" TypeModifier=""
+                            UserIDLastNumericValue="0" Visibility="private">
+                            <Qualifier>
+                                <Qualifier Documentation_plain=""
+                                    Id="rgqKMFKFS_nqHAYt" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2014-12-02T19:44:23.285"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                            </Qualifier>
+                            <Type>
+                                <Class Idref="5IsKMFKFS_nqHAYZ" Name="TypedProperty"/>
+                            </Type>
+                        </AssociationEnd>
+                    </FromEnd>
+                    <ToEnd>
+                        <AssociationEnd AggregationKind="None"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            EndModelElement="5IsKMFKFS_nqHAYZ"
+                            Id="rgqKMFKFS_nqHAYu"
+                            JavaCodeAttributeName="" Leaf="false"
+                            Multiplicity="1" Navigable="Non Navigable"
+                            PmAuthor="Def"
+                            PmCreateDateTime="2014-12-02T19:44:23.285"
+                            ProvidePropertyGetterMethod="false"
+                            ProvidePropertySetterMethod="false"
+                            QualityScore="-1" ReadOnly="false"
+                            Static="false" TypeModifier=""
+                            UserIDLastNumericValue="0" Visibility="private">
+                            <Qualifier>
+                                <Qualifier Documentation_plain=""
+                                    Id="rgqKMFKFS_nqHAYv" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2014-12-02T19:44:23.285"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                            </Qualifier>
+                            <Type>
+                                <Class Idref="5IsKMFKFS_nqHAYZ" Name="TypedProperty"/>
+                            </Type>
+                        </AssociationEnd>
+                    </ToEnd>
+                    <MasterView>
+                        <Association Idref="7gqKMFKFS_nqHAYw" Name="default"/>
+                    </MasterView>
+                </Association>
+                <Association Abstract="false" Derived="false"
+                    Direction="From To" Documentation_plain=""
+                    EndRelationshipFromMetaModelElement="5IsKMFKFS_nqHAYZ"
+                    EndRelationshipToMetaModelElement="mIepMFKFS_nqHAO9"
+                    Id="m.rpMFKFS_nqHAPm" Leaf="false" Name="type"
+                    OrderingInProfile="-1" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-02T21:00:52.697"
+                    PmLastModified="2014-12-10T08:50:04.098"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    UserIDLastNumericValue="0" Visibility="private">
+                    <FromEnd>
+                        <AssociationEnd AggregationKind="None"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            EndModelElement="5IsKMFKFS_nqHAYZ"
+                            Id="m.rpMFKFS_nqHAPn"
+                            JavaCodeAttributeName="" Leaf="false"
+                            Multiplicity="1" Navigable="Non Navigable"
+                            PmAuthor="Def"
+                            PmCreateDateTime="2014-12-02T21:00:52.697"
+                            ProvidePropertyGetterMethod="false"
+                            ProvidePropertySetterMethod="false"
+                            QualityScore="-1" ReadOnly="false"
+                            Static="false" TypeModifier=""
+                            UserIDLastNumericValue="0" Visibility="Unspecified">
+                            <Qualifier>
+                                <Qualifier Documentation_plain=""
+                                    Id="m.rpMFKFS_nqHAPo" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2014-12-02T21:00:52.697"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                            </Qualifier>
+                            <Type>
+                                <Class Idref="5IsKMFKFS_nqHAYZ" Name="TypedProperty"/>
+                            </Type>
+                        </AssociationEnd>
+                    </FromEnd>
+                    <ToEnd>
+                        <AssociationEnd AggregationKind="None"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            EndModelElement="mIepMFKFS_nqHAO9"
+                            Id="m.rpMFKFS_nqHAPp"
+                            JavaCodeAttributeName="" Leaf="false"
+                            Multiplicity="1" Name=""
+                            Navigable="Navigable" PmAuthor="Def"
+                            PmCreateDateTime="2014-12-02T21:00:52.697"
+                            ProvidePropertyGetterMethod="false"
+                            ProvidePropertySetterMethod="false"
+                            QualityScore="-1" ReadOnly="false"
+                            Static="false" TypeModifier=""
+                            UserIDLastNumericValue="0" Visibility="private">
+                            <Qualifier>
+                                <Qualifier Documentation_plain=""
+                                    Id="m.rpMFKFS_nqHAPq" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2014-12-02T21:00:52.697"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                            </Qualifier>
+                            <Type>
+                                <Class Idref="mIepMFKFS_nqHAO9" Name="PropertyType"/>
+                            </Type>
+                        </AssociationEnd>
+                    </ToEnd>
+                    <MasterView>
+                        <Association Idref="1hrpMFKFS_nqHAPr" Name="type"/>
+                    </MasterView>
+                </Association>
+                <Association Abstract="false" Derived="false"
+                    Direction="From To" Documentation_plain=""
+                    EndRelationshipFromMetaModelElement="pnfIzFKFS_nqHAUg"
+                    EndRelationshipToMetaModelElement="1qjYzFKFS_nqHAY0"
+                    Id="iufYzFKFS_nqHAZ." Leaf="false"
+                    OrderingInProfile="-1" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-10T08:31:14.385"
+                    PmLastModified="2014-12-10T09:00:13.112"
+                    QualityScore="100" UserIDLastNumericValue="0" Visibility="Unspecified">
+                    <FromEnd>
+                        <AssociationEnd AggregationKind="None"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            EndModelElement="pnfIzFKFS_nqHAUg"
+                            Id="iufYzFKFS_nqHAZ_"
+                            JavaCodeAttributeName="" Leaf="false"
+                            Multiplicity="1" Navigable="Non Navigable"
+                            PmAuthor="Def"
+                            PmCreateDateTime="2014-12-10T08:31:14.385"
+                            ProvidePropertyGetterMethod="false"
+                            ProvidePropertySetterMethod="false"
+                            QualityScore="-1" ReadOnly="false"
+                            Static="false" TypeModifier=""
+                            UserIDLastNumericValue="0" Visibility="private">
+                            <Qualifier>
+                                <Qualifier Documentation_plain=""
+                                    Id="iufYzFKFS_nqHAaA" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2014-12-10T08:31:14.385"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                            </Qualifier>
+                            <Type>
+                                <Class Idref="pnfIzFKFS_nqHAUg" Name="YAMLFileRoot"/>
+                            </Type>
+                        </AssociationEnd>
+                    </FromEnd>
+                    <ToEnd>
+                        <AssociationEnd AggregationKind="None"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            EndModelElement="1qjYzFKFS_nqHAY0"
+                            Id="iufYzFKFS_nqHAaB"
+                            JavaCodeAttributeName="" Leaf="false"
+                            Multiplicity="*" Name=""
+                            Navigable="Navigable" PmAuthor="Def"
+                            PmCreateDateTime="2014-12-10T08:31:14.385"
+                            ProvidePropertyGetterMethod="false"
+                            ProvidePropertySetterMethod="false"
+                            QualityScore="-1" ReadOnly="false"
+                            Static="false" TypeModifier=""
+                            UserIDLastNumericValue="0" Visibility="private">
+                            <Qualifier>
+                                <Qualifier Documentation_plain=""
+                                    Id="iufYzFKFS_nqHAaC" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2014-12-10T08:31:14.385"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                            </Qualifier>
+                            <Type>
+                                <Class Idref="1qjYzFKFS_nqHAY0" Name="NodeTemplate"/>
+                            </Type>
+                        </AssociationEnd>
+                    </ToEnd>
+                    <MasterView>
+                        <Association Idref="fxfYzFKFS_nqHAaD"/>
+                    </MasterView>
+                </Association>
+                <Association Abstract="false" Derived="false"
+                    Direction="From To" Documentation_plain=""
+                    EndRelationshipFromMetaModelElement="1qjYzFKFS_nqHAY0"
+                    EndRelationshipToMetaModelElement="dmh4zFKFS_nqHAaq"
+                    Id="ElnkzFKFS_nqHAgk" Leaf="false"
+                    OrderingInProfile="-1" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-10T08:44:01.096"
+                    PmLastModified="2014-12-10T09:03:23.759"
+                    QualityScore="100" UserIDLastNumericValue="0" Visibility="Unspecified">
+                    <FromEnd>
+                        <AssociationEnd AggregationKind="None"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            EndModelElement="1qjYzFKFS_nqHAY0"
+                            Id="ElnkzFKFS_nqHAgl"
+                            JavaCodeAttributeName="" Leaf="false"
+                            Multiplicity="1" Navigable="Non Navigable"
+                            PmAuthor="Def"
+                            PmCreateDateTime="2014-12-10T08:44:01.096"
+                            ProvidePropertyGetterMethod="false"
+                            ProvidePropertySetterMethod="false"
+                            QualityScore="-1" ReadOnly="false"
+                            Static="false" TypeModifier=""
+                            UserIDLastNumericValue="0" Visibility="private">
+                            <Qualifier>
+                                <Qualifier Documentation_plain=""
+                                    Id="ElnkzFKFS_nqHAgm" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2014-12-10T08:44:01.096"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                            </Qualifier>
+                            <Type>
+                                <Class Idref="1qjYzFKFS_nqHAY0" Name="NodeTemplate"/>
+                            </Type>
+                        </AssociationEnd>
+                    </FromEnd>
+                    <ToEnd>
+                        <AssociationEnd AggregationKind="None"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            EndModelElement="dmh4zFKFS_nqHAaq"
+                            Id="ElnkzFKFS_nqHAgn"
+                            JavaCodeAttributeName="" Leaf="false"
+                            Multiplicity="*" Name=""
+                            Navigable="Navigable" PmAuthor="Def"
+                            PmCreateDateTime="2014-12-10T08:44:01.096"
+                            ProvidePropertyGetterMethod="false"
+                            ProvidePropertySetterMethod="false"
+                            QualityScore="-1" ReadOnly="false"
+                            Static="false" TypeModifier=""
+                            UserIDLastNumericValue="0" Visibility="private">
+                            <Qualifier>
+                                <Qualifier Documentation_plain=""
+                                    Id="ElnkzFKFS_nqHAgo" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2014-12-10T08:44:01.096"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                            </Qualifier>
+                            <Type>
+                                <Class Idref="dmh4zFKFS_nqHAaq" Name="Root"/>
+                            </Type>
+                        </AssociationEnd>
+                    </ToEnd>
+                    <MasterView>
+                        <Association Idref="D.XkzFKFS_nqHAgp"/>
+                    </MasterView>
+                </Association>
+            </ModelChildren>
+        </ModelRelationshipContainer>
+    </ModelChildren>
+</ModelRelationshipContainer>

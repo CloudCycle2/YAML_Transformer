@@ -1,0 +1,153 @@
+<Package Abstract="false" ConnectToCodeModel="1" Documentation_plain=""
+    Id="tUDEzFKFS_nqHAel" Leaf="false" Name="yaml" PmAuthor="Def"
+    PmCreateDateTime="2014-12-10T08:39:00.141"
+    PmLastModified="2014-12-10T08:50:04.096"
+    QualityReason="2&#x9;2&#xa;5&#x9;5" QualityScore="26" Root="false"
+    UserIDLastNumericValue="0" Visibility="public">
+    <ModelChildren>
+        <Package Abstract="false" ConnectToCodeModel="1"
+            Documentation_plain="" Id="jUDEzFKFS_nqHAem" Leaf="false"
+            Name="element" PmAuthor="Def"
+            PmCreateDateTime="2014-12-10T08:39:00.145"
+            PmLastModified="2014-12-10T08:50:04.101"
+            QualityReason="2&#x9;2&#xa;5&#x9;5" QualityScore="26"
+            Root="false" UserIDLastNumericValue="0" Visibility="public">
+            <SubDiagrams>
+                <ClassDiagram Idref="QTIKMFKFS_nqHAYN"/>
+                <ClassDiagram Idref="txUozFKFS_nqHAUx"/>
+                <ClassDiagram Idref="PbdIzFKFS_nqHAUJ"/>
+            </SubDiagrams>
+            <ModelChildren>
+                <Class Abstract="true" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="mIepMFKFS_nqHAO9" Leaf="false"
+                    Name="PropertyType" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-02T20:59:16.761"
+                    PmLastModified="2014-12-10T09:00:13.113"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <MasterView>
+                        <Class Idref="GIepMFKFS_nqHAO8" Name="PropertyType"/>
+                    </MasterView>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="5IsKMFKFS_nqHAYZ" Leaf="false"
+                    Name="TypedProperty" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-02T19:43:50.695"
+                    PmLastModified="2014-12-10T09:00:13.113"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ToSimpleRelationships>
+                        <Generalization Idref="6DfozFKFS_nqHAWY" Name=""/>
+                    </ToSimpleRelationships>
+                    <MasterView>
+                        <Class Idref="ZIsKMFKFS_nqHAYY" Name="TypedProperty"/>
+                    </MasterView>
+                </Class>
+                <Class Abstract="true" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="VbmozFKFS_nqHAVB" Leaf="false"
+                    Name="YAMLElement" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-10T08:24:22.314"
+                    PmLastModified="2014-12-10T09:03:23.761"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ModelChildren>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="3IBozFKFS_nqHAVE" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="description" PmAuthor="Def"
+                            PmCreateDateTime="2014-12-10T08:24:47.803"
+                            PmLastModified="2014-12-10T08:27:55.341"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="String"
+                            TypeModifier="" UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true"/>
+                    </ModelChildren>
+                    <FromSimpleRelationships>
+                        <Generalization Idref="6DfozFKFS_nqHAWY" Name=""/>
+                        <Generalization Idref="VXEYzFKFS_nqHAW5" Name=""/>
+                        <Generalization Idref="LJ3YzFKFS_nqHAZr" Name=""/>
+                        <Generalization Idref="IziczFKFS_nqHAoc" Name=""/>
+                    </FromSimpleRelationships>
+                    <MasterView>
+                        <Class Idref="lbmozFKFS_nqHAVA" Name="YAMLElement"/>
+                    </MasterView>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="pnfIzFKFS_nqHAUg" Leaf="false"
+                    Name="YAMLFileRoot" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-10T08:22:31.909"
+                    PmLastModified="2014-12-10T08:50:04.097"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ModelChildren>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="YCRYzFKFS_nqHAYV" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="tosca_definitions_version"
+                            PmAuthor="Def"
+                            PmCreateDateTime="2014-12-10T08:29:18.854"
+                            PmLastModified="2014-12-10T08:30:05.837"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="String"
+                            TypeModifier="" UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true"/>
+                    </ModelChildren>
+                    <ToSimpleRelationships>
+                        <Generalization Idref="VXEYzFKFS_nqHAW5" Name=""/>
+                    </ToSimpleRelationships>
+                    <MasterView>
+                        <Class Idref="JnfIzFKFS_nqHAUf" Name="YAMLFileRoot"/>
+                    </MasterView>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="1qjYzFKFS_nqHAY0" Leaf="false"
+                    Name="NodeTemplate" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-10T08:30:20.651"
+                    PmLastModified="2014-12-10T08:50:04.100"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ModelChildren>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="j5a4zFKFS_nqHAaT" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="name" PmAuthor="Def"
+                            PmCreateDateTime="2014-12-10T08:32:53.361"
+                            PmLastModified="2014-12-10T08:40:02.936"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="String"
+                            TypeModifier="" UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true"/>
+                    </ModelChildren>
+                    <ToSimpleRelationships>
+                        <Generalization Idref="LJ3YzFKFS_nqHAZr" Name=""/>
+                    </ToSimpleRelationships>
+                    <MasterView>
+                        <Class Idref="1qjYzFKFS_nqHAYz" Name="NodeTemplate"/>
+                    </MasterView>
+                </Class>
+            </ModelChildren>
+        </Package>
+    </ModelChildren>
+</Package>
