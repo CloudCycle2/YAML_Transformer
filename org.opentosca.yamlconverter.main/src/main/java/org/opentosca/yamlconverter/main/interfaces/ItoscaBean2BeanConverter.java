@@ -1,7 +1,7 @@
 package org.opentosca.yamlconverter.main.interfaces;
 
 import org.opentosca.model.tosca.TDefinitions;
-import org.opentosca.model.yaml.YamlRootElement;
+import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
 
 public interface ItoscaBean2BeanConverter {
 	/**

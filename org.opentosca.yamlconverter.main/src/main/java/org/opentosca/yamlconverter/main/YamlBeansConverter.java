@@ -1,15 +1,14 @@
 package org.opentosca.yamlconverter.main;
 
-import java.io.StringWriter;
-import java.io.Writer;
-
-import org.opentosca.model.yaml.YamlRootElement;
-import org.opentosca.yamlconverter.main.exceptions.ConverterException;
-import org.opentosca.yamlconverter.main.interfaces.ItoscaYAML2YAMLbeanConverter;
-
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
+import org.opentosca.yamlconverter.main.exceptions.ConverterException;
+import org.opentosca.yamlconverter.main.interfaces.ItoscaYAML2YAMLbeanConverter;
+import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
+
+import java.io.StringWriter;
+import java.io.Writer;
 
 /**
  * This Converter uses YamlBeans to convert YAML to YAML beans (bi-directional).

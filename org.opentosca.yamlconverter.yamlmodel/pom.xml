@@ -8,5 +8,9 @@
 	<artifactId>org.opentosca.yamlconverter.yamlmodel</artifactId>
 	<version>0.1</version>
 
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+	</build>
+
 
 </project>

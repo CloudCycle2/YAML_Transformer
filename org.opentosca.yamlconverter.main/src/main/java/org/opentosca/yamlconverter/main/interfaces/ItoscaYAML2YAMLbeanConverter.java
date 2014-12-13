@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.main.interfaces;
 
-import org.opentosca.model.yaml.YamlRootElement;
+import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 
 public interface ItoscaYAML2YAMLbeanConverter {

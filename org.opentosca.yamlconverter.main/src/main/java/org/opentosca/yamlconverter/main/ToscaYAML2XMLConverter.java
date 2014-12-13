@@ -1,7 +1,7 @@
 package org.opentosca.yamlconverter.main;
 
 import org.opentosca.model.tosca.TDefinitions;
-import org.opentosca.model.yaml.YamlRootElement;
+import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.ItoscaBean2BeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
