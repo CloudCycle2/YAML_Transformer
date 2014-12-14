@@ -2,6 +2,8 @@ package org.opentosca.yamlconverter.main.interfaces;
 
 import org.opentosca.model.tosca.TDefinitions;
 import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
+import org.opentosca.model.tosca.TestRoot;
+import org.opentosca.model.yaml.YamlRootElement;
 
 public interface ItoscaBean2BeanConverter {
 	/**
@@ -16,5 +18,5 @@ public interface ItoscaBean2BeanConverter {
 	 * @param yamlroot The YAML root bean
 	 * @return The XML root bean
 	 */
-	public TDefinitions yamlb2xmlb(YamlRootElement yamlroot);
+	public TestRoot yamlb2xmlb(YamlRootElement yamlroot);
 }
