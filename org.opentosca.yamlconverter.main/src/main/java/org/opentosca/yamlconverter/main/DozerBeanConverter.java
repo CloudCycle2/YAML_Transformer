@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.opentosca.model.tosca.TDefinitions;
+import org.opentosca.model.tosca.TestRoot;
 import org.opentosca.model.yaml.YamlRootElement;
 import org.opentosca.yamlconverter.main.interfaces.ItoscaBean2BeanConverter;
 
@@ -51,7 +52,7 @@ public class DozerBeanConverter implements ItoscaBean2BeanConverter {
 		File folder = new File(foldername);
 		for (File f : folder.listFiles()) {
 			if (f.isFile()) {
-				myMappingFiles.add(foldername + "/" + f.getName());
+				myMappingFiles.add("file:" + foldername + "/" + f.getName());
 			} else if (recursive && f.isDirectory()) {
 				myMappingFiles.addAll(getMappingfiles(f.getPath(), true));
 			}
@@ -60,9 +61,11 @@ public class DozerBeanConverter implements ItoscaBean2BeanConverter {
 	}
 
 	@Override
-	public TDefinitions yamlb2xmlb(YamlRootElement yamlroot) {
+	public TestRoot yamlb2xmlb(YamlRootElement yamlroot) {
 		// TODO: not tested
-		return mapper.map(yamlroot, TDefinitions.class);
+		TestRoot test = mapper.map(yamlroot, TestRoot.class);
+		
+		return test;
 	}
 
 	@Override
