@@ -1,13 +1,8 @@
 package org.opentosca.yamlconverter.main;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
+import org.opentosca.model.tosca.TDefinitions;
+import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
+import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -16,10 +11,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-
-import org.opentosca.model.tosca.TDefinitions;
-import org.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
-import org.xml.sax.SAXException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * This converter uses JAXB to convert between Tosca XML and Tosca XML beans.
@@ -27,7 +20,7 @@ import org.xml.sax.SAXException;
  * @author Jonas Heinisch
  *
  */
-public class JAXBConverter implements ItoscaXML2XMLbeanConverter {
+public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 	Schema toscaXSD = null;
 
 	@Override

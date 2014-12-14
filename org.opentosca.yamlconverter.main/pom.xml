@@ -2,28 +2,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.opentosca</groupId>
-	<artifactId>org.opentosca.yamlconverter.main</artifactId>
-	<version>0.1</version>
+    <groupId>org.opentosca</groupId>
+    <artifactId>org.opentosca.yamlconverter.main</artifactId>
+    <version>0.1</version>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.opentosca</groupId>
-			<artifactId>org.opentosca.model.tosca</artifactId>
-			<version>0.0.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.opentosca</groupId>
-			<artifactId>org.opentosca.yamlconverter.yamlmodel</artifactId>
-			<version>0.1</version>
-		</dependency>
-		<dependency>
-  			<groupId>net.sf.dozer</groupId>
-  			<artifactId>dozer</artifactId>
-  			<version>5.4.0</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.opentosca</groupId>
+            <artifactId>org.opentosca.model.tosca</artifactId>
+            <version>0.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opentosca</groupId>
+            <artifactId>org.opentosca.yamlconverter.yamlmodel</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.esotericsoftware.yamlbeans</groupId>
+            <artifactId>yamlbeans</artifactId>
+            <version>1.06</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+
+
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>

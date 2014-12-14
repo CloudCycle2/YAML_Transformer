@@ -1,22 +1,24 @@
 package org.opentosca.yamlconverter.main;
 
+import org.dozer.DozerBeanMapper;
+import org.opentosca.model.tosca.TDefinitions;
+import org.opentosca.model.tosca.TestRoot;
+import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
+import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dozer.DozerBeanMapper;
-import org.opentosca.model.tosca.TDefinitions;
-import org.opentosca.model.tosca.TestRoot;
-import org.opentosca.model.yaml.YamlRootElement;
-import org.opentosca.yamlconverter.main.interfaces.ItoscaBean2BeanConverter;
-
 /**
  * This Converter uses Dozer to convert between XML and YAML beans.
- * 
+ *
  * @author Jonas Heinisch
  *
  */
-public class DozerBeanConverter implements ItoscaBean2BeanConverter {
+public class DozerBeanConverter implements IToscaBean2BeanConverter {
+
 	/**
 	 * Name of the folder in which the dozer mapping xmls are stored.
 	 */
@@ -39,7 +41,7 @@ public class DozerBeanConverter implements ItoscaBean2BeanConverter {
 
 	/**
 	 * Crawls a folder and returns all filenames.
-	 * 
+	 *
 	 * @param foldername
 	 *            The name of the folder that should be crawled.
 	 * @param recursive
@@ -64,14 +66,18 @@ public class DozerBeanConverter implements ItoscaBean2BeanConverter {
 	public TestRoot yamlb2xmlb(YamlRootElement yamlroot) {
 		// TODO: not tested
 		TestRoot test = mapper.map(yamlroot, TestRoot.class);
-		
 		return test;
 	}
 
-	@Override
-	public YamlRootElement xmlb2yamlb(TDefinitions xmlroot) {
+	public YAMLElement xmlb2yamlb(TDefinitions xmlroot) {
 		// TODO: not tested
-		return mapper.map(xmlroot, YamlRootElement.class);
+		return mapper.map(xmlroot, YAMLElement.class);
+	}
+
+	@Override
+	public TDefinitions yamlb2xmlb(YAMLElement yamlroot) {
+		// TODO: not tested
+		return mapper.map(yamlroot, TDefinitions.class);
 	}
 
 }

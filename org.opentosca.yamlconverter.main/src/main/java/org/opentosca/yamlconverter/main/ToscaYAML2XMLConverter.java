@@ -1,13 +1,14 @@
 package org.opentosca.yamlconverter.main;
 
 import org.opentosca.model.tosca.TDefinitions;
-import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
 import org.opentosca.model.tosca.TestRoot;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
-import org.opentosca.yamlconverter.main.interfaces.ItoscaBean2BeanConverter;
-import org.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
-import org.opentosca.yamlconverter.main.interfaces.ItoscaYAML2XMLConverter;
-import org.opentosca.yamlconverter.main.interfaces.ItoscaYAML2YAMLbeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2XmlConverter;
+import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
+import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 
 /**
  * This Converter can convert Tosca YAML to Tosca XML (bi-directional) by the
@@ -16,10 +17,10 @@ import org.opentosca.yamlconverter.main.interfaces.ItoscaYAML2YAMLbeanConverter;
  * @author Jonas Heinisch
  *
  */
-public class ToscaYAML2XMLConverter implements ItoscaYAML2XMLConverter {
-	private ItoscaYAML2YAMLbeanConverter y2yb = new YamlBeansConverter();
-	private ItoscaBean2BeanConverter b2b = new DozerBeanConverter();
-	private ItoscaXML2XMLbeanConverter x2xb = new JAXBConverter();
+public class ToscaYaml2XmlConverter implements IToscaYaml2XmlConverter {
+	private IToscaYaml2YamlBeanConverter y2yb = new YamlBeansConverter();
+	private IToscaBean2BeanConverter b2b = new DozerBeanConverter();
+	private IToscaXml2XmlBeanConverter x2xb = new JAXBConverter();
 
 	@Override
 	public String yaml2xml(String yamlstring) throws ConverterException {
@@ -32,13 +33,12 @@ public class ToscaYAML2XMLConverter implements ItoscaYAML2XMLConverter {
 		
 		TestRoot testRoot = b2b.yamlb2xmlb(yamlroot);
 		return testRoot.description;
-		
 	}
 
 	@Override
 	public String xml2yaml(String xmlstring) throws ConverterException {
 		TDefinitions xroot = x2xb.xml2xmlbean(xmlstring);
-		YamlRootElement yroot = b2b.xmlb2yamlb(xroot);
+		YAMLElement yroot = b2b.xmlb2yamlb(xroot);
 		return y2yb.yamlbean2yaml(yroot);
 	}
 

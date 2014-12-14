@@ -1,15 +1,16 @@
 import org.opentosca.model.tosca.TDefinitions;
 import org.opentosca.yamlconverter.main.JAXBConverter;
-import org.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class DoXMLConv {
+public class DoXmlConv {
+
 	public static void main(String[] args) {
-		ItoscaXML2XMLbeanConverter x2xb = new JAXBConverter();
+		IToscaXml2XmlBeanConverter x2xb = new JAXBConverter();
 		String xmlstr = "";
 		try {
 			xmlstr = readFile("Moodle-Definitions.xml", Charset.defaultCharset());
