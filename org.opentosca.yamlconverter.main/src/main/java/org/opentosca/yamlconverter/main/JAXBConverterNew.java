@@ -1,7 +1,7 @@
 package org.opentosca.yamlconverter.main;
 
 import org.opentosca.model.tosca.TDefinitions;
-import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverterNew;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
@@ -20,7 +20,7 @@ import java.nio.charset.StandardCharsets;
  * @author Jonas Heinisch
  *
  */
-public class JAXBConverter implements IToscaXml2XmlBeanConverter {
+public class JAXBConverterNew implements IToscaXml2XmlBeanConverterNew {
 	Schema toscaXSD = null;
 
 	@Override

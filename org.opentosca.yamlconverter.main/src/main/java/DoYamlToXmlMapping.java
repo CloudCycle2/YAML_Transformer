@@ -1,6 +1,6 @@
-import org.opentosca.yamlconverter.main.ToscaYaml2XmlConverter;
+import org.opentosca.yamlconverter.main.ToscaYaml2XmlConverterNew;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
-import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2XmlConverter;
+import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2XmlConverterNew;
 
 
 public class DoYamlToXmlMapping {
@@ -11,7 +11,7 @@ public class DoYamlToXmlMapping {
 		//
 		try {
 		
-		IToscaYaml2XmlConverter yaml2xml = new ToscaYaml2XmlConverter();
+		IToscaYaml2XmlConverterNew yaml2xml = new ToscaYaml2XmlConverterNew();
 		
 		result = yaml2xml.yaml2xml("");
 		} catch (ConverterException e) {

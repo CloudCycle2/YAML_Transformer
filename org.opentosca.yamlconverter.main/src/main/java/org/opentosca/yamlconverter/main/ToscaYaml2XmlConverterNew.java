@@ -3,10 +3,10 @@ package org.opentosca.yamlconverter.main;
 import org.opentosca.model.tosca.TDefinitions;
 import org.opentosca.model.tosca.TestRoot;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
-import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
-import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
-import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2XmlConverter;
-import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverterNew;
+import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverterNew;
+import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2XmlConverterNew;
+import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverterNew;
 import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 
@@ -17,10 +17,10 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
  * @author Jonas Heinisch
  *
  */
-public class ToscaYaml2XmlConverter implements IToscaYaml2XmlConverter {
-	private IToscaYaml2YamlBeanConverter y2yb = new YamlBeansConverter();
-	private IToscaBean2BeanConverter b2b = new DozerBeanConverter();
-	private IToscaXml2XmlBeanConverter x2xb = new JAXBConverter();
+public class ToscaYaml2XmlConverterNew implements IToscaYaml2XmlConverterNew {
+	private IToscaYaml2YamlBeanConverterNew y2yb = new YamlBeansConverterNew();
+	private IToscaBean2BeanConverterNew b2b = new DozerBeanConverterNew();
+	private IToscaXml2XmlBeanConverterNew x2xb = new JAXBConverterNew();
 
 	@Override
 	public String yaml2xml(String yamlstring) throws ConverterException {

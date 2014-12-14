@@ -4,7 +4,7 @@ import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
-import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverterNew;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 
 import java.io.StringWriter;
@@ -16,7 +16,7 @@ import java.io.Writer;
  * @author Jonas Heinisch
  *
  */
-public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
+public class YamlBeansConverterNew implements IToscaYaml2YamlBeanConverterNew {
 
 	@Override
 	public YAMLElement yaml2yamlbean(String yamlstring) throws ConverterException {

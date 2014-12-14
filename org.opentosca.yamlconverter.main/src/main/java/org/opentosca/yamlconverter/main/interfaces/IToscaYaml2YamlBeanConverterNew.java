@@ -3,7 +3,7 @@ package org.opentosca.yamlconverter.main.interfaces;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 
-public interface IToscaYaml2YamlBeanConverter {
+public interface IToscaYaml2YamlBeanConverterNew {
 	
 	/**
 	 * Converts Tosca YAML to Tosca YAML beans.

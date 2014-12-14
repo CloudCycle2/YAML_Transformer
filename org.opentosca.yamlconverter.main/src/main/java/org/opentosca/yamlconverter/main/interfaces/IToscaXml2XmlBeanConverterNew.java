@@ -2,7 +2,7 @@ package org.opentosca.yamlconverter.main.interfaces;
 
 import org.opentosca.model.tosca.TDefinitions;
 
-public interface IToscaXml2XmlBeanConverter {
+public interface IToscaXml2XmlBeanConverterNew {
 	/**
 	 * Converts Tosca XML beans to Tosca XML
 	 * @param root The Tosca XML root bean
