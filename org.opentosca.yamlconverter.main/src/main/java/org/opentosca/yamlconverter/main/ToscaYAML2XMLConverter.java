@@ -1,6 +1,7 @@
 package org.opentosca.yamlconverter.main;
 
 import org.opentosca.model.tosca.TDefinitions;
+import org.opentosca.model.tosca.TestRoot;
 import org.opentosca.model.yaml.YamlRootElement;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.ItoscaBean2BeanConverter;
@@ -22,9 +23,16 @@ public class ToscaYAML2XMLConverter implements ItoscaYAML2XMLConverter {
 
 	@Override
 	public String yaml2xml(String yamlstring) throws ConverterException {
-		YamlRootElement yroot = y2yb.yaml2yamlbean(yamlstring);
-		TDefinitions xroot = b2b.yamlb2xmlb(yroot);
-		return x2xb.xmlbean2xml(xroot);
+		//YamlRootElement yroot = y2yb.yaml2yamlbean(yamlstring);
+		//TDefinitions xroot = b2b.yamlb2xmlb(yroot);
+		//return x2xb.xmlbean2xml(xroot);
+		
+		YamlRootElement yamlroot = new YamlRootElement();
+		yamlroot.description = "TestDescription";
+		
+		TestRoot testRoot = b2b.yamlb2xmlb(yamlroot);
+		return testRoot.description;
+		
 	}
 
 	@Override
