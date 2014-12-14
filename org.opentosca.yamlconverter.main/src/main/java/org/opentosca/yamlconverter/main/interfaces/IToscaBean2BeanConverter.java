@@ -5,6 +5,9 @@ import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
 import org.opentosca.model.tosca.TestRoot;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 
+/**
+ * TODO: rename methods, e.g. convertToYamlBean
+ */
 public interface IToscaBean2BeanConverter {
 
 	/**

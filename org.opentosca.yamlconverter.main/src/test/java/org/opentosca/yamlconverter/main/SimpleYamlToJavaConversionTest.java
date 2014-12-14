@@ -2,12 +2,10 @@ package org.opentosca.yamlconverter.main;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
-import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.opentosca.yamlconverter.main.model.Name;
 
-import java.io.File;
 import java.io.StringWriter;
 import java.io.Writer;
 
@@ -15,12 +13,11 @@ import java.io.Writer;
  * This class makes sure that general reading and writing from/to yaml is possible.
  * @author Sebi
  */
-public class SimpleYamlToJavaConversionTest {
+public class SimpleYamlToJavaConversionTest extends BaseTest {
 
     @Test
     public void testSimpleYamlToJavaConversion() throws Exception {
-        File simpleYaml = new File(getClass().getResource("/yaml/simple.yaml").toURI());
-        YamlReader reader = new YamlReader(FileUtils.readFileToString(simpleYaml));
+        YamlReader reader = new YamlReader(testUtils.readYamlTestResource("/yaml/simple.yaml"));
         Name nameObj = reader.read(Name.class);
         Assert.assertNotNull(nameObj);
         Assert.assertNotNull(nameObj.getName());
