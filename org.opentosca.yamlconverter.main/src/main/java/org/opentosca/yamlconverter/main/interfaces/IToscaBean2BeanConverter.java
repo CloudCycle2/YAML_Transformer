@@ -5,7 +5,7 @@ import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
 import org.opentosca.model.tosca.TestRoot;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 
-public interface IToscaBean2BeanConverterNew {
+public interface IToscaBean2BeanConverter {
 
 	/**
 	 * Converts a Tosca XML bean to a Tosca YAML bean.

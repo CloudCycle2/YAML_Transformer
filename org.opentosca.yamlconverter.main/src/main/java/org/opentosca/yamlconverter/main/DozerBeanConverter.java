@@ -3,7 +3,7 @@ package org.opentosca.yamlconverter.main;
 import org.dozer.DozerBeanMapper;
 import org.opentosca.model.tosca.TDefinitions;
 import org.opentosca.model.tosca.TestRoot;
-import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverterNew;
+import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
 import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @author Jonas Heinisch
  *
  */
-public class DozerBeanConverterNew implements IToscaBean2BeanConverterNew {
+public class DozerBeanConverter implements IToscaBean2BeanConverter {
 
 	/**
 	 * Name of the folder in which the dozer mapping xmls are stored.
@@ -32,7 +32,7 @@ public class DozerBeanConverterNew implements IToscaBean2BeanConverterNew {
 	/**
 	 * Instantiates dozer mapper.
 	 */
-	public DozerBeanConverterNew() {
+	public DozerBeanConverter() {
 		List<String> myMappingFiles = getMappingfiles(DOZERMAPPINGS_FOLDER,
 				true);
 		mapper = new DozerBeanMapper();

@@ -2,7 +2,7 @@ package org.opentosca.yamlconverter.main.interfaces;
 
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 
-public interface IToscaYaml2XmlConverterNew {
+public interface IToscaYaml2XmlConverter {
 	/**
 	 * Converts Tosca YAML to Tosca XML.
 	 * @param yamlstring A Tosca YAML in a String
