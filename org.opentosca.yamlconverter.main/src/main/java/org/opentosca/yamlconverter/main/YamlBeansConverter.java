@@ -6,6 +6,7 @@ import com.esotericsoftware.yamlbeans.YamlWriter;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
 
 import java.io.StringWriter;
 import java.io.Writer;
@@ -22,7 +23,7 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 	public YAMLElement yaml2yamlbean(String yamlstring) throws ConverterException {
 		YamlReader reader = new YamlReader(yamlstring);
 		try {
-			return reader.read(YAMLElement.class);
+			return reader.read(YAMLFileRoot.class);
 		} catch (YamlException e) {
 			throw new ConverterException(e);
 		}

@@ -3,7 +3,6 @@ package org.opentosca.yamlconverter.main;
 import org.junit.Assert;
 import org.junit.Test;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
 
 /**
@@ -15,9 +14,10 @@ public class YamlBeansConverterTest extends BaseTest {
 
     @Test
     public void testYaml2YamlBean() throws Exception {
-        YAMLElement element =
+        YAMLFileRoot element = (YAMLFileRoot)
                 converter.yaml2yamlbean(testUtils.readYamlTestResource("/yaml/helloworld.yaml"));
         Assert.assertNotNull(element);
+        Assert.assertEquals(element.getTosca_definitions_version(), "tosca_simple_yaml_1_0");
     }
 
     @Test
