@@ -1,11 +1,11 @@
+import org.opentosca.model.tosca.TDefinitions;
+import org.opentosca.yamlconverter.main.JAXBConverter;
+import org.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import org.opentosca.model.tosca.TDefinitions;
-import org.opentosca.yamlconverter.main.JAXBConverter;
-import org.opentosca.yamlconverter.main.interfaces.ItoscaXML2XMLbeanConverter;
 
 public class DoXMLConv {
 	public static void main(String[] args) {
