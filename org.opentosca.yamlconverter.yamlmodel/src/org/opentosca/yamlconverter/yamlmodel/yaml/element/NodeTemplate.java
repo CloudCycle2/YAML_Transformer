@@ -1,37 +1,30 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
-import org.opentosca.yamlconverter.yamlmodel.tosca.nodes.Root;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NodeTemplate extends YAMLElement {
 
-	private String name;
-	private List<Root> root = new ArrayList<Root>();
+	private String type;
+	private Map<String, Object> properties = new HashMap<>();
 
 	public NodeTemplate() {
-		this.name = "";
-		this.root = new ArrayList<>();
+		this.type = "";
 	}
 
-	public List<Root> getRoot() {
-		return root;
+	public String getType() {
+		return type;
 	}
 
-	public void setRoot(ArrayList<Root> root) {
-		if (root != null) {
-			this.root = root;
-		}
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public String getName() {
-		return name;
+	public Map<String, Object> getProperties() {
+		return properties;
 	}
 
-	public void setName(String name) {
-		if (name != null) {
-			this.name = name;
-		}
+	public void setProperties(Map<String, Object> properties) {
+		this.properties = properties;
 	}
 }
