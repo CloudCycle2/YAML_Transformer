@@ -20,3 +20,8 @@ project.xml
 .vpprefdata
 !VisualParadigmXMLSplitterRejoiner.jar
 tmp
+org.opentosca.yamlconverter.main/.idea/
+org.opentosca.yamlconverter.yamlmodel/.idea/
+*.iml
+org.opentosca.yamlconverter.main/target/
+org.opentosca.yamlconverter.yamlmodel/target/

@@ -1,9 +1,9 @@
 package org.opentosca.yamlconverter.main.interfaces;
 
-import org.opentosca.model.yaml.YamlRootElement;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 
-public interface ItoscaYAML2YAMLbeanConverter {
+public interface IToscaYaml2YamlBeanConverter {
 	
 	/**
 	 * Converts Tosca YAML to Tosca YAML beans.
@@ -11,7 +11,7 @@ public interface ItoscaYAML2YAMLbeanConverter {
 	 * @return The Tosca YAML root bean
 	 * @throws ConverterException 
 	 */
-	public YamlRootElement yaml2yamlbean(String yamlstring) throws ConverterException;
+	public YAMLElement yaml2yamlbean(String yamlstring) throws ConverterException;
 	
 	/**
 	 * Converts Tosca YAML beans to Tosca YAML.
@@ -19,5 +19,5 @@ public interface ItoscaYAML2YAMLbeanConverter {
 	 * @return A Tosca YAML in a String
 	 * @throws ConverterException 
 	 */
-	public String yamlbean2yaml(YamlRootElement root) throws ConverterException;
+	public String yamlbean2yaml(YAMLElement root) throws ConverterException;
 }
