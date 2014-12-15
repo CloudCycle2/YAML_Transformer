@@ -1,6 +1,7 @@
 package org.opentosca.yamlconverter.main;
 
 import org.dozer.DozerBeanMapper;
+import org.dozer.DozerBeanMapperSingletonWrapper;
 import org.opentosca.model.tosca.TDefinitions;
 import org.opentosca.model.tosca.TestRoot;
 import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
@@ -8,6 +9,7 @@ import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,7 @@ public class DozerBeanConverter implements IToscaBean2BeanConverter {
 	public DozerBeanConverter() {
 		List<String> myMappingFiles = getMappingfiles(DOZERMAPPINGS_FOLDER,
 				true);
-		mapper = new DozerBeanMapper();
+		mapper = (DozerBeanMapper) DozerBeanMapperSingletonWrapper.getInstance();
 		mapper.setMappingFiles(myMappingFiles);
 	}
 
@@ -51,15 +53,29 @@ public class DozerBeanConverter implements IToscaBean2BeanConverter {
 	private List<String> getMappingfiles(String foldername, boolean recursive) {
 		// TODO: not test
 		List<String> myMappingFiles = new ArrayList<String>();
-		File folder = new File(foldername);
-		for (File f : folder.listFiles()) {
-			if (f.isFile()) {
+		File[] filesOfFolder = getFilesOfFolder(foldername);
+		for (File f : filesOfFolder) {
+			if (f.isFile() && f.getName().endsWith(".xml")) {
 				myMappingFiles.add("file:" + foldername + "/" + f.getName());
 			} else if (recursive && f.isDirectory()) {
 				myMappingFiles.addAll(getMappingfiles(f.getPath(), true));
 			}
 		}
 		return myMappingFiles;
+	}
+
+	private File[] getFilesOfFolder(String foldername) {
+		File folder = null;
+		try {
+			folder = new File(getClass().getResource(foldername).toURI());
+		} catch (URISyntaxException e) {
+			folder = new File("");
+		}
+		File[] folderContent = folder.listFiles();
+		if(folderContent == null) {
+			folderContent = new File[0];
+		}
+		return folderContent;
 	}
 
 	@Override
