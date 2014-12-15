@@ -1,10 +1,12 @@
 package org.opentosca.yamlconverter.main;
 
+import com.esotericsoftware.yamlbeans.YamlConfig;
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
 
@@ -22,6 +24,7 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 	@Override
 	public YAMLElement yaml2yamlbean(String yamlstring) throws ConverterException {
 		YamlReader reader = new YamlReader(yamlstring);
+		adjustConfig(reader.getConfig());
 		try {
 			return reader.read(YAMLFileRoot.class);
 		} catch (YamlException e) {
@@ -33,6 +36,7 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 	public String yamlbean2yaml(YAMLElement root) throws ConverterException {
 		Writer output = new StringWriter();
 		YamlWriter writer = new YamlWriter(output);
+		adjustConfig(writer.getConfig());
 		try {
 			writer.write(root);
 			writer.close();
@@ -40,6 +44,10 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 			throw new ConverterException(e);
 		}
 		return output.toString();
+	}
+
+	public void adjustConfig(YamlConfig config){
+		config.setPropertyElementType(YAMLFileRoot.class, "node_templates", NodeTemplate.class);
 	}
 
 }
