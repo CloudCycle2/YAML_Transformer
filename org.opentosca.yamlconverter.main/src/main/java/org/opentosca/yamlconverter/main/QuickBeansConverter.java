@@ -6,9 +6,8 @@ import java.util.Map.Entry;
 
 import javax.xml.namespace.QName;
 
-import org.opentosca.model.tosca.TDefinitions;
+import org.opentosca.model.tosca.Definitions;
 import org.opentosca.model.tosca.TEntityTemplate;
-import org.opentosca.model.tosca.TEntityTemplate.Properties;
 import org.opentosca.model.tosca.TNodeTemplate;
 import org.opentosca.model.tosca.TServiceTemplate;
 import org.opentosca.model.tosca.TTopologyTemplate;
@@ -19,15 +18,17 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
 public class QuickBeansConverter implements IToscaBean2BeanConverter {
 
 	@Override
-	public YAMLFileRoot xmlb2yamlb(TDefinitions xmlroot) {
+	public YAMLFileRoot xmlb2yamlb(Definitions xmlroot) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public TDefinitions yamlb2xmlb(YAMLFileRoot yamlBean) {
+	public Definitions yamlb2xmlb(YAMLFileRoot yamlBean) {
 		final Map<String, NodeTemplate> nodetemps = yamlBean.getNode_templates();
 		final TServiceTemplate servtemp = convertTo(nodetemps, new TServiceTemplate());
-		final TDefinitions tdef = new TDefinitions();
+		final Definitions tdef = new Definitions();
+		tdef.setId("blubb");
+		tdef.setTargetNamespace("http://www.example.org/tosca/blubbtemplate");
 		tdef.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(servtemp);
 		return tdef;
 	}
@@ -40,16 +41,18 @@ public class QuickBeansConverter implements IToscaBean2BeanConverter {
 			nodelist.add(toXMLNodeTempl(entry));
 		}
 		serviceTemp.setTopologyTemplate(topoTemp);
+		serviceTemp.setId("serviceblubb");
 		return serviceTemp;
 	}
 
 	private TNodeTemplate toXMLNodeTempl(Entry<String, NodeTemplate> entry) {
 		final TNodeTemplate xNodeTemp = new TNodeTemplate();
-		final Properties prop = new Properties();
-		prop.setAny(entry.getValue().getProperties());
-		xNodeTemp.setProperties(prop);
+		// final Properties prop = new Properties();
+		// prop.setAny(entry.getValue().getProperties());
+		// xNodeTemp.setProperties(prop);
 		xNodeTemp.setName(entry.getKey());
 		xNodeTemp.setType(new QName(entry.getValue().getType()));
+		xNodeTemp.setId("blubb_" + entry.getKey());
 		return xNodeTemp;
 	}
 
