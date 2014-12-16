@@ -23,7 +23,7 @@ import com.esotericsoftware.yamlbeans.YamlWriter;
 public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
 	@Override
-	public YAMLElement yaml2yamlbean(String yamlstring) throws ConverterException {
+	public YAMLFileRoot yaml2yamlbean(String yamlstring) throws ConverterException {
 		final YamlReader reader = new YamlReader(yamlstring);
 		adjustConfig(reader.getConfig());
 		try {
