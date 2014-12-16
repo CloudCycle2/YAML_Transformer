@@ -13,18 +13,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.opentosca.model.tosca"/>
-	<classpathentry kind="lib" path="libs/jaxb-api.jar"/>
-	<classpathentry kind="lib" path="libs/jaxb-core.jar"/>
-	<classpathentry kind="lib" path="libs/jaxb-impl.jar"/>
-	<classpathentry kind="lib" path="libs/yamlbeans-1.08.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.opentosca.yamlconverter.yamlmodel"/>
-	<classpathentry kind="lib" path="libs/commons-beanutils-1.8.3.jar"/>
-	<classpathentry kind="lib" path="libs/commons-lang3-3.1.jar"/>
-	<classpathentry kind="lib" path="libs/jcl-over-slf4j-1.6.6.jar"/>
-	<classpathentry kind="lib" path="libs/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="libs/slf4j-api-1.6.6.jar"/>
-	<classpathentry kind="lib" path="libs/slf4j-log4j12-1.6.6.jar"/>
-	<classpathentry kind="lib" path="libs/dozer-5.4.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
