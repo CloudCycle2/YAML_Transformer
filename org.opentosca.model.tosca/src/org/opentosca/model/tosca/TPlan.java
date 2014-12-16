@@ -30,11 +30,10 @@ import org.w3c.dom.Element;
 /**
  * <p>
  * Java class for tPlan complex type.
- * 
+ *
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
- * 
+ * The following schema fragment specifies the expected content contained within this class.
+ *
  * <pre>
  * &lt;complexType name="tPlan">
  *   &lt;complexContent>
@@ -95,13 +94,13 @@ import org.w3c.dom.Element;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "tPlan", propOrder = {"precondition", "inputParameters", "outputParameters", "planModel", "planModelReference"})
+@XmlType(name = "tPlan", propOrder = { "precondition", "inputParameters", "outputParameters", "planModel", "planModelReference" })
 public class TPlan extends TExtensibleElements {
-	
+
 	@XmlElement(name = "Precondition")
 	protected TCondition precondition;
 	@XmlElement(name = "InputParameters")
@@ -125,197 +124,194 @@ public class TPlan extends TExtensibleElements {
 	@XmlAttribute(name = "planLanguage", required = true)
 	@XmlSchemaType(name = "anyURI")
 	protected String planLanguage;
-	
-	
+
 	/**
 	 * Gets the value of the precondition property.
-	 * 
+	 *
 	 * @return possible object is {@link TCondition }
-	 * 
+	 *
 	 */
 	public TCondition getPrecondition() {
 		return this.precondition;
 	}
-	
+
 	/**
 	 * Sets the value of the precondition property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TCondition }
-	 * 
+	 *
 	 */
 	public void setPrecondition(TCondition value) {
 		this.precondition = value;
 	}
-	
+
 	/**
 	 * Gets the value of the inputParameters property.
-	 * 
+	 *
 	 * @return possible object is {@link TPlan.InputParameters }
-	 * 
+	 *
 	 */
 	public TPlan.InputParameters getInputParameters() {
 		return this.inputParameters;
 	}
-	
+
 	/**
 	 * Sets the value of the inputParameters property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TPlan.InputParameters }
-	 * 
+	 *
 	 */
 	public void setInputParameters(TPlan.InputParameters value) {
 		this.inputParameters = value;
 	}
-	
+
 	/**
 	 * Gets the value of the outputParameters property.
-	 * 
+	 *
 	 * @return possible object is {@link TPlan.OutputParameters }
-	 * 
+	 *
 	 */
 	public TPlan.OutputParameters getOutputParameters() {
 		return this.outputParameters;
 	}
-	
+
 	/**
 	 * Sets the value of the outputParameters property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TPlan.OutputParameters }
-	 * 
+	 *
 	 */
 	public void setOutputParameters(TPlan.OutputParameters value) {
 		this.outputParameters = value;
 	}
-	
+
 	/**
 	 * Gets the value of the planModel property.
-	 * 
+	 *
 	 * @return possible object is {@link TPlan.PlanModel }
-	 * 
+	 *
 	 */
 	public TPlan.PlanModel getPlanModel() {
 		return this.planModel;
 	}
-	
+
 	/**
 	 * Sets the value of the planModel property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TPlan.PlanModel }
-	 * 
+	 *
 	 */
 	public void setPlanModel(TPlan.PlanModel value) {
 		this.planModel = value;
 	}
-	
+
 	/**
 	 * Gets the value of the planModelReference property.
-	 * 
+	 *
 	 * @return possible object is {@link TPlan.PlanModelReference }
-	 * 
+	 *
 	 */
 	public TPlan.PlanModelReference getPlanModelReference() {
 		return this.planModelReference;
 	}
-	
+
 	/**
 	 * Sets the value of the planModelReference property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TPlan.PlanModelReference }
-	 * 
+	 *
 	 */
 	public void setPlanModelReference(TPlan.PlanModelReference value) {
 		this.planModelReference = value;
 	}
-	
+
 	/**
 	 * Gets the value of the id property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getId() {
 		return this.id;
 	}
-	
+
 	/**
 	 * Sets the value of the id property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setId(String value) {
 		this.id = value;
 	}
-	
+
 	/**
 	 * Gets the value of the name property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Sets the value of the name property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setName(String value) {
 		this.name = value;
 	}
-	
+
 	/**
 	 * Gets the value of the planType property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getPlanType() {
 		return this.planType;
 	}
-	
+
 	/**
 	 * Sets the value of the planType property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setPlanType(String value) {
 		this.planType = value;
 	}
-	
+
 	/**
 	 * Gets the value of the planLanguage property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getPlanLanguage() {
 		return this.planLanguage;
 	}
-	
+
 	/**
 	 * Sets the value of the planLanguage property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setPlanLanguage(String value) {
 		this.planLanguage = value;
 	}
-	
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -327,39 +323,35 @@ public class TPlan extends TExtensibleElements {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = {"inputParameter"})
+	@XmlType(name = "", propOrder = { "inputParameter" })
 	public static class InputParameters {
-		
+
 		@XmlElement(name = "InputParameter", required = true)
 		protected List<TParameter> inputParameter;
-		
-		
+
 		/**
 		 * Gets the value of the inputParameter property.
-		 * 
+		 *
 		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the inputParameter property.
-		 * 
+		 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned
+		 * list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the inputParameter property.
+		 *
 		 * <p>
 		 * For example, to add a new item, do as follows:
-		 * 
+		 *
 		 * <pre>
 		 * getInputParameter().add(newItem);
 		 * </pre>
-		 * 
-		 * 
+		 *
+		 *
 		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link TParameter }
-		 * 
-		 * 
+		 * Objects of the following type(s) are allowed in the list {@link TParameter }
+		 *
+		 *
 		 */
 		public List<TParameter> getInputParameter() {
 			if (this.inputParameter == null) {
@@ -367,17 +359,16 @@ public class TPlan extends TExtensibleElements {
 			}
 			return this.inputParameter;
 		}
-		
+
 	}
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -389,39 +380,35 @@ public class TPlan extends TExtensibleElements {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = {"outputParameter"})
+	@XmlType(name = "", propOrder = { "outputParameter" })
 	public static class OutputParameters {
-		
+
 		@XmlElement(name = "OutputParameter", required = true)
 		protected List<TParameter> outputParameter;
-		
-		
+
 		/**
 		 * Gets the value of the outputParameter property.
-		 * 
+		 *
 		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the outputParameter property.
-		 * 
+		 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned
+		 * list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the outputParameter property.
+		 *
 		 * <p>
 		 * For example, to add a new item, do as follows:
-		 * 
+		 *
 		 * <pre>
 		 * getOutputParameter().add(newItem);
 		 * </pre>
-		 * 
-		 * 
+		 *
+		 *
 		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link TParameter }
-		 * 
-		 * 
+		 * Objects of the following type(s) are allowed in the list {@link TParameter }
+		 *
+		 *
 		 */
 		public List<TParameter> getOutputParameter() {
 			if (this.outputParameter == null) {
@@ -429,17 +416,16 @@ public class TPlan extends TExtensibleElements {
 			}
 			return this.outputParameter;
 		}
-		
+
 	}
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -451,47 +437,45 @@ public class TPlan extends TExtensibleElements {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = {"any"})
+	@XmlType(name = "", propOrder = { "any" })
 	public static class PlanModel {
-		
+
 		@XmlAnyElement(lax = true)
 		protected Object any;
-		
-		
+
 		/**
 		 * Gets the value of the any property.
-		 * 
+		 *
 		 * @return possible object is {@link Object } {@link Element }
-		 * 
+		 *
 		 */
 		public Object getAny() {
 			return this.any;
 		}
-		
+
 		/**
 		 * Sets the value of the any property.
-		 * 
+		 *
 		 * @param value allowed object is {@link Object } {@link Element }
-		 * 
+		 *
 		 */
 		public void setAny(Object value) {
 			this.any = value;
 		}
-		
+
 	}
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -501,38 +485,37 @@ public class TPlan extends TExtensibleElements {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "")
 	public static class PlanModelReference {
-		
+
 		@XmlAttribute(name = "reference", required = true)
 		@XmlSchemaType(name = "anyURI")
 		protected String reference;
-		
-		
+
 		/**
 		 * Gets the value of the reference property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getReference() {
 			return this.reference;
 		}
-		
+
 		/**
 		 * Sets the value of the reference property.
-		 * 
+		 *
 		 * @param value allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setReference(String value) {
 			this.reference = value;
 		}
-		
+
 	}
-	
+
 }

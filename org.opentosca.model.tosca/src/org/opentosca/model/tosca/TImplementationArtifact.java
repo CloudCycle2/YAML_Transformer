@@ -27,11 +27,10 @@ import javax.xml.namespace.QName;
 /**
  * <p>
  * Java class for tImplementationArtifact complex type.
- * 
+ *
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
- * 
+ * The following schema fragment specifies the expected content contained within this class.
+ *
  * <pre>
  * &lt;complexType name="tImplementationArtifact">
  *   &lt;complexContent>
@@ -45,14 +44,14 @@ import javax.xml.namespace.QName;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "tImplementationArtifact")
-@XmlSeeAlso({org.opentosca.model.tosca.TImplementationArtifacts.ImplementationArtifact.class})
+@XmlSeeAlso({ org.opentosca.model.tosca.TImplementationArtifacts.ImplementationArtifact.class })
 public class TImplementationArtifact extends TExtensibleElements {
-	
+
 	@XmlTransient
 	protected String name;
 	@XmlAttribute(name = "interfaceName")
@@ -66,142 +65,138 @@ public class TImplementationArtifact extends TExtensibleElements {
 	protected QName artifactType;
 	@XmlAttribute(name = "artifactRef")
 	protected QName artifactRef;
-	
-	
+
 	/**
 	 * Ruft den Wert der name-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getName() {
-//		if (null == this.name) {
-//			return this.getOtherAttributes().get(new QName(StaticTOSCANamespaces.nsToscaExtension, "name"));
-//		}
-		
+		// if (null == this.name) {
+		// return this.getOtherAttributes().get(new QName(StaticTOSCANamespaces.nsToscaExtension, "name"));
+		// }
+
 		return this.name;
 	}
-	
+
 	/**
 	 * Legt den Wert der name-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setName(String value) {
 		this.name = value;
 	}
-	
+
 	/**
 	 * Legt den Wert der name-Eigenschaft fest.
-	 * 
-	 * @param attributeQName this QName has to be in the namespace for extending
-	 *            TOSCA due OpenTOSCA and with the local part "name"
-	 * @param the generated name should be unique and follow the rule: ownerName
-	 *            (name of the owning NodeTypeImplementation or
-	 *            RelationshipTypeImplementation) + _OpenTOSCA_IA_ + the number
-	 *            of the implementation artifact in the list of implementation
+	 *
+	 * @param attributeQName this QName has to be in the namespace for extending TOSCA due OpenTOSCA and with the local part "name"
+	 * @param the generated name should be unique and follow the rule: ownerName (name of the owning NodeTypeImplementation or
+	 *            RelationshipTypeImplementation) + _OpenTOSCA_IA_ + the number of the implementation artifact in the list of implementation
 	 *            artifacts of the owning *Implementation
-	 * 
+	 *
 	 */
 	public void setName(QName attributeQName, String generatedName) {
 		// set the new namespace for extension
-		
-		this.getOtherAttributes().put(attributeQName, generatedName);
+
+		getOtherAttributes().put(attributeQName, generatedName);
 		this.name = generatedName;
 	}
-	
+
 	/**
 	 * Gets the value of the interfaceName property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getInterfaceName() {
 		return this.interfaceName;
 	}
-	
+
 	/**
 	 * Sets the value of the interfaceName property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setInterfaceName(String value) {
 		this.interfaceName = value;
 	}
-	
+
 	/**
 	 * Gets the value of the operationName property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getOperationName() {
 		return this.operationName;
 	}
-	
+
 	/**
 	 * Sets the value of the operationName property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setOperationName(String value) {
 		this.operationName = value;
 	}
-	
+
 	/**
 	 * Gets the value of the artifactType property.
-	 * 
+	 *
 	 * @return possible object is {@link QName }
-	 * 
+	 *
 	 */
 	public QName getArtifactType() {
 		return this.artifactType;
 	}
-	
+
 	/**
 	 * Sets the value of the artifactType property.
-	 * 
+	 *
 	 * @param value allowed object is {@link QName }
-	 * 
+	 *
 	 */
 	public void setArtifactType(QName value) {
 		this.artifactType = value;
 	}
-	
+
 	/**
 	 * Gets the value of the artifactRef property.
-	 * 
+	 *
 	 * @return possible object is {@link QName }
-	 * 
+	 *
 	 */
 	public QName getArtifactRef() {
 		return this.artifactRef;
 	}
-	
+
 	/**
 	 * Sets the value of the artifactRef property.
-	 * 
+	 *
 	 * @param value allowed object is {@link QName }
-	 * 
+	 *
 	 */
 	public void setArtifactRef(QName value) {
 		this.artifactRef = value;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = (prime * result) + ((this.artifactRef == null) ? 0 : this.artifactRef.hashCode());
-		result = (prime * result) + ((this.artifactType == null) ? 0 : this.artifactType.hashCode());
-		result = (prime * result) + ((this.interfaceName == null) ? 0 : this.interfaceName.hashCode());
-		result = (prime * result) + ((this.operationName == null) ? 0 : this.operationName.hashCode());
+		result = prime * result + (this.artifactRef == null ? 0 : this.artifactRef.hashCode());
+		result = prime * result + (this.artifactType == null ? 0 : this.artifactType.hashCode());
+		result = prime * result + (this.interfaceName == null ? 0 : this.interfaceName.hashCode());
+		result = prime * result + (this.operationName == null ? 0 : this.operationName.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -213,7 +208,7 @@ public class TImplementationArtifact extends TExtensibleElements {
 		if (!(obj instanceof TImplementationArtifact)) {
 			return false;
 		}
-		TImplementationArtifact other = (TImplementationArtifact) obj;
+		final TImplementationArtifact other = (TImplementationArtifact) obj;
 		if (this.artifactRef == null) {
 			if (other.artifactRef != null) {
 				return false;
@@ -244,5 +239,5 @@ public class TImplementationArtifact extends TExtensibleElements {
 		}
 		return true;
 	}
-	
+
 }

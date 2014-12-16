@@ -11,17 +11,17 @@ public class Compute extends Root {
 	private String os_version;
 
 	public Compute() {
-		disk_size = -1;
-		num_cpus = -1;
-		mem_size = -1;
-		os_arch = "";
-		os_type = "";
-		os_distribution = "";
-		os_version = "";
+		this.disk_size = -1;
+		this.num_cpus = -1;
+		this.mem_size = -1;
+		this.os_arch = "";
+		this.os_type = "";
+		this.os_distribution = "";
+		this.os_version = "";
 	}
 
 	public Integer getDisk_size() {
-		return disk_size;
+		return this.disk_size;
 	}
 
 	public void setDisk_size(Integer disk_size) {
@@ -31,7 +31,7 @@ public class Compute extends Root {
 	}
 
 	public Integer getNum_cpus() {
-		return num_cpus;
+		return this.num_cpus;
 	}
 
 	public void setNum_cpus(Integer num_cpus) {
@@ -41,7 +41,7 @@ public class Compute extends Root {
 	}
 
 	public Integer getMem_size() {
-		return mem_size;
+		return this.mem_size;
 	}
 
 	public void setMem_size(Integer mem_size) {
@@ -51,7 +51,7 @@ public class Compute extends Root {
 	}
 
 	public String getOs_arch() {
-		return os_arch;
+		return this.os_arch;
 	}
 
 	public void setOs_arch(String os_arch) {
@@ -61,7 +61,7 @@ public class Compute extends Root {
 	}
 
 	public String getOs_type() {
-		return os_type;
+		return this.os_type;
 	}
 
 	public void setOs_type(String os_type) {
@@ -71,7 +71,7 @@ public class Compute extends Root {
 	}
 
 	public String getOs_distribution() {
-		return os_distribution;
+		return this.os_distribution;
 	}
 
 	public void setOs_distribution(String os_distribution) {
@@ -81,7 +81,7 @@ public class Compute extends Root {
 	}
 
 	public String getOs_version() {
-		return os_version;
+		return this.os_version;
 	}
 
 	public void setOs_version(String os_version) {

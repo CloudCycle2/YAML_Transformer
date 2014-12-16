@@ -11,7 +11,7 @@ public class TypedProperty extends YAMLElement {
 	}
 
 	public TypedProperty getDefault_3() {
-		return default_3;
+		return this.default_3;
 	}
 
 	public void setDefault_3(TypedProperty default_3) {
@@ -21,7 +21,7 @@ public class TypedProperty extends YAMLElement {
 	}
 
 	public PropertyType getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(PropertyType type) {

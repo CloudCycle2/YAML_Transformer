@@ -9,15 +9,15 @@ import org.opentosca.yamlconverter.main.util.TestUtils;
  */
 public class BaseTest {
 
-    protected TestUtils testUtils = new TestUtils();
+	protected TestUtils testUtils = new TestUtils();
 
-    @Before
-    public void setup() {
+	@Before
+	public void setup() {
 
-    }
+	}
 
-    @After
-    public void tearDown() {
+	@After
+	public void tearDown() {
 
-    }
+	}
 }

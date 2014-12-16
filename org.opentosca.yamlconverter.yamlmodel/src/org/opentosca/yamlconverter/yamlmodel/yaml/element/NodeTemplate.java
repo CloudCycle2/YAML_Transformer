@@ -13,7 +13,7 @@ public class NodeTemplate extends YAMLElement {
 	}
 
 	public String getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(String type) {
@@ -21,7 +21,7 @@ public class NodeTemplate extends YAMLElement {
 	}
 
 	public Map<String, Object> getProperties() {
-		return properties;
+		return this.properties;
 	}
 
 	public void setProperties(Map<String, Object> properties) {

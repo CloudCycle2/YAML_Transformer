@@ -24,11 +24,10 @@ import javax.xml.namespace.QName;
 /**
  * <p>
  * Java class for tRelationshipTypeImplementation complex type.
- * 
+ *
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
- * 
+ * The following schema fragment specifies the expected content contained within this class.
+ *
  * <pre>
  * &lt;complexType name="tRelationshipTypeImplementation">
  *   &lt;complexContent>
@@ -57,13 +56,14 @@ import javax.xml.namespace.QName;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "tRelationshipTypeImplementation", propOrder = {"tags", "derivedFrom", "requiredContainerFeatures", "implementationArtifacts"})
+@XmlType(name = "tRelationshipTypeImplementation", propOrder = { "tags", "derivedFrom", "requiredContainerFeatures",
+		"implementationArtifacts" })
 public class TRelationshipTypeImplementation extends TExtensibleElements {
-	
+
 	@XmlElement(name = "Tags")
 	protected TTags tags;
 	@XmlElement(name = "DerivedFrom")
@@ -85,155 +85,152 @@ public class TRelationshipTypeImplementation extends TExtensibleElements {
 	protected TBoolean _abstract;
 	@XmlAttribute(name = "final")
 	protected TBoolean _final;
-	
-	
+
 	/**
 	 * Gets the value of the tags property.
-	 * 
+	 *
 	 * @return possible object is {@link TTags }
-	 * 
+	 *
 	 */
 	public TTags getTags() {
 		return this.tags;
 	}
-	
+
 	/**
 	 * Sets the value of the tags property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TTags }
-	 * 
+	 *
 	 */
 	public void setTags(TTags value) {
 		this.tags = value;
 	}
-	
+
 	/**
 	 * Gets the value of the derivedFrom property.
-	 * 
-	 * @return possible object is
-	 *         {@link TRelationshipTypeImplementation.DerivedFrom }
-	 * 
+	 *
+	 * @return possible object is {@link TRelationshipTypeImplementation.DerivedFrom }
+	 *
 	 */
 	public TRelationshipTypeImplementation.DerivedFrom getDerivedFrom() {
 		return this.derivedFrom;
 	}
-	
+
 	/**
 	 * Sets the value of the derivedFrom property.
-	 * 
-	 * @param value allowed object is
-	 *            {@link TRelationshipTypeImplementation.DerivedFrom }
-	 * 
+	 *
+	 * @param value allowed object is {@link TRelationshipTypeImplementation.DerivedFrom }
+	 *
 	 */
 	public void setDerivedFrom(TRelationshipTypeImplementation.DerivedFrom value) {
 		this.derivedFrom = value;
 	}
-	
+
 	/**
 	 * Gets the value of the requiredContainerFeatures property.
-	 * 
+	 *
 	 * @return possible object is {@link TRequiredContainerFeatures }
-	 * 
+	 *
 	 */
 	public TRequiredContainerFeatures getRequiredContainerFeatures() {
 		return this.requiredContainerFeatures;
 	}
-	
+
 	/**
 	 * Sets the value of the requiredContainerFeatures property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TRequiredContainerFeatures }
-	 * 
+	 *
 	 */
 	public void setRequiredContainerFeatures(TRequiredContainerFeatures value) {
 		this.requiredContainerFeatures = value;
 	}
-	
+
 	/**
 	 * Gets the value of the implementationArtifacts property.
-	 * 
+	 *
 	 * @return possible object is {@link TImplementationArtifacts }
-	 * 
+	 *
 	 */
 	public TImplementationArtifacts getImplementationArtifacts() {
 		return this.implementationArtifacts;
 	}
-	
+
 	/**
 	 * Sets the value of the implementationArtifacts property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TImplementationArtifacts }
-	 * 
+	 *
 	 */
 	public void setImplementationArtifacts(TImplementationArtifacts value) {
 		this.implementationArtifacts = value;
 	}
-	
+
 	/**
 	 * Gets the value of the name property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Sets the value of the name property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setName(String value) {
 		this.name = value;
 	}
-	
+
 	/**
 	 * Gets the value of the targetNamespace property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getTargetNamespace() {
 		return this.targetNamespace;
 	}
-	
+
 	/**
 	 * Sets the value of the targetNamespace property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setTargetNamespace(String value) {
 		this.targetNamespace = value;
 	}
-	
+
 	/**
 	 * Gets the value of the relationshipType property.
-	 * 
+	 *
 	 * @return possible object is {@link QName }
-	 * 
+	 *
 	 */
 	public QName getRelationshipType() {
 		return this.relationshipType;
 	}
-	
+
 	/**
 	 * Sets the value of the relationshipType property.
-	 * 
+	 *
 	 * @param value allowed object is {@link QName }
-	 * 
+	 *
 	 */
 	public void setRelationshipType(QName value) {
 		this.relationshipType = value;
 	}
-	
+
 	/**
 	 * Gets the value of the abstract property.
-	 * 
+	 *
 	 * @return possible object is {@link TBoolean }
-	 * 
+	 *
 	 */
 	public TBoolean getAbstract() {
 		if (this._abstract == null) {
@@ -242,22 +239,22 @@ public class TRelationshipTypeImplementation extends TExtensibleElements {
 			return this._abstract;
 		}
 	}
-	
+
 	/**
 	 * Sets the value of the abstract property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TBoolean }
-	 * 
+	 *
 	 */
 	public void setAbstract(TBoolean value) {
 		this._abstract = value;
 	}
-	
+
 	/**
 	 * Gets the value of the final property.
-	 * 
+	 *
 	 * @return possible object is {@link TBoolean }
-	 * 
+	 *
 	 */
 	public TBoolean getFinal() {
 		if (this._final == null) {
@@ -266,26 +263,24 @@ public class TRelationshipTypeImplementation extends TExtensibleElements {
 			return this._final;
 		}
 	}
-	
+
 	/**
 	 * Sets the value of the final property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TBoolean }
-	 * 
+	 *
 	 */
 	public void setFinal(TBoolean value) {
 		this._final = value;
 	}
-	
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -295,37 +290,36 @@ public class TRelationshipTypeImplementation extends TExtensibleElements {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "")
 	public static class DerivedFrom {
-		
+
 		@XmlAttribute(name = "relationshipTypeImplementationRef", required = true)
 		protected QName relationshipTypeImplementationRef;
-		
-		
+
 		/**
 		 * Gets the value of the relationshipTypeImplementationRef property.
-		 * 
+		 *
 		 * @return possible object is {@link QName }
-		 * 
+		 *
 		 */
 		public QName getRelationshipTypeImplementationRef() {
 			return this.relationshipTypeImplementationRef;
 		}
-		
+
 		/**
 		 * Sets the value of the relationshipTypeImplementationRef property.
-		 * 
+		 *
 		 * @param value allowed object is {@link QName }
-		 * 
+		 *
 		 */
 		public void setRelationshipTypeImplementationRef(QName value) {
 			this.relationshipTypeImplementationRef = value;
 		}
-		
+
 	}
-	
+
 }
