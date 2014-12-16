@@ -13,3 +13,15 @@ node_templates:
       os_type: linux
       os_distribution: rhel
       os_version: 6.5
+  your_server:
+    type: tosca.nodes.Compute
+    properties:
+      # compute properties
+      disk_size: 11
+      num_cpus: 1
+      mem_size: 1
+      # host image properties
+      os_arch: x86_32
+      os_type: windows
+      os_distribution: rheli
+      os_version: 7.0

@@ -37,4 +37,34 @@ public class YAMLFileRoot extends YAMLElement {
 		return "YAMLFileRoot{" + "tosca_definitions_version='" + this.tosca_definitions_version + '\'' + ", node_templates="
 				+ this.node_templates + '}';
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (super.equals(obj)) {
+			if (obj instanceof YAMLFileRoot) {
+				final YAMLFileRoot other = (YAMLFileRoot) obj;
+				if (this.tosca_definitions_version != null) {
+					if (!this.tosca_definitions_version.equals(other.tosca_definitions_version)) {
+						return false;
+					}
+				} else if (other.tosca_definitions_version != null) {
+					return false;
+				}
+				if (this.node_templates != null) {
+					if (!this.node_templates.keySet().equals(other.node_templates.keySet())) {
+						return false;
+					}
+					for (final String key : this.node_templates.keySet()) {
+						if (!this.node_templates.get(key).equals(other.node_templates.get(key))) {
+							return false;
+						}
+					}
+					return true;
+				} else if (other.node_templates != null) {
+					return false;
+				}
+			}
+		}
+		return false;
+	}
 }

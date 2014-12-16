@@ -27,4 +27,40 @@ public class NodeTemplate extends YAMLElement {
 	public void setProperties(Map<String, Object> properties) {
 		this.properties = properties;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof NodeTemplate)) {
+			return false;
+		}
+		final NodeTemplate other = (NodeTemplate) obj;
+		if (this.properties == null) {
+			if (other.properties != null) {
+				return false;
+			}
+		} else {
+			if (!this.properties.keySet().equals(other.properties.keySet())) {
+				return false;
+			}
+			for (final String key : this.properties.keySet()) {
+				if (!this.properties.get(key).toString().equals(other.properties.get(key).toString())) {
+					return false;
+				}
+			}
+		}
+		if (this.type == null) {
+			if (other.type != null) {
+				return false;
+			}
+		} else if (!this.type.equals(other.type)) {
+			return false;
+		}
+		return true;
+	}
 }
