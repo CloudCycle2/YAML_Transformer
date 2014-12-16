@@ -1,17 +1,15 @@
 package org.opentosca.yamlconverter.main;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.DozerBeanMapperSingletonWrapper;
 import org.opentosca.model.tosca.TDefinitions;
-import org.opentosca.model.tosca.TestRoot;
 import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
-import org.opentosca.yamlconverter.yamlmodel.YamlRootElement;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
 
 /**
  * This Converter uses Dozer to convert between XML and YAML beans.
@@ -63,11 +61,12 @@ public class DozerBeanConverter implements IToscaBean2BeanConverter {
 
 	private File[] getFilesOfFolder(String foldername) {
 		File folder = null;
-		try {
-			folder = new File(getClass().getResource(foldername).toURI());
-		} catch (final URISyntaxException e) {
-			folder = new File("");
-		}
+		// try {
+		folder = new File(foldername);
+		// folder = new File(getClass().getResource(foldername).toURI());
+		// } catch (final URISyntaxException e) {
+		// folder = new File("");
+		// }
 		File[] folderContent = folder.listFiles();
 		if (folderContent == null) {
 			folderContent = new File[0];
@@ -76,19 +75,18 @@ public class DozerBeanConverter implements IToscaBean2BeanConverter {
 	}
 
 	@Override
-	public TestRoot yamlb2xmlb(YamlRootElement yamlroot) {
+	public TDefinitions yamlb2xmlb(YAMLFileRoot yamlroot) {
 		// TODO: not tested
-		final TestRoot test = this.mapper.map(yamlroot, TestRoot.class);
+		final TDefinitions test = this.mapper.map(yamlroot, TDefinitions.class);
 		return test;
 	}
 
 	@Override
-	public YAMLElement xmlb2yamlb(TDefinitions xmlroot) {
+	public YAMLFileRoot xmlb2yamlb(TDefinitions xmlroot) {
 		// TODO: not tested
-		return this.mapper.map(xmlroot, YAMLElement.class);
+		return this.mapper.map(xmlroot, YAMLFileRoot.class);
 	}
 
-	@Override
 	public TDefinitions yamlb2xmlb(YAMLElement yamlroot) {
 		// TODO: not tested
 		return this.mapper.map(yamlroot, TDefinitions.class);
