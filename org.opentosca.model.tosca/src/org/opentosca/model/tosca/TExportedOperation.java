@@ -24,11 +24,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 /**
  * <p>
  * Java class for tExportedOperation complex type.
- * 
+ *
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
- * 
+ * The following schema fragment specifies the expected content contained within this class.
+ *
  * <pre>
  * &lt;complexType name="tExportedOperation">
  *   &lt;complexContent>
@@ -71,13 +70,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "tExportedOperation", propOrder = {"nodeOperation", "relationshipOperation", "plan"})
+@XmlType(name = "tExportedOperation", propOrder = { "nodeOperation", "relationshipOperation", "plan" })
 public class TExportedOperation {
-	
+
 	@XmlElement(name = "NodeOperation")
 	protected TExportedOperation.NodeOperation nodeOperation;
 	@XmlElement(name = "RelationshipOperation")
@@ -88,99 +87,94 @@ public class TExportedOperation {
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlSchemaType(name = "NCName")
 	protected String name;
-	
-	
+
 	/**
 	 * Gets the value of the nodeOperation property.
-	 * 
+	 *
 	 * @return possible object is {@link TExportedOperation.NodeOperation }
-	 * 
+	 *
 	 */
 	public TExportedOperation.NodeOperation getNodeOperation() {
 		return this.nodeOperation;
 	}
-	
+
 	/**
 	 * Sets the value of the nodeOperation property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TExportedOperation.NodeOperation }
-	 * 
+	 *
 	 */
 	public void setNodeOperation(TExportedOperation.NodeOperation value) {
 		this.nodeOperation = value;
 	}
-	
+
 	/**
 	 * Gets the value of the relationshipOperation property.
-	 * 
-	 * @return possible object is
-	 *         {@link TExportedOperation.RelationshipOperation }
-	 * 
+	 *
+	 * @return possible object is {@link TExportedOperation.RelationshipOperation }
+	 *
 	 */
 	public TExportedOperation.RelationshipOperation getRelationshipOperation() {
 		return this.relationshipOperation;
 	}
-	
+
 	/**
 	 * Sets the value of the relationshipOperation property.
-	 * 
-	 * @param value allowed object is
-	 *            {@link TExportedOperation.RelationshipOperation }
-	 * 
+	 *
+	 * @param value allowed object is {@link TExportedOperation.RelationshipOperation }
+	 *
 	 */
 	public void setRelationshipOperation(TExportedOperation.RelationshipOperation value) {
 		this.relationshipOperation = value;
 	}
-	
+
 	/**
 	 * Gets the value of the plan property.
-	 * 
+	 *
 	 * @return possible object is {@link TExportedOperation.Plan }
-	 * 
+	 *
 	 */
 	public TExportedOperation.Plan getPlan() {
 		return this.plan;
 	}
-	
+
 	/**
 	 * Sets the value of the plan property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TExportedOperation.Plan }
-	 * 
+	 *
 	 */
 	public void setPlan(TExportedOperation.Plan value) {
 		this.plan = value;
 	}
-	
+
 	/**
 	 * Gets the value of the name property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Sets the value of the name property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setName(String value) {
 		this.name = value;
 	}
-	
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -192,13 +186,13 @@ public class TExportedOperation {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "")
 	public static class NodeOperation {
-		
+
 		@XmlAttribute(name = "nodeRef", required = true)
 		@XmlIDREF
 		@XmlSchemaType(name = "IDREF")
@@ -210,78 +204,76 @@ public class TExportedOperation {
 		@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 		@XmlSchemaType(name = "NCName")
 		protected String operationName;
-		
-		
+
 		/**
 		 * Gets the value of the nodeRef property.
-		 * 
+		 *
 		 * @return possible object is {@link Object }
-		 * 
+		 *
 		 */
 		public Object getNodeRef() {
 			return this.nodeRef;
 		}
-		
+
 		/**
 		 * Sets the value of the nodeRef property.
-		 * 
+		 *
 		 * @param value allowed object is {@link Object }
-		 * 
+		 *
 		 */
 		public void setNodeRef(Object value) {
 			this.nodeRef = value;
 		}
-		
+
 		/**
 		 * Gets the value of the interfaceName property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getInterfaceName() {
 			return this.interfaceName;
 		}
-		
+
 		/**
 		 * Sets the value of the interfaceName property.
-		 * 
+		 *
 		 * @param value allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setInterfaceName(String value) {
 			this.interfaceName = value;
 		}
-		
+
 		/**
 		 * Gets the value of the operationName property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getOperationName() {
 			return this.operationName;
 		}
-		
+
 		/**
 		 * Sets the value of the operationName property.
-		 * 
+		 *
 		 * @param value allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setOperationName(String value) {
 			this.operationName = value;
 		}
-		
+
 	}
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -291,49 +283,47 @@ public class TExportedOperation {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "")
 	public static class Plan {
-		
+
 		@XmlAttribute(name = "planRef", required = true)
 		@XmlIDREF
 		@XmlSchemaType(name = "IDREF")
 		protected Object planRef;
-		
-		
+
 		/**
 		 * Gets the value of the planRef property.
-		 * 
+		 *
 		 * @return possible object is {@link Object }
-		 * 
+		 *
 		 */
 		public Object getPlanRef() {
 			return this.planRef;
 		}
-		
+
 		/**
 		 * Sets the value of the planRef property.
-		 * 
+		 *
 		 * @param value allowed object is {@link Object }
-		 * 
+		 *
 		 */
 		public void setPlanRef(Object value) {
 			this.planRef = value;
 		}
-		
+
 	}
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -345,13 +335,13 @@ public class TExportedOperation {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "")
 	public static class RelationshipOperation {
-		
+
 		@XmlAttribute(name = "relationshipRef", required = true)
 		@XmlIDREF
 		@XmlSchemaType(name = "IDREF")
@@ -363,68 +353,67 @@ public class TExportedOperation {
 		@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 		@XmlSchemaType(name = "NCName")
 		protected String operationName;
-		
-		
+
 		/**
 		 * Gets the value of the relationshipRef property.
-		 * 
+		 *
 		 * @return possible object is {@link Object }
-		 * 
+		 *
 		 */
 		public Object getRelationshipRef() {
 			return this.relationshipRef;
 		}
-		
+
 		/**
 		 * Sets the value of the relationshipRef property.
-		 * 
+		 *
 		 * @param value allowed object is {@link Object }
-		 * 
+		 *
 		 */
 		public void setRelationshipRef(Object value) {
 			this.relationshipRef = value;
 		}
-		
+
 		/**
 		 * Gets the value of the interfaceName property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getInterfaceName() {
 			return this.interfaceName;
 		}
-		
+
 		/**
 		 * Sets the value of the interfaceName property.
-		 * 
+		 *
 		 * @param value allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setInterfaceName(String value) {
 			this.interfaceName = value;
 		}
-		
+
 		/**
 		 * Gets the value of the operationName property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getOperationName() {
 			return this.operationName;
 		}
-		
+
 		/**
 		 * Sets the value of the operationName property.
-		 * 
+		 *
 		 * @param value allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setOperationName(String value) {
 			this.operationName = value;
 		}
-		
+
 	}
-	
+
 }

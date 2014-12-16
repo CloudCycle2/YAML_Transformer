@@ -26,11 +26,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 /**
  * <p>
  * Java class for tOperation complex type.
- * 
+ *
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
- * 
+ * The following schema fragment specifies the expected content contained within this class.
+ *
  * <pre>
  * &lt;complexType name="tOperation">
  *   &lt;complexContent>
@@ -65,13 +64,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "tOperation", propOrder = {"inputParameters", "outputParameters"})
+@XmlType(name = "tOperation", propOrder = { "inputParameters", "outputParameters" })
 public class TOperation extends TExtensibleElements {
-	
+
 	@XmlElement(name = "InputParameters")
 	protected TOperation.InputParameters inputParameters;
 	@XmlElement(name = "OutputParameters")
@@ -80,77 +79,74 @@ public class TOperation extends TExtensibleElements {
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlSchemaType(name = "NCName")
 	protected String name;
-	
-	
+
 	/**
 	 * Gets the value of the inputParameters property.
-	 * 
+	 *
 	 * @return possible object is {@link TOperation.InputParameters }
-	 * 
+	 *
 	 */
 	public TOperation.InputParameters getInputParameters() {
 		return this.inputParameters;
 	}
-	
+
 	/**
 	 * Sets the value of the inputParameters property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TOperation.InputParameters }
-	 * 
+	 *
 	 */
 	public void setInputParameters(TOperation.InputParameters value) {
 		this.inputParameters = value;
 	}
-	
+
 	/**
 	 * Gets the value of the outputParameters property.
-	 * 
+	 *
 	 * @return possible object is {@link TOperation.OutputParameters }
-	 * 
+	 *
 	 */
 	public TOperation.OutputParameters getOutputParameters() {
 		return this.outputParameters;
 	}
-	
+
 	/**
 	 * Sets the value of the outputParameters property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TOperation.OutputParameters }
-	 * 
+	 *
 	 */
 	public void setOutputParameters(TOperation.OutputParameters value) {
 		this.outputParameters = value;
 	}
-	
+
 	/**
 	 * Gets the value of the name property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Sets the value of the name property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setName(String value) {
 		this.name = value;
 	}
-	
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -162,39 +158,35 @@ public class TOperation extends TExtensibleElements {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = {"inputParameter"})
+	@XmlType(name = "", propOrder = { "inputParameter" })
 	public static class InputParameters {
-		
+
 		@XmlElement(name = "InputParameter", required = true)
 		protected List<TParameter> inputParameter;
-		
-		
+
 		/**
 		 * Gets the value of the inputParameter property.
-		 * 
+		 *
 		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the inputParameter property.
-		 * 
+		 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned
+		 * list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the inputParameter property.
+		 *
 		 * <p>
 		 * For example, to add a new item, do as follows:
-		 * 
+		 *
 		 * <pre>
 		 * getInputParameter().add(newItem);
 		 * </pre>
-		 * 
-		 * 
+		 *
+		 *
 		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link TParameter }
-		 * 
-		 * 
+		 * Objects of the following type(s) are allowed in the list {@link TParameter }
+		 *
+		 *
 		 */
 		public List<TParameter> getInputParameter() {
 			if (this.inputParameter == null) {
@@ -202,17 +194,16 @@ public class TOperation extends TExtensibleElements {
 			}
 			return this.inputParameter;
 		}
-		
+
 	}
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -224,39 +215,35 @@ public class TOperation extends TExtensibleElements {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = {"outputParameter"})
+	@XmlType(name = "", propOrder = { "outputParameter" })
 	public static class OutputParameters {
-		
+
 		@XmlElement(name = "OutputParameter", required = true)
 		protected List<TParameter> outputParameter;
-		
-		
+
 		/**
 		 * Gets the value of the outputParameter property.
-		 * 
+		 *
 		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the outputParameter property.
-		 * 
+		 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned
+		 * list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the outputParameter property.
+		 *
 		 * <p>
 		 * For example, to add a new item, do as follows:
-		 * 
+		 *
 		 * <pre>
 		 * getOutputParameter().add(newItem);
 		 * </pre>
-		 * 
-		 * 
+		 *
+		 *
 		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link TParameter }
-		 * 
-		 * 
+		 * Objects of the following type(s) are allowed in the list {@link TParameter }
+		 *
+		 *
 		 */
 		public List<TParameter> getOutputParameter() {
 			if (this.outputParameter == null) {
@@ -264,7 +251,7 @@ public class TOperation extends TExtensibleElements {
 			}
 			return this.outputParameter;
 		}
-		
+
 	}
-	
+
 }

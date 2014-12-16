@@ -13,7 +13,7 @@ public class YAMLFileRoot extends YAMLElement {
 	}
 
 	public String getTosca_definitions_version() {
-		return tosca_definitions_version;
+		return this.tosca_definitions_version;
 	}
 
 	public void setTosca_definitions_version(String tosca_definitions_version) {
@@ -23,7 +23,7 @@ public class YAMLFileRoot extends YAMLElement {
 	}
 
 	public Map<String, NodeTemplate> getNode_templates() {
-		return node_templates;
+		return this.node_templates;
 	}
 
 	public void setNode_templates(Map<String, NodeTemplate> node_templates) {
@@ -34,9 +34,7 @@ public class YAMLFileRoot extends YAMLElement {
 
 	@Override
 	public String toString() {
-		return "YAMLFileRoot{" +
-				"tosca_definitions_version='" + tosca_definitions_version + '\'' +
-				", node_templates=" + node_templates +
-				'}';
+		return "YAMLFileRoot{" + "tosca_definitions_version='" + this.tosca_definitions_version + '\'' + ", node_templates="
+				+ this.node_templates + '}';
 	}
 }

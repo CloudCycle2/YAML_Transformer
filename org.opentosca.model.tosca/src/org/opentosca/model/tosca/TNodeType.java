@@ -22,11 +22,10 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>
  * Java class for tNodeType complex type.
- * 
+ *
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
- * 
+ * The following schema fragment specifies the expected content contained within this class.
+ *
  * <pre>
  * &lt;complexType name="tNodeType">
  *   &lt;complexContent>
@@ -72,13 +71,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "tNodeType", propOrder = {"requirementDefinitions", "capabilityDefinitions", "instanceStates", "interfaces"})
+@XmlType(name = "tNodeType", propOrder = { "requirementDefinitions", "capabilityDefinitions", "instanceStates", "interfaces" })
 public class TNodeType extends TEntityType {
-	
+
 	@XmlElement(name = "RequirementDefinitions")
 	protected TNodeType.RequirementDefinitions requirementDefinitions;
 	@XmlElement(name = "CapabilityDefinitions")
@@ -87,97 +86,94 @@ public class TNodeType extends TEntityType {
 	protected TTopologyElementInstanceStates instanceStates;
 	@XmlElement(name = "Interfaces")
 	protected TNodeType.Interfaces interfaces;
-	
-	
+
 	/**
 	 * Gets the value of the requirementDefinitions property.
-	 * 
+	 *
 	 * @return possible object is {@link TNodeType.RequirementDefinitions }
-	 * 
+	 *
 	 */
 	public TNodeType.RequirementDefinitions getRequirementDefinitions() {
 		return this.requirementDefinitions;
 	}
-	
+
 	/**
 	 * Sets the value of the requirementDefinitions property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TNodeType.RequirementDefinitions }
-	 * 
+	 *
 	 */
 	public void setRequirementDefinitions(TNodeType.RequirementDefinitions value) {
 		this.requirementDefinitions = value;
 	}
-	
+
 	/**
 	 * Gets the value of the capabilityDefinitions property.
-	 * 
+	 *
 	 * @return possible object is {@link TNodeType.CapabilityDefinitions }
-	 * 
+	 *
 	 */
 	public TNodeType.CapabilityDefinitions getCapabilityDefinitions() {
 		return this.capabilityDefinitions;
 	}
-	
+
 	/**
 	 * Sets the value of the capabilityDefinitions property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TNodeType.CapabilityDefinitions }
-	 * 
+	 *
 	 */
 	public void setCapabilityDefinitions(TNodeType.CapabilityDefinitions value) {
 		this.capabilityDefinitions = value;
 	}
-	
+
 	/**
 	 * Gets the value of the instanceStates property.
-	 * 
+	 *
 	 * @return possible object is {@link TTopologyElementInstanceStates }
-	 * 
+	 *
 	 */
 	public TTopologyElementInstanceStates getInstanceStates() {
 		return this.instanceStates;
 	}
-	
+
 	/**
 	 * Sets the value of the instanceStates property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TTopologyElementInstanceStates }
-	 * 
+	 *
 	 */
 	public void setInstanceStates(TTopologyElementInstanceStates value) {
 		this.instanceStates = value;
 	}
-	
+
 	/**
 	 * Gets the value of the interfaces property.
-	 * 
+	 *
 	 * @return possible object is {@link TNodeType.Interfaces }
-	 * 
+	 *
 	 */
 	public TNodeType.Interfaces getInterfaces() {
 		return this.interfaces;
 	}
-	
+
 	/**
 	 * Sets the value of the interfaces property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TNodeType.Interfaces }
-	 * 
+	 *
 	 */
 	public void setInterfaces(TNodeType.Interfaces value) {
 		this.interfaces = value;
 	}
-	
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -189,39 +185,36 @@ public class TNodeType extends TEntityType {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = {"capabilityDefinition"})
+	@XmlType(name = "", propOrder = { "capabilityDefinition" })
 	public static class CapabilityDefinitions {
-		
+
 		@XmlElement(name = "CapabilityDefinition", required = true)
 		protected List<TCapabilityDefinition> capabilityDefinition;
-		
-		
+
 		/**
 		 * Gets the value of the capabilityDefinition property.
-		 * 
+		 *
 		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the capabilityDefinition property.
-		 * 
+		 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned
+		 * list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the capabilityDefinition
+		 * property.
+		 *
 		 * <p>
 		 * For example, to add a new item, do as follows:
-		 * 
+		 *
 		 * <pre>
 		 * getCapabilityDefinition().add(newItem);
 		 * </pre>
-		 * 
-		 * 
+		 *
+		 *
 		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link TCapabilityDefinition }
-		 * 
-		 * 
+		 * Objects of the following type(s) are allowed in the list {@link TCapabilityDefinition }
+		 *
+		 *
 		 */
 		public List<TCapabilityDefinition> getCapabilityDefinition() {
 			if (this.capabilityDefinition == null) {
@@ -229,17 +222,16 @@ public class TNodeType extends TEntityType {
 			}
 			return this.capabilityDefinition;
 		}
-		
+
 	}
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -251,39 +243,35 @@ public class TNodeType extends TEntityType {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = {"_interface"})
+	@XmlType(name = "", propOrder = { "_interface" })
 	public static class Interfaces {
-		
+
 		@XmlElement(name = "Interface", required = true)
 		protected List<TInterface> _interface;
-		
-		
+
 		/**
 		 * Gets the value of the interface property.
-		 * 
+		 *
 		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the interface property.
-		 * 
+		 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned
+		 * list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the interface property.
+		 *
 		 * <p>
 		 * For example, to add a new item, do as follows:
-		 * 
+		 *
 		 * <pre>
 		 * getInterface().add(newItem);
 		 * </pre>
-		 * 
-		 * 
+		 *
+		 *
 		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link TInterface }
-		 * 
-		 * 
+		 * Objects of the following type(s) are allowed in the list {@link TInterface }
+		 *
+		 *
 		 */
 		public List<TInterface> getInterface() {
 			if (this._interface == null) {
@@ -291,17 +279,16 @@ public class TNodeType extends TEntityType {
 			}
 			return this._interface;
 		}
-		
+
 	}
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -313,39 +300,36 @@ public class TNodeType extends TEntityType {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = {"requirementDefinition"})
+	@XmlType(name = "", propOrder = { "requirementDefinition" })
 	public static class RequirementDefinitions {
-		
+
 		@XmlElement(name = "RequirementDefinition", required = true)
 		protected List<TRequirementDefinition> requirementDefinition;
-		
-		
+
 		/**
 		 * Gets the value of the requirementDefinition property.
-		 * 
+		 *
 		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the requirementDefinition property.
-		 * 
+		 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned
+		 * list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the requirementDefinition
+		 * property.
+		 *
 		 * <p>
 		 * For example, to add a new item, do as follows:
-		 * 
+		 *
 		 * <pre>
 		 * getRequirementDefinition().add(newItem);
 		 * </pre>
-		 * 
-		 * 
+		 *
+		 *
 		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link TRequirementDefinition }
-		 * 
-		 * 
+		 * Objects of the following type(s) are allowed in the list {@link TRequirementDefinition }
+		 *
+		 *
 		 */
 		public List<TRequirementDefinition> getRequirementDefinition() {
 			if (this.requirementDefinition == null) {
@@ -353,7 +337,7 @@ public class TNodeType extends TEntityType {
 			}
 			return this.requirementDefinition;
 		}
-		
+
 	}
-	
+
 }

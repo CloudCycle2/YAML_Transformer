@@ -24,11 +24,10 @@ import javax.xml.namespace.QName;
 /**
  * <p>
  * Java class for tNodeTypeImplementation complex type.
- * 
+ *
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
- * 
+ * The following schema fragment specifies the expected content contained within this class.
+ *
  * <pre>
  * &lt;complexType name="tNodeTypeImplementation">
  *   &lt;complexContent>
@@ -58,13 +57,14 @@ import javax.xml.namespace.QName;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "tNodeTypeImplementation", propOrder = {"tags", "derivedFrom", "requiredContainerFeatures", "implementationArtifacts", "deploymentArtifacts"})
+@XmlType(name = "tNodeTypeImplementation", propOrder = { "tags", "derivedFrom", "requiredContainerFeatures", "implementationArtifacts",
+		"deploymentArtifacts" })
 public class TNodeTypeImplementation extends TExtensibleElements {
-	
+
 	@XmlElement(name = "Tags")
 	protected TTags tags;
 	@XmlElement(name = "DerivedFrom")
@@ -88,174 +88,172 @@ public class TNodeTypeImplementation extends TExtensibleElements {
 	protected TBoolean _abstract;
 	@XmlAttribute(name = "final")
 	protected TBoolean _final;
-	
-	
+
 	/**
 	 * Gets the value of the tags property.
-	 * 
+	 *
 	 * @return possible object is {@link TTags }
-	 * 
+	 *
 	 */
 	public TTags getTags() {
 		return this.tags;
 	}
-	
+
 	/**
 	 * Sets the value of the tags property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TTags }
-	 * 
+	 *
 	 */
 	public void setTags(TTags value) {
 		this.tags = value;
 	}
-	
+
 	/**
 	 * Gets the value of the derivedFrom property.
-	 * 
+	 *
 	 * @return possible object is {@link TNodeTypeImplementation.DerivedFrom }
-	 * 
+	 *
 	 */
 	public TNodeTypeImplementation.DerivedFrom getDerivedFrom() {
 		return this.derivedFrom;
 	}
-	
+
 	/**
 	 * Sets the value of the derivedFrom property.
-	 * 
-	 * @param value allowed object is
-	 *            {@link TNodeTypeImplementation.DerivedFrom }
-	 * 
+	 *
+	 * @param value allowed object is {@link TNodeTypeImplementation.DerivedFrom }
+	 *
 	 */
 	public void setDerivedFrom(TNodeTypeImplementation.DerivedFrom value) {
 		this.derivedFrom = value;
 	}
-	
+
 	/**
 	 * Gets the value of the requiredContainerFeatures property.
-	 * 
+	 *
 	 * @return possible object is {@link TRequiredContainerFeatures }
-	 * 
+	 *
 	 */
 	public TRequiredContainerFeatures getRequiredContainerFeatures() {
 		return this.requiredContainerFeatures;
 	}
-	
+
 	/**
 	 * Sets the value of the requiredContainerFeatures property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TRequiredContainerFeatures }
-	 * 
+	 *
 	 */
 	public void setRequiredContainerFeatures(TRequiredContainerFeatures value) {
 		this.requiredContainerFeatures = value;
 	}
-	
+
 	/**
 	 * Gets the value of the implementationArtifacts property.
-	 * 
+	 *
 	 * @return possible object is {@link TImplementationArtifacts }
-	 * 
+	 *
 	 */
 	public TImplementationArtifacts getImplementationArtifacts() {
 		return this.implementationArtifacts;
 	}
-	
+
 	/**
 	 * Sets the value of the implementationArtifacts property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TImplementationArtifacts }
-	 * 
+	 *
 	 */
 	public void setImplementationArtifacts(TImplementationArtifacts value) {
 		this.implementationArtifacts = value;
 	}
-	
+
 	/**
 	 * Gets the value of the deploymentArtifacts property.
-	 * 
+	 *
 	 * @return possible object is {@link TDeploymentArtifacts }
-	 * 
+	 *
 	 */
 	public TDeploymentArtifacts getDeploymentArtifacts() {
 		return this.deploymentArtifacts;
 	}
-	
+
 	/**
 	 * Sets the value of the deploymentArtifacts property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TDeploymentArtifacts }
-	 * 
+	 *
 	 */
 	public void setDeploymentArtifacts(TDeploymentArtifacts value) {
 		this.deploymentArtifacts = value;
 	}
-	
+
 	/**
 	 * Gets the value of the name property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Sets the value of the name property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setName(String value) {
 		this.name = value;
 	}
-	
+
 	/**
 	 * Gets the value of the targetNamespace property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getTargetNamespace() {
 		return this.targetNamespace;
 	}
-	
+
 	/**
 	 * Sets the value of the targetNamespace property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setTargetNamespace(String value) {
 		this.targetNamespace = value;
 	}
-	
+
 	/**
 	 * Gets the value of the nodeType property.
-	 * 
+	 *
 	 * @return possible object is {@link QName }
-	 * 
+	 *
 	 */
 	public QName getNodeType() {
 		return this.nodeType;
 	}
-	
+
 	/**
 	 * Sets the value of the nodeType property.
-	 * 
+	 *
 	 * @param value allowed object is {@link QName }
-	 * 
+	 *
 	 */
 	public void setNodeType(QName value) {
 		this.nodeType = value;
 	}
-	
+
 	/**
 	 * Gets the value of the abstract property.
-	 * 
+	 *
 	 * @return possible object is {@link TBoolean }
-	 * 
+	 *
 	 */
 	public TBoolean getAbstract() {
 		if (this._abstract == null) {
@@ -264,22 +262,22 @@ public class TNodeTypeImplementation extends TExtensibleElements {
 			return this._abstract;
 		}
 	}
-	
+
 	/**
 	 * Sets the value of the abstract property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TBoolean }
-	 * 
+	 *
 	 */
 	public void setAbstract(TBoolean value) {
 		this._abstract = value;
 	}
-	
+
 	/**
 	 * Gets the value of the final property.
-	 * 
+	 *
 	 * @return possible object is {@link TBoolean }
-	 * 
+	 *
 	 */
 	public TBoolean getFinal() {
 		if (this._final == null) {
@@ -288,26 +286,24 @@ public class TNodeTypeImplementation extends TExtensibleElements {
 			return this._final;
 		}
 	}
-	
+
 	/**
 	 * Sets the value of the final property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TBoolean }
-	 * 
+	 *
 	 */
 	public void setFinal(TBoolean value) {
 		this._final = value;
 	}
-	
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -317,37 +313,36 @@ public class TNodeTypeImplementation extends TExtensibleElements {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "")
 	public static class DerivedFrom {
-		
+
 		@XmlAttribute(name = "nodeTypeImplementationRef", required = true)
 		protected QName nodeTypeImplementationRef;
-		
-		
+
 		/**
 		 * Gets the value of the nodeTypeImplementationRef property.
-		 * 
+		 *
 		 * @return possible object is {@link QName }
-		 * 
+		 *
 		 */
 		public QName getNodeTypeImplementationRef() {
 			return this.nodeTypeImplementationRef;
 		}
-		
+
 		/**
 		 * Sets the value of the nodeTypeImplementationRef property.
-		 * 
+		 *
 		 * @param value allowed object is {@link QName }
-		 * 
+		 *
 		 */
 		public void setNodeTypeImplementationRef(QName value) {
 			this.nodeTypeImplementationRef = value;
 		}
-		
+
 	}
-	
+
 }

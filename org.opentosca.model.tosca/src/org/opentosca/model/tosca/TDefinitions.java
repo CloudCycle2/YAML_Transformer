@@ -32,11 +32,10 @@ import org.w3c.dom.Element;
 /**
  * <p>
  * Java class for tDefinitions complex type.
- * 
+ *
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
- * 
+ * The following schema fragment specifies the expected content contained within this class.
+ *
  * <pre>
  * &lt;complexType name="tDefinitions">
  *   &lt;complexContent>
@@ -87,21 +86,30 @@ import org.w3c.dom.Element;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "tDefinitions", propOrder = {"extensions", "_import", "types", "serviceTemplateOrNodeTypeOrNodeTypeImplementation"})
-@XmlSeeAlso({Definitions.class})
+@XmlType(name = "tDefinitions", propOrder = { "extensions", "_import", "types", "serviceTemplateOrNodeTypeOrNodeTypeImplementation" })
+@XmlSeeAlso({ Definitions.class })
 public class TDefinitions extends TExtensibleElements {
-	
+
 	@XmlElement(name = "Extensions")
 	protected TDefinitions.Extensions extensions;
 	@XmlElement(name = "Import")
 	protected List<TImport> _import;
 	@XmlElement(name = "Types")
 	protected TDefinitions.Types types;
-	@XmlElements({@XmlElement(name = "ServiceTemplate", type = TServiceTemplate.class), @XmlElement(name = "NodeType", type = TNodeType.class), @XmlElement(name = "NodeTypeImplementation", type = TNodeTypeImplementation.class), @XmlElement(name = "RelationshipType", type = TRelationshipType.class), @XmlElement(name = "RelationshipTypeImplementation", type = TRelationshipTypeImplementation.class), @XmlElement(name = "RequirementType", type = TRequirementType.class), @XmlElement(name = "CapabilityType", type = TCapabilityType.class), @XmlElement(name = "ArtifactType", type = TArtifactType.class), @XmlElement(name = "ArtifactTemplate", type = TArtifactTemplate.class), @XmlElement(name = "PolicyType", type = TPolicyType.class), @XmlElement(name = "PolicyTemplate", type = TPolicyTemplate.class)})
+	@XmlElements({ @XmlElement(name = "ServiceTemplate", type = TServiceTemplate.class),
+			@XmlElement(name = "NodeType", type = TNodeType.class),
+			@XmlElement(name = "NodeTypeImplementation", type = TNodeTypeImplementation.class),
+			@XmlElement(name = "RelationshipType", type = TRelationshipType.class),
+			@XmlElement(name = "RelationshipTypeImplementation", type = TRelationshipTypeImplementation.class),
+			@XmlElement(name = "RequirementType", type = TRequirementType.class),
+			@XmlElement(name = "CapabilityType", type = TCapabilityType.class),
+			@XmlElement(name = "ArtifactType", type = TArtifactType.class),
+			@XmlElement(name = "ArtifactTemplate", type = TArtifactTemplate.class),
+			@XmlElement(name = "PolicyType", type = TPolicyType.class), @XmlElement(name = "PolicyTemplate", type = TPolicyTemplate.class) })
 	protected List<TExtensibleElements> serviceTemplateOrNodeTypeOrNodeTypeImplementation;
 	@XmlAttribute(name = "id", required = true)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
@@ -113,49 +121,46 @@ public class TDefinitions extends TExtensibleElements {
 	@XmlAttribute(name = "targetNamespace", required = true)
 	@XmlSchemaType(name = "anyURI")
 	protected String targetNamespace;
-	
-	
+
 	/**
 	 * Gets the value of the extensions property.
-	 * 
+	 *
 	 * @return possible object is {@link TDefinitions.Extensions }
-	 * 
+	 *
 	 */
 	public TDefinitions.Extensions getExtensions() {
 		return this.extensions;
 	}
-	
+
 	/**
 	 * Sets the value of the extensions property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TDefinitions.Extensions }
-	 * 
+	 *
 	 */
 	public void setExtensions(TDefinitions.Extensions value) {
 		this.extensions = value;
 	}
-	
+
 	/**
 	 * Gets the value of the import property.
-	 * 
+	 *
 	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the import property.
-	 * 
+	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list
+	 * will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the import property.
+	 *
 	 * <p>
 	 * For example, to add a new item, do as follows:
-	 * 
+	 *
 	 * <pre>
 	 * getImport().add(newItem);
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list {@link TImport }
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public List<TImport> getImport() {
 		if (this._import == null) {
@@ -163,55 +168,49 @@ public class TDefinitions extends TExtensibleElements {
 		}
 		return this._import;
 	}
-	
+
 	/**
 	 * Gets the value of the types property.
-	 * 
+	 *
 	 * @return possible object is {@link TDefinitions.Types }
-	 * 
+	 *
 	 */
 	public TDefinitions.Types getTypes() {
 		return this.types;
 	}
-	
+
 	/**
 	 * Sets the value of the types property.
-	 * 
+	 *
 	 * @param value allowed object is {@link TDefinitions.Types }
-	 * 
+	 *
 	 */
 	public void setTypes(TDefinitions.Types value) {
 		this.types = value;
 	}
-	
+
 	/**
-	 * Gets the value of the serviceTemplateOrNodeTypeOrNodeTypeImplementation
-	 * property.
-	 * 
+	 * Gets the value of the serviceTemplateOrNodeTypeOrNodeTypeImplementation property.
+	 *
 	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the
+	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list
+	 * will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the
 	 * serviceTemplateOrNodeTypeOrNodeTypeImplementation property.
-	 * 
+	 *
 	 * <p>
 	 * For example, to add a new item, do as follows:
-	 * 
+	 *
 	 * <pre>
 	 * getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(newItem);
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link TServiceTemplate } {@link TNodeType }
-	 * {@link TNodeTypeImplementation } {@link TRelationshipType }
-	 * {@link TRelationshipTypeImplementation } {@link TRequirementType }
-	 * {@link TCapabilityType } {@link TArtifactType } {@link TArtifactTemplate }
-	 * {@link TPolicyType } {@link TPolicyTemplate }
-	 * 
-	 * 
+	 * Objects of the following type(s) are allowed in the list {@link TServiceTemplate } {@link TNodeType } {@link TNodeTypeImplementation }
+	 * {@link TRelationshipType } {@link TRelationshipTypeImplementation } {@link TRequirementType } {@link TCapabilityType }
+	 * {@link TArtifactType } {@link TArtifactTemplate } {@link TPolicyType } {@link TPolicyTemplate }
+	 *
+	 *
 	 */
 	public List<TExtensibleElements> getServiceTemplateOrNodeTypeOrNodeTypeImplementation() {
 		if (this.serviceTemplateOrNodeTypeOrNodeTypeImplementation == null) {
@@ -219,76 +218,74 @@ public class TDefinitions extends TExtensibleElements {
 		}
 		return this.serviceTemplateOrNodeTypeOrNodeTypeImplementation;
 	}
-	
+
 	/**
 	 * Gets the value of the id property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getId() {
 		return this.id;
 	}
-	
+
 	/**
 	 * Sets the value of the id property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setId(String value) {
 		this.id = value;
 	}
-	
+
 	/**
 	 * Gets the value of the name property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Sets the value of the name property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setName(String value) {
 		this.name = value;
 	}
-	
+
 	/**
 	 * Gets the value of the targetNamespace property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getTargetNamespace() {
 		return this.targetNamespace;
 	}
-	
+
 	/**
 	 * Sets the value of the targetNamespace property.
-	 * 
+	 *
 	 * @param value allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setTargetNamespace(String value) {
 		this.targetNamespace = value;
 	}
-	
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -300,39 +297,35 @@ public class TDefinitions extends TExtensibleElements {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = {"extension"})
+	@XmlType(name = "", propOrder = { "extension" })
 	public static class Extensions {
-		
+
 		@XmlElement(name = "Extension", required = true)
 		protected List<TExtension> extension;
-		
-		
+
 		/**
 		 * Gets the value of the extension property.
-		 * 
+		 *
 		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the extension property.
-		 * 
+		 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned
+		 * list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the extension property.
+		 *
 		 * <p>
 		 * For example, to add a new item, do as follows:
-		 * 
+		 *
 		 * <pre>
 		 * getExtension().add(newItem);
 		 * </pre>
-		 * 
-		 * 
+		 *
+		 *
 		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link TExtension }
-		 * 
-		 * 
+		 * Objects of the following type(s) are allowed in the list {@link TExtension }
+		 *
+		 *
 		 */
 		public List<TExtension> getExtension() {
 			if (this.extension == null) {
@@ -340,17 +333,16 @@ public class TDefinitions extends TExtensibleElements {
 			}
 			return this.extension;
 		}
-		
+
 	}
-	
+
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
+	 * The following schema fragment specifies the expected content contained within this class.
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -362,39 +354,35 @@ public class TDefinitions extends TExtensibleElements {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = {"any"})
+	@XmlType(name = "", propOrder = { "any" })
 	public static class Types {
-		
+
 		@XmlAnyElement(lax = true)
 		protected List<Object> any;
-		
-		
+
 		/**
 		 * Gets the value of the any property.
-		 * 
+		 *
 		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the any property.
-		 * 
+		 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned
+		 * list will be present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the any property.
+		 *
 		 * <p>
 		 * For example, to add a new item, do as follows:
-		 * 
+		 *
 		 * <pre>
 		 * getAny().add(newItem);
 		 * </pre>
-		 * 
-		 * 
+		 *
+		 *
 		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link Object } {@link Element }
-		 * 
-		 * 
+		 * Objects of the following type(s) are allowed in the list {@link Object } {@link Element }
+		 *
+		 *
 		 */
 		public List<Object> getAny() {
 			if (this.any == null) {
@@ -402,7 +390,7 @@ public class TDefinitions extends TExtensibleElements {
 			}
 			return this.any;
 		}
-		
+
 	}
-	
+
 }
