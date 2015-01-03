@@ -17,7 +17,7 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import org.opentosca.model.tosca.TDefinitions;
+import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
 import org.xml.sax.SAXException;
 
@@ -31,11 +31,11 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 	Schema toscaXSD = null;
 
 	@Override
-	public String xmlbean2xml(TDefinitions root) {
+	public String xmlbean2xml(Definitions root) {
 		// TODO: this is not tested!
 		try {
 			final OutputStream stream = new ByteArrayOutputStream();
-			final JAXBContext jaxbContext = JAXBContext.newInstance(TDefinitions.class);
+			final JAXBContext jaxbContext = JAXBContext.newInstance(Definitions.class);
 			final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 			jaxbMarshaller.setSchema(getToscaSchema());
 
@@ -52,16 +52,16 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 	}
 
 	@Override
-	public TDefinitions xml2xmlbean(String xmlstring) {
+	public Definitions xml2xmlbean(String xmlstring) {
 		// TODO: this is not tested!
 		final InputStream stream = string2InputStream(xmlstring);
 		try {
-			final JAXBContext jaxbContext = JAXBContext.newInstance(TDefinitions.class);
+			final JAXBContext jaxbContext = JAXBContext.newInstance(Definitions.class);
 
 			final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			jaxbUnmarshaller.setSchema(getToscaSchema());
 
-			final TDefinitions xroot = (TDefinitions) jaxbUnmarshaller.unmarshal(stream);
+			final Definitions xroot = (Definitions) jaxbUnmarshaller.unmarshal(stream);
 			return xroot;
 
 		} catch (final JAXBException e) {

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.DozerBeanMapperSingletonWrapper;
-import org.opentosca.model.tosca.TDefinitions;
+import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
@@ -75,21 +75,21 @@ public class DozerBeanConverter implements IToscaBean2BeanConverter {
 	}
 
 	@Override
-	public TDefinitions yamlb2xmlb(YAMLFileRoot yamlroot) {
+	public Definitions yamlb2xmlb(YAMLFileRoot yamlroot) {
 		// TODO: not tested
-		final TDefinitions test = this.mapper.map(yamlroot, TDefinitions.class);
+		final Definitions test = this.mapper.map(yamlroot, Definitions.class);
 		return test;
 	}
 
 	@Override
-	public YAMLFileRoot xmlb2yamlb(TDefinitions xmlroot) {
+	public YAMLFileRoot xmlb2yamlb(Definitions xmlroot) {
 		// TODO: not tested
 		return this.mapper.map(xmlroot, YAMLFileRoot.class);
 	}
 
-	public TDefinitions yamlb2xmlb(YAMLElement yamlroot) {
+	public Definitions yamlb2xmlb(YAMLElement yamlroot) {
 		// TODO: not tested
-		return this.mapper.map(yamlroot, TDefinitions.class);
+		return this.mapper.map(yamlroot, Definitions.class);
 	}
 
 }

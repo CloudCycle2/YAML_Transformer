@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.main;
 
-import org.opentosca.model.tosca.TDefinitions;
+import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
@@ -23,7 +23,7 @@ public class ToscaYaml2XmlConverter implements IToscaYaml2XmlConverter {
 	@Override
 	public String yaml2xml(String yamlstring) throws ConverterException {
 		final YAMLFileRoot yroot = this.y2yb.yaml2yamlbean(yamlstring);
-		final TDefinitions xroot = this.b2b.yamlb2xmlb(yroot);
+		final Definitions xroot = this.b2b.yamlb2xmlb(yroot);
 		return this.x2xb.xmlbean2xml(xroot);
 
 		// final YamlRootElement yamlroot = new YamlRootElement();
@@ -35,7 +35,7 @@ public class ToscaYaml2XmlConverter implements IToscaYaml2XmlConverter {
 
 	@Override
 	public String xml2yaml(String xmlstring) throws ConverterException {
-		final TDefinitions xroot = this.x2xb.xml2xmlbean(xmlstring);
+		final Definitions xroot = this.x2xb.xml2xmlbean(xmlstring);
 		final YAMLElement yroot = this.b2b.xmlb2yamlb(xroot);
 		return this.y2yb.yamlbean2yaml(yroot);
 	}
