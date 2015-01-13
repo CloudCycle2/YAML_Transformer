@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.xml.namespace.QName;
 
 import org.opentosca.model.tosca.Definitions;
+import org.opentosca.model.tosca.TDocumentation;
 import org.opentosca.model.tosca.TEntityTemplate;
 import org.opentosca.model.tosca.TNodeTemplate;
 import org.opentosca.model.tosca.TServiceTemplate;
@@ -35,7 +36,7 @@ public class Yaml2XmlSwitch {
 		// result.setTargetNamespace();
 		// result.setExtensions();
 		// result.setTypes();
-		// result.getDocumentation().add(docu);
+		result.getDocumentation().add(toDocumentation(elem.getDescription()));
 		// result.getOtherAttributes().put(name, attribute);
 		/*
 		 * for(CapabilityType capType : elem.getCapabilityTypes()){
@@ -79,6 +80,13 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
+	private TDocumentation toDocumentation(String desc) {
+		final TDocumentation docu = new TDocumentation();
+		docu.getContent().add(desc);
+		// TODO set lang and source
+		return docu;
+	}
+
 	@SuppressWarnings("unused")
 	private Object case_Propertytype(PropertyType elem) {
 		// TODO
@@ -102,7 +110,7 @@ public class Yaml2XmlSwitch {
 		// result.setRequirements(req);
 		result.setType(new QName(elem.getType()));
 		// result.getAny().add(any);
-		// result.getDocumentation().add(docu);
+		result.getDocumentation().add(toDocumentation(elem.getDescription()));
 		// result.getOtherAttributes().put(name, attr)
 		return result;
 	}
