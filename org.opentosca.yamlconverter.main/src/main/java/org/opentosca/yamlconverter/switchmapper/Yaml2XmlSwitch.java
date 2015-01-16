@@ -14,6 +14,7 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
 
 public class Yaml2XmlSwitch {
+	private static final String TOSCABASETYPES_NS = null;
 	private long uniqueID = 0;
 
 	public Object doswitch(Object elem) {
@@ -95,20 +96,44 @@ public class Yaml2XmlSwitch {
 		result.setName(unique("Nodetemplate"));
 		// result.setPolicies(poli);
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
-		final Object properties = parseProperties(elem.getProperties(), elem.getType());
+		final QName type = new QName(elem.getType());
+		final Object properties = parseProperties(elem.getProperties(), type);
 		prop.setAny(properties);
 		result.setProperties(prop);
 		// result.setPropertyConstraints(propconstr);
 		// result.setRequirements(req);
-		result.setType(new QName(elem.getType()));
+		result.setType(type);
 		// result.getAny().add(any);
 		// result.getDocumentation().add(docu);
 		// result.getOtherAttributes().put(name, attr)
 		return result;
 	}
 
-	private Object parseProperties(Map<String, Object> properties, String type) {
-		// TODO: implement this in the right way...
+	private Object parseProperties(Map<String, Object> properties, QName type) {
+		final StringBuilder xml = new StringBuilder();
+		final StringBuilder xsd = new StringBuilder();
+		xml.append("<");
+		if (type.getPrefix() != null && !type.getPrefix().equals("")) {
+			xml.append(type.getPrefix() + ":");
+		}
+		xml.append(type.getLocalPart() + "Properties");
+		xml.append(">");
+		for (final Map.Entry<String, Object> entry : properties.entrySet()) {
+			xml.append("<");
+			xml.append(entry.getKey());
+			xml.append(">");
+			xml.append(entry.getValue());
+			xml.append("</");
+			xml.append(entry.getKey());
+			xml.append(">");
+		}
+		xml.append("</");
+		if (type.getPrefix() != null && !type.getPrefix().equals("")) {
+			xml.append(type.getPrefix() + ":");
+		}
+		xml.append(type.getLocalPart() + "Properties");
+		xml.append(">");
+		System.out.println(xml.toString());
 		return null;
 	}
 
