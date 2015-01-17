@@ -1,0 +1,7 @@
+# This is an interface definition with related operations
+# ToDO: Define operations in artifact?
+Custom_InstallVM:
+	InstallVMwithCustomKeypair:
+	InstallVMwithGeneratedKeypair:
+	InstallVMwithCustomFlavor:
+	InstallVMwithCustomImage:
