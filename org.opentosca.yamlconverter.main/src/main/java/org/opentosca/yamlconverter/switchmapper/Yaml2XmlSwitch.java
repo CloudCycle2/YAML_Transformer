@@ -1,7 +1,5 @@
 package org.opentosca.yamlconverter.switchmapper;
 
-import java.util.Map;
-
 import javax.xml.namespace.QName;
 
 import org.opentosca.model.tosca.Definitions;
@@ -10,6 +8,7 @@ import org.opentosca.model.tosca.TEntityTemplate;
 import org.opentosca.model.tosca.TNodeTemplate;
 import org.opentosca.model.tosca.TServiceTemplate;
 import org.opentosca.model.tosca.TTopologyTemplate;
+import org.opentosca.yamlconverter.main.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
@@ -106,7 +105,8 @@ public class Yaml2XmlSwitch {
 		// result.setPolicies(poli);
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
 		final QName type = new QName(elem.getType());
-		final Object properties = parseProperties(elem.getProperties(), type);
+		// final Object properties = parseProperties(elem.getProperties(), type);
+		final AnyMap properties = new AnyMap(elem.getProperties());
 		prop.setAny(properties);
 		result.setProperties(prop);
 		// result.setPropertyConstraints(propconstr);
@@ -116,34 +116,6 @@ public class Yaml2XmlSwitch {
 		result.getDocumentation().add(toDocumentation(elem.getDescription()));
 		// result.getOtherAttributes().put(name, attr)
 		return result;
-	}
-
-	private Object parseProperties(Map<String, String> properties, QName type) {
-		final StringBuilder xml = new StringBuilder();
-		final StringBuilder xsd = new StringBuilder();
-		xml.append("<");
-		if (type.getPrefix() != null && !type.getPrefix().equals("")) {
-			xml.append(type.getPrefix() + ":");
-		}
-		xml.append(type.getLocalPart() + "Properties");
-		xml.append(">");
-		for (final Map.Entry<String, String> entry : properties.entrySet()) {
-			xml.append("<");
-			xml.append(entry.getKey());
-			xml.append(">");
-			xml.append(entry.getValue());
-			xml.append("</");
-			xml.append(entry.getKey());
-			xml.append(">");
-		}
-		xml.append("</");
-		if (type.getPrefix() != null && !type.getPrefix().equals("")) {
-			xml.append(type.getPrefix() + ":");
-		}
-		xml.append(type.getLocalPart() + "Properties");
-		xml.append(">");
-		System.out.println(xml.toString());
-		return null;
 	}
 
 	/**
