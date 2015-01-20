@@ -1,0 +1,54 @@
+<Association Abstract="false" Derived="false" Direction="To From"
+    Documentation_plain=""
+    EndRelationshipFromMetaModelElement="9yVzx1KFS_nqHA92"
+    EndRelationshipToMetaModelElement="pnfIzFKFS_nqHAUg"
+    Id="1CDzx1KFS_nqHA.d" Leaf="false" Name="inputs"
+    OrderingInProfile="-1" PmAuthor="Def"
+    PmCreateDateTime="2015-01-13T16:00:02.731"
+    PmLastModified="2015-01-20T17:41:45.722" QualityReason="2&#x9;2"
+    QualityScore="97" UserIDLastNumericValue="0" Visibility="Unspecified">
+    <FromEnd>
+        <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
+            Derived="false" DerivedUnion="false" Documentation_plain=""
+            EndModelElement="9yVzx1KFS_nqHA92" Id="1CDzx1KFS_nqHA.e"
+            JavaCodeAttributeName="" Leaf="false" Multiplicity="*"
+            Name="" Navigable="Navigable" PmAuthor="Def"
+            PmCreateDateTime="2015-01-13T16:00:02.731"
+            ProvidePropertyGetterMethod="false"
+            ProvidePropertySetterMethod="false" QualityScore="-1"
+            ReadOnly="false" Static="false" TypeModifier=""
+            UserIDLastNumericValue="0" Visibility="private">
+            <Qualifier>
+                <Qualifier Documentation_plain="" Id="1CDzx1KFS_nqHA.f"
+                    Name="" PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T16:00:02.731"
+                    QualityScore="-1" UserIDLastNumericValue="0"/>
+            </Qualifier>
+            <Type>
+                <Class Idref="9yVzx1KFS_nqHA92" Name="Input"/>
+            </Type>
+        </AssociationEnd>
+    </FromEnd>
+    <ToEnd>
+        <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
+            Derived="false" DerivedUnion="false" Documentation_plain=""
+            EndModelElement="pnfIzFKFS_nqHAUg" Id="1CDzx1KFS_nqHA.g"
+            JavaCodeAttributeName="" Leaf="false"
+            Multiplicity="Unspecified" Navigable="Non Navigable"
+            PmAuthor="Def" PmCreateDateTime="2015-01-13T16:00:02.731"
+            ProvidePropertyGetterMethod="false"
+            ProvidePropertySetterMethod="false" QualityScore="-1"
+            ReadOnly="false" Static="false" TypeModifier=""
+            UserIDLastNumericValue="0" Visibility="private">
+            <Qualifier>
+                <Qualifier Documentation_plain="" Id="1CDzx1KFS_nqHA.h"
+                    Name="" PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T16:00:02.731"
+                    QualityScore="-1" UserIDLastNumericValue="0"/>
+            </Qualifier>
+            <Type>
+                <Class Idref="pnfIzFKFS_nqHAUg" Name="ServiceTemplate"/>
+            </Type>
+        </AssociationEnd>
+    </ToEnd>
+</Association>

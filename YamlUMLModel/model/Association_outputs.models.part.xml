@@ -1,0 +1,54 @@
+<Association Abstract="false" Derived="false" Direction="To From"
+    Documentation_plain=""
+    EndRelationshipFromMetaModelElement="UaIzx1KFS_nqHA8z"
+    EndRelationshipToMetaModelElement="pnfIzFKFS_nqHAUg"
+    Id="pXYzx1KFS_nqHA87" Leaf="false" Name="outputs"
+    OrderingInProfile="-1" PmAuthor="Def"
+    PmCreateDateTime="2015-01-13T15:57:13.381"
+    PmLastModified="2015-01-20T17:41:45.721" QualityReason="2&#x9;2"
+    QualityScore="97" UserIDLastNumericValue="0" Visibility="Unspecified">
+    <FromEnd>
+        <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
+            Derived="false" DerivedUnion="false" Documentation_plain=""
+            EndModelElement="UaIzx1KFS_nqHA8z" Id="pXYzx1KFS_nqHA88"
+            JavaCodeAttributeName="" Leaf="false" Multiplicity="*"
+            Navigable="Navigable" PmAuthor="Def"
+            PmCreateDateTime="2015-01-13T15:57:13.381"
+            ProvidePropertyGetterMethod="false"
+            ProvidePropertySetterMethod="false" QualityScore="-1"
+            ReadOnly="false" Static="false" TypeModifier=""
+            UserIDLastNumericValue="0" Visibility="private">
+            <Qualifier>
+                <Qualifier Documentation_plain="" Id="pXYzx1KFS_nqHA89"
+                    Name="" PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T15:57:13.381"
+                    QualityScore="-1" UserIDLastNumericValue="0"/>
+            </Qualifier>
+            <Type>
+                <Class Idref="UaIzx1KFS_nqHA8z" Name="Output"/>
+            </Type>
+        </AssociationEnd>
+    </FromEnd>
+    <ToEnd>
+        <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
+            Derived="false" DerivedUnion="false" Documentation_plain=""
+            EndModelElement="pnfIzFKFS_nqHAUg" Id="pXYzx1KFS_nqHA8."
+            JavaCodeAttributeName="" Leaf="false"
+            Multiplicity="Unspecified" Navigable="Non Navigable"
+            PmAuthor="Def" PmCreateDateTime="2015-01-13T15:57:13.382"
+            ProvidePropertyGetterMethod="false"
+            ProvidePropertySetterMethod="false" QualityScore="-1"
+            ReadOnly="false" Static="false" TypeModifier=""
+            UserIDLastNumericValue="0" Visibility="Unspecified">
+            <Qualifier>
+                <Qualifier Documentation_plain="" Id="ZXYzx1KFS_nqHA8_"
+                    Name="" PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T15:57:13.382"
+                    QualityScore="-1" UserIDLastNumericValue="0"/>
+            </Qualifier>
+            <Type>
+                <Class Idref="pnfIzFKFS_nqHAUg" Name="ServiceTemplate"/>
+            </Type>
+        </AssociationEnd>
+    </ToEnd>
+</Association>

@@ -1,50 +1,53 @@
 <Association Abstract="false" Derived="false" Direction="From To"
     Documentation_plain=""
-    EndRelationshipFromMetaModelElement="eJG3ylKFS_nqHA.U"
-    EndRelationshipToMetaModelElement="YmG3ylKFS_nqHAqo"
-    Id="TzG3ylKFS_nqHBLn" Leaf="false" OrderingInProfile="-1"
-    PmAuthor="Def" PmCreateDateTime="2014-12-16T17:28:04.722"
-    PmLastModified="2014-12-16T17:40:52.255" QualityScore="100"
-    UserIDLastNumericValue="0" Visibility="Unspecified">
+    EndRelationshipFromMetaModelElement="pnfIzFKFS_nqHAUg"
+    EndRelationshipToMetaModelElement="1RSTx1KFS_nqHA5Y"
+    Id="v1qTx1KFS_nqHA5p" Leaf="false" Name="relationship_types"
+    OrderingInProfile="-1" PmAuthor="Def"
+    PmCreateDateTime="2015-01-13T15:53:51.741"
+    PmLastModified="2015-01-20T18:07:05.200" QualityReason="2&#x9;2"
+    QualityScore="97" UserIDLastNumericValue="0" Visibility="Unspecified">
     <FromEnd>
         <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
             Derived="false" DerivedUnion="false" Documentation_plain=""
-            EndModelElement="eJG3ylKFS_nqHA.U" Id="TzG3ylKFS_nqHBLo"
+            EndModelElement="pnfIzFKFS_nqHAUg" Id="v1qTx1KFS_nqHA5q"
             JavaCodeAttributeName="" Leaf="false"
             Multiplicity="Unspecified" Navigable="Non Navigable"
-            PmAuthor="Def" PmCreateDateTime="2014-12-16T17:28:04.722"
+            PmAuthor="Def" PmCreateDateTime="2015-01-13T15:53:51.741"
             ProvidePropertyGetterMethod="false"
             ProvidePropertySetterMethod="false" QualityScore="-1"
             ReadOnly="false" Static="false" TypeModifier=""
             UserIDLastNumericValue="0" Visibility="Unspecified">
             <Qualifier>
-                <Qualifier Documentation_plain="" Id="TzG3ylKFS_nqHBLp"
+                <Qualifier Documentation_plain="" Id="v1qTx1KFS_nqHA5r"
                     Name="" PmAuthor="Def"
-                    PmCreateDateTime="2014-12-16T17:28:04.722"
+                    PmCreateDateTime="2015-01-13T15:53:51.741"
                     QualityScore="-1" UserIDLastNumericValue="0"/>
             </Qualifier>
+            <Type>
+                <Class Idref="pnfIzFKFS_nqHAUg" Name="ServiceTemplate"/>
+            </Type>
         </AssociationEnd>
     </FromEnd>
     <ToEnd>
         <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
-            Derived="false" DerivedUnion="false"
-            EndModelElement="YmG3ylKFS_nqHAqo" Id="TzG3ylKFS_nqHBLq"
+            Derived="false" DerivedUnion="false" Documentation_plain=""
+            EndModelElement="1RSTx1KFS_nqHA5Y" Id="v1qTx1KFS_nqHA5s"
             JavaCodeAttributeName="" Leaf="false" Multiplicity="*"
-            Name="nodeTemplateOrRelationshipTemplate"
             Navigable="Navigable" PmAuthor="Def"
-            PmCreateDateTime="2014-12-16T17:28:04.722"
+            PmCreateDateTime="2015-01-13T15:53:51.741"
             ProvidePropertyGetterMethod="false"
             ProvidePropertySetterMethod="false" QualityScore="-1"
-            ReadOnly="false" RepresentativeAttribute=".JG3ylKFS_nqHA.W"
-            Static="false" UserIDLastNumericValue="0" Visibility="protected">
+            ReadOnly="false" Static="false" TypeModifier=""
+            UserIDLastNumericValue="0" Visibility="private">
             <Qualifier>
-                <Qualifier Documentation_plain="" Id="TzG3ylKFS_nqHBLr"
+                <Qualifier Documentation_plain="" Id="v1qTx1KFS_nqHA5t"
                     Name="" PmAuthor="Def"
-                    PmCreateDateTime="2014-12-16T17:28:04.722"
+                    PmCreateDateTime="2015-01-13T15:53:51.741"
                     QualityScore="-1" UserIDLastNumericValue="0"/>
             </Qualifier>
             <Type>
-                <Class Idref="YmG3ylKFS_nqHAqo" Name="TEntityTemplate"/>
+                <Class Idref="1RSTx1KFS_nqHA5Y" Name="RelationshipType"/>
             </Type>
         </AssociationEnd>
     </ToEnd>
