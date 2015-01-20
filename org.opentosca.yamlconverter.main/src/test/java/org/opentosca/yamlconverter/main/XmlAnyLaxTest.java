@@ -21,16 +21,16 @@ import javax.xml.namespace.QName;
 public class XmlAnyLaxTest {
 
 	// @formatter:off
-	private static final String xml =
+	private static final String xml = ""+
 			"<message to=\"john@example.com\" from=\"jane@example.com\">" +
-					"<customer>" +
-					"<name>Sue Smith</name>" +
-					"<address>" +
-					"<street>123 A Street</street>" +
-					"<city>Any Town</city>" +
-					"</address>" +
-					"</customer>" +
-					"</message>";
+			"	<customer>" +
+			"		<name>Sue Smith</name>" +
+			"		<address>" +
+			"			<street>123 A Street</street>" +
+			"			<city>Any Town</city>" +
+			"		</address>" +
+			"	</customer>" +
+			"</message>";
 	// @formatter:on
 
 	public static void main(String[] args) throws Exception {
@@ -41,7 +41,7 @@ public class XmlAnyLaxTest {
 		final Message message = (Message) unmarshaller.unmarshal(new ByteArrayInputStream(xml.getBytes()));
 
 		final Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("key1", "value1");
+		map.put("key1234", "value1");
 		map.put("key2", "value2");
 		final GenericProperties props = new GenericProperties(map);
 
