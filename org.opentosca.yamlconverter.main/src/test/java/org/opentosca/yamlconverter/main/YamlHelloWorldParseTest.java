@@ -59,7 +59,7 @@ public class YamlHelloWorldParseTest extends BaseTest {
 		temp2.getProperties().put("os_version", "7.0");
 		node_templates.put("your_server", temp2);
 
-		root.getNodeTemplate().addAll(node_templates.values());
+		root.getNode_templates().putAll(node_templates);
 		// root.setNode_templates(node_templates);
 		return root;
 	}

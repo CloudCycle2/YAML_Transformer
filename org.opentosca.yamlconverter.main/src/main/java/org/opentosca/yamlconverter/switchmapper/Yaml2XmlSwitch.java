@@ -70,7 +70,7 @@ public class Yaml2XmlSwitch {
 		// serviceTemplate.getOtherAttributes().put(key, value);
 		// topologyTemplate.getAny().add(o);
 		// topologyTemplate.getDocumentation().add(docu);
-		for (final NodeTemplate nt : elem.getNodeTemplate()) {
+		for (final NodeTemplate nt : elem.getNode_templates().values()) {
 			final TNodeTemplate xnode = case_NodeTemplate(nt);
 			// TODO: is the name now parsed directly to the nodetemplate?
 			// override name and id of the nodetemplate

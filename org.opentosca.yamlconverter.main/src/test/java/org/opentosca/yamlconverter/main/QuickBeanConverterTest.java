@@ -32,7 +32,7 @@ public class QuickBeanConverterTest extends BaseTest {
 		properties.put("mem_size", "200");
 		nodeTemplate.setProperties(properties);
 
-		yamlRoot.getNodeTemplate().addAll(nodeTemplateMap.values());
+		yamlRoot.getNode_templates().putAll(nodeTemplateMap);
 		// yamlRoot.setNode_templates(nodeTemplateMap);
 
 		final TDefinitions result = this.converter.yamlb2xmlb(yamlRoot);

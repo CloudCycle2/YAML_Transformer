@@ -1,7 +1,7 @@
 package org.opentosca.yamlconverter.main;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -24,14 +24,14 @@ public class DozerBeanConverterTest extends BaseTest {
 		final ServiceTemplate yamlRoot = new ServiceTemplate();
 		yamlRoot.setTosca_definitions_version("tosca_123");
 
-		final List<NodeTemplate> nodeTemplateMap = new ArrayList<>();
+		final Map<String, NodeTemplate> nodeTemplateMap = new HashMap<>();
 		final NodeTemplate nodeTemplate = new NodeTemplate();
 		final String nodeTemplateType = "tosca.nodes.Compute";
 		nodeTemplate.setType(nodeTemplateType);
 		// nodeTemplateMap.put("OpenStack", nodeTemplate);
-		nodeTemplateMap.add(nodeTemplate);
+		nodeTemplateMap.put("test", nodeTemplate);
 
-		yamlRoot.getNodeTemplate().addAll(nodeTemplateMap);
+		yamlRoot.getNode_templates().putAll(nodeTemplateMap);
 
 		final TDefinitions result = this.converter.yamlb2xmlb(yamlRoot);
 		Assert.assertNotNull(result);

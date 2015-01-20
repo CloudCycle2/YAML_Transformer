@@ -1,5 +1,6 @@
 package org.opentosca.yamlconverter.main;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.xml.namespace.QName;
@@ -22,7 +23,7 @@ public class QuickBeansConverter implements IToscaBean2BeanConverter {
 
 	@Override
 	public Definitions yamlb2xmlb(ServiceTemplate yamlBean) {
-		final List<NodeTemplate> nodetemps = yamlBean.getNodeTemplate();
+		final Collection<NodeTemplate> nodetemps = yamlBean.getNode_templates().values();
 		final TServiceTemplate servtemp = convertTo(nodetemps, new TServiceTemplate());
 		final Definitions tdef = new Definitions();
 		tdef.setId("blubb");
@@ -31,7 +32,7 @@ public class QuickBeansConverter implements IToscaBean2BeanConverter {
 		return tdef;
 	}
 
-	public TServiceTemplate convertTo(List<NodeTemplate> yamllist, TServiceTemplate arg1) {
+	public TServiceTemplate convertTo(Collection<NodeTemplate> yamllist, TServiceTemplate arg1) {
 		final TServiceTemplate serviceTemp = new TServiceTemplate();
 		final TTopologyTemplate topoTemp = new TTopologyTemplate();
 		final List<TEntityTemplate> nodelist = topoTemp.getNodeTemplateOrRelationshipTemplate();

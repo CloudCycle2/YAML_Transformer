@@ -119,7 +119,7 @@ public class Yaml2XmlTextSwitch {
 	private void parseTopologyTemplate(ServiceTemplate root) {
 		linep();
 		this.xml.append("<TopologyTemplate>");
-		for (final NodeTemplate entry : root.getNodeTemplate()) {
+		for (final NodeTemplate entry : root.getNode_templates().values()) {
 			parseNodeTemplate(entry);
 		}
 		linem();
