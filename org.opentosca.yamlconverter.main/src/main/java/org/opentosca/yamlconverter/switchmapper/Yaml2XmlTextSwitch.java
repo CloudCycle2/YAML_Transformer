@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 public class Yaml2XmlTextSwitch {
 	public static final String TYPES_XSD_FILENAME = "TypesGen.xsd";
@@ -45,7 +45,7 @@ public class Yaml2XmlTextSwitch {
 	 * @param root the Root Element to parse.
 	 * @return inputVariable -> requirement
 	 */
-	public Map<String, String> getInputRequirements(YAMLFileRoot root) {
+	public Map<String, String> getInputRequirements(ServiceTemplate root) {
 		final Map<String, String> inputreq = new HashMap<String, String>();
 		// for(Input in : root.getInputs()){
 		// inputreq.put(in.getName(), in.getDescription());
@@ -67,7 +67,7 @@ public class Yaml2XmlTextSwitch {
 	 *
 	 * @param root
 	 */
-	public void parse(YAMLFileRoot root) {
+	public void parse(ServiceTemplate root) {
 		if (root == null) {
 			return;
 		}
@@ -97,7 +97,7 @@ public class Yaml2XmlTextSwitch {
 		this.xml.append("</documentation>");
 	}
 
-	private void parseImports(YAMLFileRoot root) {
+	private void parseImports(ServiceTemplate root) {
 		lineone();
 		this.xml.append("<Import");
 		this.xml.append(" importType=\"http://www.w3.org/2001/XMLSchema\"");
@@ -105,7 +105,7 @@ public class Yaml2XmlTextSwitch {
 		this.xml.append(" namespace=\"" + TYPE_NS + "\" />");
 	}
 
-	private void parseServiceTemplate(YAMLFileRoot root) {
+	private void parseServiceTemplate(ServiceTemplate root) {
 		linep();
 		this.xml.append("<ServiceTemplate");
 		this.xml.append(" id=\"servicetemplate\"");
@@ -116,25 +116,26 @@ public class Yaml2XmlTextSwitch {
 		this.xml.append("</ServiceTemplate>");
 	}
 
-	private void parseTopologyTemplate(YAMLFileRoot root) {
+	private void parseTopologyTemplate(ServiceTemplate root) {
 		linep();
 		this.xml.append("<TopologyTemplate>");
-		for (final Entry<String, NodeTemplate> entry : root.getNode_templates().entrySet()) {
+		for (final NodeTemplate entry : root.getNodeTemplate()) {
 			parseNodeTemplate(entry);
 		}
 		linem();
 		this.xml.append("</TopologyTemplate>");
 	}
 
-	private void parseNodeTemplate(Entry<String, NodeTemplate> entry) {
+	private void parseNodeTemplate(NodeTemplate entry) {
 		linep();
 		this.xml.append("<NodeTemplate");
-		this.xml.append(" id=\"" + entry.getKey() + "\"");
-		this.xml.append(" name=\"" + entry.getKey() + "\"");
-		this.xml.append(" type=\"" + entry.getValue().getType() + "\"");
+		// TODO: name!
+		// this.xml.append(" id=\"" + entry.getName() + "\"");
+		// this.xml.append(" name=\"" + entry.getName() + "\"");
+		this.xml.append(" type=\"" + entry.getType() + "\"");
 		this.xml.append(">");
-		parseDocumentation(entry.getValue().getDescription());
-		parseNodeTemplateProperties(entry.getValue().getProperties(), entry.getValue().getType(), entry.getKey());
+		parseDocumentation(entry.getDescription());
+		// parseNodeTemplateProperties(entry.getProperties(), entry.getType(), entry.getName());
 		linem();
 		this.xml.append("</NodeTemplate>");
 	}
