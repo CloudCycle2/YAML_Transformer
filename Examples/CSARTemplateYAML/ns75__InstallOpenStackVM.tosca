@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tosca:Definitions xmlns:tosca="http://docs.oasis-open.org/tosca/ns/2011/12" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12" xmlns:ns31="http://www.eclipse.org/winery/model/selfservice" id="winery-defs-for_ns75-InstallOpenStackVM" targetNamespace="http://types.opentosca.org">
+    <tosca:Import namespace="http://types.opentosca.org/propertiesdefinition/winery" location="../imports/http%253A%252F%252Fwww.w3.org%252F2001%252FXMLSchema/http%253A%252F%252Ftypes.opentosca.org%252Fpropertiesdefinition%252Fwinery/Properties/Properties.xsd" importType="http://www.w3.org/2001/XMLSchema" winery:wpd="true"/>
+    <tosca:Import namespace="http://types.opentosca.org" location="ns75__InstallOpenStackVM_impl.tosca" importType="http://docs.oasis-open.org/tosca/ns/2011/12"/>
+    <tosca:Import namespace="http://types.opentosca.org/propertiesdefinition/winery" location="../nodetypes/http%253A%252F%252Ftypes.opentosca.org/InstallOpenStackVM/propertiesdefinition/Properties.xsd" importType="http://www.w3.org/2001/XMLSchema" winery:wpd="true"/>
+    <tosca:NodeType name="InstallOpenStackVM" targetNamespace="http://types.opentosca.org" winery:bordercolor="#5e351a">
+        <winery:PropertiesDefinition elementname="Properties" namespace="http://types.opentosca.org/propertiesdefinition/winery">
+            <winery:properties>
+                <winery:key>credentials</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+            <winery:properties>
+                <winery:key>endpointsAPI</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+            <winery:properties>
+                <winery:key>keypair</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+            <winery:properties>
+                <winery:key>minDisk</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+            <winery:properties>
+                <winery:key>minRAM</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+            <winery:properties>
+                <winery:key>flavorId</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+            <winery:properties>
+                <winery:key>imageId</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+            <winery:properties>
+                <winery:key>imageName</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+            <winery:properties>
+                <winery:key>floatingIp</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+            <winery:properties>
+                <winery:key>serverId</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+            <winery:properties>
+                <winery:key>privKey</winery:key>
+                <winery:type>xsd:string</winery:type>
+            </winery:properties>
+        </winery:PropertiesDefinition>
+        <tosca:PropertiesDefinition xmlns:ns76="http://types.opentosca.org/propertiesdefinition/winery" type="ns76:Properties"/>
+        <tosca:Interfaces>
+            <tosca:Interface name="Custom_InstallVM">
+                <tosca:Operation name="InstallVMwithCustomKeypair">
+                    <tosca:InputParameters>
+                        <tosca:InputParameter name="credentials" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="endpointsAPI" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="flavorId" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="keypair" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="imageId" type="xsd:string" required="yes"/>
+                    </tosca:InputParameters>
+                    <tosca:OutputParameters>
+                        <tosca:OutputParameter name="serverId" type="xsd:string" required="yes"/>
+                        <tosca:OutputParameter name="floatingIp" type="xsd:string" required="yes"/>
+                    </tosca:OutputParameters>
+                </tosca:Operation>
+                <tosca:Operation name="InstallVMwithGeneratedKeypair">
+                    <tosca:InputParameters>
+                        <tosca:InputParameter name="credentials" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="endpointsAPI" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="flavorId" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="imageName" type="xsd:string" required="yes"/>
+                    </tosca:InputParameters>
+                    <tosca:OutputParameters>
+                        <tosca:OutputParameter name="serverId" type="xsd:string" required="yes"/>
+                        <tosca:OutputParameter name="floatingIp" type="xsd:string" required="yes"/>
+                        <tosca:OutputParameter name="privKey" type="xsd:string" required="yes"/>
+                    </tosca:OutputParameters>
+                </tosca:Operation>
+                <tosca:Operation name="InstallVMwithCustomFlavor">
+                    <tosca:InputParameters>
+                        <tosca:InputParameter name="credentials" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="endpointsAPI" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="minDisk" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="minRAM" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="imageName" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="keypair" type="xsd:string" required="yes"/>
+                    </tosca:InputParameters>
+                    <tosca:OutputParameters>
+                        <tosca:OutputParameter name="serverId" type="xsd:string" required="yes"/>
+                        <tosca:OutputParameter name="floatingIp" type="xsd:string" required="yes"/>
+                    </tosca:OutputParameters>
+                </tosca:Operation>
+                <tosca:Operation name="InstallVMwithCustomImage">
+                    <tosca:InputParameters>
+                        <tosca:InputParameter name="credentials" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="endpointsAPI" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="flavorId" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="imageName" type="xsd:string" required="yes"/>
+                        <tosca:InputParameter name="keypair" type="xsd:string" required="yes"/>
+                    </tosca:InputParameters>
+                    <tosca:OutputParameters>
+                        <tosca:OutputParameter name="serverId" type="xsd:string" required="yes"/>
+                        <tosca:OutputParameter name="floatingIp" type="xsd:string" required="yes"/>
+                    </tosca:OutputParameters>
+                </tosca:Operation>
+            </tosca:Interface>
+        </tosca:Interfaces>
+    </tosca:NodeType>
+</tosca:Definitions>

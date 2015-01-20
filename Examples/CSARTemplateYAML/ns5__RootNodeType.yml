@@ -1,0 +1,16 @@
+# Required TOSCA Definitions version string
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+# The TOSCA Node Type all other TOSCA base Node Types derive from
+# The statements beginning at line 9 are extracted from the TOSCA-Simple-Profile-YAML-v1.0 B.6.1 tosca.nodes.Root
+RootNodeType:
+	derived_from: RootNodeType
+	description: Root NodeType
+	requirements:
+		- dependency:
+			type: tosca.capabilities.Feature
+			lower_bound: 0
+			upper_bound: unbounded
+		capabilities:
+			feature: tosca.capabilities.Feature
+		interfaces: [ tosca.interfaces.node.Lifecycle ]	
