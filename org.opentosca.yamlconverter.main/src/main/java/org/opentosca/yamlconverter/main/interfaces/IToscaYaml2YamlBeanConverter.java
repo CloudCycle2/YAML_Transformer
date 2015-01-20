@@ -1,8 +1,8 @@
 package org.opentosca.yamlconverter.main.interfaces;
 
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
 
 public interface IToscaYaml2YamlBeanConverter {
 
@@ -13,7 +13,7 @@ public interface IToscaYaml2YamlBeanConverter {
 	 * @return The Tosca YAML root bean
 	 * @throws ConverterException
 	 */
-	public YAMLFileRoot yaml2yamlbean(String yamlstring) throws ConverterException;
+	public ServiceTemplate yaml2yamlbean(String yamlstring) throws ConverterException;
 
 	/**
 	 * Converts Tosca YAML beans to Tosca YAML.

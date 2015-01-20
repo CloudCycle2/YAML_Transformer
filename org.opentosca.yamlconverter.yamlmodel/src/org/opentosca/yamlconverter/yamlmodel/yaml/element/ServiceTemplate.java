@@ -107,4 +107,80 @@ public class ServiceTemplate extends YAMLElement {
 		}
 		return false;
 	}
+
+	public String getTosca_definitions_version() {
+		return this.tosca_definitions_version;
+	}
+
+	public void setTosca_definitions_version(String tosca_definitions_version) {
+		this.tosca_definitions_version = tosca_definitions_version;
+	}
+
+	public String getTosca_default_namespace() {
+		return this.tosca_default_namespace;
+	}
+
+	public void setTosca_default_namespace(String tosca_default_namespace) {
+		this.tosca_default_namespace = tosca_default_namespace;
+	}
+
+	public String getTemplate_name() {
+		return this.template_name;
+	}
+
+	public void setTemplate_name(String template_name) {
+		this.template_name = template_name;
+	}
+
+	public String getTemplate_author() {
+		return this.template_author;
+	}
+
+	public void setTemplate_author(String template_author) {
+		this.template_author = template_author;
+	}
+
+	public String getTemplate_version() {
+		return this.template_version;
+	}
+
+	public void setTemplate_version(String template_version) {
+		this.template_version = template_version;
+	}
+
+	public ArrayList<NodeType> getNodeType() {
+		return this.nodeType;
+	}
+
+	public ArrayList<CapabilityType> getCapabilityType() {
+		return this.capabilityType;
+	}
+
+	public ArrayList<ArchitectType> getArchitectType() {
+		return this.architectType;
+	}
+
+	public ArrayList<Output> getOutput() {
+		return this.output;
+	}
+
+	public ArrayList<Input> getInput() {
+		return this.input;
+	}
+
+	public ArrayList<Group> getGroup() {
+		return this.group;
+	}
+
+	public ArrayList<NodeTemplate> getNodeTemplate() {
+		return this.nodeTemplate;
+	}
+
+	public ArrayList<Import> getImports() {
+		return this.imports;
+	}
+
+	public ArrayList<RelationshipType> getRelationshipType() {
+		return this.relationshipType;
+	}
 }

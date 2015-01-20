@@ -23,5 +23,5 @@ node_templates:
       # host image properties
       os_arch: x86_32
       os_type: windows
-      os_distribution: rheli
+      os_distribution: { get_property: [my_server, os_distribution] }
       os_version: 7.0

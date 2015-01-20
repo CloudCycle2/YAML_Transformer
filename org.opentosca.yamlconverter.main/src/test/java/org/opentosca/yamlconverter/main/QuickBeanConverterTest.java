@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.opentosca.model.tosca.TDefinitions;
 import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 /**
  * @author Sebi
@@ -19,7 +19,7 @@ public class QuickBeanConverterTest extends BaseTest {
 
 	@Test
 	public void testYamlBean2XmlBean() throws Exception {
-		final YAMLFileRoot yamlRoot = new YAMLFileRoot();
+		final ServiceTemplate yamlRoot = new ServiceTemplate();
 		yamlRoot.setTosca_definitions_version("tosca_123");
 
 		final Map<String, NodeTemplate> nodeTemplateMap = new HashMap<>();
@@ -27,12 +27,13 @@ public class QuickBeanConverterTest extends BaseTest {
 		final String nodeTemplateType = "tosca.nodes.Compute";
 		nodeTemplate.setType(nodeTemplateType);
 		nodeTemplateMap.put("OpenStack", nodeTemplate);
-		final HashMap<String, Object> properties = new HashMap<String, Object>();
+		final HashMap<String, String> properties = new HashMap<>();
 		properties.put("numcpu", "2");
 		properties.put("mem_size", "200");
 		nodeTemplate.setProperties(properties);
 
-		yamlRoot.setNode_templates(nodeTemplateMap);
+		yamlRoot.getNodeTemplate().addAll(nodeTemplateMap.values());
+		// yamlRoot.setNode_templates(nodeTemplateMap);
 
 		final TDefinitions result = this.converter.yamlb2xmlb(yamlRoot);
 		Assert.assertNotNull(result);
