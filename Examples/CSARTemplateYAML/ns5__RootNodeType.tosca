@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tosca:Definitions xmlns:tosca="http://docs.oasis-open.org/tosca/ns/2011/12" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12" xmlns:ns31="http://www.eclipse.org/winery/model/selfservice" id="winery-defs-for_ns5-RootNodeType" targetNamespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+    <tosca:Import namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" location="../imports/http%253A%252F%252Fwww.w3.org%252F2001%252FXMLSchema/http%253A%252F%252Fdocs.oasis-open.org%252Ftosca%252Fns%252F2011%252F12%252FToscaBaseTypes/Artifacts/Artifacts.xsd" importType="http://www.w3.org/2001/XMLSchema"/>
+    <tosca:Import namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" location="../imports/http%253A%252F%252Fwww.w3.org%252F2001%252FXMLSchema/http%253A%252F%252Fdocs.oasis-open.org%252Ftosca%252Fns%252F2011%252F12%252FToscaBaseTypes/TOSCA-v1.0-BaseTypes/TOSCA-v1.0-BaseTypes.xsd" importType="http://www.w3.org/2001/XMLSchema"/>
+    <tosca:NodeType name="RootNodeType" targetNamespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <tosca:documentation>Root NodeType</tosca:documentation>
+    </tosca:NodeType>
+</tosca:Definitions>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tosca:Definitions xmlns:tosca="http://docs.oasis-open.org/tosca/ns/2011/12" xmlns:winery="http://www.opentosca.org/winery/extensions/tosca/2013/02/12" xmlns:ns31="http://www.eclipse.org/winery/model/selfservice" id="winery-defs-for_ns75-InstallVMServTemplate" targetNamespace="http://types.opentosca.org">
+    <tosca:Import namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" location="ns5__OperatingSystem.tosca" importType="http://docs.oasis-open.org/tosca/ns/2011/12"/>
+    <tosca:Import namespace="http://types.opentosca.org" location="ns75__InstallOpenStackVM.tosca" importType="http://docs.oasis-open.org/tosca/ns/2011/12"/>
+    <tosca:ServiceTemplate id="InstallVMServTemplate" name="InstallVMServTemplate" targetNamespace="http://types.opentosca.org">
+        <tosca:TopologyTemplate>
+            <tosca:NodeTemplate xmlns:ns75="http://types.opentosca.org" name="InstallOpenStackVMTemplate" minInstances="1" maxInstances="1" id="InstallOpenStackVMTemplate" type="ns75:InstallOpenStackVM" winery:x="435" winery:y="241">
+                <tosca:Properties>
+                    <ns76:Properties xmlns:ns76="http://types.opentosca.org/propertiesdefinition/winery" xmlns="http://types.opentosca.org/propertiesdefinition/winery" xmlns:ty="http://types.opentosca.org">
+                        <credentials>{"auth":{"tenantId":"4114e1b404404565ac2ccbcc76b8078e","passwordCredentials":{"username":"marzie.dehghanipour","password":"piorkaun"}}}</credentials>
+                        <endpointsAPI>{"os-identity-api":"http:\/\/129.69.209.127:5000\/v2.0","os-tenantId":"4114e1b404404565ac2ccbcc76b8078e"}</endpointsAPI>
+                        <keypair/>
+                        <minDisk/>
+                        <minRAM/>
+                        <flavorId>3</flavorId>
+                        <imageId/>
+                        <imageName>ubuntu-12.04-server-cloudimg-amd64</imageName>
+                        <floatingIp></floatingIp>
+                        <serverId></serverId>
+                        <privKey></privKey>
+					</ns76:Properties>
+                </tosca:Properties>
+            </tosca:NodeTemplate>
+            <tosca:NodeTemplate xmlns:ns5="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" name="LinuxOperatingSystem" minInstances="1" maxInstances="1" id="LinuxOperatingSystem" type="ns5:OperatingSystem" winery:x="429" winery:y="75">
+            	<tosca:Properties>
+                    <ns6:Properties xmlns:ns6="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/propertiesdefinition/winery" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/propertiesdefinition/winery" xmlns:ty="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+                    	<hostname></hostname>
+                    	<sshUser>ubuntu</sshUser>
+                    	<sshKey></sshKey>
+                    	<script>uname -a</script> 
+               		</ns6:Properties>
+                </tosca:Properties>   
+            </tosca:NodeTemplate>             
+        </tosca:TopologyTemplate>
+        <tosca:Plans>
+            <tosca:Plan id="InstallVMServTemplateBuildPlan" name="InstallVMServTemplateBuildPlan" planType="http://docs.oasis-open.org/tosca/ns/2011/12/PlanTypes/BuildPlan" planLanguage="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+                <tosca:InputParameters>
+                    <tosca:InputParameter name="credentials" type="xsd:string" required="yes"/>
+                    <tosca:InputParameter name="endpointsAPI" type="xsd:string" required="yes"/>
+                    <tosca:InputParameter name="flavorId" type="xsd:string" required="yes"/>
+                    <tosca:InputParameter name="keypair" type="xsd:string" required="yes"/>
+                    <tosca:InputParameter name="imageId" type="xsd:string" required="yes"/>
+                    <tosca:InputParameter name="imageName" type="xsd:string" required="yes"/>
+                    <tosca:InputParameter name="minDisk" type="xsd:string" required="yes"/>
+                    <tosca:InputParameter name="minRAM" type="xsd:string" required="yes"/>
+                </tosca:InputParameters>
+                <tosca:OutputParameters>
+                    <tosca:OutputParameter name="selfserviceApplicationUrl" type="xsd:string"/>
+                    <tosca:OutputParameter name="selfserviceMessage" type="xsd:string"/>
+                    <tosca:OutputParameter name="selfservicePolicyMessage" type="xsd:string"/>
+                    <tosca:OutputParameter name="selfserviceStatus" type="xsd:string"/>
+                    <tosca:OutputParameter name="CorrelationID" type="xsd:string"/>
+                </tosca:OutputParameters>
+                <tosca:PlanModelReference reference="../servicetemplates/types.opentosca.org/InstallVMServTemplate/plans/InstallVMServTemplateBuildPlan/InstallVMServTemplateBuildPlan.zip"/>
+            </tosca:Plan>
+        </tosca:Plans>
+    </tosca:ServiceTemplate>
+</tosca:Definitions>
