@@ -1,0 +1,10 @@
+<Generalization ConnectToCodeModel="1" Documentation_plain=""
+    From="VbmozFKFS_nqHAVB" Id="kilbx1KFS_nqHBGb" PmAuthor="Def"
+    PmCreateDateTime="2015-01-13T16:12:40.521"
+    PmLastModified="2015-01-13T16:42:33.584" QualityScore="100"
+    Substitutable="false" To="1qjYzFKFS_nqHAY0"
+    UserIDLastNumericValue="0" Visibility="Unspecified">
+    <MasterView>
+        <Generalization Idref="8ylbx1KFS_nqHBGc"/>
+    </MasterView>
+</Generalization>
