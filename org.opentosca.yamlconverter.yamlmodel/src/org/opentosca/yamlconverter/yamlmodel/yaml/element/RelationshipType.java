@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
-public abstract class PropertyType {
+public class RelationshipType extends YAMLElement {
 
 	public int hashCode() {
 		int hashCode = 0;
@@ -13,8 +13,8 @@ public abstract class PropertyType {
 	public boolean equals(Object object) {
 		if (this == object) {
 			return true;
-		} else if (object instanceof PropertyType) {
-			PropertyType propertyTypeObject = (PropertyType) object;
+		} else if (object instanceof RelationshipType) {
+			RelationshipType relationshipTypeObject = (RelationshipType) object;
 			boolean equals = true;
 			return equals;
 		}
