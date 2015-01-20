@@ -9,13 +9,14 @@
             Documentation_plain="" Id="jUDEzFKFS_nqHAem" Leaf="false"
             Name="element" PmAuthor="Def"
             PmCreateDateTime="2014-12-10T08:39:00.145"
-            PmLastModified="2014-12-10T08:50:04.101"
+            PmLastModified="2015-01-13T16:32:32.741"
             QualityReason="2&#x9;2&#xa;5&#x9;5" QualityScore="26"
             Root="false" UserIDLastNumericValue="0" Visibility="public">
             <SubDiagrams>
                 <ClassDiagram Idref="QTIKMFKFS_nqHAYN"/>
                 <ClassDiagram Idref="txUozFKFS_nqHAUx"/>
-                <ClassDiagram Idref="PbdIzFKFS_nqHAUJ"/>
+                <ClassDiagram Idref="tB0Hx1KFS_nqHBM_"/>
+                <ClassDiagram Idref="wleXx1KFS_nqHBRc"/>
             </SubDiagrams>
             <ModelChildren>
                 <Class Abstract="true" Active="false"
@@ -24,7 +25,7 @@
                     Id="mIepMFKFS_nqHAO9" Leaf="false"
                     Name="PropertyType" PmAuthor="Def"
                     PmCreateDateTime="2014-12-02T20:59:16.761"
-                    PmLastModified="2014-12-10T09:00:13.113"
+                    PmLastModified="2015-01-13T16:17:07.562"
                     QualityReason="2&#x9;2" QualityScore="97"
                     Root="false" UserIDLastNumericValue="0" Visibility="public">
                     <MasterView>
@@ -33,16 +34,14 @@
                 </Class>
                 <Class Abstract="false" Active="false"
                     BusinessKeyMutable="true" BusinessModel="false"
-                    ConnectToCodeModel="1" Documentation_plain=""
-                    Id="5IsKMFKFS_nqHAYZ" Leaf="false"
-                    Name="TypedProperty" PmAuthor="Def"
+                    ConnectToCodeModel="1"
+                    Documentation="&lt;head>&#xd;&#xa;    &lt;style type=&quot;text/css&quot;>&#xa;      &lt;!--&#xa;        body { color: #000000; font-family: Courier New; font-size: 11px }&#xa;      -->&#xa;    &lt;/style>&#xd;&#xa;    &#xd;&#xa;  &lt;/head>&#xd;&#xa;  &lt;body>&#xd;&#xa;    &lt;p>&#xd;&#xa;      A.3.9&#xd;&#xa;    &lt;/p>&#xd;&#xa;  &lt;/body>"
+                    Documentation_plain="A.3.9" Id="5IsKMFKFS_nqHAYZ"
+                    Leaf="false" Name="TypedProperty" PmAuthor="Def"
                     PmCreateDateTime="2014-12-02T19:43:50.695"
-                    PmLastModified="2014-12-10T09:00:13.113"
+                    PmLastModified="2015-01-13T16:17:07.562"
                     QualityReason="2&#x9;2" QualityScore="97"
                     Root="false" UserIDLastNumericValue="0" Visibility="public">
-                    <ToSimpleRelationships>
-                        <Generalization Idref="6DfozFKFS_nqHAWY" Name=""/>
-                    </ToSimpleRelationships>
                     <MasterView>
                         <Class Idref="ZIsKMFKFS_nqHAYY" Name="TypedProperty"/>
                     </MasterView>
@@ -53,7 +52,7 @@
                     Id="VbmozFKFS_nqHAVB" Leaf="false"
                     Name="YAMLElement" PmAuthor="Def"
                     PmCreateDateTime="2014-12-10T08:24:22.314"
-                    PmLastModified="2014-12-10T09:03:23.761"
+                    PmLastModified="2015-01-13T16:17:07.561"
                     QualityReason="2&#x9;2" QualityScore="97"
                     Root="false" UserIDLastNumericValue="0" Visibility="public">
                     <ModelChildren>
@@ -73,10 +72,16 @@
                             Visibility="private" Visible="true"/>
                     </ModelChildren>
                     <FromSimpleRelationships>
-                        <Generalization Idref="6DfozFKFS_nqHAWY" Name=""/>
                         <Generalization Idref="VXEYzFKFS_nqHAW5" Name=""/>
-                        <Generalization Idref="LJ3YzFKFS_nqHAZr" Name=""/>
-                        <Generalization Idref="IziczFKFS_nqHAoc" Name=""/>
+                        <Generalization Idref="AaATx1KFS_nqHA4E" Name=""/>
+                        <Generalization Idref="sU8Tx1KFS_nqHA5A" Name=""/>
+                        <Generalization Idref="pI2Tx1KFS_nqHA6M" Name=""/>
+                        <Generalization Idref="eLdTx1KFS_nqHA7X" Name=""/>
+                        <Generalization Idref="FGQzx1KFS_nqHA8h" Name=""/>
+                        <Generalization Idref="p05zx1KFS_nqHA9n" Name=""/>
+                        <Generalization Idref="lx0Lx1KFS_nqHA_x" Name=""/>
+                        <Generalization Idref="YzsLx1KFS_nqHBAF" Name=""/>
+                        <Generalization Idref="kilbx1KFS_nqHBGb" Name=""/>
                     </FromSimpleRelationships>
                     <MasterView>
                         <Class Idref="lbmozFKFS_nqHAVA" Name="YAMLElement"/>
@@ -86,9 +91,9 @@
                     BusinessKeyMutable="true" BusinessModel="false"
                     ConnectToCodeModel="1" Documentation_plain=""
                     Id="pnfIzFKFS_nqHAUg" Leaf="false"
-                    Name="YAMLFileRoot" PmAuthor="Def"
+                    Name="ServiceTemplate" PmAuthor="Def"
                     PmCreateDateTime="2014-12-10T08:22:31.909"
-                    PmLastModified="2014-12-10T08:50:04.097"
+                    PmLastModified="2015-01-20T14:11:24.957"
                     QualityReason="2&#x9;2" QualityScore="97"
                     Root="false" UserIDLastNumericValue="0" Visibility="public">
                     <ModelChildren>
@@ -107,13 +112,67 @@
                             Scope="instance" Type="String"
                             TypeModifier="" UserIDLastNumericValue="0"
                             Visibility="private" Visible="true"/>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="c1a9x1KFS_nqHA01" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="tosca_default_namespace"
+                            PmAuthor="Def"
+                            PmCreateDateTime="2015-01-13T15:40:49.358"
+                            PmLastModified="2015-01-13T15:48:59.626"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="String"
+                            TypeModifier="" UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true"/>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id=".AG9x1KFS_nqHA1L" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="template_name" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-13T15:40:54.815"
+                            PmLastModified="2015-01-13T15:48:59.626"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="String"
+                            TypeModifier="" UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true"/>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="Ptm9x1KFS_nqHA1O" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="template_author" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-13T15:41:01.820"
+                            PmLastModified="2015-01-13T15:48:59.626"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="String"
+                            TypeModifier="" UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true"/>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="MM29x1KFS_nqHA1R" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="template_version" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-13T15:41:07.852"
+                            PmLastModified="2015-01-13T15:48:59.626"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="String"
+                            TypeModifier="" UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true"/>
                     </ModelChildren>
                     <ToSimpleRelationships>
                         <Generalization Idref="VXEYzFKFS_nqHAW5" Name=""/>
                     </ToSimpleRelationships>
-                    <MasterView>
-                        <Class Idref="JnfIzFKFS_nqHAUf" Name="YAMLFileRoot"/>
-                    </MasterView>
                 </Class>
                 <Class Abstract="false" Active="false"
                     BusinessKeyMutable="true" BusinessModel="false"
@@ -121,7 +180,7 @@
                     Id="1qjYzFKFS_nqHAY0" Leaf="false"
                     Name="NodeTemplate" PmAuthor="Def"
                     PmCreateDateTime="2014-12-10T08:30:20.651"
-                    PmLastModified="2014-12-10T08:50:04.100"
+                    PmLastModified="2015-01-20T13:49:19.995"
                     QualityReason="2&#x9;2" QualityScore="97"
                     Root="false" UserIDLastNumericValue="0" Visibility="public">
                     <ModelChildren>
@@ -132,20 +191,757 @@
                             HasGetter="false" HasSetter="false"
                             Id="j5a4zFKFS_nqHAaT" IsID="false"
                             Leaf="false" Multiplicity="Unspecified"
-                            Name="name" PmAuthor="Def"
+                            Name="type" PmAuthor="Def"
                             PmCreateDateTime="2014-12-10T08:32:53.361"
-                            PmLastModified="2014-12-10T08:40:02.936"
+                            PmLastModified="2015-01-13T16:22:32.130"
                             QualityScore="-1" ReadOnly="false"
                             Scope="instance" Type="String"
                             TypeModifier="" UserIDLastNumericValue="0"
                             Visibility="private" Visible="true"/>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="Ymc3x1KFS_nqHBR6" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="properties" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-13T16:32:41.158"
+                            PmLastModified="2015-01-20T12:36:13.684"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="Map" TypeModifier=""
+                            UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true">
+                            <TemplateTypeBindInfo>
+                                <TemplateTypeBindInfo BindedType="Map"
+                                    Documentation_plain=""
+                                    Id="q2hY4NKFS_nqHAYw" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T12:28:45.269"
+                                    QualityScore="-1" TypeModifier="" UserIDLastNumericValue="0">
+                                    <Details>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="O2hY4NKFS_nqHAY4"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T12:28:45.276"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="O2hY4NKFS_nqHAY5"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T12:28:45.276"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="e2hY4NKFS_nqHAY6"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T12:28:45.278"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="e2hY4NKFS_nqHAY7"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T12:28:45.278"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    </Details>
+                                </TemplateTypeBindInfo>
+                            </TemplateTypeBindInfo>
+                        </Attribute>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="v_i3x1KFS_nqHBSA" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="requirements" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-13T16:32:55.933"
+                            PmLastModified="2015-01-13T16:42:33.584"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="Map" TypeModifier=""
+                            UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true">
+                            <TemplateTypeBindInfo>
+                                <TemplateTypeBindInfo BindedType="Map"
+                                    Documentation_plain=""
+                                    Id=".1q3x1KFS_nqHBSC" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-13T16:33:11.007"
+                                    QualityScore="-1" TypeModifier="" UserIDLastNumericValue="0">
+                                    <Details>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="h1q3x1KFS_nqHBSD"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-13T16:33:11.009"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="h1q3x1KFS_nqHBSE"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-13T16:33:11.009"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="x1q3x1KFS_nqHBSF"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-13T16:33:11.011"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="x1q3x1KFS_nqHBSG"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-13T16:33:11.011"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    </Details>
+                                </TemplateTypeBindInfo>
+                            </TemplateTypeBindInfo>
+                        </Attribute>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="51q3x1KFS_nqHBSI" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="capabilities" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-13T16:33:11.015"
+                            PmLastModified="2015-01-20T13:48:50.833"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="Map" TypeModifier=""
+                            UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true">
+                            <TemplateTypeBindInfo>
+                                <TemplateTypeBindInfo BindedType="Map"
+                                    Documentation_plain=""
+                                    Id="yK9G4NKFS_nqHAdX" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:48:20.755"
+                                    QualityScore="-1" TypeModifier="" UserIDLastNumericValue="0">
+                                    <Details>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="KK9G4NKFS_nqHAdY"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:48:20.757"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="qK9G4NKFS_nqHAdZ"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:48:20.757"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="aK9G4NKFS_nqHAda"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:48:20.758"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="6K9G4NKFS_nqHAdb"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:48:20.759"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    </Details>
+                                </TemplateTypeBindInfo>
+                            </TemplateTypeBindInfo>
+                        </Attribute>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="UJHG4NKFS_nqHAdw" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="interfaces" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-20T13:48:58.634"
+                            PmLastModified="2015-01-20T13:49:19.996"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="Map" TypeModifier=""
+                            UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true">
+                            <TemplateTypeBindInfo>
+                                <TemplateTypeBindInfo BindedType="Map"
+                                    Documentation_plain=""
+                                    Id="snXG4NKFS_nqHAdy" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:49:08.173"
+                                    QualityScore="-1" TypeModifier="" UserIDLastNumericValue="0">
+                                    <Details>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="8nXG4NKFS_nqHAdz"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:49:08.175"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="8nXG4NKFS_nqHAd0"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:49:08.175"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="inXG4NKFS_nqHAd1"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:49:08.177"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="inXG4NKFS_nqHAd2"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:49:08.177"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    </Details>
+                                </TemplateTypeBindInfo>
+                            </TemplateTypeBindInfo>
+                        </Attribute>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="qnXG4NKFS_nqHAd3" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="artifacts" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-20T13:49:08.181"
+                            PmLastModified="2015-01-20T13:49:19.996"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="Map" TypeModifier=""
+                            UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true">
+                            <TemplateTypeBindInfo>
+                                <TemplateTypeBindInfo BindedType="Map"
+                                    Documentation_plain=""
+                                    Id="l5PG4NKFS_nqHAd5" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:49:15.241"
+                                    QualityScore="-1" TypeModifier="" UserIDLastNumericValue="0">
+                                    <Details>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="V5PG4NKFS_nqHAd6"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:49:15.242"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="V5PG4NKFS_nqHAd7"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:49:15.242"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="N5PG4NKFS_nqHAd8"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:49:15.244"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="N5PG4NKFS_nqHAd9"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:49:15.244"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    </Details>
+                                </TemplateTypeBindInfo>
+                            </TemplateTypeBindInfo>
+                        </Attribute>
                     </ModelChildren>
                     <ToSimpleRelationships>
-                        <Generalization Idref="LJ3YzFKFS_nqHAZr" Name=""/>
+                        <Generalization Idref="kilbx1KFS_nqHBGb" Name=""/>
                     </ToSimpleRelationships>
-                    <MasterView>
-                        <Class Idref="1qjYzFKFS_nqHAYz" Name="NodeTemplate"/>
-                    </MasterView>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="e2qjx1KFS_nqHA2v" Leaf="false" Name="Import"
+                    PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T15:49:28.542"
+                    PmLastModified="2015-01-13T16:42:33.569"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ToSimpleRelationships>
+                        <Generalization Idref="AaATx1KFS_nqHA4E" Name=""/>
+                    </ToSimpleRelationships>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="UQHjx1KFS_nqHA3T" Leaf="false" Name="NodeType"
+                    PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T15:51:50.282"
+                    PmLastModified="2015-01-20T13:23:11.253"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ModelChildren>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="QZpS4NKFS_nqHAaU" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="derived_from" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-20T13:21:28.066"
+                            PmLastModified="2015-01-20T13:23:11.253"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="String"
+                            TypeModifier="" UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true"/>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="4NlS4NKFS_nqHAap" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="properties" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-20T13:21:44.839"
+                            PmLastModified="2015-01-20T13:23:11.253"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="Map" TypeModifier=""
+                            UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true">
+                            <TemplateTypeBindInfo>
+                                <TemplateTypeBindInfo BindedType="Map"
+                                    Documentation_plain=""
+                                    Id="cWtS4NKFS_nqHAar" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:00.078"
+                                    QualityScore="-1" TypeModifier="" UserIDLastNumericValue="0">
+                                    <Details>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="8WtS4NKFS_nqHAas"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:00.079"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="CWtS4NKFS_nqHAat"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:00.080"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="iWtS4NKFS_nqHAau"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:00.081"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="SWtS4NKFS_nqHAav"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:00.082"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    </Details>
+                                </TemplateTypeBindInfo>
+                            </TemplateTypeBindInfo>
+                        </Attribute>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="qWtS4NKFS_nqHAaw" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="requirements" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-20T13:22:00.085"
+                            PmLastModified="2015-01-20T13:23:11.253"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="Map" TypeModifier=""
+                            UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true">
+                            <TemplateTypeBindInfo>
+                                <TemplateTypeBindInfo BindedType="Map"
+                                    Documentation_plain=""
+                                    Id="oe9S4NKFS_nqHAay" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:08.517"
+                                    QualityScore="-1" TypeModifier="" UserIDLastNumericValue="0">
+                                    <Details>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="4e9S4NKFS_nqHAaz"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:08.519"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="4e9S4NKFS_nqHAa0"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:08.519"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="ke9S4NKFS_nqHAa1"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:08.521"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="ke9S4NKFS_nqHAa2"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:08.521"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    </Details>
+                                </TemplateTypeBindInfo>
+                            </TemplateTypeBindInfo>
+                        </Attribute>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="Me9S4NKFS_nqHAa3" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="capabilities" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-20T13:22:08.525"
+                            PmLastModified="2015-01-20T13:23:11.253"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="Map" TypeModifier=""
+                            UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true">
+                            <TemplateTypeBindInfo>
+                                <TemplateTypeBindInfo BindedType="Map"
+                                    Documentation_plain=""
+                                    Id="Z3TS4NKFS_nqHAa5" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:22.694"
+                                    QualityScore="-1" TypeModifier="" UserIDLastNumericValue="0">
+                                    <Details>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="F3TS4NKFS_nqHAa6"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:22.696"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="l3TS4NKFS_nqHAa7"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:22.697"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="V3TS4NKFS_nqHAa8"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:22.698"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="13TS4NKFS_nqHAa9"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:22.699"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    </Details>
+                                </TemplateTypeBindInfo>
+                            </TemplateTypeBindInfo>
+                        </Attribute>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="d3TS4NKFS_nqHAa_" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="interfaces" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-20T13:22:22.702"
+                            PmLastModified="2015-01-20T13:23:11.253"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="Map" TypeModifier=""
+                            UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true">
+                            <TemplateTypeBindInfo>
+                                <TemplateTypeBindInfo BindedType="Map"
+                                    Documentation_plain=""
+                                    Id="GdLS4NKFS_nqHAbB" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:30.040"
+                                    QualityScore="-1" TypeModifier="" UserIDLastNumericValue="0">
+                                    <Details>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="mdLS4NKFS_nqHAbC"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:30.041"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="WdLS4NKFS_nqHAbD"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:30.042"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="OdLS4NKFS_nqHAbE"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:30.044"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="OdLS4NKFS_nqHAbF"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:30.044"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    </Details>
+                                </TemplateTypeBindInfo>
+                            </TemplateTypeBindInfo>
+                        </Attribute>
+                        <Attribute Abstract="false" Aggregation="None"
+                            AllowEmptyName="false"
+                            ConnectToCodeModel="1" Derived="false"
+                            DerivedUnion="false" Documentation_plain=""
+                            HasGetter="false" HasSetter="false"
+                            Id="BdLS4NKFS_nqHAbH" IsID="false"
+                            Leaf="false" Multiplicity="Unspecified"
+                            Name="artifacts" PmAuthor="Def"
+                            PmCreateDateTime="2015-01-20T13:22:30.048"
+                            PmLastModified="2015-01-20T13:23:11.253"
+                            QualityScore="-1" ReadOnly="false"
+                            Scope="instance" Type="Map" TypeModifier=""
+                            UserIDLastNumericValue="0"
+                            Visibility="private" Visible="true">
+                            <TemplateTypeBindInfo>
+                                <TemplateTypeBindInfo BindedType="Map"
+                                    Documentation_plain=""
+                                    Id="im7S4NKFS_nqHAbJ" Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:40.977"
+                                    QualityScore="-1" TypeModifier="" UserIDLastNumericValue="0">
+                                    <Details>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="ym7S4NKFS_nqHAbK"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:40.979"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="ym7S4NKFS_nqHAbL"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:40.979"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    <TemplateTypeBindDetails
+                                    Documentation_plain=""
+                                    Id="Km7S4NKFS_nqHAbM"
+                                    Name="" PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:40.980"
+                                    QualityScore="-1"
+                                    UserIDLastNumericValue="0" Wildcard="Non Wildcard">
+                                    <Arguments>
+                                    <TemplateTypeBindInfo
+                                    BindedType="String"
+                                    Documentation_plain=""
+                                    Id="qm7S4NKFS_nqHAbN"
+                                    Name=""
+                                    PmAuthor="Def"
+                                    PmCreateDateTime="2015-01-20T13:22:40.981"
+                                    QualityScore="-1" UserIDLastNumericValue="0"/>
+                                    </Arguments>
+                                    </TemplateTypeBindDetails>
+                                    </Details>
+                                </TemplateTypeBindInfo>
+                            </TemplateTypeBindInfo>
+                        </Attribute>
+                    </ModelChildren>
+                    <ToSimpleRelationships>
+                        <Generalization Idref="sU8Tx1KFS_nqHA5A" Name=""/>
+                    </ToSimpleRelationships>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="1RSTx1KFS_nqHA5Y" Leaf="false"
+                    Name="RelationshipType" PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T15:53:38.860"
+                    PmLastModified="2015-01-13T16:42:33.582"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ToSimpleRelationships>
+                        <Generalization Idref="pI2Tx1KFS_nqHA6M" Name=""/>
+                    </ToSimpleRelationships>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="5m.Tx1KFS_nqHA6j" Leaf="false"
+                    Name="CapabilityType" PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T15:54:31.527"
+                    PmLastModified="2015-01-20T14:11:24.956"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ToSimpleRelationships>
+                        <Generalization Idref="eLdTx1KFS_nqHA7X" Name=""/>
+                    </ToSimpleRelationships>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="vSjTx1KFS_nqHA7p" Leaf="false"
+                    Name="ArchitectType" PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T15:55:44.829"
+                    PmLastModified="2015-01-13T16:42:33.583"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ToSimpleRelationships>
+                        <Generalization Idref="FGQzx1KFS_nqHA8h" Name=""/>
+                    </ToSimpleRelationships>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="UaIzx1KFS_nqHA8z" Leaf="false" Name="Output"
+                    PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T15:57:02.858"
+                    PmLastModified="2015-01-13T16:42:33.570"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ToSimpleRelationships>
+                        <Generalization Idref="p05zx1KFS_nqHA9n" Name=""/>
+                    </ToSimpleRelationships>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="9yVzx1KFS_nqHA92" Leaf="false" Name="Input"
+                    PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T15:59:38.351"
+                    PmLastModified="2015-01-13T16:42:33.566"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ToSimpleRelationships>
+                        <Generalization Idref="lx0Lx1KFS_nqHA_x" Name=""/>
+                    </ToSimpleRelationships>
+                </Class>
+                <Class Abstract="false" Active="false"
+                    BusinessKeyMutable="true" BusinessModel="false"
+                    ConnectToCodeModel="1" Documentation_plain=""
+                    Id="GB1zx1KFS_nqHA9_" Leaf="false" Name="Group"
+                    PmAuthor="Def"
+                    PmCreateDateTime="2015-01-13T15:59:43.256"
+                    PmLastModified="2015-01-13T16:42:33.574"
+                    QualityReason="2&#x9;2" QualityScore="97"
+                    Root="false" UserIDLastNumericValue="0" Visibility="public">
+                    <ToSimpleRelationships>
+                        <Generalization Idref="YzsLx1KFS_nqHBAF" Name=""/>
+                    </ToSimpleRelationships>
                 </Class>
             </ModelChildren>
         </Package>

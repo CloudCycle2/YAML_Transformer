@@ -4,13 +4,13 @@
     DiagramBackground="rgb(255, 255, 255)" Editable="true"
     FollowDiagramParentElement="true" GeneralizationSetNotation="2"
     GridColor="rgb(192, 192, 192)" GridHeight="10" GridVisible="false"
-    GridWidth="10" Height="823" HideEmptyTaggedValues="false"
+    GridWidth="10" Height="793" HideEmptyTaggedValues="false"
     Id="QTIKMFKFS_nqHAYN" ImageHeight="0" ImageScale="1.0"
     ImageWidth="0" InitializeDiagramForCreate="true" Maximized="false"
     ModelElementNameAlignment="4" Name="Property"
     PaintConnectorThroughLabel="0" ParentModel="jUDEzFKFS_nqHAem"
     PmAuthor="Def" PmCreateDateTime="2014-12-02T19:43:16.738"
-    PmLastModified="2014-12-10T09:36:05.205" QualityScore="-1"
+    PmLastModified="2015-01-20T14:12:10.355" QualityScore="-1"
     RequestValidateSnapToGrid="false" ShapePresentationOption="0"
     ShowActivityStateNodeCaption="65535" ShowAllocatedFrom="true"
     ShowAllocatedTo="true" ShowAssociationNavigationArrows="3"
@@ -25,7 +25,7 @@
     ShowStereotypes="true" ShowTaggedValues="false"
     ShowTemplateInfoOfGeneralizationAndRealization="false"
     SuppressImplied1MultiplicityForAttributeAndAssociationEnd="false"
-    TrimmedHeight="0" TrimmedWidth="0" Width="1664" X="0" Y="0"
+    TrimmedHeight="0" TrimmedWidth="0" Width="758" X="0" Y="0"
     ZoomRatio="1.0" _alwaysShowReferenceAndSubdiagramResource="false" _globalPaletteOption="true">
     <Connectors>
         <Association
@@ -191,7 +191,7 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
-            VisibilityStyle="1" Width="90" WpMbs="false" X="310" Y="360" ZOrder="9">
+            VisibilityStyle="1" Width="90" WpMbs="false" X="310" Y="360" ZOrder="8">
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -239,7 +239,7 @@
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
             VisibilityStyle="1" Width="110" WpMbs="false" X="270"
-            Y="220" ZOrder="11">
+            Y="220" ZOrder="10">
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
