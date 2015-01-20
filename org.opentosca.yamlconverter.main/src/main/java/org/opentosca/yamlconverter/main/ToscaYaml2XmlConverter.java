@@ -6,8 +6,8 @@ import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2XmlConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
 
 /**
  * This Converter can convert Tosca YAML to Tosca XML (bi-directional) by the use of other converters.
@@ -22,7 +22,7 @@ public class ToscaYaml2XmlConverter implements IToscaYaml2XmlConverter {
 
 	@Override
 	public String yaml2xml(String yamlstring) throws ConverterException {
-		final YAMLFileRoot yroot = this.y2yb.yaml2yamlbean(yamlstring);
+		final ServiceTemplate yroot = this.y2yb.yaml2yamlbean(yamlstring);
 		final Definitions xroot = this.b2b.yamlb2xmlb(yroot);
 		return this.x2xb.xmlbean2xml(xroot);
 

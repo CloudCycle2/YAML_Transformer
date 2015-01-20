@@ -1,7 +1,7 @@
 package org.opentosca.yamlconverter.main.interfaces;
 
 import org.opentosca.model.tosca.Definitions;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 /**
  * TODO: rename methods, e.g. convertToYamlBean
@@ -14,7 +14,7 @@ public interface IToscaBean2BeanConverter {
 	 * @param xmlroot The XML root bean
 	 * @return The YAML root bean
 	 */
-	public YAMLFileRoot xmlb2yamlb(Definitions xmlroot);
+	public ServiceTemplate xmlb2yamlb(Definitions xmlroot);
 
 	/**
 	 * Converts a Tosca YAML bean to a Tosca XML bean.
@@ -24,5 +24,5 @@ public interface IToscaBean2BeanConverter {
 	 */
 	// public TestRoot yamlb2xmlb(YamlRootElement yamlroot);
 
-	public Definitions yamlb2xmlb(YAMLFileRoot yamlBean);
+	public Definitions yamlb2xmlb(ServiceTemplate yamlBean);
 }

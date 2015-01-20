@@ -1,23 +1,48 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
-public class TypedProperty extends YAMLElement {
-
-	// TODO: check if it's really default_3 or just a typo?!
-	private TypedProperty default_3;
+/**
+ * A.3.9
+ */
+public class TypedProperty {
+	private TypedProperty default_1;
 	private PropertyType type;
 
-	public TypedProperty() {
-
-	}
-
-	public TypedProperty getDefault_3() {
-		return this.default_3;
-	}
-
-	public void setDefault_3(TypedProperty default_3) {
-		if (default_3 != null) {
-			this.default_3 = default_3;
+	@Override
+	public int hashCode() {
+		int hashCode = 0;
+		if (this.default_1 != null) {
+			hashCode += this.default_1.hashCode();
 		}
+		if (this.type != null) {
+			hashCode += this.type.hashCode();
+		}
+		if (hashCode == 0) {
+			hashCode = super.hashCode();
+		}
+		return hashCode;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (object instanceof TypedProperty) {
+			final TypedProperty typedPropertyObject = (TypedProperty) object;
+			boolean equals = true;
+			equals &= this.default_1 == typedPropertyObject.default_1 || this.default_1 != null
+					&& this.default_1.equals(typedPropertyObject.default_1);
+			equals &= this.type == typedPropertyObject.type || this.type != null && this.type.equals(typedPropertyObject.type);
+			return equals;
+		}
+		return false;
+	}
+
+	public TypedProperty getDefault_1() {
+		return this.default_1;
+	}
+
+	public void setDefault_1(TypedProperty default_1) {
+		this.default_1 = default_1;
 	}
 
 	public PropertyType getType() {
@@ -25,8 +50,6 @@ public class TypedProperty extends YAMLElement {
 	}
 
 	public void setType(PropertyType type) {
-		if (type != null) {
-			this.type = type;
-		}
+		this.type = type;
 	}
 }
