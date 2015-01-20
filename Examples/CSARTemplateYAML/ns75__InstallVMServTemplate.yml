@@ -1,0 +1,95 @@
+# Required TOSCA Definitions version string
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+# Optional. default namespace (schema, types version) 
+tosca_default_namespace: http://types.opentosca.org 
+
+# Optional name of this service template
+template_name: InstallVMServTemplate 
+
+# ToDo: Check whether this is necessary
+description: Service Template for installing VMServ 
+
+# list of import statements for importing other definitions files 
+# ToDo: Convert these XML files to YAML, check relative path
+imports: 
+	- ns5__OperatingSystem.yaml 
+	- ns75__InstallOpenStackVM.yaml 
+	
+# list of global input parameters	
+# The following values are extracted from the XML <Plan> <InputParameter> section. ToDo: check if names can be the same as in "properties"
+inputs:
+	minRAM:
+		type: string
+		description: Number of RAM
+	credentials:
+		type: string
+		description: Credentials
+	endpointsAPI:
+		type: string
+		description: Endpoint API
+	flavorId:
+		type: string
+		description: Flavor ID	
+	keypair:
+		type: string
+		description: keypair
+	imageId:
+		type: string
+		description: image ID	
+	imageName:
+		type: string
+		description: Name of the image
+	minDisk:
+		type: string
+		description: Minimal number of disks	
+		
+# list of node templates	
+# ToDo: Describe NodeTypes in YAML
+# ToDo: What if there is no value?
+# ToDo: What if there are duplicated values (input and property value)?
+node_templates:
+	InstallOpenStackVMTemplate:
+		type: InstallOpenStackVM
+		properties:
+            credentials: {"auth":{"tenantId":"4114e1b404404565ac2ccbcc76b8078e","passwordCredentials":{"username":"marzie.dehghanipour","password":"piorkaun"}}}
+            endpointsAPI: {"os-identity-api":"http:\/\/129.69.209.127:5000\/v2.0","os-tenantId":"4114e1b404404565ac2ccbcc76b8078e"}
+            keypair: {get_input:keypair} 
+            minDisk: {get_input:minDisk}
+            minRAM: {get_input:minRAM}
+            flavorId: 3
+            imageId: {get_input:imageId}
+            imageName: ubuntu-12.04-server-cloudimg-amd64 # or {get_input:imageName}
+            floatingIp:
+            serverId:
+            privKey:
+		
+	LinuxOperatingSystem:
+		type: OperatingSystem
+		properties:
+			hostname:
+            sshUser: ubuntu
+            sshKey:
+            script: uname -a
+		constraints:
+			- minInstances: 1
+			- maxInstances: 1
+			
+# list of output parameters
+# ToDo: Define output parameters in artifact (for reference see: InstallVMServTemplateBuildPlanArtifacts.wsdl)
+outputs:
+	selfserviceApplicationUrl:	
+		description: This is the self service application URL
+		value:
+    selfserviceMessage:
+		description: This is the self service message
+		value:
+    selfservicePolicyMessage:
+		description: This is the self service policy message
+		value:
+    selfserviceStatus:
+		description: This is the self service status
+		value:
+    CorrelationID:
+		description: This is the correlation ID
+		value:
