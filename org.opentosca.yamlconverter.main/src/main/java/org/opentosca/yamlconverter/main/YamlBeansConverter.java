@@ -13,6 +13,7 @@ import com.esotericsoftware.yamlbeans.YamlConfig;
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
+import com.esotericsoftware.yamlbeans.scalar.ScalarSerializer;
 
 /**
  * This Converter uses YamlBeans to convert YAML to YAML beans (bi-directional).
@@ -49,6 +50,32 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
 	public void adjustConfig(YamlConfig config) {
 		config.setPropertyElementType(YAMLFileRoot.class, "node_templates", NodeTemplate.class);
+		config.setScalarSerializer(String.class, new ScalarSerializer<String>() {
+			@Override
+			public String write(String object) throws YamlException {
+				System.out.println("Write: " + object);
+				return object;
+			}
+
+			@Override
+			public String read(String value) throws YamlException {
+				System.out.println("Read: " + value);
+				return value;
+			}
+		});
+		config.setScalarSerializer(Integer.class, new ScalarSerializer<String>() {
+			@Override
+			public String write(String object) throws YamlException {
+				System.out.println("Write: " + object);
+				return object;
+			}
+
+			@Override
+			public String read(String value) throws YamlException {
+				System.out.println("Read: " + value);
+				return value;
+			}
+		});
 	}
 
 }

@@ -1,13 +1,16 @@
 package org.opentosca.yamlconverter.main.model;
 
+import java.beans.ConstructorProperties;
+
 /**
  * @author Sebi
  */
 public class Name {
 	public String name;
 
-	public Name() {
-		this.name = "";
+	@ConstructorProperties({ "name" })
+	public Name(String name) {
+		this.name = name;
 	}
 
 	public String getName() {

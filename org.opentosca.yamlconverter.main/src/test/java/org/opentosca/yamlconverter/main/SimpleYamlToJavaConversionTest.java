@@ -12,7 +12,7 @@ import com.esotericsoftware.yamlbeans.YamlWriter;
 
 /**
  * This class makes sure that general reading and writing from/to yaml is possible.
- * 
+ *
  * @author Sebi
  */
 public class SimpleYamlToJavaConversionTest extends BaseTest {
@@ -24,12 +24,12 @@ public class SimpleYamlToJavaConversionTest extends BaseTest {
 		Assert.assertNotNull(nameObj);
 		Assert.assertNotNull(nameObj.getName());
 		Assert.assertFalse(nameObj.getName().equals(""));
+		Assert.assertTrue(nameObj.getName().equals("Test"));
 	}
 
 	@Test
 	public void testSimpleJavaToYamlConversion() throws Exception {
-		final Name yamlObj = new Name();
-		yamlObj.setName("test");
+		final Name yamlObj = new Name("Test");
 		final Writer writer = new StringWriter();
 		final YamlWriter yamlWriter = new YamlWriter(writer);
 		yamlWriter.write(yamlObj);
@@ -37,7 +37,7 @@ public class SimpleYamlToJavaConversionTest extends BaseTest {
 		final String output = writer.toString();
 		Assert.assertNotNull(output);
 		Assert.assertTrue(output.contains("name:"));
-		Assert.assertTrue(output.contains("test"));
+		Assert.assertTrue(output.contains("Test"));
 	}
 
 }
