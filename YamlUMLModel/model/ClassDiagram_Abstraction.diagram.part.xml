@@ -1,0 +1,1319 @@
+<ClassDiagram AlignToGrid="true" AutoFitShapesSize="false"
+    ConnectionPointStyle="0" ConnectorLabelOrientation="0"
+    ConnectorLineJumps="0" ConnectorLineJumpsSize="0" ConnectorStyle="1"
+    DiagramBackground="rgb(255, 255, 255)" Editable="true"
+    FollowDiagramParentElement="true" GeneralizationSetNotation="2"
+    GridColor="rgb(192, 192, 192)" GridHeight="10" GridVisible="false"
+    GridWidth="10" Height="816" HideEmptyTaggedValues="false"
+    Id="txUozFKFS_nqHAUx" ImageHeight="0" ImageScale="1.0"
+    ImageWidth="0" InitializeDiagramForCreate="true" Maximized="true"
+    ModelElementNameAlignment="4" Name="Abstraction"
+    PaintConnectorThroughLabel="0" ParentModel="jUDEzFKFS_nqHAem"
+    PmAuthor="Def" PmCreateDateTime="2014-12-10T08:23:19.661"
+    PmLastModified="2015-01-20T18:35:14.704" QualityScore="-1"
+    RequestValidateSnapToGrid="false" ShapePresentationOption="0"
+    ShowActivityStateNodeCaption="65535" ShowAllocatedFrom="true"
+    ShowAllocatedTo="true" ShowAssociationNavigationArrows="3"
+    ShowAttributeGetterSetter="false" ShowAttributesCodeDetails="2"
+    ShowAttributesPropertyModifiers="2" ShowAttributesType="1"
+    ShowClassEmptyCompartments="2" ShowClassOwner="2"
+    ShowConnectorName="0" ShowConstraints="false"
+    ShowDefaultPackage="true" ShowEllipsisForUnshownClassMembers="2"
+    ShowOperationsCodeDetails="2" ShowOperationsParameters="1"
+    ShowOperationsReturnType="1" ShowPackageNameStyle="0"
+    ShowPackageOwner="2" ShowParametersCodeDetails="2"
+    ShowStereotypes="true" ShowTaggedValues="false"
+    ShowTemplateInfoOfGeneralizationAndRealization="false"
+    SuppressImplied1MultiplicityForAttributeAndAssociationEnd="false"
+    TrimmedHeight="0" TrimmedWidth="0" Width="1571" X="0" Y="0"
+    ZoomRatio="1.2" _alwaysShowReferenceAndSubdiagramResource="false" _globalPaletteOption="true">
+    <Connectors>
+        <Association
+            AssociationEndPropertyStringsAInternalHeight="-2147483648"
+            AssociationEndPropertyStringsAInternalWidth="-2147483648"
+            AssociationEndPropertyStringsBInternalHeight="-2147483648"
+            AssociationEndPropertyStringsBInternalWidth="-2147483648"
+            Background="rgb(122, 207, 245)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+            From="SxYYzFKFS_nqHAWs" FromConnectType="0"
+            FromMultiplicityInternalHeight="-2147483648"
+            FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
+            FromRoleInternalHeight="-2147483648"
+            FromRoleInternalWidth="-2147483648" FromShapeXDiff="0"
+            FromShapeYDiff="0"
+            HasAssociationEndPropertyStringsAShape="false"
+            HasAssociationEndPropertyStringsBShape="false"
+            HasMultiplicityAShape="false" HasMultiplicityBShape="true"
+            HasRoleAShape="false" HasRoleBShape="false" Height="220"
+            Id="p2vjx1KFS_nqHA3p" MetaModelElement="H8Rjx1KFS_nqHA3B"
+            Model="H8Rjx1KFS_nqHA3B" Name="imports"
+            PaintThroughLabel="2" RequestRebuild="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            Selectable="true" ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+            ShowFromMultiplicity="true" ShowFromRoleName="true"
+            ShowFromRoleVisibility="true"
+            ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
+            ShowOrderedMultiplicityConstraint="true"
+            ShowStereotypes="true" ShowToMultiplicity="true"
+            ShowToRoleName="true" ShowToRoleVisibility="true"
+            ShowUniqueMultiplicityConstraint="true"
+            SuppressImplied1MultiplicityForAssociationEnd="0"
+            To="x2vjx1KFS_nqHA3n" ToConnectType="0"
+            ToMultiplicityInternalHeight="-2147483648"
+            ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
+            ToRoleInternalHeight="-2147483648"
+            ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="155" X="267" Y="282" ZOrder="2">
+            <MultiplicityBRectangle Height="40" Width="40" X="320" Y="430"/>
+            <MultiplicityARectangle Height="0" Width="20" X="480" Y="470"/>
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="56" X="320" Y="410"/>
+            <RoleB>
+                <MultiplicityCaption Height="40" Width="40" X="320" Y="430"/>
+            </RoleB>
+            <Points>
+                <Point X="330.0" Y="345.0"/>
+                <Point X="330.0" Y="440.0"/>
+                <Point X="360.0" Y="440.0"/>
+            </Points>
+        </Association>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="315"
+            Id="n6ATx1KFS_nqHA4F" MetaModelElement="AaATx1KFS_nqHA4E"
+            Model="AaATx1KFS_nqHA4E" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="x2vjx1KFS_nqHA3n"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="785" X="377" Y="397" ZOrder="4">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="790" Y="570"/>
+            <Points>
+                <Point X="1100.0" Y="650.0"/>
+                <Point X="440.0" Y="460.0"/>
+            </Points>
+        </Generalization>
+        <Association
+            AssociationEndPropertyStringsAInternalHeight="-2147483648"
+            AssociationEndPropertyStringsAInternalWidth="-2147483648"
+            AssociationEndPropertyStringsBInternalHeight="-2147483648"
+            AssociationEndPropertyStringsBInternalWidth="-2147483648"
+            Background="rgb(122, 207, 245)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+            From="B0cTx1KFS_nqHA42" FromConnectType="0"
+            FromMultiplicityInternalHeight="-2147483648"
+            FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
+            FromRoleInternalHeight="-2147483648"
+            FromRoleInternalWidth="-2147483648" FromShapeXDiff="0"
+            FromShapeYDiff="0"
+            HasAssociationEndPropertyStringsAShape="false"
+            HasAssociationEndPropertyStringsBShape="false"
+            HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+            HasRoleAShape="false" HasRoleBShape="false" Height="480"
+            Id="h0cTx1KFS_nqHA44" MetaModelElement="HPoTx1KFS_nqHA4Y"
+            Model="HPoTx1KFS_nqHA4Y" Name="node_types"
+            PaintThroughLabel="2" RequestRebuild="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            Selectable="true" ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+            ShowFromMultiplicity="true" ShowFromRoleName="true"
+            ShowFromRoleVisibility="true"
+            ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
+            ShowOrderedMultiplicityConstraint="true"
+            ShowStereotypes="true" ShowToMultiplicity="true"
+            ShowToRoleName="true" ShowToRoleVisibility="true"
+            ShowUniqueMultiplicityConstraint="true"
+            SuppressImplied1MultiplicityForAssociationEnd="0"
+            To="SxYYzFKFS_nqHAWs" ToConnectType="0"
+            ToMultiplicityInternalHeight="-2147483648"
+            ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
+            ToRoleInternalHeight="-2147483648"
+            ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="215" X="207" Y="282" ZOrder="6">
+            <MultiplicityBRectangle Height="0" Width="20" X="390" Y="480"/>
+            <MultiplicityARectangle Height="40" Width="40" X="320" Y="690"/>
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="77" X="270" Y="510"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="320" Y="690"/>
+            </RoleA>
+            <Points>
+                <Point X="360.0" Y="700.0"/>
+                <Point X="270.0" Y="700.0"/>
+                <Point X="270.0" Y="345.0"/>
+            </Points>
+        </Association>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="125"
+            Id="BM8Tx1KFS_nqHA5B" MetaModelElement="sU8Tx1KFS_nqHA5A"
+            Model="sU8Tx1KFS_nqHA5A" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="B0cTx1KFS_nqHA42"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="682" X="480" Y="607" ZOrder="8">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="830" Y="690"/>
+            <Points>
+                <Point X="1100.0" Y="670.0"/>
+                <Point X="542.0" Y="670.0"/>
+            </Points>
+        </Generalization>
+        <Association
+            AssociationEndPropertyStringsAInternalHeight="-2147483648"
+            AssociationEndPropertyStringsAInternalWidth="-2147483648"
+            AssociationEndPropertyStringsBInternalHeight="-2147483648"
+            AssociationEndPropertyStringsBInternalWidth="-2147483648"
+            Background="rgb(122, 207, 245)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+            From="SxYYzFKFS_nqHAWs" FromConnectType="0"
+            FromMultiplicityInternalHeight="-2147483648"
+            FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
+            FromRoleInternalHeight="-2147483648"
+            FromRoleInternalWidth="-2147483648" FromShapeXDiff="0"
+            FromShapeYDiff="0"
+            HasAssociationEndPropertyStringsAShape="false"
+            HasAssociationEndPropertyStringsBShape="false"
+            HasMultiplicityAShape="false" HasMultiplicityBShape="true"
+            HasRoleAShape="false" HasRoleBShape="false" Height="610"
+            Id="dXmTx1KFS_nqHA6B" MetaModelElement="v1qTx1KFS_nqHA5p"
+            Model="v1qTx1KFS_nqHA5p" Name="relationship_types"
+            PaintThroughLabel="2" RequestRebuild="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            Selectable="true" ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+            ShowFromMultiplicity="true" ShowFromRoleName="true"
+            ShowFromRoleVisibility="true"
+            ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
+            ShowOrderedMultiplicityConstraint="true"
+            ShowStereotypes="true" ShowToMultiplicity="true"
+            ShowToRoleName="true" ShowToRoleVisibility="true"
+            ShowUniqueMultiplicityConstraint="true"
+            SuppressImplied1MultiplicityForAssociationEnd="0"
+            To="tXmTx1KFS_nqHA5_" ToConnectType="0"
+            ToMultiplicityInternalHeight="-2147483648"
+            ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
+            ToRoleInternalHeight="-2147483648"
+            ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="255" X="167" Y="282" ZOrder="10">
+            <MultiplicityBRectangle Height="40" Width="40" X="320" Y="820"/>
+            <MultiplicityARectangle Height="0" Width="20" X="370" Y="510"/>
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="108" X="230" Y="570"/>
+            <RoleB>
+                <MultiplicityCaption Height="40" Width="40" X="320" Y="820"/>
+            </RoleB>
+            <Points>
+                <Point X="230.0" Y="345.0"/>
+                <Point X="230.0" Y="830.0"/>
+                <Point X="360.0" Y="830.0"/>
+            </Points>
+        </Association>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="232"
+            Id="hY2Tx1KFS_nqHA6N" MetaModelElement="pI2Tx1KFS_nqHA6M"
+            Model="pI2Tx1KFS_nqHA6M" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="tXmTx1KFS_nqHA5_"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="757" X="407" Y="640" ZOrder="12">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="790" Y="740"/>
+            <Points>
+                <Point X="1102.0" Y="702.0"/>
+                <Point X="470.0" Y="810.0"/>
+            </Points>
+        </Generalization>
+        <Association
+            AssociationEndPropertyStringsAInternalHeight="-2147483648"
+            AssociationEndPropertyStringsAInternalWidth="-2147483648"
+            AssociationEndPropertyStringsBInternalHeight="-2147483648"
+            AssociationEndPropertyStringsBInternalWidth="-2147483648"
+            Background="rgb(122, 207, 245)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+            From="5P_Tx1KFS_nqHA8L" FromConnectType="0"
+            FromMultiplicityInternalHeight="-2147483648"
+            FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
+            FromRoleInternalHeight="-2147483648"
+            FromRoleInternalWidth="-2147483648" FromShapeXDiff="0"
+            FromShapeYDiff="0"
+            HasAssociationEndPropertyStringsAShape="false"
+            HasAssociationEndPropertyStringsBShape="false"
+            HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+            HasRoleAShape="false" HasRoleBShape="false" Height="680"
+            Id="lP_Tx1KFS_nqHA8N" MetaModelElement="PRnTx1KFS_nqHA7z"
+            Model="PRnTx1KFS_nqHA7z" Name="artefact_types"
+            PaintThroughLabel="2" RequestRebuild="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            Selectable="true" ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+            ShowFromMultiplicity="true" ShowFromRoleName="true"
+            ShowFromRoleVisibility="true"
+            ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
+            ShowOrderedMultiplicityConstraint="true"
+            ShowStereotypes="true" ShowToMultiplicity="true"
+            ShowToRoleName="true" ShowToRoleVisibility="true"
+            ShowUniqueMultiplicityConstraint="true"
+            SuppressImplied1MultiplicityForAssociationEnd="0"
+            To="SxYYzFKFS_nqHAWs" ToConnectType="0"
+            ToMultiplicityInternalHeight="-2147483648"
+            ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
+            ToRoleInternalHeight="-2147483648"
+            ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="275" X="147" Y="282" ZOrder="18">
+            <MultiplicityBRectangle Height="0" Width="20" X="360" Y="470"/>
+            <MultiplicityARectangle Height="40" Width="40" X="320" Y="890"/>
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="88" X="210" Y="610"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="320" Y="890"/>
+            </RoleA>
+            <Points>
+                <Point X="360.0" Y="900.0"/>
+                <Point X="210.0" Y="900.0"/>
+                <Point X="210.0" Y="345.0"/>
+            </Points>
+        </Association>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="302"
+            Id="_2Qzx1KFS_nqHA8i" MetaModelElement="FGQzx1KFS_nqHA8h"
+            Model="FGQzx1KFS_nqHA8h" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="5P_Tx1KFS_nqHA8L"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="776" X="387" Y="640" ZOrder="20">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="770" Y="800"/>
+            <Points>
+                <Point X="1101.0" Y="702.0"/>
+                <Point X="450.0" Y="880.0"/>
+            </Points>
+        </Generalization>
+        <Association
+            AssociationEndPropertyStringsAInternalHeight="-2147483648"
+            AssociationEndPropertyStringsAInternalWidth="-2147483648"
+            AssociationEndPropertyStringsBInternalHeight="-2147483648"
+            AssociationEndPropertyStringsBInternalWidth="-2147483648"
+            Background="rgb(122, 207, 245)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+            From="eyJzx1KFS_nqHA9T" FromConnectType="0"
+            FromMultiplicityInternalHeight="-2147483648"
+            FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
+            FromRoleInternalHeight="-2147483648"
+            FromRoleInternalWidth="-2147483648" FromShapeXDiff="0"
+            FromShapeYDiff="0"
+            HasAssociationEndPropertyStringsAShape="false"
+            HasAssociationEndPropertyStringsBShape="false"
+            HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+            HasRoleAShape="false" HasRoleBShape="false" Height="810"
+            Id="ByJzx1KFS_nqHA9V" MetaModelElement="pXYzx1KFS_nqHA87"
+            Model="pXYzx1KFS_nqHA87" Name="outputs"
+            PaintThroughLabel="2" RequestRebuild="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            Selectable="true" ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+            ShowFromMultiplicity="true" ShowFromRoleName="true"
+            ShowFromRoleVisibility="true"
+            ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
+            ShowOrderedMultiplicityConstraint="true"
+            ShowStereotypes="true" ShowToMultiplicity="true"
+            ShowToRoleName="true" ShowToRoleVisibility="true"
+            ShowUniqueMultiplicityConstraint="true"
+            SuppressImplied1MultiplicityForAssociationEnd="0"
+            To="SxYYzFKFS_nqHAWs" ToConnectType="0"
+            ToMultiplicityInternalHeight="-2147483648"
+            ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
+            ToRoleInternalHeight="-2147483648"
+            ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="315" X="107" Y="282" ZOrder="22">
+            <MultiplicityBRectangle Height="0" Width="20" X="380" Y="470"/>
+            <MultiplicityARectangle Height="40" Width="40" X="320" Y="1020"/>
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="56" X="170" Y="670"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="320" Y="1020"/>
+            </RoleA>
+            <Points>
+                <Point X="360.0" Y="1030.0"/>
+                <Point X="170.0" Y="1030.0"/>
+                <Point X="170.0" Y="345.0"/>
+            </Points>
+        </Association>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="442"
+            Id="vs5zx1KFS_nqHA9o" MetaModelElement="p05zx1KFS_nqHA9n"
+            Model="p05zx1KFS_nqHA9n" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="eyJzx1KFS_nqHA9T"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="786" X="377" Y="640" ZOrder="24">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="760" Y="860"/>
+            <Points>
+                <Point X="1101.0" Y="702.0"/>
+                <Point X="440.0" Y="1020.0"/>
+            </Points>
+        </Generalization>
+        <Association
+            AssociationEndPropertyStringsAInternalHeight="-2147483648"
+            AssociationEndPropertyStringsAInternalWidth="-2147483648"
+            AssociationEndPropertyStringsBInternalHeight="-2147483648"
+            AssociationEndPropertyStringsBInternalWidth="-2147483648"
+            Background="rgb(122, 207, 245)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+            From="sB4Lx1KFS_nqHA_g" FromConnectType="0"
+            FromMultiplicityInternalHeight="-2147483648"
+            FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
+            FromRoleInternalHeight="-2147483648"
+            FromRoleInternalWidth="-2147483648" FromShapeXDiff="0"
+            FromShapeYDiff="0"
+            HasAssociationEndPropertyStringsAShape="false"
+            HasAssociationEndPropertyStringsBShape="false"
+            HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+            HasRoleAShape="false" HasRoleBShape="false" Height="300"
+            Id="8B4Lx1KFS_nqHA_i" MetaModelElement="1CDzx1KFS_nqHA.d"
+            Model="1CDzx1KFS_nqHA.d" Name="inputs" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+            ShowFromMultiplicity="true" ShowFromRoleName="true"
+            ShowFromRoleVisibility="true"
+            ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
+            ShowOrderedMultiplicityConstraint="true"
+            ShowStereotypes="true" ShowToMultiplicity="true"
+            ShowToRoleName="true" ShowToRoleVisibility="true"
+            ShowUniqueMultiplicityConstraint="true"
+            SuppressImplied1MultiplicityForAssociationEnd="0"
+            To="SxYYzFKFS_nqHAWs" ToConnectType="0"
+            ToMultiplicityInternalHeight="-2147483648"
+            ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
+            ToRoleInternalHeight="-2147483648"
+            ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="175" X="247" Y="282" ZOrder="26">
+            <MultiplicityBRectangle Height="0" Width="20" X="440" Y="540"/>
+            <MultiplicityARectangle Height="40" Width="40" X="320" Y="510"/>
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="48" X="310" Y="490"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="320" Y="510"/>
+            </RoleA>
+            <Points>
+                <Point X="360.0" Y="520.0"/>
+                <Point X="310.0" Y="520.0"/>
+                <Point X="310.0" Y="345.0"/>
+            </Points>
+        </Association>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="235"
+            Id="rp0Lx1KFS_nqHA_y" MetaModelElement="lx0Lx1KFS_nqHA_x"
+            Model="lx0Lx1KFS_nqHA_x" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="sB4Lx1KFS_nqHA_g"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="785" X="377" Y="477" ZOrder="28">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="770" Y="600"/>
+            <Points>
+                <Point X="1100.0" Y="650.0"/>
+                <Point X="440.0" Y="540.0"/>
+            </Points>
+        </Generalization>
+        <Association
+            AssociationEndPropertyStringsAInternalHeight="-2147483648"
+            AssociationEndPropertyStringsAInternalWidth="-2147483648"
+            AssociationEndPropertyStringsBInternalHeight="-2147483648"
+            AssociationEndPropertyStringsBInternalWidth="-2147483648"
+            Background="rgb(122, 207, 245)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+            From="mSMLx1KFS_nqHA_4" FromConnectType="0"
+            FromMultiplicityInternalHeight="-2147483648"
+            FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
+            FromRoleInternalHeight="-2147483648"
+            FromRoleInternalWidth="-2147483648" FromShapeXDiff="0"
+            FromShapeYDiff="0"
+            HasAssociationEndPropertyStringsAShape="false"
+            HasAssociationEndPropertyStringsBShape="false"
+            HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+            HasRoleAShape="false" HasRoleBShape="false" Height="750"
+            Id="WSMLx1KFS_nqHA_6" MetaModelElement="_EQLx1KFS_nqHA_C"
+            Model="_EQLx1KFS_nqHA_C" Name="groups" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+            ShowFromMultiplicity="true" ShowFromRoleName="true"
+            ShowFromRoleVisibility="true"
+            ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
+            ShowOrderedMultiplicityConstraint="true"
+            ShowStereotypes="true" ShowToMultiplicity="true"
+            ShowToRoleName="true" ShowToRoleVisibility="true"
+            ShowUniqueMultiplicityConstraint="true"
+            SuppressImplied1MultiplicityForAssociationEnd="0"
+            To="SxYYzFKFS_nqHAWs" ToConnectType="0"
+            ToMultiplicityInternalHeight="-2147483648"
+            ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
+            ToRoleInternalHeight="-2147483648"
+            ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="295" X="127" Y="282" ZOrder="30">
+            <MultiplicityBRectangle Height="0" Width="20" X="340" Y="470"/>
+            <MultiplicityARectangle Height="40" Width="40" X="320" Y="960"/>
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="53" X="190" Y="640"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="320" Y="960"/>
+            </RoleA>
+            <Points>
+                <Point X="360.0" Y="970.0"/>
+                <Point X="190.0" Y="970.0"/>
+                <Point X="190.0" Y="345.0"/>
+            </Points>
+        </Association>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="372"
+            Id="rLsLx1KFS_nqHBAG" MetaModelElement="YzsLx1KFS_nqHBAF"
+            Model="YzsLx1KFS_nqHBAF" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="mSMLx1KFS_nqHA_4"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="786" X="377" Y="640" ZOrder="32">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="750" Y="830"/>
+            <Points>
+                <Point X="1101.0" Y="702.0"/>
+                <Point X="440.0" Y="950.0"/>
+            </Points>
+        </Generalization>
+        <Association
+            AssociationEndPropertyStringsAInternalHeight="-2147483648"
+            AssociationEndPropertyStringsAInternalWidth="-2147483648"
+            AssociationEndPropertyStringsBInternalHeight="-2147483648"
+            AssociationEndPropertyStringsBInternalWidth="-2147483648"
+            Background="rgb(122, 207, 245)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+            From="SxYYzFKFS_nqHAWs" FromConnectType="0"
+            FromMultiplicityInternalHeight="-2147483648"
+            FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
+            FromRoleInternalHeight="-2147483648"
+            FromRoleInternalWidth="-2147483648" FromShapeXDiff="0"
+            FromShapeYDiff="0"
+            HasAssociationEndPropertyStringsAShape="false"
+            HasAssociationEndPropertyStringsBShape="false"
+            HasMultiplicityAShape="false" HasMultiplicityBShape="true"
+            HasRoleAShape="false" HasRoleBShape="false" Height="380"
+            Id="UlKbx1KFS_nqHBEh" MetaModelElement="iufYzFKFS_nqHAZ."
+            Model="iufYzFKFS_nqHAZ." Name="node_templates"
+            PaintThroughLabel="2" RequestRebuild="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            Selectable="true" ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+            ShowFromMultiplicity="true" ShowFromRoleName="true"
+            ShowFromRoleVisibility="true"
+            ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
+            ShowOrderedMultiplicityConstraint="true"
+            ShowStereotypes="true" ShowToMultiplicity="true"
+            ShowToRoleName="true" ShowToRoleVisibility="true"
+            ShowUniqueMultiplicityConstraint="true"
+            SuppressImplied1MultiplicityForAssociationEnd="0"
+            To="klKbx1KFS_nqHBEf" ToConnectType="0"
+            ToMultiplicityInternalHeight="-2147483648"
+            ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
+            ToRoleInternalHeight="-2147483648"
+            ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="195" X="227" Y="282" ZOrder="34">
+            <MultiplicityBRectangle Height="40" Width="40" X="320" Y="590"/>
+            <MultiplicityARectangle Height="40" Width="40" X="440" Y="460"/>
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="97" X="290" Y="460"/>
+            <RoleB>
+                <MultiplicityCaption Height="40" Width="40" X="320" Y="590"/>
+            </RoleB>
+            <Points>
+                <Point X="290.0" Y="345.0"/>
+                <Point X="290.0" Y="600.0"/>
+                <Point X="360.0" Y="600.0"/>
+            </Points>
+        </Association>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="125"
+            Id="8ylbx1KFS_nqHBGc" MetaModelElement="kilbx1KFS_nqHBGb"
+            Model="kilbx1KFS_nqHBGb" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="klKbx1KFS_nqHBEf"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="682" X="480" Y="597" ZOrder="36">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="830" Y="680"/>
+            <Points>
+                <Point X="1100.0" Y="660.0"/>
+                <Point X="542.0" Y="660.0"/>
+            </Points>
+        </Generalization>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="430"
+            Id="0IkYzFKFS_nqHAW6" MetaModelElement="VXEYzFKFS_nqHAW5"
+            Model="VXEYzFKFS_nqHAW5" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="SxYYzFKFS_nqHAWs"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="801" X="361" Y="282" ZOrder="38">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="770" Y="520"/>
+            <Points>
+                <Point X="1100.0" Y="650.0"/>
+                <Point X="423.0" Y="345.0"/>
+            </Points>
+        </Generalization>
+        <Association
+            AssociationEndPropertyStringsAInternalHeight="-2147483648"
+            AssociationEndPropertyStringsAInternalWidth="-2147483648"
+            AssociationEndPropertyStringsBInternalHeight="-2147483648"
+            AssociationEndPropertyStringsBInternalWidth="-2147483648"
+            Background="rgb(122, 207, 245)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+            From="SxYYzFKFS_nqHAWs" FromConnectType="0"
+            FromMultiplicityInternalHeight="-2147483648"
+            FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
+            FromRoleInternalHeight="-2147483648"
+            FromRoleInternalWidth="-2147483648" FromShapeXDiff="0"
+            FromShapeYDiff="0"
+            HasAssociationEndPropertyStringsAShape="false"
+            HasAssociationEndPropertyStringsBShape="false"
+            HasMultiplicityAShape="false" HasMultiplicityBShape="true"
+            HasRoleAShape="false" HasRoleBShape="false" Height="497"
+            Id="RGyGENKFS_nqHBif" MetaModelElement="YkXu4NKFS_nqHBDN"
+            Model="YkXu4NKFS_nqHBDN" Name="capability_types"
+            PaintThroughLabel="2" RequestRebuild="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            Selectable="true" ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+            ShowFromMultiplicity="true" ShowFromRoleName="true"
+            ShowFromRoleVisibility="true"
+            ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
+            ShowOrderedMultiplicityConstraint="false"
+            ShowStereotypes="true" ShowToMultiplicity="true"
+            ShowToRoleName="true" ShowToRoleVisibility="true"
+            ShowUniqueMultiplicityConstraint="false"
+            SuppressImplied1MultiplicityForAssociationEnd="0"
+            To="BGyGENKFS_nqHBib" ToConnectType="0"
+            ToMultiplicityInternalHeight="-2147483648"
+            ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
+            ToRoleInternalHeight="-2147483648"
+            ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="192" X="208" Y="304" ZOrder="-1">
+            <MultiplicityBRectangle Height="40" Width="40" X="330" Y="770"/>
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="98" X="220" Y="630"/>
+            <RoleB>
+                <MultiplicityCaption Height="40" Width="40" X="330" Y="770"/>
+            </RoleB>
+            <Points>
+                <Point X="249.0" Y="345.0"/>
+                <Point X="249.0" Y="760.0"/>
+                <Point X="359.0" Y="760.0"/>
+            </Points>
+        </Association>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="120"
+            Id="8WeGENKFS_nqHBjO" MetaModelElement="36eGENKFS_nqHBjN"
+            Model="36eGENKFS_nqHBjN" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="BGyGENKFS_nqHBib"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="731" X="409" Y="661" ZOrder="-1">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="765" Y="720"/>
+            <Points>
+                <Point X="1099.0" Y="703.0"/>
+                <Point X="450.0" Y="740.0"/>
+            </Points>
+        </Generalization>
+    </Connectors>
+    <Shapes>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="115" Id="klKbx1KFS_nqHBEf" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="1qjYzFKFS_nqHAY0" Model="1qjYzFKFS_nqHAY0"
+            ModelElementNameAlignment="9" Name="NodeTemplate"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="182" WpMbs="false" X="360"
+            Y="580" ZOrder="20">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="182" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="40" Id="mSMLx1KFS_nqHA_4" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="GB1zx1KFS_nqHA9_" Model="GB1zx1KFS_nqHA9_"
+            ModelElementNameAlignment="9" Name="Group"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="80" WpMbs="false" X="360" Y="950" ZOrder="23">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="80" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="40" Id="sB4Lx1KFS_nqHA_g" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="9yVzx1KFS_nqHA92" Model="9yVzx1KFS_nqHA92"
+            ModelElementNameAlignment="9" Name="Input"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="80" WpMbs="false" X="360" Y="500" ZOrder="25">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="80" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="40" Id="eyJzx1KFS_nqHA9T" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="UaIzx1KFS_nqHA8z" Model="UaIzx1KFS_nqHA8z"
+            ModelElementNameAlignment="9" Name="Output"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="80" WpMbs="false" X="360"
+            Y="1020" ZOrder="27">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="80" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="40" Id="5P_Tx1KFS_nqHA8L" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="vSjTx1KFS_nqHA7p" Model="vSjTx1KFS_nqHA7p"
+            ModelElementNameAlignment="9" Name="ArtefactTypes"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="90" WpMbs="false" X="360" Y="880" ZOrder="29">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="90" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="40" Id="tXmTx1KFS_nqHA5_" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="1RSTx1KFS_nqHA5Y" Model="1RSTx1KFS_nqHA5Y"
+            ModelElementNameAlignment="9" Name="RelationshipType"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="110" WpMbs="false" X="360"
+            Y="810" ZOrder="31">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="110" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="115" Id="B0cTx1KFS_nqHA42" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="UQHjx1KFS_nqHA3T" Model="UQHjx1KFS_nqHA3T"
+            ModelElementNameAlignment="9" Name="NodeType"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="182" WpMbs="false" X="360"
+            Y="670" ZOrder="33">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="182" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="40" Id="x2vjx1KFS_nqHA3n" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="e2qjx1KFS_nqHA2v" Model="e2qjx1KFS_nqHA2v"
+            ModelElementNameAlignment="9" Name="Import"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="80" WpMbs="false" X="360" Y="420" ZOrder="35">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="80" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="235" Id="SxYYzFKFS_nqHAWs" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="pnfIzFKFS_nqHAUg" Model="pnfIzFKFS_nqHAUg"
+            ModelElementNameAlignment="9" Name="ServiceTemplate"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="263" WpMbs="false" X="160"
+            Y="110" ZOrder="37">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="263" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="true" ConnectionPointType="2"
+            CreatorDiagramType="ClassDiagram"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="53" Id="lbmozFKFS_nqHAVA" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="VbmozFKFS_nqHAVB" Model="VbmozFKFS_nqHAVB"
+            ModelElementNameAlignment="9" Name="YAMLElement"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="40"
+            ParentConnectorLineLength="10" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="102" WpMbs="false" X="1100"
+            Y="650" ZOrder="39">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="102" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+        <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="40" Id="BGyGENKFS_nqHBib" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="5m.Tx1KFS_nqHA6j" Model="5m.Tx1KFS_nqHA6j"
+            ModelElementNameAlignment="9" Name="CapabilityType"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+            PrimitiveShapeType="0" RequestDefaultSize="false"
+            RequestFitSize="false" RequestFitSizeFromCenter="false"
+            RequestResetCaption="false" RequestResetCaptionSize="false"
+            RequestSetSizeOption="0" Selectable="true"
+            ShowAllocatedFrom="0" ShowAllocatedTo="0"
+            ShowAttributeType="1" ShowAttributesCodeDetails="0"
+            ShowAttributesPropertyModifiers="0" ShowAttributesType="0"
+            ShowClassMemberConstraints="true"
+            ShowEllipsisForUnshownMembers="0" ShowEmptyCompartments="0"
+            ShowEnumerationLiteralType="1"
+            ShowInitialAttributeValue="true"
+            ShowOperationParameterDirection="false"
+            ShowOperationProperties="false"
+            ShowOperationRaisedExceptions="false"
+            ShowOperationSignature="true"
+            ShowOperationTemplateParameters="false"
+            ShowOperationType="1" ShowOperationsCodeDetails="0"
+            ShowOperationsParameters="0" ShowOperationsReturnType="0"
+            ShowOwnerOption="3"
+            ShowParameterNameInOperationSignature="true"
+            ShowParametersCodeDetails="0" ShowTypeOption="0"
+            SuppressImplied1MultiplicityForAttribute="0"
+            VisibilityStyle="1" Width="90" WpMbs="false" X="360" Y="740" ZOrder="2">
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="90" X="0" Y="0"/>
+            <FillColor Color="rgb(122, 207, 245)" Style="1"
+                Transparency="0" Type="1"/>
+        </Class>
+    </Shapes>
+</ClassDiagram>
