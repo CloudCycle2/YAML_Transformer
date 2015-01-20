@@ -17,8 +17,7 @@ public class YamlBeansConverterTest extends BaseTest {
 		final ServiceTemplate element = this.converter.yaml2yamlbean(this.testUtils.readYamlTestResource("/yaml/helloworld.yaml"));
 		Assert.assertNotNull(element);
 		Assert.assertEquals(element.getTosca_definitions_version(), "tosca_simple_yaml_1_0");
-		// TODO:
-		// Assert.assertEquals("tosca.nodes.Compute", element.getNodeTemplate().get("my_server").getType());
+		Assert.assertEquals("tosca.nodes.Compute", element.getNode_templates().get("my_server").getType());
 	}
 
 	@Test

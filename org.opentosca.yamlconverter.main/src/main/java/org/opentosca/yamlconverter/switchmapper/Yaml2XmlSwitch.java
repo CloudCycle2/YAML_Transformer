@@ -70,12 +70,11 @@ public class Yaml2XmlSwitch {
 		// serviceTemplate.getOtherAttributes().put(key, value);
 		// topologyTemplate.getAny().add(o);
 		// topologyTemplate.getDocumentation().add(docu);
-		for (final NodeTemplate nt : elem.getNode_templates().values()) {
-			final TNodeTemplate xnode = case_NodeTemplate(nt);
-			// TODO: is the name now parsed directly to the nodetemplate?
+		for (final Map.Entry<String, NodeTemplate> nt : elem.getNode_templates().entrySet()) {
+			final TNodeTemplate xnode = case_NodeTemplate(nt.getValue());
 			// override name and id of the nodetemplate
-			// xnode.setName(nt.getKey());
-			// xnode.setId(name2id(nt.getKey()));
+			xnode.setName(nt.getKey());
+			xnode.setId(name2id(nt.getKey()));
 			topologyTemplate.getNodeTemplateOrRelationshipTemplate().add(xnode);
 		}
 		// topologyTemplate.getOtherAttributes().put(key, value);

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 public class Yaml2XmlTextSwitch {
@@ -23,11 +24,10 @@ public class Yaml2XmlTextSwitch {
 	private final StringBuilder xml = new StringBuilder();
 	private final StringBuilder xsd = new StringBuilder();
 
-	// TODO: Object should be NodeType
 	/**
 	 * NodeType name -> NodeType
 	 */
-	private final Map<String, Object> nodeTypes = new HashMap<>();
+	private final Map<String, NodeType> nodeTypes = new HashMap<>();
 
 	/**
 	 * inputVariable -> input value
@@ -119,22 +119,21 @@ public class Yaml2XmlTextSwitch {
 	private void parseTopologyTemplate(ServiceTemplate root) {
 		linep();
 		this.xml.append("<TopologyTemplate>");
-		for (final NodeTemplate entry : root.getNode_templates().values()) {
+		for (final Entry<String, NodeTemplate> entry : root.getNode_templates().entrySet()) {
 			parseNodeTemplate(entry);
 		}
 		linem();
 		this.xml.append("</TopologyTemplate>");
 	}
 
-	private void parseNodeTemplate(NodeTemplate entry) {
+	private void parseNodeTemplate(Entry<String, NodeTemplate> entry) {
 		linep();
 		this.xml.append("<NodeTemplate");
-		// TODO: name!
-		// this.xml.append(" id=\"" + entry.getName() + "\"");
-		// this.xml.append(" name=\"" + entry.getName() + "\"");
-		this.xml.append(" type=\"" + entry.getType() + "\"");
+		this.xml.append(" id=\"" + entry.getKey() + "\"");
+		this.xml.append(" name=\"" + entry.getKey() + "\"");
+		this.xml.append(" type=\"" + entry.getValue().getType() + "\"");
 		this.xml.append(">");
-		parseDocumentation(entry.getDescription());
+		parseDocumentation(entry.getValue().getDescription());
 		// parseNodeTemplateProperties(entry.getProperties(), entry.getType(), entry.getName());
 		linem();
 		this.xml.append("</NodeTemplate>");
