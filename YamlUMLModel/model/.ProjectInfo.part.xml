@@ -162,7 +162,7 @@
         <PORepository>
             <POUserIDFormats>
                 <POUserIDFormat Digits="2" Guid="false"
-                    Id="6bahMFKFS_nqHANJ" LastNumericValue="0"
+                    Id="6bahMFKFS_nqHANJ" LastNumericValue="6"
                     ModelType="BPMNElement" Prefix="BP" Suffix=""/>
                 <POUserIDFormat Digits="2" Guid="false"
                     Id="GbahMFKFS_nqHANK" LastNumericValue="0"
@@ -171,7 +171,7 @@
                     Id="GbahMFKFS_nqHANL" LastNumericValue="0"
                     ModelType="UseCase" Prefix="UC" Suffix=""/>
                 <POUserIDFormat Digits="3" Guid="false"
-                    Id="GbahMFKFS_nqHANM" LastNumericValue="0"
+                    Id="GbahMFKFS_nqHANM" LastNumericValue="1"
                     ModelType="Requirement" Prefix="REQ" Suffix=""/>
                 <POUserIDFormat Digits="3" Guid="false"
                     Id="GbahMFKFS_nqHANN" LastNumericValue="0"
