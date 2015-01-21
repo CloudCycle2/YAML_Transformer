@@ -52,7 +52,6 @@ public class Parser implements IToscaYamlParser {
 
 	@Override
 	public Map<String, String> getInputRequirements() {
-		final Map<String, String> result = new HashMap<String, String>();
 		if (this.serviceTempl == null) {
 			throw new IllegalStateException("Call parse(..) before calling getInputRequirements()");
 		}
