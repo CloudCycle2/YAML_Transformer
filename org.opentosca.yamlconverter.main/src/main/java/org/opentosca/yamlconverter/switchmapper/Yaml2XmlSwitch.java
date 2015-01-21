@@ -23,6 +23,7 @@ import org.opentosca.model.tosca.TRelationshipType;
 import org.opentosca.model.tosca.TRequirementDefinition;
 import org.opentosca.model.tosca.TServiceTemplate;
 import org.opentosca.model.tosca.TTopologyTemplate;
+import org.opentosca.yamlconverter.main.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Import;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
@@ -83,8 +84,8 @@ public class Yaml2XmlSwitch {
 	private Definitions case_ServiceTemplate(ServiceTemplate elem) {
 		for (final Entry<String, Input> entry : elem.getInputs().entrySet()) {
 			final String value = entry.getValue().getDescription() + " Has to be of type " +
-					// TODO: YAMLmodel Input
-					// entry.getValue().getType() +
+			// TODO: YAMLmodel Input
+			// entry.getValue().getType() +
 					"<notdefined>" + ".";
 			this.inputReq.put(entry.getKey(), value);
 		}
@@ -276,7 +277,7 @@ public class Yaml2XmlSwitch {
 		// result.setPolicies(poli);
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
 		final QName type = new QName(elem.getType());
-		final Object properties = parseProperties(elem.getProperties(), type);
+		final AnyMap properties = new AnyMap(elem.getProperties());
 		prop.setAny(properties);
 		result.setProperties(prop);
 		// result.setPropertyConstraints(propconstr);
@@ -286,10 +287,6 @@ public class Yaml2XmlSwitch {
 		result.getDocumentation().add(toDocumentation(elem.getDescription()));
 		// result.getOtherAttributes().put(name, attr)
 		return result;
-	}
-
-	private Object parseProperties(Map<String, String> properties, QName type) {
-		return null;
 	}
 
 	/**

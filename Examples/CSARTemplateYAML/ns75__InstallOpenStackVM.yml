@@ -1,7 +1,7 @@
 # Required TOSCA Definitions version string
 tosca_definitions_version: tosca_simple_yaml_1_0
 
-OperatingSystem:
+InstallOpenStackVM:
 	derived_from: RootNodeType
 	description: InstallOpenStackVM
 	
