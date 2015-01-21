@@ -47,7 +47,10 @@ public class Parser implements IToscaYamlParser {
 
 	@Override
 	public String getXSD() {
-		throw new UnsupportedOperationException("not supported yet");
+		if (this.xml.equals("")) {
+			throw new IllegalStateException("Call parse(..) before calling getXSD()");
+		}
+		return this.b2b.getXSD();
 	}
 
 	@Override

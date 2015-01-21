@@ -24,4 +24,8 @@ public class SwitchMapperConverter implements IToscaBean2BeanConverter {
 		return this.switchmapper.getInputRequirements();
 	}
 
+	public String getXSD() {
+		return this.switchmapper.getXSD();
+	}
+
 }

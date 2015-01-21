@@ -33,6 +33,8 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 public class Yaml2XmlSwitch {
+	private static String TYPESNS = "http://www.example.org/tosca/yamlgen/types";
+
 	private long uniqueID = 0;
 
 	private StringBuilder xsd;
@@ -120,6 +122,7 @@ public class Yaml2XmlSwitch {
 		for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
 			// TODO: How do we handle imports?
 			// result.getImport().add(case_Import(importelem));
+			// TODO: add types import
 		}
 		// serviceTemplate.setBoundaryDefinitions(value);
 		serviceTemplate.setId(unique("serviceTemplate"));
@@ -219,9 +222,19 @@ public class Yaml2XmlSwitch {
 		final PropertiesDefinition result = new PropertiesDefinition();
 		// TODO: setElement()?!
 		// result.setElement(value);
-		result.setType(new QName("types:" + typename + "Properties"));
-		// TODO: XSD?!
+		result.setType(new QName(TYPESNS, typename + "Properties", "types"));
+		generateTypeXSD(properties, typename + "Properties");
 		return result;
+	}
+
+	private void generateTypeXSD(Map<String, String> properties, String name) {
+		this.xsd.append("<xs:complexType name=\"" + name + "\">");
+		this.xsd.append("<xs:sequence>");
+		for (final Entry<String, String> entry : properties.entrySet()) {
+			this.xsd.append("<xs:element name=\"" + entry.getKey() + "\" type=\"xs:" + entry.getValue() + "\"");
+		}
+		this.xsd.append("</xs:sequence>");
+		this.xsd.append("</xs:complexType>");
 	}
 
 	private Interfaces parseNodeTypeInterfaces(Map<String, String> interfaces) {
