@@ -5,16 +5,14 @@ import java.util.Map;
 
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
-import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 public class Parser implements IToscaYamlParser {
 	private final IToscaYaml2YamlBeanConverter y2yb = new YamlBeansConverter();
-	private final IToscaBean2BeanConverter b2b = new SwitchMapperConverter();
+	private final SwitchMapperConverter b2b = new SwitchMapperConverter();
 	private final IToscaXml2XmlBeanConverter x2xb = new JAXBConverter();
 
 	private String xml = "";
@@ -58,11 +56,7 @@ public class Parser implements IToscaYamlParser {
 		if (this.serviceTempl == null) {
 			throw new IllegalStateException("Call parse(..) before calling getInputRequirements()");
 		}
-		for (final Input inp : this.serviceTempl.getInput()) {
-			// TODO:
-			// result.put(inp, inp);
-		}
-		return result;
+		return this.b2b.getInputRequirements();
 	}
 
 	@Override
