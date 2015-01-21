@@ -48,7 +48,6 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 	}
 
 	public void adjustConfig(YamlConfig config) {
-		// FIXME
 		config.setPropertyElementType(ServiceTemplate.class, "node_templates", NodeTemplate.class);
 	}
 
