@@ -48,4 +48,44 @@ public class NodeType extends YAMLElement {
 	public Map<String, String> getArtifacts() {
 		return this.artifacts;
 	}
+
+	public String getDerived_from() {
+		return this.derived_from;
+	}
+
+	public void setDerived_from(String derived_from) {
+		this.derived_from = derived_from;
+	}
+
+	public Map<String, String> getProperties() {
+		return this.properties;
+	}
+
+	public void setProperties(Map<String, String> properties) {
+		this.properties = properties;
+	}
+
+	public Map<String, String> getRequirements() {
+		return this.requirements;
+	}
+
+	public void setRequirements(Map<String, String> requirements) {
+		this.requirements = requirements;
+	}
+
+	public Map<String, String> getCapabilities() {
+		return this.capabilities;
+	}
+
+	public void setCapabilities(Map<String, String> capabilities) {
+		this.capabilities = capabilities;
+	}
+
+	public Map<String, String> getInterfaces() {
+		return this.interfaces;
+	}
+
+	public void setInterfaces(Map<String, String> interfaces) {
+		this.interfaces = interfaces;
+	}
 }
