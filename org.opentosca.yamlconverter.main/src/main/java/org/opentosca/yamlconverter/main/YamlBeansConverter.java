@@ -6,8 +6,8 @@ import java.io.Writer;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
 
 import com.esotericsoftware.yamlbeans.YamlConfig;
 import com.esotericsoftware.yamlbeans.YamlException;
@@ -23,11 +23,11 @@ import com.esotericsoftware.yamlbeans.YamlWriter;
 public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
 	@Override
-	public YAMLFileRoot yaml2yamlbean(String yamlstring) throws ConverterException {
+	public ServiceTemplate yaml2yamlbean(String yamlstring) throws ConverterException {
 		final YamlReader reader = new YamlReader(yamlstring);
 		adjustConfig(reader.getConfig());
 		try {
-			return reader.read(YAMLFileRoot.class);
+			return reader.read(ServiceTemplate.class);
 		} catch (final YamlException e) {
 			throw new ConverterException(e);
 		}
@@ -48,7 +48,7 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 	}
 
 	public void adjustConfig(YamlConfig config) {
-		config.setPropertyElementType(YAMLFileRoot.class, "node_templates", NodeTemplate.class);
+		config.setPropertyElementType(ServiceTemplate.class, "node_templates", NodeTemplate.class);
 	}
 
 }

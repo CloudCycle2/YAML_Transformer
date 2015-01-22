@@ -1,7 +1,5 @@
 package org.opentosca.yamlconverter.switchmapper;
 
-import java.util.Map;
-
 import javax.xml.namespace.QName;
 
 import org.opentosca.model.tosca.Definitions;
@@ -10,16 +8,18 @@ import org.opentosca.model.tosca.TEntityTemplate;
 import org.opentosca.model.tosca.TNodeTemplate;
 import org.opentosca.model.tosca.TServiceTemplate;
 import org.opentosca.model.tosca.TTopologyTemplate;
+import org.opentosca.yamlconverter.main.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 public class Yaml2XmlSwitch {
+	private static final String TOSCABASETYPES_NS = null;
 	private long uniqueID = 0;
 
 	public Object doswitch(Object elem) {
-		if (elem instanceof YAMLFileRoot) {
-			return case_YAMLFileRoot((YAMLFileRoot) elem);
+		if (elem instanceof ServiceTemplate) {
+			return case_ServiceTemplate((ServiceTemplate) elem);
 		}
 		if (elem instanceof NodeTemplate) {
 			return case_NodeTemplate((NodeTemplate) elem);
@@ -27,7 +27,7 @@ public class Yaml2XmlSwitch {
 		throw new UnsupportedOperationException("Object not yet supported");
 	}
 
-	private Definitions case_YAMLFileRoot(YAMLFileRoot elem) {
+	private Definitions case_ServiceTemplate(ServiceTemplate elem) {
 		final Definitions result = new Definitions();
 		final TServiceTemplate serviceTemplate = new TServiceTemplate();
 		final TTopologyTemplate topologyTemplate = new TTopologyTemplate();
@@ -69,11 +69,12 @@ public class Yaml2XmlSwitch {
 		// serviceTemplate.getOtherAttributes().put(key, value);
 		// topologyTemplate.getAny().add(o);
 		// topologyTemplate.getDocumentation().add(docu);
-		for (final Map.Entry<String, NodeTemplate> nt : elem.getNode_templates().entrySet()) {
-			final TNodeTemplate xnode = case_NodeTemplate(nt.getValue());
+		for (final NodeTemplate nt : elem.getNodeTemplate()) {
+			final TNodeTemplate xnode = case_NodeTemplate(nt);
+			// TODO: is the name now parsed directly to the nodetemplate?
 			// override name and id of the nodetemplate
-			xnode.setName(nt.getKey());
-			xnode.setId(name2id(nt.getKey()));
+			// xnode.setName(nt.getKey());
+			// xnode.setId(name2id(nt.getKey()));
 			topologyTemplate.getNodeTemplateOrRelationshipTemplate().add(xnode);
 		}
 		// topologyTemplate.getOtherAttributes().put(key, value);
@@ -103,21 +104,18 @@ public class Yaml2XmlSwitch {
 		result.setName(unique("Nodetemplate"));
 		// result.setPolicies(poli);
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
-		final Object properties = parseProperties(elem.getProperties(), elem.getType());
+		final QName type = new QName(elem.getType());
+		// final Object properties = parseProperties(elem.getProperties(), type);
+		final AnyMap properties = new AnyMap(elem.getProperties());
 		prop.setAny(properties);
 		result.setProperties(prop);
 		// result.setPropertyConstraints(propconstr);
 		// result.setRequirements(req);
-		result.setType(new QName(elem.getType()));
+		result.setType(type);
 		// result.getAny().add(any);
 		result.getDocumentation().add(toDocumentation(elem.getDescription()));
 		// result.getOtherAttributes().put(name, attr)
 		return result;
-	}
-
-	private Object parseProperties(Map<String, Object> properties, String type) {
-		// TODO: implement this in the right way...
-		return null;
 	}
 
 	/**

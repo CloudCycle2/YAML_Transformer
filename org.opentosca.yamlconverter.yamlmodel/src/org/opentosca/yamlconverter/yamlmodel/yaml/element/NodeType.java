@@ -2,8 +2,8 @@ package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
 import java.util.Map;
 
-public class NodeTemplate extends YAMLElement {
-	private String type;
+public class NodeType extends YAMLElement {
+	private String derived_from;
 	private Map<String, String> properties;
 	private Map<String, String> requirements;
 	private Map<String, String> capabilities;
@@ -13,8 +13,8 @@ public class NodeTemplate extends YAMLElement {
 	@Override
 	public int hashCode() {
 		int hashCode = 0;
-		if (this.type != null) {
-			hashCode += this.type.hashCode();
+		if (this.derived_from != null) {
+			hashCode += this.derived_from.hashCode();
 		}
 		if (hashCode == 0) {
 			hashCode = super.hashCode();
@@ -26,26 +26,27 @@ public class NodeTemplate extends YAMLElement {
 	public boolean equals(Object object) {
 		if (this == object) {
 			return true;
-		} else if (object instanceof NodeTemplate) {
-			final NodeTemplate nodeTemplateObject = (NodeTemplate) object;
+		} else if (object instanceof NodeType) {
+			final NodeType nodeTypeObject = (NodeType) object;
 			boolean equals = true;
-			equals &= this.type == nodeTemplateObject.type || this.type != null && this.type.equals(nodeTemplateObject.type);
-			equals &= this.properties == nodeTemplateObject.properties;
-			equals &= this.requirements == nodeTemplateObject.requirements;
-			equals &= this.capabilities == nodeTemplateObject.capabilities;
-			equals &= this.interfaces == nodeTemplateObject.interfaces;
-			equals &= this.artifacts == nodeTemplateObject.artifacts;
+			equals &= this.derived_from == nodeTypeObject.derived_from || this.derived_from != null
+					&& this.derived_from.equals(nodeTypeObject.derived_from);
+			equals &= this.properties == nodeTypeObject.properties;
+			equals &= this.requirements == nodeTypeObject.requirements;
+			equals &= this.capabilities == nodeTypeObject.capabilities;
+			equals &= this.interfaces == nodeTypeObject.interfaces;
+			equals &= this.artifacts == nodeTypeObject.artifacts;
 			return equals;
 		}
 		return false;
 	}
 
-	public String getType() {
-		return this.type;
+	public String getDerived_from() {
+		return this.derived_from;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setDerived_from(String derived_from) {
+		this.derived_from = derived_from;
 	}
 
 	public Map<String, String> getProperties() {
