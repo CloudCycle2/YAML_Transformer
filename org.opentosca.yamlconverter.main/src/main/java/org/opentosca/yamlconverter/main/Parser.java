@@ -1,8 +1,5 @@
 package org.opentosca.yamlconverter.main;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
@@ -12,7 +9,11 @@ import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Parser implements IToscaYamlParser {
+
 	private final IToscaYaml2YamlBeanConverter y2yb = new YamlBeansConverter();
 	private final IToscaBean2BeanConverter b2b = new SwitchMapperConverter();
 	private final IToscaXml2XmlBeanConverter x2xb = new JAXBConverter();
@@ -25,6 +26,9 @@ public class Parser implements IToscaYamlParser {
 
 	@Override
 	public void parse(String yamlString) {
+		if (yamlString == null || yamlString.equals("")) {
+			throw new IllegalArgumentException("Path to yaml file may not be empty!");
+		}
 		try {
 			this.serviceTempl = this.y2yb.yaml2yamlbean(yamlString);
 		} catch (final ConverterException e) {
@@ -58,7 +62,7 @@ public class Parser implements IToscaYamlParser {
 		if (this.serviceTempl == null) {
 			throw new IllegalStateException("Call parse(..) before calling getInputRequirements()");
 		}
-		for (final Input inp : this.serviceTempl.getInput()) {
+		for (final Input inp : this.serviceTempl.getInputs().values()) {
 			// TODO:
 			// result.put(inp, inp);
 		}
