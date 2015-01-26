@@ -41,6 +41,14 @@ public class NodeType extends YAMLElement {
 		return false;
 	}
 
+	public void setArtifacts(Map<String, String> artifacts) {
+		this.artifacts = artifacts;
+	}
+
+	public Map<String, String> getArtifacts() {
+		return this.artifacts;
+	}
+
 	public String getDerived_from() {
 		return this.derived_from;
 	}
@@ -79,13 +87,5 @@ public class NodeType extends YAMLElement {
 
 	public void setInterfaces(Map<String, String> interfaces) {
 		this.interfaces = interfaces;
-	}
-
-	public Map<String, String> getArtifacts() {
-		return this.artifacts;
-	}
-
-	public void setArtifacts(Map<String, String> artifacts) {
-		this.artifacts = artifacts;
 	}
 }

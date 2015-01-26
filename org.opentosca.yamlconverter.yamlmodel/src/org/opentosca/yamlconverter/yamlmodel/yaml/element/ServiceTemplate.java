@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 public class ServiceTemplate extends YAMLElement {
 	private String tosca_definitions_version;
@@ -8,15 +8,15 @@ public class ServiceTemplate extends YAMLElement {
 	private String template_name;
 	private String template_author;
 	private String template_version;
-	private final ArrayList<NodeType> nodeType = new ArrayList<NodeType>();
-	private final ArrayList<CapabilityType> capabilityType = new ArrayList<CapabilityType>();
-	private final ArrayList<ArchitectType> architectType = new ArrayList<ArchitectType>();
-	private final ArrayList<Output> output = new ArrayList<Output>();
-	private final ArrayList<Input> input = new ArrayList<Input>();
-	private final ArrayList<Group> group = new ArrayList<Group>();
-	private final ArrayList<NodeTemplate> nodeTemplate = new ArrayList<NodeTemplate>();
-	private final ArrayList<Import> imports = new ArrayList<Import>();
-	private final ArrayList<RelationshipType> relationshipType = new ArrayList<RelationshipType>();
+	private Map<String, Import> imports;
+	private Map<String, Input> inputs;
+	private Map<String, NodeTemplate> node_templates;
+	private Map<String, NodeType> node_types;
+	private Map<String, CapabilityType> capability_types;
+	private Map<String, RelationshipType> relationship_types;
+	private Map<String, ArtefactType> artefact_types;
+	private Map<String, Group> groups;
+	private Map<String, Output> outputs;
 
 	@Override
 	public int hashCode() {
@@ -35,33 +35,6 @@ public class ServiceTemplate extends YAMLElement {
 		}
 		if (this.template_version != null) {
 			hashCode += this.template_version.hashCode();
-		}
-		if (this.nodeType != null) {
-			hashCode += this.nodeType.hashCode();
-		}
-		if (this.capabilityType != null) {
-			hashCode += this.capabilityType.hashCode();
-		}
-		if (this.architectType != null) {
-			hashCode += this.architectType.hashCode();
-		}
-		if (this.output != null) {
-			hashCode += this.output.hashCode();
-		}
-		if (this.input != null) {
-			hashCode += this.input.hashCode();
-		}
-		if (this.group != null) {
-			hashCode += this.group.hashCode();
-		}
-		if (this.nodeTemplate != null) {
-			hashCode += this.nodeTemplate.hashCode();
-		}
-		if (this.imports != null) {
-			hashCode += this.imports.hashCode();
-		}
-		if (this.relationshipType != null) {
-			hashCode += this.relationshipType.hashCode();
 		}
 		if (hashCode == 0) {
 			hashCode = super.hashCode();
@@ -87,100 +60,129 @@ public class ServiceTemplate extends YAMLElement {
 					&& this.template_author.equals(serviceTemplateObject.template_author);
 			equals &= this.template_version == serviceTemplateObject.template_version || this.template_version != null
 					&& this.template_version.equals(serviceTemplateObject.template_version);
-			equals &= this.nodeType == serviceTemplateObject.nodeType || this.nodeType != null
-					&& this.nodeType.equals(serviceTemplateObject.nodeType);
-			equals &= this.capabilityType == serviceTemplateObject.capabilityType || this.capabilityType != null
-					&& this.capabilityType.equals(serviceTemplateObject.capabilityType);
-			equals &= this.architectType == serviceTemplateObject.architectType || this.architectType != null
-					&& this.architectType.equals(serviceTemplateObject.architectType);
-			equals &= this.output == serviceTemplateObject.output || this.output != null
-					&& this.output.equals(serviceTemplateObject.output);
-			equals &= this.input == serviceTemplateObject.input || this.input != null && this.input.equals(serviceTemplateObject.input);
-			equals &= this.group == serviceTemplateObject.group || this.group != null && this.group.equals(serviceTemplateObject.group);
-			equals &= this.nodeTemplate == serviceTemplateObject.nodeTemplate || this.nodeTemplate != null
-					&& this.nodeTemplate.equals(serviceTemplateObject.nodeTemplate);
-			equals &= this.imports == serviceTemplateObject.imports || this.imports != null
-					&& this.imports.equals(serviceTemplateObject.imports);
-			equals &= this.relationshipType == serviceTemplateObject.relationshipType || this.relationshipType != null
-					&& this.relationshipType.equals(serviceTemplateObject.relationshipType);
+			equals &= this.imports == serviceTemplateObject.imports;
+			equals &= this.inputs == serviceTemplateObject.inputs;
+			equals &= this.node_templates == serviceTemplateObject.node_templates;
+			equals &= this.node_types == serviceTemplateObject.node_types;
+			equals &= this.capability_types == serviceTemplateObject.capability_types;
+			equals &= this.relationship_types == serviceTemplateObject.relationship_types;
+			equals &= this.artefact_types == serviceTemplateObject.artefact_types;
+			equals &= this.groups == serviceTemplateObject.groups;
+			equals &= this.outputs == serviceTemplateObject.outputs;
 			return equals;
 		}
 		return false;
-	}
-
-	public String getTosca_definitions_version() {
-		return this.tosca_definitions_version;
 	}
 
 	public void setTosca_definitions_version(String tosca_definitions_version) {
 		this.tosca_definitions_version = tosca_definitions_version;
 	}
 
-	public String getTosca_default_namespace() {
-		return this.tosca_default_namespace;
+	public String getTosca_definitions_version() {
+		return this.tosca_definitions_version;
 	}
 
 	public void setTosca_default_namespace(String tosca_default_namespace) {
 		this.tosca_default_namespace = tosca_default_namespace;
 	}
 
-	public String getTemplate_name() {
-		return this.template_name;
+	public String getTosca_default_namespace() {
+		return this.tosca_default_namespace;
 	}
 
 	public void setTemplate_name(String template_name) {
 		this.template_name = template_name;
 	}
 
-	public String getTemplate_author() {
-		return this.template_author;
+	public String getTemplate_name() {
+		return this.template_name;
 	}
 
 	public void setTemplate_author(String template_author) {
 		this.template_author = template_author;
 	}
 
-	public String getTemplate_version() {
-		return this.template_version;
+	public String getTemplate_author() {
+		return this.template_author;
 	}
 
 	public void setTemplate_version(String template_version) {
 		this.template_version = template_version;
 	}
 
-	public ArrayList<NodeType> getNodeType() {
-		return this.nodeType;
+	public String getTemplate_version() {
+		return this.template_version;
 	}
 
-	public ArrayList<CapabilityType> getCapabilityType() {
-		return this.capabilityType;
+	public void setImports(Map<String, Import> imports) {
+		this.imports = imports;
 	}
 
-	public ArrayList<ArchitectType> getArchitectType() {
-		return this.architectType;
-	}
-
-	public ArrayList<Output> getOutput() {
-		return this.output;
-	}
-
-	public ArrayList<Input> getInput() {
-		return this.input;
-	}
-
-	public ArrayList<Group> getGroup() {
-		return this.group;
-	}
-
-	public ArrayList<NodeTemplate> getNodeTemplate() {
-		return this.nodeTemplate;
-	}
-
-	public ArrayList<Import> getImports() {
+	public Map<String, Import> getImports() {
 		return this.imports;
 	}
 
-	public ArrayList<RelationshipType> getRelationshipType() {
-		return this.relationshipType;
+	public void setInputs(Map<String, Input> inputs) {
+		this.inputs = inputs;
+	}
+
+	public Map<String, Input> getInputs() {
+		return this.inputs;
+	}
+
+	public void setNode_templates(Map<String, NodeTemplate> node_templates) {
+		this.node_templates = node_templates;
+	}
+
+	public Map<String, NodeTemplate> getNode_templates() {
+		return this.node_templates;
+	}
+
+	public void setNode_types(Map<String, NodeType> node_types) {
+		this.node_types = node_types;
+	}
+
+	public Map<String, NodeType> getNode_types() {
+		return this.node_types;
+	}
+
+	public void setCapability_types(Map<String, CapabilityType> capability_types) {
+		this.capability_types = capability_types;
+	}
+
+	public Map<String, CapabilityType> getCapability_types() {
+		return this.capability_types;
+	}
+
+	public void setRelationship_types(Map<String, RelationshipType> relationship_types) {
+		this.relationship_types = relationship_types;
+	}
+
+	public Map<String, RelationshipType> getRelationship_types() {
+		return this.relationship_types;
+	}
+
+	public void setArtefact_types(Map<String, ArtefactType> artefact_types) {
+		this.artefact_types = artefact_types;
+	}
+
+	public Map<String, ArtefactType> getArtefact_types() {
+		return this.artefact_types;
+	}
+
+	public void setGroups(Map<String, Group> groups) {
+		this.groups = groups;
+	}
+
+	public Map<String, Group> getGroups() {
+		return this.groups;
+	}
+
+	public void setOutputs(Map<String, Output> outputs) {
+		this.outputs = outputs;
+	}
+
+	public Map<String, Output> getOutputs() {
+		return this.outputs;
 	}
 }
