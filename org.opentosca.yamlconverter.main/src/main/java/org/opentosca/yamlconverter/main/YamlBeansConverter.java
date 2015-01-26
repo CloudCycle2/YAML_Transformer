@@ -21,6 +21,9 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
 	@Override
 	public ServiceTemplate yaml2yamlbean(String yamlstring) throws ConverterException {
+		if (yamlstring == null || yamlstring.equals("")) {
+			throw new IllegalArgumentException("Path for YAML file may not be empty!");
+		}
 		final YamlReader reader = new YamlReader(yamlstring);
 		adjustConfig(reader.getConfig());
 		try {
@@ -32,6 +35,9 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
 	@Override
 	public String yamlbean2yaml(YAMLElement root) throws ConverterException {
+		if (root == null) {
+			throw new IllegalArgumentException("Root element may not be null!");
+		}
 		final Writer output = new StringWriter();
 		final YamlWriter writer = new YamlWriter(output);
 		adjustConfig(writer.getConfig());
