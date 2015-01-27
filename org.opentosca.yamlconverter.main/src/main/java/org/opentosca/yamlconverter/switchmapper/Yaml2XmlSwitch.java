@@ -84,12 +84,14 @@ public class Yaml2XmlSwitch {
 	}
 
 	private Definitions case_ServiceTemplate(ServiceTemplate elem) {
-		for (final Entry<String, Input> entry : elem.getInputs().entrySet()) {
-			final String value = entry.getValue().getDescription() + " Has to be of type " +
-			// TODO: YAMLmodel Input
-			// entry.getValue().getType() +
-					"<notdefined>" + ".";
-			this.inputReq.put(entry.getKey(), value);
+		if (elem.getInputs() != null) {
+			for (final Entry<String, Input> entry : elem.getInputs().entrySet()) {
+				final String value = entry.getValue().getDescription() + " Has to be of type " +
+				// TODO: YAMLmodel Input
+				// entry.getValue().getType() +
+						"<notdefined>" + ".";
+				this.inputReq.put(entry.getKey(), value);
+			}
 		}
 
 		final Definitions result = new Definitions();
@@ -97,32 +99,42 @@ public class Yaml2XmlSwitch {
 		final TTopologyTemplate topologyTemplate = new TTopologyTemplate();
 		result.setId(unique("root"));
 		result.setName(unique("Root"));
-		// result.setTargetNamespace();
+		// TODO: set correct namespace as soon as it's known
+		result.setTargetNamespace("example.com/yamlconverter");
+		result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(serviceTemplate);
 		// result.setExtensions();
 		// result.setTypes();
 		result.getDocumentation().add(toDocumentation(elem.getDescription()));
 		// result.getOtherAttributes().put(name, attribute);
-		for (final Entry<String, CapabilityType> capType : elem.getCapability_types().entrySet()) {
-			final TCapabilityType ct = case_CapabilityType(capType);
-			ct.setName(capType.getKey());
-			result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(ct);
+		if (elem.getCapability_types() != null) {
+			for (final Entry<String, CapabilityType> capType : elem.getCapability_types().entrySet()) {
+				final TCapabilityType ct = case_CapabilityType(capType);
+				ct.setName(capType.getKey());
+				result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(ct);
+			}
 		}
-		for (final Entry<String, NodeType> nt : elem.getNode_types().entrySet()) {
-			final TNodeType xnode = case_NodeType(nt.getValue(), nt.getKey());
-			result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(xnode);
+		if (elem.getNode_types() != null) {
+			for (final Entry<String, NodeType> nt : elem.getNode_types().entrySet()) {
+				final TNodeType xnode = case_NodeType(nt.getValue(), nt.getKey());
+				result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(xnode);
+			}
 		}
-		for (final Entry<String, RelationshipType> relType : elem.getRelationship_types().entrySet()) {
-			final TRelationshipType rt = case_RelationshipType(relType);
-			rt.setName(relType.getKey());
-			result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(rt);
+		if (elem.getRelationship_types() != null) {
+			for (final Entry<String, RelationshipType> relType : elem.getRelationship_types().entrySet()) {
+				final TRelationshipType rt = case_RelationshipType(relType);
+				rt.setName(relType.getKey());
+				result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(rt);
+			}
 		}
 		// for (final ArtifactType artType : elem.getArtifactType()) {
 		// result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(case_ArtifactType(artType));
 		// }
-		for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
-			// TODO: How do we handle imports?
-			// result.getImport().add(case_Import(importelem));
-			// TODO: add types import
+		if (elem.getImports() != null) {
+			for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
+				// TODO: How do we handle imports?
+				// result.getImport().add(case_Import(importelem));
+				// TODO: add types import
+			}
 		}
 		// serviceTemplate.setBoundaryDefinitions(value);
 		serviceTemplate.setId(unique("serviceTemplate"));
@@ -136,12 +148,14 @@ public class Yaml2XmlSwitch {
 		// serviceTemplate.getOtherAttributes().put(key, value);
 		// topologyTemplate.getAny().add(o);
 		// topologyTemplate.getDocumentation().add(docu);
-		for (final Map.Entry<String, NodeTemplate> nt : elem.getNode_templates().entrySet()) {
-			final TNodeTemplate xnode = case_NodeTemplate(nt.getValue());
-			// override name and id of the nodetemplate
-			xnode.setName(nt.getKey());
-			xnode.setId(name2id(nt.getKey()));
-			topologyTemplate.getNodeTemplateOrRelationshipTemplate().add(xnode);
+		if (elem.getNode_templates() != null) {
+			for (final Map.Entry<String, NodeTemplate> nt : elem.getNode_templates().entrySet()) {
+				final TNodeTemplate xnode = case_NodeTemplate(nt.getValue());
+				// override name and id of the nodetemplate
+				xnode.setName(nt.getKey());
+				xnode.setId(name2id(nt.getKey()));
+				topologyTemplate.getNodeTemplateOrRelationshipTemplate().add(xnode);
+			}
 		}
 		// topologyTemplate.getOtherAttributes().put(key, value);
 		return result;
