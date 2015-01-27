@@ -20,6 +20,16 @@ public class YamlBeansConverterTest extends BaseTest {
 		Assert.assertEquals("tosca.nodes.Compute", element.getNode_templates().get("my_server").getType());
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testYaml2YamlBean_Null() throws Exception {
+		this.converter.yaml2yamlbean(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testYaml2YamlBean_EmptyString() throws Exception {
+		this.converter.yaml2yamlbean("");
+	}
+
 	@Test
 	public void testYamlBean2Yaml() throws Exception {
 		// construct element
@@ -29,5 +39,10 @@ public class YamlBeansConverterTest extends BaseTest {
 		final String output = this.converter.yamlbean2yaml(element);
 		Assert.assertNotNull(output);
 		Assert.assertTrue(output.contains(yamlSpec));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testYamlBean2Yaml_Null() throws Exception {
+		this.converter.yamlbean2yaml(null);
 	}
 }
