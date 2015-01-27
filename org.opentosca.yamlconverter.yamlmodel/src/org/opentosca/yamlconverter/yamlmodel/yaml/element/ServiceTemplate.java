@@ -14,7 +14,7 @@ public class ServiceTemplate extends YAMLElement {
 	private Map<String, NodeType> node_types;
 	private Map<String, CapabilityType> capability_types;
 	private Map<String, RelationshipType> relationship_types;
-	private Map<String, ArtefactType> artefact_types;
+	private Map<String, ArtifactType> artifact_types;
 	private Map<String, Group> groups;
 	private Map<String, Output> outputs;
 
@@ -66,7 +66,7 @@ public class ServiceTemplate extends YAMLElement {
 			equals &= this.node_types == serviceTemplateObject.node_types;
 			equals &= this.capability_types == serviceTemplateObject.capability_types;
 			equals &= this.relationship_types == serviceTemplateObject.relationship_types;
-			equals &= this.artefact_types == serviceTemplateObject.artefact_types;
+			equals &= this.artifact_types == serviceTemplateObject.artifact_types;
 			equals &= this.groups == serviceTemplateObject.groups;
 			equals &= this.outputs == serviceTemplateObject.outputs;
 			return equals;
@@ -162,12 +162,12 @@ public class ServiceTemplate extends YAMLElement {
 		return this.relationship_types;
 	}
 
-	public void setArtefact_types(Map<String, ArtefactType> artefact_types) {
-		this.artefact_types = artefact_types;
+	public void setArtifact_types(Map<String, ArtifactType> artifact_types) {
+		this.artifact_types = artifact_types;
 	}
 
-	public Map<String, ArtefactType> getArtefact_types() {
-		return this.artefact_types;
+	public Map<String, ArtifactType> getArtifact_types() {
+		return this.artifact_types;
 	}
 
 	public void setGroups(Map<String, Group> groups) {

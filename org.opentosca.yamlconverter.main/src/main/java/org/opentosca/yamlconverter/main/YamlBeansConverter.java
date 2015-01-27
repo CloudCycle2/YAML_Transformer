@@ -22,7 +22,7 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 	@Override
 	public ServiceTemplate yaml2yamlbean(String yamlstring) throws ConverterException {
 		if (yamlstring == null || yamlstring.equals("")) {
-			throw new IllegalArgumentException("Path for YAML file may not be empty!");
+			throw new IllegalArgumentException("YAML string may not be empty!");
 		}
 		final YamlReader reader = new YamlReader(yamlstring);
 		adjustConfig(reader.getConfig());
@@ -57,7 +57,7 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 		config.setPropertyElementType(ServiceTemplate.class, "node_types", NodeType.class);
 		config.setPropertyElementType(ServiceTemplate.class, "capability_types", CapabilityType.class);
 		config.setPropertyElementType(ServiceTemplate.class, "relationship_types", RelationshipType.class);
-		config.setPropertyElementType(ServiceTemplate.class, "artefact_types", ArtefactType.class);
+		config.setPropertyElementType(ServiceTemplate.class, "artifact_types", ArtifactType.class);
 		config.setPropertyElementType(ServiceTemplate.class, "groups", Group.class);
 		config.setPropertyElementType(ServiceTemplate.class, "outputs", Output.class);
 	}

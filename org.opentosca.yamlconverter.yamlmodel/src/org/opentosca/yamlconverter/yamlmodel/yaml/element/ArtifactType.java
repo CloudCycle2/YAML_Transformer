@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
-public class ArtefactType extends YAMLElement {
+public class ArtifactType extends YAMLElement {
 
 	public int hashCode() {
 		int hashCode = 0;
@@ -13,8 +13,8 @@ public class ArtefactType extends YAMLElement {
 	public boolean equals(Object object) {
 		if (this == object) {
 			return true;
-		} else if (object instanceof ArtefactType) {
-			ArtefactType artefactTypeObject = (ArtefactType) object;
+		} else if (object instanceof ArtifactType) {
+			ArtifactType artifactTypeObject = (ArtifactType) object;
 			boolean equals = true;
 			return equals;
 		}
