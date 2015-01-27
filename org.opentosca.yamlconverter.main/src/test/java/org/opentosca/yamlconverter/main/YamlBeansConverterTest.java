@@ -19,7 +19,7 @@ public class YamlBeansConverterTest extends BaseTest {
 	public void testYaml2YamlBean() throws Exception {
 		final ServiceTemplate element = this.converter.yaml2yamlbean(this.testUtils.readYamlTestResource("/yaml/helloworld.yaml"));
 		Assert.assertNotNull(element);
-		Assert.assertEquals(element.getTosca_definitions_version(), "tosca_simple_yaml_1_0");
+		Assert.assertEquals("tosca_simple_yaml_1_0", element.getTosca_definitions_version());
 		Assert.assertEquals("tosca.nodes.Compute", element.getNode_templates().get("my_server").getType());
 	}
 
@@ -55,10 +55,10 @@ public class YamlBeansConverterTest extends BaseTest {
 		Assert.assertNotNull(templ);
 		final Map<String, Input> inputs = templ.getInputs();
 		Assert.assertNotNull(inputs);
-		Assert.assertEquals("template must have 1 input", inputs.size(), 1);
+		Assert.assertEquals("template must have 1 input", 1, inputs.size());
 		final Input fooInput = inputs.get("foo");
-		Assert.assertEquals("fooInput must have the type 'string'", fooInput.getType(), "string");
-		Assert.assertEquals("fooInput must have 1 constraint", fooInput.getConstraints().size(), 2);
-		Assert.assertEquals("constraint min_length is equals 2", fooInput.getConstraints().get(0).get("min_length"), "2");
+		Assert.assertEquals("fooInput must have the type 'string'", "string", fooInput.getType());
+		Assert.assertEquals("fooInput must have 1 constraint", 2, fooInput.getConstraints().size());
+		Assert.assertEquals("constraint min_length is equals 2", "2", fooInput.getConstraints().get(0).get("min_length"));
 	}
 }
