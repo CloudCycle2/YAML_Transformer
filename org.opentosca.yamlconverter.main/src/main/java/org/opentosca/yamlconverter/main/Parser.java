@@ -1,8 +1,5 @@
 package org.opentosca.yamlconverter.main;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
@@ -10,6 +7,9 @@ import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Parser implements IToscaYamlParser {
 
@@ -27,7 +27,7 @@ public class Parser implements IToscaYamlParser {
 	@Override
 	public void parse(String yamlString) {
 		if (yamlString == null || yamlString.equals("")) {
-			throw new IllegalArgumentException("Path to yaml file may not be empty!");
+			throw new IllegalArgumentException("YAML string may not be empty!");
 		}
 		try {
 			// TODO: how to handle the inputs? Suggestion: Give a default value to
