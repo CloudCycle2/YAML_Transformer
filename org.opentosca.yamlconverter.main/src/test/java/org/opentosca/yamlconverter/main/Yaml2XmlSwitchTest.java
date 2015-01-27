@@ -20,7 +20,7 @@ public class Yaml2XmlSwitchTest extends BaseTest {
 		final String yaml = this.testUtils.readYamlTestResource("/yaml/helloworld.yaml");
 		final ServiceTemplate root = this.c.yaml2yamlbean(yaml);
 		final Yaml2XmlSwitch mapper = new Yaml2XmlSwitch();
-		final Definitions d = (Definitions) mapper.doswitch(root);
+		final Definitions d = mapper.parse(root);
 		System.out.println(this.conv.xmlbean2xml(d));
 	}
 }
