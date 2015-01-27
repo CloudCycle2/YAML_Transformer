@@ -1,0 +1,51 @@
+<Association Abstract="false" Derived="false" Direction="From To"
+    Documentation_plain=""
+    EndRelationshipFromMetaModelElement="eJG3ylKFS_nqHA.U"
+    EndRelationshipToMetaModelElement="YmG3ylKFS_nqHAqo"
+    Id="TzG3ylKFS_nqHBLn" Leaf="false" OrderingInProfile="-1"
+    PmAuthor="Def" PmCreateDateTime="2014-12-16T17:28:04.722"
+    PmLastModified="2014-12-16T17:40:52.255" QualityScore="100"
+    UserIDLastNumericValue="0" Visibility="Unspecified">
+    <FromEnd>
+        <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
+            Derived="false" DerivedUnion="false" Documentation_plain=""
+            EndModelElement="eJG3ylKFS_nqHA.U" Id="TzG3ylKFS_nqHBLo"
+            JavaCodeAttributeName="" Leaf="false"
+            Multiplicity="Unspecified" Navigable="Non Navigable"
+            PmAuthor="Def" PmCreateDateTime="2014-12-16T17:28:04.722"
+            ProvidePropertyGetterMethod="false"
+            ProvidePropertySetterMethod="false" QualityScore="-1"
+            ReadOnly="false" Static="false" TypeModifier=""
+            UserIDLastNumericValue="0" Visibility="Unspecified">
+            <Qualifier>
+                <Qualifier Documentation_plain="" Id="TzG3ylKFS_nqHBLp"
+                    Name="" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-16T17:28:04.722"
+                    QualityScore="-1" UserIDLastNumericValue="0"/>
+            </Qualifier>
+        </AssociationEnd>
+    </FromEnd>
+    <ToEnd>
+        <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
+            Derived="false" DerivedUnion="false"
+            EndModelElement="YmG3ylKFS_nqHAqo" Id="TzG3ylKFS_nqHBLq"
+            JavaCodeAttributeName="" Leaf="false" Multiplicity="*"
+            Name="nodeTemplateOrRelationshipTemplate"
+            Navigable="Navigable" PmAuthor="Def"
+            PmCreateDateTime="2014-12-16T17:28:04.722"
+            ProvidePropertyGetterMethod="false"
+            ProvidePropertySetterMethod="false" QualityScore="-1"
+            ReadOnly="false" RepresentativeAttribute=".JG3ylKFS_nqHA.W"
+            Static="false" UserIDLastNumericValue="0" Visibility="protected">
+            <Qualifier>
+                <Qualifier Documentation_plain="" Id="TzG3ylKFS_nqHBLr"
+                    Name="" PmAuthor="Def"
+                    PmCreateDateTime="2014-12-16T17:28:04.722"
+                    QualityScore="-1" UserIDLastNumericValue="0"/>
+            </Qualifier>
+            <Type>
+                <Class Idref="YmG3ylKFS_nqHAqo" Name="TEntityTemplate"/>
+            </Type>
+        </AssociationEnd>
+    </ToEnd>
+</Association>

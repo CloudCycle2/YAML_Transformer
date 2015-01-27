@@ -1,57 +1,54 @@
 <Association Abstract="false" Derived="false" Direction="From To"
     Documentation_plain=""
-    EndRelationshipFromMetaModelElement="5IsKMFKFS_nqHAYZ"
-    EndRelationshipToMetaModelElement="mIepMFKFS_nqHAO9"
-    Id="m.rpMFKFS_nqHAPm" Leaf="false" Name="type"
+    EndRelationshipFromMetaModelElement="pnfIzFKFS_nqHAUg"
+    EndRelationshipToMetaModelElement="1RSTx1KFS_nqHA5Y"
+    Id="v1qTx1KFS_nqHA5p" Leaf="false" Name="relationship_types"
     OrderingInProfile="-1" PmAuthor="Def"
-    PmCreateDateTime="2014-12-02T21:00:52.697"
-    PmLastModified="2014-12-10T08:50:04.098" QualityReason="2&#x9;2"
-    QualityScore="97" UserIDLastNumericValue="0" Visibility="private">
+    PmCreateDateTime="2015-01-13T15:53:51.741"
+    PmLastModified="2015-01-20T18:07:05.200" QualityReason="2&#x9;2"
+    QualityScore="97" UserIDLastNumericValue="0" Visibility="Unspecified">
     <FromEnd>
         <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
             Derived="false" DerivedUnion="false" Documentation_plain=""
-            EndModelElement="5IsKMFKFS_nqHAYZ" Id="m.rpMFKFS_nqHAPn"
-            JavaCodeAttributeName="" Leaf="false" Multiplicity="1"
-            Navigable="Non Navigable" PmAuthor="Def"
-            PmCreateDateTime="2014-12-02T21:00:52.697"
+            EndModelElement="pnfIzFKFS_nqHAUg" Id="v1qTx1KFS_nqHA5q"
+            JavaCodeAttributeName="" Leaf="false"
+            Multiplicity="Unspecified" Navigable="Non Navigable"
+            PmAuthor="Def" PmCreateDateTime="2015-01-13T15:53:51.741"
             ProvidePropertyGetterMethod="false"
             ProvidePropertySetterMethod="false" QualityScore="-1"
             ReadOnly="false" Static="false" TypeModifier=""
             UserIDLastNumericValue="0" Visibility="Unspecified">
             <Qualifier>
-                <Qualifier Documentation_plain="" Id="m.rpMFKFS_nqHAPo"
+                <Qualifier Documentation_plain="" Id="v1qTx1KFS_nqHA5r"
                     Name="" PmAuthor="Def"
-                    PmCreateDateTime="2014-12-02T21:00:52.697"
+                    PmCreateDateTime="2015-01-13T15:53:51.741"
                     QualityScore="-1" UserIDLastNumericValue="0"/>
             </Qualifier>
             <Type>
-                <Class Idref="5IsKMFKFS_nqHAYZ" Name="TypedProperty"/>
+                <Class Idref="pnfIzFKFS_nqHAUg" Name="ServiceTemplate"/>
             </Type>
         </AssociationEnd>
     </FromEnd>
     <ToEnd>
         <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
             Derived="false" DerivedUnion="false" Documentation_plain=""
-            EndModelElement="mIepMFKFS_nqHAO9" Id="m.rpMFKFS_nqHAPp"
-            JavaCodeAttributeName="" Leaf="false" Multiplicity="1"
-            Name="" Navigable="Navigable" PmAuthor="Def"
-            PmCreateDateTime="2014-12-02T21:00:52.697"
+            EndModelElement="1RSTx1KFS_nqHA5Y" Id="v1qTx1KFS_nqHA5s"
+            JavaCodeAttributeName="" Leaf="false" Multiplicity="*"
+            Navigable="Navigable" PmAuthor="Def"
+            PmCreateDateTime="2015-01-13T15:53:51.741"
             ProvidePropertyGetterMethod="false"
             ProvidePropertySetterMethod="false" QualityScore="-1"
             ReadOnly="false" Static="false" TypeModifier=""
             UserIDLastNumericValue="0" Visibility="private">
             <Qualifier>
-                <Qualifier Documentation_plain="" Id="m.rpMFKFS_nqHAPq"
+                <Qualifier Documentation_plain="" Id="v1qTx1KFS_nqHA5t"
                     Name="" PmAuthor="Def"
-                    PmCreateDateTime="2014-12-02T21:00:52.697"
+                    PmCreateDateTime="2015-01-13T15:53:51.741"
                     QualityScore="-1" UserIDLastNumericValue="0"/>
             </Qualifier>
             <Type>
-                <Class Idref="mIepMFKFS_nqHAO9" Name="PropertyType"/>
+                <Class Idref="1RSTx1KFS_nqHA5Y" Name="RelationshipType"/>
             </Type>
         </AssociationEnd>
     </ToEnd>
-    <MasterView>
-        <Association Idref="1hrpMFKFS_nqHAPr" Name="type"/>
-    </MasterView>
 </Association>
