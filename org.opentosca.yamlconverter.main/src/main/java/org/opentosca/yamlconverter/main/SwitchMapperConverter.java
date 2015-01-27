@@ -1,5 +1,7 @@
 package org.opentosca.yamlconverter.main;
 
+import java.util.Map;
+
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.interfaces.IToscaBean2BeanConverter;
 import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
@@ -15,7 +17,15 @@ public class SwitchMapperConverter implements IToscaBean2BeanConverter {
 
 	@Override
 	public Definitions yamlb2xmlb(ServiceTemplate yamlBean) {
-		return (Definitions) this.switchmapper.doswitch(yamlBean);
+		return this.switchmapper.parse(yamlBean);
+	}
+
+	public Map<String, String> getInputRequirements() {
+		return this.switchmapper.getInputRequirements();
+	}
+
+	public String getXSD() {
+		return this.switchmapper.getXSD();
 	}
 
 }
