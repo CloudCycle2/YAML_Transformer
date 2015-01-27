@@ -1,15 +1,18 @@
 # Required TOSCA Definitions version string
 tosca_definitions_version: tosca_simple_yaml_1_0
 
+imports:
+ - ns5__RootNodeType.yaml
+ 
 OperatingSystem:
-	derived_from: RootNodeType
-	description: Operating System
-	properties:
-			hostname:
-				type: string
-            sshUser:
-				type: string
-            sshKey:
-				type: string
-            script:
-				type: string		
+ derived_from: RootNodeType
+ description: Operating System
+ properties:
+  hostname:
+   type: string
+  sshUser:
+   type: string
+  sshKey:
+   type: string
+  script:
+   type: string		
