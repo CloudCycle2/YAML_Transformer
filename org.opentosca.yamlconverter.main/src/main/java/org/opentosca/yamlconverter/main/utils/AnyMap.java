@@ -1,4 +1,4 @@
-package org.opentosca.yamlconverter.main;
+package org.opentosca.yamlconverter.main.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

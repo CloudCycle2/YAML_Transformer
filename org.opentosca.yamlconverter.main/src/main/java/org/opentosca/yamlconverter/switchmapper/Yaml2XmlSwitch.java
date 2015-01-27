@@ -23,7 +23,7 @@ import org.opentosca.model.tosca.TRelationshipType;
 import org.opentosca.model.tosca.TRequirementDefinition;
 import org.opentosca.model.tosca.TServiceTemplate;
 import org.opentosca.model.tosca.TTopologyTemplate;
-import org.opentosca.yamlconverter.main.AnyMap;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Import;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
