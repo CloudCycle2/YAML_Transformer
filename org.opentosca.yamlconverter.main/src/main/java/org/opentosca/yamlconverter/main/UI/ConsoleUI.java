@@ -72,17 +72,21 @@ public class ConsoleUI {
 		}
 
 		final String xsd = parser.getXSD();
-		System.out.println("\nAlso I have an XSD-file for you. Save it as types.xsd!");
-		System.out.println(xsd);
+		if (!xsd.isEmpty()) {
+			System.out.println("\nAlso I have an XSD-file for you. Save it as types.xsd!");
+			System.out.println(xsd);
 
-		final String xsdfilename = promptString("\nIf you want to save this XSD, enter a filename, else just hit ENTER...");
-		if (!xsdfilename.isEmpty()) {
-			try {
-				fileutil.saveStringAsFile(xsdfilename, xsd);
-			} catch (final IOException e) {
-				System.out.println("ERROR: File has not been saved, because of an IOException.");
+			final String xsdfilename = promptString("\nIf you want to save this XSD, enter a filename, else just hit ENTER...");
+			if (!xsdfilename.isEmpty()) {
+				try {
+					fileutil.saveStringAsFile(xsdfilename, xsd);
+				} catch (final IOException e) {
+					System.out.println("ERROR: File has not been saved, because of an IOException.");
+				}
 			}
 		}
+
+		System.out.println("\nWuhuu! I'm finished with converting. I hope you're happy now! Good Bye!\n\n exiting...");
 	}
 
 	private static String promptString(String promptString) {

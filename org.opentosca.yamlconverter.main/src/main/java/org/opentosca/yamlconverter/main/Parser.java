@@ -68,11 +68,13 @@ public class Parser implements IToscaYamlParser {
 		}
 		final Map<String, String> result = new HashMap<String, String>();
 		final Map<String, Input> serviceTemplateInputs = this.serviceTempl.getInputs();
-		for (final String inputKey : serviceTemplateInputs.keySet()) {
-			// TODO: we need a better data structure for inputs (it's just an empty class without any attributes),
-			// respectively for ServiceTemplate
-			// TODO: adjust code to improved data structure
-			result.put(inputKey, serviceTemplateInputs.get(inputKey).toString());
+		if (serviceTemplateInputs != null) {
+			for (final String inputKey : serviceTemplateInputs.keySet()) {
+				// TODO: we need a better data structure for inputs (it's just an empty class without any attributes),
+				// respectively for ServiceTemplate
+				// TODO: adjust code to improved data structure
+				result.put(inputKey, serviceTemplateInputs.get(inputKey).toString());
+			}
 		}
 		return result;
 	}

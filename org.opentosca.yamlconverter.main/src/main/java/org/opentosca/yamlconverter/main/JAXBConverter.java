@@ -19,6 +19,7 @@ import javax.xml.validation.SchemaFactory;
 
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.xml.sax.SAXException;
 
 /**
