@@ -10,7 +10,11 @@
     ModelElementNameAlignment="4" Name="Property"
     PaintConnectorThroughLabel="0" ParentModel="jUDEzFKFS_nqHAem"
     PmAuthor="Def" PmCreateDateTime="2014-12-02T19:43:16.738"
+<<<<<<< HEAD
     PmLastModified="2015-01-20T18:30:30.055" QualityScore="-1"
+=======
+    PmLastModified="2015-01-20T14:12:10.355" QualityScore="-1"
+>>>>>>> master
     RequestValidateSnapToGrid="false" ShapePresentationOption="0"
     ShowActivityStateNodeCaption="65535" ShowAllocatedFrom="true"
     ShowAllocatedTo="true" ShowAssociationNavigationArrows="3"

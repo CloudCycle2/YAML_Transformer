@@ -1,10 +1,13 @@
-import org.opentosca.yamlconverter.main.ToscaYaml2XmlConverter;
+package org.opentosca.yamlconverter.main;
+
+import org.junit.Test;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2XmlConverter;
 
-public class DoYamlToXmlMapping {
+public class DoYamlToXmlMapping extends BaseTest {
 
-	public static void main(String[] args) {
+	@Test
+	public void testMapping() {
 		String result = "";
 
 		//

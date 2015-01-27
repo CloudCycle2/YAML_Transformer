@@ -19,6 +19,7 @@ import javax.xml.validation.SchemaFactory;
 
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.xml.sax.SAXException;
 
 /**
@@ -35,9 +36,10 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 		// TODO: this is not tested!
 		try {
 			final OutputStream stream = new ByteArrayOutputStream();
-			final JAXBContext jaxbContext = JAXBContext.newInstance(Definitions.class);
+			final JAXBContext jaxbContext = JAXBContext.newInstance(Definitions.class, AnyMap.class);
 			final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-			jaxbMarshaller.setSchema(getToscaSchema());
+			// TODO: re-enable schema validation when the proper namespaces are set
+			// jaxbMarshaller.setSchema(getToscaSchema());
 
 			// output pretty printed
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

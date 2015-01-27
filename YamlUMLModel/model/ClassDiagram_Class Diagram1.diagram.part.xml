@@ -4,6 +4,7 @@
     DiagramBackground="rgb(255, 255, 255)" Editable="true"
     FollowDiagramParentElement="true" GeneralizationSetNotation="2"
     GridColor="rgb(192, 192, 192)" GridHeight="10" GridVisible="false"
+<<<<<<< HEAD
     GridWidth="10" Height="816" HideEmptyTaggedValues="false"
     Id="dDK3ylKFS_nqHAdR" ImageHeight="0" ImageScale="1.0"
     ImageWidth="0" InitializeDiagramForCreate="true" Maximized="true"
@@ -11,6 +12,15 @@
     PaintConnectorThroughLabel="0" ParentModel="DNq3ylKFS_nqHAde"
     PmAuthor="Def" PmCreateDateTime="2014-12-16T17:27:48.142"
     PmLastModified="2015-01-20T18:30:30.056" QualityScore="-1"
+=======
+    GridWidth="10" Height="0" HideEmptyTaggedValues="false"
+    Id="dDK3ylKFS_nqHAdR" ImageHeight="0" ImageScale="1.0"
+    ImageWidth="0" InitializeDiagramForCreate="true" Maximized="false"
+    ModelElementNameAlignment="4" Name="Class Diagram1"
+    PaintConnectorThroughLabel="0" ParentModel="DNq3ylKFS_nqHAde"
+    PmAuthor="Def" PmCreateDateTime="2014-12-16T17:27:48.142"
+    PmLastModified="2015-01-20T14:12:10.358" QualityScore="-1"
+>>>>>>> master
     RequestValidateSnapToGrid="false" ShapePresentationOption="0"
     ShowActivityStateNodeCaption="65535" ShowAllocatedFrom="true"
     ShowAllocatedTo="true" ShowAssociationNavigationArrows="3"
@@ -25,7 +35,11 @@
     ShowStereotypes="true" ShowTaggedValues="false"
     ShowTemplateInfoOfGeneralizationAndRealization="false"
     SuppressImplied1MultiplicityForAttributeAndAssociationEnd="false"
+<<<<<<< HEAD
     TrimmedHeight="0" TrimmedWidth="0" Width="1571" X="0" Y="0"
+=======
+    TrimmedHeight="0" TrimmedWidth="0" Width="0" X="0" Y="0"
+>>>>>>> master
     ZoomRatio="0.1" _alwaysShowReferenceAndSubdiagramResource="false" _globalPaletteOption="true">
     <Connectors>
         <Association
@@ -9872,7 +9886,11 @@
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
             VisibilityStyle="1" Width="80" WpMbs="false" X="1360"
+<<<<<<< HEAD
             Y="2710" ZOrder="509">
+=======
+            Y="2710" ZOrder="508">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -9919,7 +9937,11 @@
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
             VisibilityStyle="1" Width="120" WpMbs="false" X="1340"
+<<<<<<< HEAD
             Y="2860" ZOrder="511">
+=======
+            Y="2860" ZOrder="510">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -9966,7 +9988,11 @@
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
             VisibilityStyle="1" Width="210" WpMbs="false" X="1100"
+<<<<<<< HEAD
             Y="1760" ZOrder="513">
+=======
+            Y="1760" ZOrder="512">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -10013,7 +10039,11 @@
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
             VisibilityStyle="1" Width="90" WpMbs="false" X="1160"
+<<<<<<< HEAD
             Y="1920" ZOrder="515">
+=======
+            Y="1920" ZOrder="514">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -10060,7 +10090,11 @@
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
             VisibilityStyle="1" Width="350" WpMbs="false" X="3980"
+<<<<<<< HEAD
             Y="2860" ZOrder="517">
+=======
+            Y="2860" ZOrder="516">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -10107,7 +10141,11 @@
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
             VisibilityStyle="1" Width="80" WpMbs="false" X="1810"
+<<<<<<< HEAD
             Y="4920" ZOrder="519">
+=======
+            Y="4920" ZOrder="518">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>

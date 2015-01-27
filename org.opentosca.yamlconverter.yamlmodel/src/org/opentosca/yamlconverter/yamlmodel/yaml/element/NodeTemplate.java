@@ -1,66 +1,74 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class NodeTemplate extends YAMLElement {
-
 	private String type;
-	private Map<String, Object> properties = new HashMap<>();
+	private Map<String, String> properties;
+	private Map<String, String> requirements;
+	private Map<String, String> capabilities;
+	private Map<String, String> interfaces;
+	private Map<String, String> artifacts;
 
-	public NodeTemplate() {
-		this.type = "";
+	@Override
+	public int hashCode() {
+		int hashCode = 0;
+		if (this.type != null) {
+			hashCode += this.type.hashCode();
+		}
+		if (hashCode == 0) {
+			hashCode = super.hashCode();
+		}
+		return hashCode;
 	}
 
-	public String getType() {
-		return this.type;
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		} else if (object instanceof NodeTemplate) {
+			final NodeTemplate nodeTemplateObject = (NodeTemplate) object;
+			boolean equals = true;
+			equals &= this.type == nodeTemplateObject.type || this.type != null && this.type.equals(nodeTemplateObject.type);
+			equals &= this.properties == nodeTemplateObject.properties;
+			equals &= this.requirements == nodeTemplateObject.requirements;
+			equals &= this.capabilities == nodeTemplateObject.capabilities;
+			equals &= this.interfaces == nodeTemplateObject.interfaces;
+			equals &= this.artifacts == nodeTemplateObject.artifacts;
+			return equals;
+		}
+		return false;
 	}
 
 	public void setType(String type) {
 		this.type = type;
 	}
 
-	public Map<String, Object> getProperties() {
-		return this.properties;
+	public String getType() {
+		return this.type;
 	}
 
-	public void setProperties(Map<String, Object> properties) {
+	public void setProperties(Map<String, String> properties) {
 		this.properties = properties;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (!(obj instanceof NodeTemplate)) {
-			return false;
-		}
-		final NodeTemplate other = (NodeTemplate) obj;
-		if (this.properties == null) {
-			if (other.properties != null) {
-				return false;
-			}
-		} else {
-			if (!this.properties.keySet().equals(other.properties.keySet())) {
-				return false;
-			}
-			for (final String key : this.properties.keySet()) {
-				if (!this.properties.get(key).toString().equals(other.properties.get(key).toString())) {
-					return false;
-				}
-			}
-		}
-		if (this.type == null) {
-			if (other.type != null) {
-				return false;
-			}
-		} else if (!this.type.equals(other.type)) {
-			return false;
-		}
-		return true;
+	public Map<String, String> getProperties() {
+		return this.properties;
+	}
+
+	public void setRequirements(Map<String, String> requirements) {
+		this.requirements = requirements;
+	}
+
+	public Map<String, String> getRequirements() {
+		return this.requirements;
+	}
+
+	public void setCapabilities(Map<String, String> capabilities) {
+		this.capabilities = capabilities;
+	}
+
+	public Map<String, String> getCapabilities() {
+		return this.capabilities;
 	}
 }

@@ -4,13 +4,21 @@
     DiagramBackground="rgb(255, 255, 255)" Editable="true"
     FollowDiagramParentElement="true" GeneralizationSetNotation="2"
     GridColor="rgb(192, 192, 192)" GridHeight="10" GridVisible="false"
+<<<<<<< HEAD
     GridWidth="10" Height="816" HideEmptyTaggedValues="false"
+=======
+    GridWidth="10" Height="793" HideEmptyTaggedValues="false"
+>>>>>>> master
     Id="txUozFKFS_nqHAUx" ImageHeight="0" ImageScale="1.0"
     ImageWidth="0" InitializeDiagramForCreate="true" Maximized="true"
     ModelElementNameAlignment="4" Name="Abstraction"
     PaintConnectorThroughLabel="0" ParentModel="jUDEzFKFS_nqHAem"
     PmAuthor="Def" PmCreateDateTime="2014-12-10T08:23:19.661"
+<<<<<<< HEAD
     PmLastModified="2015-01-20T18:35:14.704" QualityScore="-1"
+=======
+    PmLastModified="2015-01-20T14:12:10.357" QualityScore="-1"
+>>>>>>> master
     RequestValidateSnapToGrid="false" ShapePresentationOption="0"
     ShowActivityStateNodeCaption="65535" ShowAllocatedFrom="true"
     ShowAllocatedTo="true" ShowAssociationNavigationArrows="3"
@@ -25,8 +33,13 @@
     ShowStereotypes="true" ShowTaggedValues="false"
     ShowTemplateInfoOfGeneralizationAndRealization="false"
     SuppressImplied1MultiplicityForAttributeAndAssociationEnd="false"
+<<<<<<< HEAD
     TrimmedHeight="0" TrimmedWidth="0" Width="1571" X="0" Y="0"
     ZoomRatio="1.2" _alwaysShowReferenceAndSubdiagramResource="false" _globalPaletteOption="true">
+=======
+    TrimmedHeight="0" TrimmedWidth="0" Width="758" X="0" Y="0"
+    ZoomRatio="0.8" _alwaysShowReferenceAndSubdiagramResource="false" _globalPaletteOption="true">
+>>>>>>> master
     <Connectors>
         <Association
             AssociationEndPropertyStringsAInternalHeight="-2147483648"
@@ -45,7 +58,11 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="false" HasMultiplicityBShape="true"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="220"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="186"
+>>>>>>> master
             Id="p2vjx1KFS_nqHA3p" MetaModelElement="H8Rjx1KFS_nqHA3B"
             Model="H8Rjx1KFS_nqHA3B" Name="imports"
             PaintThroughLabel="2" RequestRebuild="false"
@@ -66,13 +83,19 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="155" X="267" Y="282" ZOrder="2">
             <MultiplicityBRectangle Height="40" Width="40" X="320" Y="430"/>
+=======
+            UseToShapeCenter="true" Width="129" X="430" Y="414" ZOrder="2">
+            <MultiplicityBRectangle Height="40" Width="40" X="470" Y="540"/>
+>>>>>>> master
             <MultiplicityARectangle Height="0" Width="20" X="480" Y="470"/>
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="56" X="320" Y="410"/>
@@ -83,6 +106,18 @@
                 <Point X="330.0" Y="345.0"/>
                 <Point X="330.0" Y="440.0"/>
                 <Point X="360.0" Y="440.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="470" Y="510"/>
+            <RoleB>
+                <MultiplicityCaption Height="40" Width="40" X="470" Y="540"/>
+            </RoleB>
+            <Points>
+                <Point X="480.0" Y="464.0"/>
+                <Point X="480.0" Y="550.0"/>
+                <Point X="509.0" Y="550.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Generalization Background="rgb(255, 255, 255)"
@@ -90,7 +125,11 @@
             ConnectorStyle="Follow Diagram"
             CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
             From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+<<<<<<< HEAD
             FromShapeXDiff="0" FromShapeYDiff="0" Height="315"
+=======
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="157"
+>>>>>>> master
             Id="n6ATx1KFS_nqHA4F" MetaModelElement="AaATx1KFS_nqHA4E"
             Model="AaATx1KFS_nqHA4E" PaintThroughLabel="2"
             RequestRebuild="false" RequestResetCaption="false"
@@ -98,17 +137,28 @@
             ShowConnectorName="2" To="x2vjx1KFS_nqHA3n"
             ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="785" X="377" Y="397" ZOrder="4">
+=======
+            UseToShapeCenter="true" Width="388" X="541" Y="423" ZOrder="4">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="0" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
+<<<<<<< HEAD
                 Width="20" X="790" Y="570"/>
             <Points>
                 <Point X="1100.0" Y="650.0"/>
                 <Point X="440.0" Y="460.0"/>
+=======
+                Width="20" X="740" Y="510"/>
+            <Points>
+                <Point X="879.0" Y="473.0"/>
+                <Point X="591.0" Y="530.0"/>
+>>>>>>> master
             </Points>
         </Generalization>
         <Association
@@ -128,12 +178,21 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="480"
             Id="h0cTx1KFS_nqHA44" MetaModelElement="HPoTx1KFS_nqHA4Y"
             Model="HPoTx1KFS_nqHA4Y" Name="node_types"
             PaintThroughLabel="2" RequestRebuild="false"
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="446"
+            Id="h0cTx1KFS_nqHA44" MetaModelElement="HPoTx1KFS_nqHA4Y"
+            Model="HPoTx1KFS_nqHA4Y" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+>>>>>>> master
             ShowConnectorName="2" ShowDirection="false"
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
@@ -149,13 +208,20 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="215" X="207" Y="282" ZOrder="6">
             <MultiplicityBRectangle Height="0" Width="20" X="390" Y="480"/>
             <MultiplicityARectangle Height="40" Width="40" X="320" Y="690"/>
+=======
+            UseToShapeCenter="true" Width="189" X="370" Y="414" ZOrder="6">
+            <MultiplicityBRectangle Height="0" Width="20" X="390" Y="480"/>
+            <MultiplicityARectangle Height="40" Width="40" X="470" Y="800"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="77" X="270" Y="510"/>
@@ -166,6 +232,18 @@
                 <Point X="360.0" Y="700.0"/>
                 <Point X="270.0" Y="700.0"/>
                 <Point X="270.0" Y="345.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="430" Y="690"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="470" Y="800"/>
+            </RoleA>
+            <Points>
+                <Point X="509.0" Y="810.0"/>
+                <Point X="420.0" Y="810.0"/>
+                <Point X="420.0" Y="464.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Generalization Background="rgb(255, 255, 255)"
@@ -173,7 +251,11 @@
             ConnectorStyle="Follow Diagram"
             CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
             From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+<<<<<<< HEAD
             FromShapeXDiff="0" FromShapeYDiff="0" Height="125"
+=======
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="405"
+>>>>>>> master
             Id="BM8Tx1KFS_nqHA5B" MetaModelElement="sU8Tx1KFS_nqHA5A"
             Model="sU8Tx1KFS_nqHA5A" PaintThroughLabel="2"
             RequestRebuild="false" RequestResetCaption="false"
@@ -181,17 +263,28 @@
             ShowConnectorName="2" To="B0cTx1KFS_nqHA42"
             ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="682" X="480" Y="607" ZOrder="8">
+=======
+            UseToShapeCenter="true" Width="388" X="541" Y="424" ZOrder="8">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="0" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
+<<<<<<< HEAD
                 Width="20" X="830" Y="690"/>
             <Points>
                 <Point X="1100.0" Y="670.0"/>
                 <Point X="542.0" Y="670.0"/>
+=======
+                Width="20" X="720" Y="620"/>
+            <Points>
+                <Point X="879.0" Y="474.0"/>
+                <Point X="591.0" Y="779.0"/>
+>>>>>>> master
             </Points>
         </Generalization>
         <Association
@@ -211,12 +304,21 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="false" HasMultiplicityBShape="true"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="610"
             Id="dXmTx1KFS_nqHA6B" MetaModelElement="v1qTx1KFS_nqHA5p"
             Model="v1qTx1KFS_nqHA5p" Name="relationship_types"
             PaintThroughLabel="2" RequestRebuild="false"
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="576"
+            Id="dXmTx1KFS_nqHA6B" MetaModelElement="v1qTx1KFS_nqHA5p"
+            Model="v1qTx1KFS_nqHA5p" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+>>>>>>> master
             ShowConnectorName="2" ShowDirection="false"
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
@@ -232,13 +334,19 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="255" X="167" Y="282" ZOrder="10">
             <MultiplicityBRectangle Height="40" Width="40" X="320" Y="820"/>
+=======
+            UseToShapeCenter="true" Width="229" X="330" Y="414" ZOrder="10">
+            <MultiplicityBRectangle Height="40" Width="40" X="470" Y="930"/>
+>>>>>>> master
             <MultiplicityARectangle Height="0" Width="20" X="370" Y="510"/>
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="108" X="230" Y="570"/>
@@ -249,6 +357,18 @@
                 <Point X="230.0" Y="345.0"/>
                 <Point X="230.0" Y="830.0"/>
                 <Point X="360.0" Y="830.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="390" Y="710"/>
+            <RoleB>
+                <MultiplicityCaption Height="40" Width="40" X="470" Y="930"/>
+            </RoleB>
+            <Points>
+                <Point X="380.0" Y="464.0"/>
+                <Point X="380.0" Y="940.0"/>
+                <Point X="509.0" Y="940.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Generalization Background="rgb(255, 255, 255)"
@@ -256,7 +376,11 @@
             ConnectorStyle="Follow Diagram"
             CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
             From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+<<<<<<< HEAD
             FromShapeXDiff="0" FromShapeYDiff="0" Height="232"
+=======
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="545"
+>>>>>>> master
             Id="hY2Tx1KFS_nqHA6N" MetaModelElement="pI2Tx1KFS_nqHA6M"
             Model="pI2Tx1KFS_nqHA6M" PaintThroughLabel="2"
             RequestRebuild="false" RequestResetCaption="false"
@@ -264,17 +388,28 @@
             ShowConnectorName="2" To="tXmTx1KFS_nqHA5_"
             ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="757" X="407" Y="640" ZOrder="12">
+=======
+            UseToShapeCenter="true" Width="358" X="571" Y="424" ZOrder="12">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="0" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
+<<<<<<< HEAD
                 Width="20" X="790" Y="740"/>
             <Points>
                 <Point X="1102.0" Y="702.0"/>
                 <Point X="470.0" Y="810.0"/>
+=======
+                Width="20" X="740" Y="680"/>
+            <Points>
+                <Point X="879.0" Y="474.0"/>
+                <Point X="621.0" Y="919.0"/>
+>>>>>>> master
             </Points>
         </Generalization>
         <Association
@@ -285,7 +420,11 @@
             Background="rgb(122, 207, 245)"
             ConnectorLabelOrientation="4" ConnectorLineJumps="4"
             ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             From="5P_Tx1KFS_nqHA8L" FromConnectType="0"
+=======
+            From="QnNTx1KFS_nqHA7E" FromConnectType="0"
+>>>>>>> master
             FromMultiplicityInternalHeight="-2147483648"
             FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
             FromRoleInternalHeight="-2147483648"
@@ -294,12 +433,21 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="680"
             Id="lP_Tx1KFS_nqHA8N" MetaModelElement="PRnTx1KFS_nqHA7z"
             Model="PRnTx1KFS_nqHA7z" Name="artefact_types"
             PaintThroughLabel="2" RequestRebuild="false"
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="506"
+            Id="wnNTx1KFS_nqHA7G" MetaModelElement="C.RTx1KFS_nqHA6r"
+            Model="C.RTx1KFS_nqHA6r" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+>>>>>>> master
             ShowConnectorName="2" ShowDirection="false"
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
@@ -315,13 +463,20 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="275" X="147" Y="282" ZOrder="18">
             <MultiplicityBRectangle Height="0" Width="20" X="360" Y="470"/>
             <MultiplicityARectangle Height="40" Width="40" X="320" Y="890"/>
+=======
+            UseToShapeCenter="true" Width="209" X="350" Y="414" ZOrder="14">
+            <MultiplicityBRectangle Height="0" Width="20" X="400" Y="470"/>
+            <MultiplicityARectangle Height="40" Width="40" X="470" Y="860"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="88" X="210" Y="610"/>
@@ -332,6 +487,18 @@
                 <Point X="360.0" Y="900.0"/>
                 <Point X="210.0" Y="900.0"/>
                 <Point X="210.0" Y="345.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="410" Y="730"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="470" Y="860"/>
+            </RoleA>
+            <Points>
+                <Point X="509.0" Y="870.0"/>
+                <Point X="400.0" Y="870.0"/>
+                <Point X="400.0" Y="464.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Generalization Background="rgb(255, 255, 255)"
@@ -339,6 +506,7 @@
             ConnectorStyle="Follow Diagram"
             CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
             From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+<<<<<<< HEAD
             FromShapeXDiff="0" FromShapeYDiff="0" Height="302"
             Id="_2Qzx1KFS_nqHA8i" MetaModelElement="FGQzx1KFS_nqHA8h"
             Model="FGQzx1KFS_nqHA8h" PaintThroughLabel="2"
@@ -348,16 +516,34 @@
             ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
             UseToShapeCenter="true" Width="776" X="387" Y="640" ZOrder="20">
+=======
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="475"
+            Id="ebdTx1KFS_nqHA7Y" MetaModelElement="eLdTx1KFS_nqHA7X"
+            Model="eLdTx1KFS_nqHA7X" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="QnNTx1KFS_nqHA7E"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="378" X="551" Y="424" ZOrder="16">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="0" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
+<<<<<<< HEAD
                 Width="20" X="770" Y="800"/>
             <Points>
                 <Point X="1101.0" Y="702.0"/>
                 <Point X="450.0" Y="880.0"/>
+=======
+                Width="20" X="740" Y="670"/>
+            <Points>
+                <Point X="879.0" Y="474.0"/>
+                <Point X="601.0" Y="849.0"/>
+>>>>>>> master
             </Points>
         </Generalization>
         <Association
@@ -368,7 +554,11 @@
             Background="rgb(122, 207, 245)"
             ConnectorLabelOrientation="4" ConnectorLineJumps="4"
             ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             From="eyJzx1KFS_nqHA9T" FromConnectType="0"
+=======
+            From="5P_Tx1KFS_nqHA8L" FromConnectType="0"
+>>>>>>> master
             FromMultiplicityInternalHeight="-2147483648"
             FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
             FromRoleInternalHeight="-2147483648"
@@ -377,12 +567,21 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="810"
             Id="ByJzx1KFS_nqHA9V" MetaModelElement="pXYzx1KFS_nqHA87"
             Model="pXYzx1KFS_nqHA87" Name="outputs"
             PaintThroughLabel="2" RequestRebuild="false"
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="646"
+            Id="lP_Tx1KFS_nqHA8N" MetaModelElement="PRnTx1KFS_nqHA7z"
+            Model="PRnTx1KFS_nqHA7z" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+>>>>>>> master
             ShowConnectorName="2" ShowDirection="false"
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
@@ -398,13 +597,20 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="315" X="107" Y="282" ZOrder="22">
             <MultiplicityBRectangle Height="0" Width="20" X="380" Y="470"/>
             <MultiplicityARectangle Height="40" Width="40" X="320" Y="1020"/>
+=======
+            UseToShapeCenter="true" Width="249" X="310" Y="414" ZOrder="18">
+            <MultiplicityBRectangle Height="0" Width="20" X="360" Y="470"/>
+            <MultiplicityARectangle Height="40" Width="40" X="470" Y="1000"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="56" X="170" Y="670"/>
@@ -415,6 +621,18 @@
                 <Point X="360.0" Y="1030.0"/>
                 <Point X="170.0" Y="1030.0"/>
                 <Point X="170.0" Y="345.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="370" Y="830"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="470" Y="1000"/>
+            </RoleA>
+            <Points>
+                <Point X="509.0" Y="1010.0"/>
+                <Point X="360.0" Y="1010.0"/>
+                <Point X="360.0" Y="464.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Generalization Background="rgb(255, 255, 255)"
@@ -422,6 +640,7 @@
             ConnectorStyle="Follow Diagram"
             CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
             From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+<<<<<<< HEAD
             FromShapeXDiff="0" FromShapeYDiff="0" Height="442"
             Id="vs5zx1KFS_nqHA9o" MetaModelElement="p05zx1KFS_nqHA9n"
             Model="p05zx1KFS_nqHA9n" PaintThroughLabel="2"
@@ -431,16 +650,34 @@
             ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
             UseToShapeCenter="true" Width="786" X="377" Y="640" ZOrder="24">
+=======
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="615"
+            Id="_2Qzx1KFS_nqHA8i" MetaModelElement="FGQzx1KFS_nqHA8h"
+            Model="FGQzx1KFS_nqHA8h" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="5P_Tx1KFS_nqHA8L"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="380" X="550" Y="424" ZOrder="20">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="0" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
+<<<<<<< HEAD
                 Width="20" X="760" Y="860"/>
             <Points>
                 <Point X="1101.0" Y="702.0"/>
                 <Point X="440.0" Y="1020.0"/>
+=======
+                Width="20" X="740" Y="730"/>
+            <Points>
+                <Point X="880.0" Y="474.0"/>
+                <Point X="600.0" Y="989.0"/>
+>>>>>>> master
             </Points>
         </Generalization>
         <Association
@@ -451,7 +688,11 @@
             Background="rgb(122, 207, 245)"
             ConnectorLabelOrientation="4" ConnectorLineJumps="4"
             ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             From="sB4Lx1KFS_nqHA_g" FromConnectType="0"
+=======
+            From="eyJzx1KFS_nqHA9T" FromConnectType="0"
+>>>>>>> master
             FromMultiplicityInternalHeight="-2147483648"
             FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
             FromRoleInternalHeight="-2147483648"
@@ -460,9 +701,15 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="300"
             Id="8B4Lx1KFS_nqHA_i" MetaModelElement="1CDzx1KFS_nqHA.d"
             Model="1CDzx1KFS_nqHA.d" Name="inputs" PaintThroughLabel="2"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="776"
+            Id="ByJzx1KFS_nqHA9V" MetaModelElement="pXYzx1KFS_nqHA87"
+            Model="pXYzx1KFS_nqHA87" PaintThroughLabel="2"
+>>>>>>> master
             RequestRebuild="false" RequestResetCaption="false"
             RequestResetCaptionSize="false" Selectable="true"
             ShowAssociationEndPropertyStrings="false"
@@ -481,13 +728,20 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="175" X="247" Y="282" ZOrder="26">
             <MultiplicityBRectangle Height="0" Width="20" X="440" Y="540"/>
             <MultiplicityARectangle Height="40" Width="40" X="320" Y="510"/>
+=======
+            UseToShapeCenter="true" Width="289" X="270" Y="414" ZOrder="22">
+            <MultiplicityBRectangle Height="0" Width="20" X="380" Y="470"/>
+            <MultiplicityARectangle Height="40" Width="40" X="470" Y="1130"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="48" X="310" Y="490"/>
@@ -498,6 +752,18 @@
                 <Point X="360.0" Y="520.0"/>
                 <Point X="310.0" Y="520.0"/>
                 <Point X="310.0" Y="345.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="330" Y="920"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="470" Y="1130"/>
+            </RoleA>
+            <Points>
+                <Point X="509.0" Y="1140.0"/>
+                <Point X="320.0" Y="1140.0"/>
+                <Point X="320.0" Y="464.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Generalization Background="rgb(255, 255, 255)"
@@ -505,6 +771,7 @@
             ConnectorStyle="Follow Diagram"
             CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
             From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+<<<<<<< HEAD
             FromShapeXDiff="0" FromShapeYDiff="0" Height="235"
             Id="rp0Lx1KFS_nqHA_y" MetaModelElement="lx0Lx1KFS_nqHA_x"
             Model="lx0Lx1KFS_nqHA_x" PaintThroughLabel="2"
@@ -514,16 +781,34 @@
             ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
             UseToShapeCenter="true" Width="785" X="377" Y="477" ZOrder="28">
+=======
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="755"
+            Id="vs5zx1KFS_nqHA9o" MetaModelElement="p05zx1KFS_nqHA9n"
+            Model="p05zx1KFS_nqHA9n" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="eyJzx1KFS_nqHA9T"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="390" X="540" Y="424" ZOrder="24">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="0" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
+<<<<<<< HEAD
                 Width="20" X="770" Y="600"/>
             <Points>
                 <Point X="1100.0" Y="650.0"/>
                 <Point X="440.0" Y="540.0"/>
+=======
+                Width="20" X="730" Y="800"/>
+            <Points>
+                <Point X="880.0" Y="474.0"/>
+                <Point X="590.0" Y="1129.0"/>
+>>>>>>> master
             </Points>
         </Generalization>
         <Association
@@ -534,7 +819,11 @@
             Background="rgb(122, 207, 245)"
             ConnectorLabelOrientation="4" ConnectorLineJumps="4"
             ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             From="mSMLx1KFS_nqHA_4" FromConnectType="0"
+=======
+            From="sB4Lx1KFS_nqHA_g" FromConnectType="0"
+>>>>>>> master
             FromMultiplicityInternalHeight="-2147483648"
             FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
             FromRoleInternalHeight="-2147483648"
@@ -543,9 +832,15 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="750"
             Id="WSMLx1KFS_nqHA_6" MetaModelElement="_EQLx1KFS_nqHA_C"
             Model="_EQLx1KFS_nqHA_C" Name="groups" PaintThroughLabel="2"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="266"
+            Id="8B4Lx1KFS_nqHA_i" MetaModelElement="1CDzx1KFS_nqHA.d"
+            Model="1CDzx1KFS_nqHA.d" PaintThroughLabel="2"
+>>>>>>> master
             RequestRebuild="false" RequestResetCaption="false"
             RequestResetCaptionSize="false" Selectable="true"
             ShowAssociationEndPropertyStrings="false"
@@ -564,13 +859,20 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="295" X="127" Y="282" ZOrder="30">
             <MultiplicityBRectangle Height="0" Width="20" X="340" Y="470"/>
             <MultiplicityARectangle Height="40" Width="40" X="320" Y="960"/>
+=======
+            UseToShapeCenter="true" Width="149" X="410" Y="414" ZOrder="26">
+            <MultiplicityBRectangle Height="0" Width="20" X="440" Y="540"/>
+            <MultiplicityARectangle Height="40" Width="40" X="470" Y="620"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="53" X="190" Y="640"/>
@@ -581,6 +883,18 @@
                 <Point X="360.0" Y="970.0"/>
                 <Point X="190.0" Y="970.0"/>
                 <Point X="190.0" Y="345.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="470" Y="480"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="470" Y="620"/>
+            </RoleA>
+            <Points>
+                <Point X="509.0" Y="630.0"/>
+                <Point X="460.0" Y="630.0"/>
+                <Point X="460.0" Y="464.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Generalization Background="rgb(255, 255, 255)"
@@ -588,6 +902,7 @@
             ConnectorStyle="Follow Diagram"
             CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
             From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+<<<<<<< HEAD
             FromShapeXDiff="0" FromShapeYDiff="0" Height="372"
             Id="rLsLx1KFS_nqHBAG" MetaModelElement="YzsLx1KFS_nqHBAF"
             Model="YzsLx1KFS_nqHBAF" PaintThroughLabel="2"
@@ -597,16 +912,34 @@
             ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
             UseToShapeCenter="true" Width="786" X="377" Y="640" ZOrder="32">
+=======
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="237"
+            Id="rp0Lx1KFS_nqHA_y" MetaModelElement="lx0Lx1KFS_nqHA_x"
+            Model="lx0Lx1KFS_nqHA_x" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="sB4Lx1KFS_nqHA_g"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="388" X="541" Y="423" ZOrder="28">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="0" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
+<<<<<<< HEAD
                 Width="20" X="750" Y="830"/>
             <Points>
                 <Point X="1101.0" Y="702.0"/>
                 <Point X="440.0" Y="950.0"/>
+=======
+                Width="20" X="730" Y="540"/>
+            <Points>
+                <Point X="879.0" Y="473.0"/>
+                <Point X="591.0" Y="610.0"/>
+>>>>>>> master
             </Points>
         </Generalization>
         <Association
@@ -617,7 +950,11 @@
             Background="rgb(122, 207, 245)"
             ConnectorLabelOrientation="4" ConnectorLineJumps="4"
             ConnectorStyle="Follow Diagram" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             From="SxYYzFKFS_nqHAWs" FromConnectType="0"
+=======
+            From="mSMLx1KFS_nqHA_4" FromConnectType="0"
+>>>>>>> master
             FromMultiplicityInternalHeight="-2147483648"
             FromMultiplicityInternalWidth="-2147483648" FromPinType="1"
             FromRoleInternalHeight="-2147483648"
@@ -625,6 +962,7 @@
             FromShapeYDiff="0"
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
+<<<<<<< HEAD
             HasMultiplicityAShape="false" HasMultiplicityBShape="true"
             HasRoleAShape="false" HasRoleBShape="false" Height="380"
             Id="UlKbx1KFS_nqHBEh" MetaModelElement="iufYzFKFS_nqHAZ."
@@ -632,6 +970,15 @@
             PaintThroughLabel="2" RequestRebuild="false"
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
+=======
+            HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+            HasRoleAShape="false" HasRoleBShape="false" Height="716"
+            Id="WSMLx1KFS_nqHA_6" MetaModelElement="_EQLx1KFS_nqHA_C"
+            Model="_EQLx1KFS_nqHA_C" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+>>>>>>> master
             ShowConnectorName="2" ShowDirection="false"
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
@@ -641,12 +988,17 @@
             ShowToRoleName="true" ShowToRoleVisibility="true"
             ShowUniqueMultiplicityConstraint="true"
             SuppressImplied1MultiplicityForAssociationEnd="0"
+<<<<<<< HEAD
             To="klKbx1KFS_nqHBEf" ToConnectType="0"
+=======
+            To="SxYYzFKFS_nqHAWs" ToConnectType="0"
+>>>>>>> master
             ToMultiplicityInternalHeight="-2147483648"
             ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="195" X="227" Y="282" ZOrder="34">
             <MultiplicityBRectangle Height="40" Width="40" X="320" Y="590"/>
             <MultiplicityARectangle Height="40" Width="40" X="440" Y="460"/>
@@ -680,23 +1032,42 @@
             ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
             UseToShapeCenter="true" Width="682" X="480" Y="597" ZOrder="36">
+=======
+            UseToShapeCenter="true" Width="269" X="290" Y="414" ZOrder="30">
+            <MultiplicityBRectangle Height="0" Width="20" X="340" Y="470"/>
+            <MultiplicityARectangle Height="40" Width="40" X="470" Y="1070"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="0" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
+<<<<<<< HEAD
                 Width="20" X="830" Y="680"/>
             <Points>
                 <Point X="1100.0" Y="660.0"/>
                 <Point X="542.0" Y="660.0"/>
             </Points>
         </Generalization>
+=======
+                Width="20" X="310" Y="930"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="470" Y="1070"/>
+            </RoleA>
+            <Points>
+                <Point X="509.0" Y="1080.0"/>
+                <Point X="340.0" Y="1080.0"/>
+                <Point X="340.0" Y="464.0"/>
+            </Points>
+        </Association>
+>>>>>>> master
         <Generalization Background="rgb(255, 255, 255)"
             ConnectorLabelOrientation="4" ConnectorLineJumps="4"
             ConnectorStyle="Follow Diagram"
             CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
             From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+<<<<<<< HEAD
             FromShapeXDiff="0" FromShapeYDiff="0" Height="430"
             Id="0IkYzFKFS_nqHAW6" MetaModelElement="VXEYzFKFS_nqHAW5"
             Model="VXEYzFKFS_nqHAW5" PaintThroughLabel="2"
@@ -706,16 +1077,34 @@
             ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
             UseToShapeCenter="true" Width="801" X="361" Y="282" ZOrder="38">
+=======
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="685"
+            Id="rLsLx1KFS_nqHBAG" MetaModelElement="YzsLx1KFS_nqHBAF"
+            Model="YzsLx1KFS_nqHBAF" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="mSMLx1KFS_nqHA_4"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="390" X="540" Y="424" ZOrder="32">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="0" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
+<<<<<<< HEAD
                 Width="20" X="770" Y="520"/>
             <Points>
                 <Point X="1100.0" Y="650.0"/>
                 <Point X="423.0" Y="345.0"/>
+=======
+                Width="20" X="720" Y="770"/>
+            <Points>
+                <Point X="880.0" Y="474.0"/>
+                <Point X="590.0" Y="1059.0"/>
+>>>>>>> master
             </Points>
         </Generalization>
         <Association
@@ -734,6 +1123,7 @@
             FromShapeYDiff="0"
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
+<<<<<<< HEAD
             HasMultiplicityAShape="false" HasMultiplicityBShape="true"
             HasRoleAShape="false" HasRoleBShape="false" Height="497"
             Id="RGyGENKFS_nqHBif" MetaModelElement="YkXu4NKFS_nqHBDN"
@@ -741,27 +1131,52 @@
             PaintThroughLabel="2" RequestRebuild="false"
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
+=======
+            HasMultiplicityAShape="true" HasMultiplicityBShape="true"
+            HasRoleAShape="false" HasRoleBShape="false" Height="372"
+            Id="UlKbx1KFS_nqHBEh" MetaModelElement="iufYzFKFS_nqHAZ."
+            Model="iufYzFKFS_nqHAZ." PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+>>>>>>> master
             ShowConnectorName="2" ShowDirection="false"
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
             ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
+<<<<<<< HEAD
             ShowOrderedMultiplicityConstraint="false"
             ShowStereotypes="true" ShowToMultiplicity="true"
             ShowToRoleName="true" ShowToRoleVisibility="true"
             ShowUniqueMultiplicityConstraint="false"
             SuppressImplied1MultiplicityForAssociationEnd="0"
             To="BGyGENKFS_nqHBib" ToConnectType="0"
+=======
+            ShowOrderedMultiplicityConstraint="true"
+            ShowStereotypes="true" ShowToMultiplicity="true"
+            ShowToRoleName="true" ShowToRoleVisibility="true"
+            ShowUniqueMultiplicityConstraint="true"
+            SuppressImplied1MultiplicityForAssociationEnd="0"
+            To="klKbx1KFS_nqHBEf" ToConnectType="0"
+>>>>>>> master
             ToMultiplicityInternalHeight="-2147483648"
             ToMultiplicityInternalWidth="-2147483648" ToPinType="1"
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="192" X="208" Y="304" ZOrder="-1">
             <MultiplicityBRectangle Height="40" Width="40" X="330" Y="770"/>
+=======
+            UseToShapeCenter="true" Width="195" X="377" Y="400" ZOrder="34">
+            <MultiplicityBRectangle Height="40" Width="40" X="470" Y="700"/>
+            <MultiplicityARectangle Height="40" Width="40" X="440" Y="460"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="98" X="220" Y="630"/>
@@ -772,6 +1187,21 @@
                 <Point X="249.0" Y="345.0"/>
                 <Point X="249.0" Y="760.0"/>
                 <Point X="359.0" Y="760.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="450" Y="640"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="440" Y="460"/>
+            </RoleA>
+            <RoleB>
+                <MultiplicityCaption Height="40" Width="40" X="470" Y="700"/>
+            </RoleB>
+            <Points>
+                <Point X="440.0" Y="462.0"/>
+                <Point X="440.0" Y="710.0"/>
+                <Point X="510.0" Y="710.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Generalization Background="rgb(255, 255, 255)"
@@ -779,6 +1209,7 @@
             ConnectorStyle="Follow Diagram"
             CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
             From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+<<<<<<< HEAD
             FromShapeXDiff="0" FromShapeYDiff="0" Height="120"
             Id="8WeGENKFS_nqHBjO" MetaModelElement="36eGENKFS_nqHBjN"
             Model="36eGENKFS_nqHBjN" PaintThroughLabel="2"
@@ -788,16 +1219,60 @@
             ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
             UseToShapeCenter="true" Width="731" X="409" Y="661" ZOrder="-1">
+=======
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="342"
+            Id="8ylbx1KFS_nqHBGc" MetaModelElement="kilbx1KFS_nqHBGb"
+            Model="kilbx1KFS_nqHBGb" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="klKbx1KFS_nqHBEf"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="406" X="537" Y="410" ZOrder="36">
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="0" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="730" Y="570"/>
+            <Points>
+                <Point X="881.0" Y="472.0"/>
+                <Point X="600.0" Y="690.0"/>
+            </Points>
+        </Generalization>
+        <Generalization Background="rgb(255, 255, 255)"
+            ConnectorLabelOrientation="4" ConnectorLineJumps="4"
+            ConnectorStyle="Follow Diagram"
+            CreatorDiagramType="ClassDiagram" Foreground="rgb(0, 0, 0)"
+            From="lbmozFKFS_nqHAVA" FromConnectType="0" FromPinType="1"
+            FromShapeXDiff="0" FromShapeYDiff="0" Height="100"
+            Id="0IkYzFKFS_nqHAW6" MetaModelElement="VXEYzFKFS_nqHAW5"
+            Model="VXEYzFKFS_nqHAW5" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowConnectorName="2" To="SxYYzFKFS_nqHAWs"
+            ToConnectType="0" ToPinType="1" ToShapeXDiff="0"
+            ToShapeYDiff="0" UseFromShapeCenter="true"
+            UseToShapeCenter="true" Width="492" X="437" Y="370" ZOrder="38">
+>>>>>>> master
+            <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
+            <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
+                <Stroke/>
+            </Line>
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+<<<<<<< HEAD
                 Width="20" X="765" Y="720"/>
             <Points>
                 <Point X="1099.0" Y="703.0"/>
                 <Point X="450.0" Y="740.0"/>
+=======
+                Width="20" X="660" Y="420"/>
+            <Points>
+                <Point X="879.0" Y="420.0"/>
+                <Point X="487.0" Y="420.0"/>
+>>>>>>> master
             </Points>
         </Generalization>
     </Connectors>
@@ -806,7 +1281,11 @@
             ConnectToPoint="false" ConnectionPointType="2"
             DisplayAsRobustnessAnalysisIcon="true"
             EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             Height="115" Id="klKbx1KFS_nqHBEf" InterfaceBall="false"
+=======
+            Height="40" Id="klKbx1KFS_nqHBEf" InterfaceBall="false"
+>>>>>>> master
             KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
             LshRfAts="true" MShDrAt="false" MSwTpPts="true"
             MetaModelElement="1qjYzFKFS_nqHAY0" Model="1qjYzFKFS_nqHAY0"
@@ -837,15 +1316,23 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="182" WpMbs="false" X="360"
             Y="580" ZOrder="20">
+=======
+            VisibilityStyle="1" Width="90" WpMbs="false" X="510" Y="690" ZOrder="20">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="FreeMove"
+<<<<<<< HEAD
                 Visible="true" Width="182" X="0" Y="0"/>
+=======
+                Visible="true" Width="90" X="0" Y="0"/>
+>>>>>>> master
             <FillColor Color="rgb(122, 207, 245)" Style="1"
                 Transparency="0" Type="1"/>
         </Class>
@@ -884,7 +1371,12 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="80" WpMbs="false" X="360" Y="950" ZOrder="23">
+=======
+            VisibilityStyle="1" Width="80" WpMbs="false" X="510"
+            Y="1060" ZOrder="23">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -930,7 +1422,11 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="80" WpMbs="false" X="360" Y="500" ZOrder="25">
+=======
+            VisibilityStyle="1" Width="80" WpMbs="false" X="510" Y="610" ZOrder="25">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -976,8 +1472,13 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="80" WpMbs="false" X="360"
             Y="1020" ZOrder="27">
+=======
+            VisibilityStyle="1" Width="80" WpMbs="false" X="510"
+            Y="1130" ZOrder="27">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -996,7 +1497,11 @@
             KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
             LshRfAts="true" MShDrAt="false" MSwTpPts="true"
             MetaModelElement="vSjTx1KFS_nqHA7p" Model="vSjTx1KFS_nqHA7p"
+<<<<<<< HEAD
             ModelElementNameAlignment="9" Name="ArtefactTypes"
+=======
+            ModelElementNameAlignment="9" Name="ArchitectType"
+>>>>>>> master
             OperationSortType="0"
             OverrideAppearanceWithStereotypeIcon="true"
             ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
@@ -1023,7 +1528,11 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="90" WpMbs="false" X="360" Y="880" ZOrder="29">
+=======
+            VisibilityStyle="1" Width="90" WpMbs="false" X="510" Y="990" ZOrder="29">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -1038,11 +1547,19 @@
             ConnectToPoint="false" ConnectionPointType="2"
             DisplayAsRobustnessAnalysisIcon="true"
             EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             Height="40" Id="tXmTx1KFS_nqHA5_" InterfaceBall="false"
             KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
             LshRfAts="true" MShDrAt="false" MSwTpPts="true"
             MetaModelElement="1RSTx1KFS_nqHA5Y" Model="1RSTx1KFS_nqHA5Y"
             ModelElementNameAlignment="9" Name="RelationshipType"
+=======
+            Height="40" Id="QnNTx1KFS_nqHA7E" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="5m.Tx1KFS_nqHA6j" Model="5m.Tx1KFS_nqHA6j"
+            ModelElementNameAlignment="9" Name="CapabilityType"
+>>>>>>> master
             OperationSortType="0"
             OverrideAppearanceWithStereotypeIcon="true"
             ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
@@ -1069,8 +1586,12 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="110" WpMbs="false" X="360"
             Y="810" ZOrder="31">
+=======
+            VisibilityStyle="1" Width="90" WpMbs="false" X="510" Y="850" ZOrder="31">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -1085,11 +1606,19 @@
             ConnectToPoint="false" ConnectionPointType="2"
             DisplayAsRobustnessAnalysisIcon="true"
             EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             Height="115" Id="B0cTx1KFS_nqHA42" InterfaceBall="false"
             KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
             LshRfAts="true" MShDrAt="false" MSwTpPts="true"
             MetaModelElement="UQHjx1KFS_nqHA3T" Model="UQHjx1KFS_nqHA3T"
             ModelElementNameAlignment="9" Name="NodeType"
+=======
+            Height="40" Id="tXmTx1KFS_nqHA5_" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="1RSTx1KFS_nqHA5Y" Model="1RSTx1KFS_nqHA5Y"
+            ModelElementNameAlignment="9" Name="RelationshipType"
+>>>>>>> master
             OperationSortType="0"
             OverrideAppearanceWithStereotypeIcon="true"
             ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
@@ -1116,15 +1645,24 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="182" WpMbs="false" X="360"
             Y="670" ZOrder="33">
+=======
+            VisibilityStyle="1" Width="110" WpMbs="false" X="510"
+            Y="920" ZOrder="33">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="FreeMove"
+<<<<<<< HEAD
                 Visible="true" Width="182" X="0" Y="0"/>
+=======
+                Visible="true" Width="110" X="0" Y="0"/>
+>>>>>>> master
             <FillColor Color="rgb(122, 207, 245)" Style="1"
                 Transparency="0" Type="1"/>
         </Class>
@@ -1132,11 +1670,19 @@
             ConnectToPoint="false" ConnectionPointType="2"
             DisplayAsRobustnessAnalysisIcon="true"
             EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             Height="40" Id="x2vjx1KFS_nqHA3n" InterfaceBall="false"
             KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
             LshRfAts="true" MShDrAt="false" MSwTpPts="true"
             MetaModelElement="e2qjx1KFS_nqHA2v" Model="e2qjx1KFS_nqHA2v"
             ModelElementNameAlignment="9" Name="Import"
+=======
+            Height="40" Id="B0cTx1KFS_nqHA42" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="UQHjx1KFS_nqHA3T" Model="UQHjx1KFS_nqHA3T"
+            ModelElementNameAlignment="9" Name="NodeType"
+>>>>>>> master
             OperationSortType="0"
             OverrideAppearanceWithStereotypeIcon="true"
             ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
@@ -1163,7 +1709,11 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="80" WpMbs="false" X="360" Y="420" ZOrder="35">
+=======
+            VisibilityStyle="1" Width="80" WpMbs="false" X="510" Y="780" ZOrder="35">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -1178,11 +1728,19 @@
             ConnectToPoint="false" ConnectionPointType="2"
             DisplayAsRobustnessAnalysisIcon="true"
             EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             Height="235" Id="SxYYzFKFS_nqHAWs" InterfaceBall="false"
             KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
             LshRfAts="true" MShDrAt="false" MSwTpPts="true"
             MetaModelElement="pnfIzFKFS_nqHAUg" Model="pnfIzFKFS_nqHAUg"
             ModelElementNameAlignment="9" Name="ServiceTemplate"
+=======
+            Height="40" Id="x2vjx1KFS_nqHA3n" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="e2qjx1KFS_nqHA2v" Model="e2qjx1KFS_nqHA2v"
+            ModelElementNameAlignment="9" Name="Import"
+>>>>>>> master
             OperationSortType="0"
             OverrideAppearanceWithStereotypeIcon="true"
             ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
@@ -1209,8 +1767,12 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="263" WpMbs="false" X="160"
             Y="110" ZOrder="37">
+=======
+            VisibilityStyle="1" Width="80" WpMbs="false" X="510" Y="530" ZOrder="37">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -1222,6 +1784,7 @@
                 Transparency="0" Type="1"/>
         </Class>
         <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+<<<<<<< HEAD
             ConnectToPoint="true" ConnectionPointType="2"
             CreatorDiagramType="ClassDiagram"
             DisplayAsRobustnessAnalysisIcon="true"
@@ -1235,6 +1798,20 @@
             OverrideAppearanceWithStereotypeIcon="true"
             ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="40"
             ParentConnectorLineLength="10" PresentationOption="4"
+=======
+            ConnectToPoint="false" ConnectionPointType="2"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="113" Id="SxYYzFKFS_nqHAWs" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="pnfIzFKFS_nqHAUg" Model="pnfIzFKFS_nqHAUg"
+            ModelElementNameAlignment="9" Name="ServiceTemplate"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
+            ParentConnectorLineLength="0" PresentationOption="4"
+>>>>>>> master
             PrimitiveShapeType="0" RequestDefaultSize="false"
             RequestFitSize="false" RequestFitSizeFromCenter="false"
             RequestResetCaption="false" RequestResetCaptionSize="false"
@@ -1257,19 +1834,29 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="102" WpMbs="false" X="1100"
             Y="650" ZOrder="39">
+=======
+            VisibilityStyle="1" Width="176" WpMbs="false" X="310"
+            Y="350" ZOrder="39">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="FreeMove"
+<<<<<<< HEAD
                 Visible="true" Width="102" X="0" Y="0"/>
+=======
+                Visible="true" Width="176" X="0" Y="0"/>
+>>>>>>> master
             <FillColor Color="rgb(122, 207, 245)" Style="1"
                 Transparency="0" Type="1"/>
         </Class>
         <Class AttributeSortType="0" Background="rgb(122, 207, 245)"
+<<<<<<< HEAD
             ConnectToPoint="false" ConnectionPointType="2"
             DisplayAsRobustnessAnalysisIcon="true"
             EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
@@ -1282,6 +1869,21 @@
             OverrideAppearanceWithStereotypeIcon="true"
             ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
             ParentConnectorLineLength="0" PresentationOption="4"
+=======
+            ConnectToPoint="true" ConnectionPointType="2"
+            CreatorDiagramType="ClassDiagram"
+            DisplayAsRobustnessAnalysisIcon="true"
+            EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+            Height="53" Id="lbmozFKFS_nqHAVA" InterfaceBall="false"
+            KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
+            LshRfAts="true" MShDrAt="false" MSwTpPts="true"
+            MetaModelElement="VbmozFKFS_nqHAVB" Model="VbmozFKFS_nqHAVB"
+            ModelElementNameAlignment="9" Name="YAMLElement"
+            OperationSortType="0"
+            OverrideAppearanceWithStereotypeIcon="true"
+            ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="40"
+            ParentConnectorLineLength="10" PresentationOption="4"
+>>>>>>> master
             PrimitiveShapeType="0" RequestDefaultSize="false"
             RequestFitSize="false" RequestFitSizeFromCenter="false"
             RequestResetCaption="false" RequestResetCaptionSize="false"
@@ -1304,14 +1906,23 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="90" WpMbs="false" X="360" Y="740" ZOrder="2">
+=======
+            VisibilityStyle="1" Width="102" WpMbs="false" X="880"
+            Y="420" ZOrder="41">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
             <Caption Height="15" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="FreeMove"
+<<<<<<< HEAD
                 Visible="true" Width="90" X="0" Y="0"/>
+=======
+                Visible="true" Width="102" X="0" Y="0"/>
+>>>>>>> master
             <FillColor Color="rgb(122, 207, 245)" Style="1"
                 Transparency="0" Type="1"/>
         </Class>

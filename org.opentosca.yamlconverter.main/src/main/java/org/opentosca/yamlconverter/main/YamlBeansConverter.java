@@ -5,9 +5,17 @@ import java.io.Writer;
 
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ArtifactType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Group;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Import;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Output;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLFileRoot;
 
 import com.esotericsoftware.yamlbeans.YamlConfig;
 import com.esotericsoftware.yamlbeans.YamlException;
@@ -24,11 +32,14 @@ import com.esotericsoftware.yamlbeans.scalar.ScalarSerializer;
 public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
 	@Override
-	public YAMLFileRoot yaml2yamlbean(String yamlstring) throws ConverterException {
+	public ServiceTemplate yaml2yamlbean(String yamlstring) throws ConverterException {
+		if (yamlstring == null || yamlstring.equals("")) {
+			throw new IllegalArgumentException("YAML string may not be empty!");
+		}
 		final YamlReader reader = new YamlReader(yamlstring);
 		adjustConfig(reader.getConfig());
 		try {
-			return reader.read(YAMLFileRoot.class);
+			return reader.read(ServiceTemplate.class);
 		} catch (final YamlException e) {
 			throw new ConverterException(e);
 		}
@@ -36,6 +47,9 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
 	@Override
 	public String yamlbean2yaml(YAMLElement root) throws ConverterException {
+		if (root == null) {
+			throw new IllegalArgumentException("Root element may not be null!");
+		}
 		final Writer output = new StringWriter();
 		final YamlWriter writer = new YamlWriter(output);
 		adjustConfig(writer.getConfig());
@@ -49,7 +63,6 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 	}
 
 	public void adjustConfig(YamlConfig config) {
-		config.setPropertyElementType(YAMLFileRoot.class, "node_templates", NodeTemplate.class);
 		config.setScalarSerializer(String.class, new ScalarSerializer<String>() {
 			@Override
 			public String write(String object) throws YamlException {
@@ -76,6 +89,15 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 				return value;
 			}
 		});
+		config.setPropertyElementType(ServiceTemplate.class, "imports", Import.class);
+		config.setPropertyElementType(ServiceTemplate.class, "inputs", Input.class);
+		config.setPropertyElementType(ServiceTemplate.class, "node_templates", NodeTemplate.class);
+		config.setPropertyElementType(ServiceTemplate.class, "node_types", NodeType.class);
+		config.setPropertyElementType(ServiceTemplate.class, "capability_types", CapabilityType.class);
+		config.setPropertyElementType(ServiceTemplate.class, "relationship_types", RelationshipType.class);
+		config.setPropertyElementType(ServiceTemplate.class, "artifact_types", ArtifactType.class);
+		config.setPropertyElementType(ServiceTemplate.class, "groups", Group.class);
+		config.setPropertyElementType(ServiceTemplate.class, "outputs", Output.class);
 	}
 
 }

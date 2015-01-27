@@ -4,6 +4,7 @@
     DiagramBackground="rgb(255, 255, 255)" Editable="true"
     FollowDiagramParentElement="true" GeneralizationSetNotation="2"
     GridColor="rgb(192, 192, 192)" GridHeight="10" GridVisible="false"
+<<<<<<< HEAD
     GridWidth="10" Height="800" HideEmptyTaggedValues="false"
     Id="tB0Hx1KFS_nqHBM_" ImageHeight="0" ImageScale="1.0"
     ImageWidth="0" InitializeDiagramForCreate="true" Maximized="false"
@@ -11,6 +12,15 @@
     PaintConnectorThroughLabel="0" ParentModel="jUDEzFKFS_nqHAem"
     PmAuthor="Def" PmCreateDateTime="2015-01-13T16:19:22.925"
     PmLastModified="2015-01-20T18:30:30.069" QualityScore="-1"
+=======
+    GridWidth="10" Height="816" HideEmptyTaggedValues="false"
+    Id="tB0Hx1KFS_nqHBM_" ImageHeight="0" ImageScale="1.0"
+    ImageWidth="0" InitializeDiagramForCreate="true" Maximized="true"
+    ModelElementNameAlignment="4" Name="ServiceTemplate"
+    PaintConnectorThroughLabel="0" ParentModel="jUDEzFKFS_nqHAem"
+    PmAuthor="Def" PmCreateDateTime="2015-01-13T16:19:22.925"
+    PmLastModified="2015-01-20T15:56:08.336" QualityScore="-1"
+>>>>>>> master
     RequestValidateSnapToGrid="false" ShapePresentationOption="0"
     ShowActivityStateNodeCaption="65535" ShowAllocatedFrom="true"
     ShowAllocatedTo="true" ShowAssociationNavigationArrows="3"
@@ -25,8 +35,13 @@
     ShowStereotypes="true" ShowTaggedValues="false"
     ShowTemplateInfoOfGeneralizationAndRealization="false"
     SuppressImplied1MultiplicityForAttributeAndAssociationEnd="false"
+<<<<<<< HEAD
     TrimmedHeight="0" TrimmedWidth="0" Width="758" X="0" Y="0"
     ZoomRatio="1.5" _alwaysShowReferenceAndSubdiagramResource="false" _globalPaletteOption="true">
+=======
+    TrimmedHeight="0" TrimmedWidth="0" Width="1816" X="0" Y="0"
+    ZoomRatio="1.6" _alwaysShowReferenceAndSubdiagramResource="false" _globalPaletteOption="true">
+>>>>>>> master
     <Connectors>
         <Association
             AssociationEndPropertyStringsAInternalHeight="-2147483648"
@@ -45,13 +60,21 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="false" HasMultiplicityBShape="true"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="115"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="186"
+>>>>>>> master
             Id="zecHx1KFS_nqHBNn" MetaModelElement="H8Rjx1KFS_nqHA3B"
             Model="H8Rjx1KFS_nqHA3B" Name="imports"
             PaintThroughLabel="2" RequestRebuild="false"
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
+<<<<<<< HEAD
             ShowConnectorName="2" ShowDirection="true"
+=======
+            ShowConnectorName="2" ShowDirection="false"
+>>>>>>> master
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
             ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
@@ -66,13 +89,19 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="95" X="226" Y="218" ZOrder="2">
             <MultiplicityBRectangle Height="40" Width="40" X="240" Y="260"/>
+=======
+            UseToShapeCenter="true" Width="129" X="210" Y="84" ZOrder="2">
+            <MultiplicityBRectangle Height="40" Width="40" X="250" Y="210"/>
+>>>>>>> master
             <MultiplicityARectangle Height="0" Width="20" X="480" Y="470"/>
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="16" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="74" X="240" Y="270"/>
@@ -83,6 +112,18 @@
                 <Point X="260.0" Y="251.0"/>
                 <Point X="260.0" Y="300.0"/>
                 <Point X="288.0" Y="300.0"/>
+=======
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="55" X="260" Y="173"/>
+            <RoleB>
+                <MultiplicityCaption Height="40" Width="40" X="250" Y="210"/>
+            </RoleB>
+            <Points>
+                <Point X="260.0" Y="134.0"/>
+                <Point X="260.0" Y="220.0"/>
+                <Point X="289.0" Y="220.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Association
@@ -102,6 +143,7 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="425"
             Id="HecHx1KFS_nqHBNr" MetaModelElement="HPoTx1KFS_nqHA4Y"
             Model="HPoTx1KFS_nqHA4Y" Name="node_types"
@@ -109,6 +151,15 @@
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
             ShowConnectorName="2" ShowDirection="true"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="441"
+            Id="HecHx1KFS_nqHBNr" MetaModelElement="HPoTx1KFS_nqHA4Y"
+            Model="HPoTx1KFS_nqHA4Y" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+>>>>>>> master
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
             ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
@@ -123,13 +174,20 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="155" X="166" Y="218" ZOrder="4">
             <MultiplicityBRectangle Height="0" Width="20" X="390" Y="480"/>
             <MultiplicityARectangle Height="40" Width="40" X="250" Y="600"/>
+=======
+            UseToShapeCenter="true" Width="134" X="177" Y="111" ZOrder="4">
+            <MultiplicityBRectangle Height="0" Width="20" X="390" Y="480"/>
+            <MultiplicityARectangle Height="40" Width="40" X="250" Y="520"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="16" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="95" X="190" Y="420"/>
@@ -140,6 +198,18 @@
                 <Point X="288.0" Y="610.0"/>
                 <Point X="200.0" Y="610.0"/>
                 <Point X="200.0" Y="251.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="210" Y="380"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="250" Y="520"/>
+            </RoleA>
+            <Points>
+                <Point X="289.0" Y="529.0"/>
+                <Point X="199.0" Y="529.0"/>
+                <Point X="199.0" Y="134.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Association
@@ -159,6 +229,7 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="false" HasMultiplicityBShape="true"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="595"
             Id="vecHx1KFS_nqHBNv" MetaModelElement="v1qTx1KFS_nqHA5p"
             Model="v1qTx1KFS_nqHA5p" Name="relationship_types"
@@ -166,6 +237,15 @@
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
             ShowConnectorName="2" ShowDirection="true"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="628"
+            Id="vecHx1KFS_nqHBNv" MetaModelElement="v1qTx1KFS_nqHA5p"
+            Model="v1qTx1KFS_nqHA5p" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+>>>>>>> master
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
             ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
@@ -180,13 +260,19 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="196" X="126" Y="218" ZOrder="6">
             <MultiplicityBRectangle Height="40" Width="40" X="250" Y="770"/>
+=======
+            UseToShapeCenter="true" Width="191" X="128" Y="102" ZOrder="6">
+            <MultiplicityBRectangle Height="40" Width="40" X="250" Y="690"/>
+>>>>>>> master
             <MultiplicityARectangle Height="0" Width="20" X="370" Y="510"/>
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="16" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="126" X="150" Y="510"/>
@@ -197,6 +283,18 @@
                 <Point X="159.0" Y="251.0"/>
                 <Point X="159.0" Y="780.0"/>
                 <Point X="289.0" Y="780.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="170" Y="420"/>
+            <RoleB>
+                <MultiplicityCaption Height="40" Width="40" X="250" Y="690"/>
+            </RoleB>
+            <Points>
+                <Point X="160.0" Y="133.0"/>
+                <Point X="160.0" Y="700.0"/>
+                <Point X="288.0" Y="700.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Association
@@ -216,6 +314,7 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="665"
             Id="E.cHx1KFS_nqHBN3" MetaModelElement="PRnTx1KFS_nqHA7z"
             Model="PRnTx1KFS_nqHA7z" Name="artefact_types"
@@ -223,6 +322,15 @@
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
             ShowConnectorName="2" ShowDirection="true"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="780"
+            Id="E.cHx1KFS_nqHBN3" MetaModelElement="PRnTx1KFS_nqHA7z"
+            Model="PRnTx1KFS_nqHA7z" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+>>>>>>> master
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
             ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
@@ -237,13 +345,20 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="216" X="106" Y="218" ZOrder="10">
             <MultiplicityBRectangle Height="0" Width="20" X="360" Y="470"/>
             <MultiplicityARectangle Height="40" Width="40" X="250" Y="840"/>
+=======
+            UseToShapeCenter="true" Width="292" X="68" Y="61" ZOrder="10">
+            <MultiplicityBRectangle Height="0" Width="20" X="360" Y="470"/>
+            <MultiplicityARectangle Height="40" Width="40" X="250" Y="760"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="16" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="106" X="130" Y="540"/>
@@ -254,6 +369,18 @@
                 <Point X="289.0" Y="850.0"/>
                 <Point X="139.0" Y="850.0"/>
                 <Point X="139.0" Y="251.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="150" Y="540"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="250" Y="760"/>
+            </RoleA>
+            <Points>
+                <Point X="290.0" Y="769.0"/>
+                <Point X="140.0" Y="769.0"/>
+                <Point X="140.0" Y="132.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Association
@@ -273,6 +400,7 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="805"
             Id="c.cHx1KFS_nqHBN7" MetaModelElement="pXYzx1KFS_nqHA87"
             Model="pXYzx1KFS_nqHA87" Name="outputs"
@@ -280,6 +408,15 @@
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
             ShowConnectorName="2" ShowDirection="true"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="920"
+            Id="c.cHx1KFS_nqHBN7" MetaModelElement="pXYzx1KFS_nqHA87"
+            Model="pXYzx1KFS_nqHA87" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+>>>>>>> master
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
             ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
@@ -294,13 +431,20 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="256" X="66" Y="218" ZOrder="12">
             <MultiplicityBRectangle Height="0" Width="20" X="380" Y="470"/>
             <MultiplicityARectangle Height="40" Width="40" X="250" Y="980"/>
+=======
+            UseToShapeCenter="true" Width="332" X="28" Y="61" ZOrder="12">
+            <MultiplicityBRectangle Height="0" Width="20" X="380" Y="470"/>
+            <MultiplicityARectangle Height="40" Width="40" X="250" Y="900"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="16" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="74" X="90" Y="620"/>
@@ -311,6 +455,18 @@
                 <Point X="289.0" Y="990.0"/>
                 <Point X="99.0" Y="990.0"/>
                 <Point X="99.0" Y="251.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="110" Y="630"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="250" Y="900"/>
+            </RoleA>
+            <Points>
+                <Point X="289.0" Y="909.0"/>
+                <Point X="100.0" Y="909.0"/>
+                <Point X="100.0" Y="132.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Association
@@ -330,6 +486,7 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+<<<<<<< HEAD
             HasRoleAShape="true" HasRoleBShape="false" Height="186"
             Id="K.cHx1KFS_nqHBN_" MetaModelElement="1CDzx1KFS_nqHA.d"
             Model="1CDzx1KFS_nqHA.d" Name="inputs" PaintThroughLabel="2"
@@ -337,6 +494,15 @@
             RequestResetCaptionSize="false" Selectable="true"
             ShowAssociationEndPropertyStrings="false"
             ShowConnectorName="2" ShowDirection="true"
+=======
+            HasRoleAShape="true" HasRoleBShape="false" Height="256"
+            Id="K.cHx1KFS_nqHBN_" MetaModelElement="1CDzx1KFS_nqHA.d"
+            Model="1CDzx1KFS_nqHA.d" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+>>>>>>> master
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
             ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
@@ -351,15 +517,24 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="115" X="206" Y="216" ZOrder="14">
             <FromPinRatio X="-0.012500000186264515" Y="0.5"/>
             <ToPinRatio X="0.5696202516555786" Y="0.9971098303794861"/>
             <MultiplicityBRectangle Height="0" Width="20" X="440" Y="540"/>
             <MultiplicityARectangle Height="40" Width="40" X="250" Y="340"/>
+=======
+            UseToShapeCenter="true" Width="149" X="190" Y="84" ZOrder="14">
+            <FromPinRatio X="-0.012500000186264515" Y="0.5"/>
+            <ToPinRatio X="0.8522727489471436" Y="1.0088495016098022"/>
+            <MultiplicityBRectangle Height="0" Width="20" X="440" Y="540"/>
+            <MultiplicityARectangle Height="40" Width="40" X="250" Y="280"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="16" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="66" X="230" Y="320"/>
@@ -371,6 +546,19 @@
                 <Point X="288.0" Y="370.0"/>
                 <Point X="240.0" Y="370.0"/>
                 <Point X="240.0" Y="250.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="220" Y="170"/>
+            <RoleA>
+                <NameCaption Height="40" Width="40" X="270" Y="290"/>
+                <MultiplicityCaption Height="40" Width="40" X="250" Y="280"/>
+            </RoleA>
+            <Points>
+                <Point X="289.0" Y="290.0"/>
+                <Point X="240.0" Y="290.0"/>
+                <Point X="240.0" Y="134.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Association
@@ -390,6 +578,7 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="false"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="725"
             Id="2.cHx1KFS_nqHBOD" MetaModelElement="_EQLx1KFS_nqHA_C"
             Model="_EQLx1KFS_nqHA_C" Name="groups" PaintThroughLabel="2"
@@ -397,6 +586,15 @@
             RequestResetCaptionSize="false" Selectable="true"
             ShowAssociationEndPropertyStrings="false"
             ShowConnectorName="2" ShowDirection="true"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="840"
+            Id="2.cHx1KFS_nqHBOD" MetaModelElement="_EQLx1KFS_nqHA_C"
+            Model="_EQLx1KFS_nqHA_C" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+>>>>>>> master
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
             ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
@@ -411,13 +609,20 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="236" X="86" Y="218" ZOrder="16">
             <MultiplicityBRectangle Height="0" Width="20" X="340" Y="470"/>
             <MultiplicityARectangle Height="40" Width="40" X="250" Y="900"/>
+=======
+            UseToShapeCenter="true" Width="312" X="48" Y="61" ZOrder="16">
+            <MultiplicityBRectangle Height="0" Width="20" X="340" Y="470"/>
+            <MultiplicityARectangle Height="40" Width="40" X="250" Y="820"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="16" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="72" X="110" Y="570"/>
@@ -428,6 +633,18 @@
                 <Point X="289.0" Y="910.0"/>
                 <Point X="119.0" Y="910.0"/>
                 <Point X="119.0" Y="251.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="90" Y="630"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="250" Y="820"/>
+            </RoleA>
+            <Points>
+                <Point X="290.0" Y="829.0"/>
+                <Point X="120.0" Y="829.0"/>
+                <Point X="120.0" Y="132.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Association
@@ -447,6 +664,7 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="true" HasMultiplicityBShape="true"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="255"
             Id="R.cHx1KFS_nqHBOH" MetaModelElement="iufYzFKFS_nqHAZ."
             Model="iufYzFKFS_nqHAZ." Name="node_templates"
@@ -454,6 +672,15 @@
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
             ShowConnectorName="2" ShowDirection="true"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="271"
+            Id="R.cHx1KFS_nqHBOH" MetaModelElement="iufYzFKFS_nqHAZ."
+            Model="iufYzFKFS_nqHAZ." PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+>>>>>>> master
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
             ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
@@ -468,13 +695,20 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="135" X="186" Y="218" ZOrder="18">
             <MultiplicityBRectangle Height="40" Width="40" X="250" Y="430"/>
             <MultiplicityARectangle Height="0" Width="20" X="220" Y="270"/>
+=======
+            UseToShapeCenter="true" Width="114" X="197" Y="111" ZOrder="18">
+            <MultiplicityBRectangle Height="40" Width="40" X="250" Y="350"/>
+            <MultiplicityARectangle Height="40" Width="40" X="220" Y="130"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="16" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="116" X="210" Y="340"/>
@@ -488,6 +722,21 @@
                 <Point X="220.0" Y="251.0"/>
                 <Point X="220.0" Y="440.0"/>
                 <Point X="288.0" Y="440.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="230" Y="300"/>
+            <RoleA>
+                <MultiplicityCaption Height="40" Width="40" X="220" Y="130"/>
+            </RoleA>
+            <RoleB>
+                <MultiplicityCaption Height="40" Width="40" X="250" Y="350"/>
+            </RoleB>
+            <Points>
+                <Point X="219.0" Y="134.0"/>
+                <Point X="219.0" Y="360.0"/>
+                <Point X="289.0" Y="360.0"/>
+>>>>>>> master
             </Points>
         </Association>
         <Association
@@ -508,6 +757,7 @@
             HasAssociationEndPropertyStringsAShape="false"
             HasAssociationEndPropertyStringsBShape="false"
             HasMultiplicityAShape="false" HasMultiplicityBShape="true"
+<<<<<<< HEAD
             HasRoleAShape="false" HasRoleBShape="false" Height="525"
             Id="6MXu4NKFS_nqHBDS" MetaModelElement="YkXu4NKFS_nqHBDN"
             Model="YkXu4NKFS_nqHBDN" Name="capability_types"
@@ -515,6 +765,15 @@
             RequestResetCaption="false" RequestResetCaptionSize="false"
             Selectable="true" ShowAssociationEndPropertyStrings="false"
             ShowConnectorName="2" ShowDirection="true"
+=======
+            HasRoleAShape="false" HasRoleBShape="false" Height="558"
+            Id="6MXu4NKFS_nqHBDS" MetaModelElement="YkXu4NKFS_nqHBDN"
+            Model="YkXu4NKFS_nqHBDN" PaintThroughLabel="2"
+            RequestRebuild="false" RequestResetCaption="false"
+            RequestResetCaptionSize="false" Selectable="true"
+            ShowAssociationEndPropertyStrings="false"
+            ShowConnectorName="2" ShowDirection="false"
+>>>>>>> master
             ShowFromMultiplicity="true" ShowFromRoleName="true"
             ShowFromRoleVisibility="true"
             ShowMultiplicityConstraints="false" ShowNavigationArrows="0"
@@ -529,12 +788,18 @@
             ToRoleInternalHeight="-2147483648"
             ToRoleInternalWidth="-2147483648" ToShapeXDiff="0"
             ToShapeYDiff="0" UseFromShapeCenter="true"
+<<<<<<< HEAD
             UseToShapeCenter="true" Width="175" X="146" Y="218" ZOrder="-1">
             <MultiplicityBRectangle Height="15" Width="23" X="260" Y="710"/>
+=======
+            UseToShapeCenter="true" Width="171" X="148" Y="102" ZOrder="-1">
+            <MultiplicityBRectangle Height="15" Width="23" X="260" Y="630"/>
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="16" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="None" Visible="true"
                 Width="116" X="170" Y="470"/>
@@ -545,6 +810,18 @@
                 <Point X="180.0" Y="251.0"/>
                 <Point X="180.0" Y="710.0"/>
                 <Point X="288.0" Y="710.0"/>
+=======
+            <Caption Height="0" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="None" Visible="true"
+                Width="20" X="180" Y="440"/>
+            <RoleB>
+                <MultiplicityCaption Height="15" Width="23" X="260" Y="630"/>
+            </RoleB>
+            <Points>
+                <Point X="180.0" Y="133.0"/>
+                <Point X="180.0" Y="630.0"/>
+                <Point X="288.0" Y="630.0"/>
+>>>>>>> master
             </Points>
         </Association>
     </Connectors>
@@ -585,7 +862,11 @@
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
             VisibilityStyle="1" Width="210" WpMbs="false" X="290"
+<<<<<<< HEAD
             Y="410" ZOrder="22">
+=======
+            Y="330" ZOrder="22">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -631,12 +912,20 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="80" WpMbs="false" X="290" Y="900" ZOrder="25">
+=======
+            VisibilityStyle="1" Width="80" WpMbs="false" X="290" Y="820" ZOrder="24">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
+=======
+            <Caption Height="14" InternalHeight="-2147483648"
+>>>>>>> master
                 InternalWidth="-2147483648" Side="FreeMove"
                 Visible="true" Width="80" X="0" Y="0"/>
             <FillColor Color="rgb(122, 207, 245)" Style="1"
@@ -677,7 +966,11 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="80" WpMbs="false" X="290" Y="350" ZOrder="27">
+=======
+            VisibilityStyle="1" Width="80" WpMbs="false" X="290" Y="270" ZOrder="26">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -723,12 +1016,20 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="80" WpMbs="false" X="290" Y="970" ZOrder="29">
+=======
+            VisibilityStyle="1" Width="80" WpMbs="false" X="290" Y="890" ZOrder="28">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
+=======
+            <Caption Height="14" InternalHeight="-2147483648"
+>>>>>>> master
                 InternalWidth="-2147483648" Side="FreeMove"
                 Visible="true" Width="80" X="0" Y="0"/>
             <FillColor Color="rgb(122, 207, 245)" Style="1"
@@ -742,7 +1043,11 @@
             KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
             LshRfAts="true" MShDrAt="false" MSwTpPts="true"
             MetaModelElement="vSjTx1KFS_nqHA7p" Model="vSjTx1KFS_nqHA7p"
+<<<<<<< HEAD
             ModelElementNameAlignment="9" Name="ArtefactTypes"
+=======
+            ModelElementNameAlignment="9" Name="ArchitectType"
+>>>>>>> master
             OperationSortType="0"
             OverrideAppearanceWithStereotypeIcon="true"
             ParentConnectorDTheta="0.0" ParentConnectorHeaderLength="0"
@@ -769,12 +1074,20 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="90" WpMbs="false" X="290" Y="830" ZOrder="31">
+=======
+            VisibilityStyle="1" Width="90" WpMbs="false" X="290" Y="750" ZOrder="30">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
+=======
+            <Caption Height="14" InternalHeight="-2147483648"
+>>>>>>> master
                 InternalWidth="-2147483648" Side="FreeMove"
                 Visible="true" Width="90" X="0" Y="0"/>
             <FillColor Color="rgb(122, 207, 245)" Style="1"
@@ -815,12 +1128,20 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="90" WpMbs="false" X="290" Y="690" ZOrder="33">
+=======
+            VisibilityStyle="1" Width="90" WpMbs="false" X="290" Y="610" ZOrder="32">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
+=======
+            <Caption Height="14" InternalHeight="-2147483648"
+>>>>>>> master
                 InternalWidth="-2147483648" Side="FreeMove"
                 Visible="true" Width="90" X="0" Y="0"/>
             <FillColor Color="rgb(122, 207, 245)" Style="1"
@@ -862,12 +1183,20 @@
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
             VisibilityStyle="1" Width="110" WpMbs="false" X="290"
+<<<<<<< HEAD
             Y="760" ZOrder="35">
+=======
+            Y="680" ZOrder="34">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="15" InternalHeight="-2147483648"
+=======
+            <Caption Height="14" InternalHeight="-2147483648"
+>>>>>>> master
                 InternalWidth="-2147483648" Side="FreeMove"
                 Visible="true" Width="110" X="0" Y="0"/>
             <FillColor Color="rgb(122, 207, 245)" Style="1"
@@ -909,7 +1238,11 @@
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
             VisibilityStyle="1" Width="190" WpMbs="false" X="290"
+<<<<<<< HEAD
             Y="540" ZOrder="37">
+=======
+            Y="460" ZOrder="37">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
@@ -955,12 +1288,20 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="80" WpMbs="false" X="290" Y="280" ZOrder="39">
+=======
+            VisibilityStyle="1" Width="80" WpMbs="false" X="290" Y="200" ZOrder="39">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="14" InternalHeight="-2147483648"
+=======
+            <Caption Height="15" InternalHeight="-2147483648"
+>>>>>>> master
                 InternalWidth="-2147483648" Side="FreeMove"
                 Visible="true" Width="80" X="0" Y="0"/>
             <FillColor Color="rgb(122, 207, 245)" Style="1"
@@ -970,7 +1311,11 @@
             ConnectToPoint="false" ConnectionPointType="2"
             DisplayAsRobustnessAnalysisIcon="true"
             EnumerationLiteralSortType="0" Foreground="rgb(0, 0, 0)"
+<<<<<<< HEAD
             Height="230" Id="ZucHx1KFS_nqHBNJ" InterfaceBall="false"
+=======
+            Height="113" Id="ZucHx1KFS_nqHBNJ" InterfaceBall="false"
+>>>>>>> master
             KShDrOp="false" KSwCsMbSt="true" LShCmMl="false"
             LshRfAts="true" MShDrAt="false" MSwTpPts="true"
             MetaModelElement="pnfIzFKFS_nqHAUg" Model="pnfIzFKFS_nqHAUg"
@@ -1001,14 +1346,24 @@
             ShowParameterNameInOperationSignature="true"
             ShowParametersCodeDetails="0" ShowTypeOption="0"
             SuppressImplied1MultiplicityForAttribute="0"
+<<<<<<< HEAD
             VisibilityStyle="1" Width="263" WpMbs="false" X="90" Y="20" ZOrder="41">
+=======
+            VisibilityStyle="1" Width="176" WpMbs="false" X="90" Y="20" ZOrder="41">
+>>>>>>> master
             <ElementFont Color="rgb(0, 0, 0)" Name="Dialog" Size="11" Style="0"/>
             <Line Cap="0" Color="rgb(0, 0, 0)" Transparency="0" Weight="1.0">
                 <Stroke/>
             </Line>
+<<<<<<< HEAD
             <Caption Height="14" InternalHeight="-2147483648"
                 InternalWidth="-2147483648" Side="FreeMove"
                 Visible="true" Width="263" X="0" Y="0"/>
+=======
+            <Caption Height="15" InternalHeight="-2147483648"
+                InternalWidth="-2147483648" Side="FreeMove"
+                Visible="true" Width="176" X="0" Y="0"/>
+>>>>>>> master
             <FillColor Color="rgb(122, 207, 245)" Style="1"
                 Transparency="0" Type="1"/>
         </Class>

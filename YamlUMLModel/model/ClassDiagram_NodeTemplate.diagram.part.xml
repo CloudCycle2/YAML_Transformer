@@ -10,7 +10,11 @@
     ModelElementNameAlignment="4" Name="NodeTemplate"
     PaintConnectorThroughLabel="0" ParentModel="jUDEzFKFS_nqHAem"
     PmAuthor="Def" PmCreateDateTime="2015-01-13T16:29:25.571"
+<<<<<<< HEAD
     PmLastModified="2015-01-20T18:30:30.070" QualityScore="-1"
+=======
+    PmLastModified="2015-01-20T14:12:10.359" QualityScore="-1"
+>>>>>>> master
     RequestValidateSnapToGrid="false" ShapePresentationOption="0"
     ShowActivityStateNodeCaption="65535" ShowAllocatedFrom="true"
     ShowAllocatedTo="true" ShowAssociationNavigationArrows="3"
