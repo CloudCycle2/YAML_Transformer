@@ -17,7 +17,7 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
  */
 public class ToscaYaml2XmlConverter implements IToscaYaml2XmlConverter {
 	private final IToscaYaml2YamlBeanConverter y2yb = new YamlBeansConverter();
-	private final IToscaBean2BeanConverter b2b = new QuickBeansConverter();
+	private final IToscaBean2BeanConverter b2b = new SwitchMapperConverter();
 	private final IToscaXml2XmlBeanConverter x2xb = new JAXBConverter();
 
 	@Override

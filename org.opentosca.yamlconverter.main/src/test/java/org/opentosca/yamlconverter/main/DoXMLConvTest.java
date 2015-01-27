@@ -1,15 +1,18 @@
+package org.opentosca.yamlconverter.main;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.junit.Test;
 import org.opentosca.model.tosca.TDefinitions;
-import org.opentosca.yamlconverter.main.JAXBConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
 
-public class DoXMLConv {
+public class DoXMLConvTest extends BaseTest {
 
-	public static void main(String[] args) {
+	@Test
+	public void testXMLconv() {
 		final IToscaXml2XmlBeanConverter x2xb = new JAXBConverter();
 		String xmlstr = "";
 		try {
