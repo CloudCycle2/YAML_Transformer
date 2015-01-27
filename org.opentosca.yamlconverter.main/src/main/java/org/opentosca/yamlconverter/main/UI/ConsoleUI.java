@@ -107,27 +107,14 @@ public class ConsoleUI {
 
 	private static void cowsay(String message) {
 		if (COW) {
-			final int messageLength = message.length(); // Laenge der Nachricht
-
-			/*********************************************
-			 * Sprechblase erzeugen
-			 **********************************************/
-			String top = " "; // Obere Linie der Sprechblase
-			String bottom = " "; // Untere Linie der Sprechblase
-
-			// Linke und rechte Grenze mit Nachricht der Sprechblase
+			final int messageLength = message.length();
+			String top = " ";
+			String bottom = " ";
 			final String contentAndBorders = "< " + message + " >";
-
-			// Gesamte Sprechblase
 			String speechBubble;
-
-			// Die Kuh
-			String kuh;
-
-			// Die gesamte Ausgabe
+			String cow;
 			String cowsay;
 
-			// Obere + untere Linie erzeugen
 			for (int i = 1; i <= messageLength + 2; i++) {
 				top += "_";
 				bottom += "-";
@@ -137,14 +124,13 @@ public class ConsoleUI {
 			speechBubble += contentAndBorders + "\n";
 			speechBubble += bottom + "\n";
 
-			// Die Kuh erzeugen
-			kuh = "        \\   ^__^" + "\n";
-			kuh += "         \\  (oo)\\_______" + "\n";
-			kuh += "            (__)\\       )\\/\\" + "\n";
-			kuh += "                ||----w |" + "\n";
-			kuh += "                ||     ||" + "\n";
+			cow = "        \\   ^__^" + "\n";
+			cow += "         \\  (oo)\\_______" + "\n";
+			cow += "            (__)\\       )\\/\\" + "\n";
+			cow += "                ||----w |" + "\n";
+			cow += "                ||     ||" + "\n";
 
-			cowsay = speechBubble + kuh;
+			cowsay = speechBubble + cow;
 
 			System.out.println(cowsay);
 		} else {
