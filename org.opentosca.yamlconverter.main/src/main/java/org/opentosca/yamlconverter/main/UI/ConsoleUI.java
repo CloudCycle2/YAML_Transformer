@@ -13,9 +13,10 @@ import org.opentosca.yamlconverter.main.utils.FileUtil;
 
 public class ConsoleUI {
 	private static FileUtil fileutil = new FileUtil();
+	private static boolean COW = true;
 
 	public static void main(String[] args) {
-		System.out.println("Hi! This is the TOSCA YAML 2 XML Converter! Let's start!");
+		cowsay("Hi! This is the TOSCA YAML 2 XML Cowverter! Let's start!");
 		boolean read = false;
 		String yaml = "";
 		while (!read) {
@@ -34,18 +35,20 @@ public class ConsoleUI {
 				yaml = fileutil.readYamlResource(filename);
 				read = true;
 			} catch (final URISyntaxException e) {
-				System.out.println("Filename not valid!");
+				System.out.println("ERROR: Filename not valid! Muh..");
 				read = false;
 			} catch (final IOException e) {
-				System.out.println("File could not be read!");
+				System.out.println("ERROR: File could not be read! Muh..");
 				read = false;
+			} catch (final NullPointerException e) {
+				System.out.println("ERROR: File could not be found! Muh..");
 			}
 		}
 		final Parser parser = new Parser();
 		parser.parse(yaml);
 		final Map<String, String> reqMap = parser.getInputRequirements();
 		if (!reqMap.isEmpty()) {
-			System.out.println("I need some variables you have to define!");
+			cowsay("I need some variables you have to define!");
 			final Map<String, String> inputValues = new HashMap<String, String>();
 			for (final Entry<String, String> requirement : reqMap.entrySet()) {
 				final String userinput = promptString("Variable " + requirement.getKey() + " (" + requirement.getValue() + "):");
@@ -58,7 +61,7 @@ public class ConsoleUI {
 			// No input fields
 		}
 		final String xml = parser.getXML();
-		System.out.println("I have some results for you!\n");
+		cowsay("I have some results for you!");
 		System.out.println("Here is your XML-file:");
 		System.out.println(xml);
 
@@ -67,7 +70,7 @@ public class ConsoleUI {
 			try {
 				fileutil.saveStringAsFile(xmlfilename, xml);
 			} catch (final IOException e) {
-				System.out.println("ERROR: File has not been saved, because of an IOException.");
+				System.out.println("ERROR: File has not been saved, because of an IOException. Muh..");
 			}
 		}
 
@@ -81,12 +84,13 @@ public class ConsoleUI {
 				try {
 					fileutil.saveStringAsFile(xsdfilename, xsd);
 				} catch (final IOException e) {
-					System.out.println("ERROR: File has not been saved, because of an IOException.");
+					System.out.println("ERROR: File has not been saved, because of an IOException. Muh..");
 				}
 			}
 		}
 
-		System.out.println("\nWuhuu! I'm finished with converting. I hope you're happy now! Good Bye!\n\n exiting...");
+		cowsay("Wuhuu! I'm finished with converting. I hope you're happy now! Good Bye!");
+		System.out.println("\n\n  exiting...");
 	}
 
 	private static String promptString(String promptString) {
@@ -99,5 +103,52 @@ public class ConsoleUI {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	private static void cowsay(String message) {
+		if (COW) {
+			final int messageLength = message.length(); // Laenge der Nachricht
+
+			/*********************************************
+			 * Sprechblase erzeugen
+			 **********************************************/
+			String top = " "; // Obere Linie der Sprechblase
+			String bottom = " "; // Untere Linie der Sprechblase
+
+			// Linke und rechte Grenze mit Nachricht der Sprechblase
+			final String contentAndBorders = "< " + message + " >";
+
+			// Gesamte Sprechblase
+			String speechBubble;
+
+			// Die Kuh
+			String kuh;
+
+			// Die gesamte Ausgabe
+			String cowsay;
+
+			// Obere + untere Linie erzeugen
+			for (int i = 1; i <= messageLength + 2; i++) {
+				top += "_";
+				bottom += "-";
+			}
+
+			speechBubble = top + "\n";
+			speechBubble += contentAndBorders + "\n";
+			speechBubble += bottom + "\n";
+
+			// Die Kuh erzeugen
+			kuh = "        \\   ^__^" + "\n";
+			kuh += "         \\  (oo)\\_______" + "\n";
+			kuh += "            (__)\\       )\\/\\" + "\n";
+			kuh += "                ||----w |" + "\n";
+			kuh += "                ||     ||" + "\n";
+
+			cowsay = speechBubble + kuh;
+
+			System.out.println(cowsay);
+		} else {
+			System.out.println("\n" + message + "\n");
+		}
 	}
 }
