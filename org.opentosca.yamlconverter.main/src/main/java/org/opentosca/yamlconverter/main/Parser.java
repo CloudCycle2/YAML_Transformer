@@ -70,13 +70,34 @@ public class Parser implements IToscaYamlParser {
 		final Map<String, Input> serviceTemplateInputs = this.serviceTempl.getInputs();
 		if (serviceTemplateInputs != null) {
 			for (final String inputKey : serviceTemplateInputs.keySet()) {
-				// TODO: we need a better data structure for inputs (it's just an empty class without any attributes),
-				// respectively for ServiceTemplate
-				// TODO: adjust code to improved data structure
-				result.put(inputKey, serviceTemplateInputs.get(inputKey).toString());
+				final Input currentInput = serviceTemplateInputs.get(inputKey);
+				String descriptionForUser = "Description: ";
+				descriptionForUser += currentInput.getDescription() + "; ";
+				descriptionForUser += "Type: " + currentInput.getType() + "; ";
+				descriptionForUser = addConstraintsToDescription(currentInput, descriptionForUser);
+				result.put(inputKey, descriptionForUser);
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * TODO: add description
+	 * @param currentInput
+	 * @param descriptionForUser
+	 * @return
+	 */
+	private String addConstraintsToDescription(Input currentInput, String descriptionForUser) {
+		descriptionForUser += "Constraints: ";
+		// TODO: improve the following iterations
+		for (Map<String, String> constraints : currentInput.getConstraints()) {
+            if (constraints != null) {
+                for (String key : constraints.keySet()) {
+                    descriptionForUser += key + ": " + constraints.get(key) + ",";
+                }
+            }
+        }
+		return descriptionForUser;
 	}
 
 	@Override
