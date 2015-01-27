@@ -41,6 +41,6 @@ public class MasterParserTest extends BaseTest {
 		Assert.assertNotNull(inputs);
 		Assert.assertEquals(1, inputs.size());
 		Assert.assertTrue("contains an input with key 'foo'", inputs.containsKey("foo"));
-		// TODO: check for constraints in description
+		Assert.assertTrue("constraints are not in description", inputs.get("foo").toLowerCase().contains("constraints: none"));
 	}
 }
