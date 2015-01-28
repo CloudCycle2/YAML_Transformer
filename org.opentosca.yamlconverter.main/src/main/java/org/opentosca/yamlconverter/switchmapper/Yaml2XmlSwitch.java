@@ -95,8 +95,8 @@ public class Yaml2XmlSwitch {
 		if (elem.getInputs() != null) {
 			for (final Entry<String, Input> entry : elem.getInputs().entrySet()) {
 				final String value = entry.getValue().getDescription() + " Has to be of type " +
-				// TODO: YAMLmodel Input
-				// entry.getValue().getType() +
+						// TODO: YAMLmodel Input
+						// entry.getValue().getType() +
 						"<notdefined>" + ".";
 				this.inputReq.put(entry.getKey(), value);
 			}
@@ -336,7 +336,7 @@ public class Yaml2XmlSwitch {
 		// result.setPolicies(poli);
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
 		final QName type = new QName(elem.getType());
-		final AnyMap properties = new AnyMap(elem.getProperties(), TYPESNS, "types");
+		final AnyMap properties = new AnyMap(elem.getProperties());
 		prop.setAny(properties);
 		result.setProperties(prop);
 		// result.setPropertyConstraints(propconstr);
