@@ -1,6 +1,7 @@
 package org.opentosca.yamlconverter.switchmapper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -44,6 +45,7 @@ public class Yaml2XmlSwitch {
 
 	private StringBuilder xsd;
 	private Map<String, String> inputReq;
+	private Map<String, String> propertyvalues;
 
 	/**
 	 * Parses {@link ServiceTemplate} to {@link Definitions}.
@@ -54,6 +56,7 @@ public class Yaml2XmlSwitch {
 	public Definitions parse(ServiceTemplate st) {
 		this.xsd = new StringBuilder(); // reset
 		this.inputReq = new HashMap<>();
+		this.propertyvalues = new HashMap<>();
 		return case_ServiceTemplate(st);
 	}
 
@@ -73,6 +76,10 @@ public class Yaml2XmlSwitch {
 		return this.inputReq;
 	}
 
+	public Map<String, String> getPropertyValues() {
+		return this.propertyvalues;
+	}
+
 	/**
 	 * Deprecated. Use parse(..).
 	 *
@@ -84,9 +91,6 @@ public class Yaml2XmlSwitch {
 	public Object doswitch(Object elem) {
 		if (elem instanceof ServiceTemplate) {
 			return case_ServiceTemplate((ServiceTemplate) elem);
-		}
-		if (elem instanceof NodeTemplate) {
-			return case_NodeTemplate((NodeTemplate) elem);
 		}
 		throw new UnsupportedOperationException("Object not yet supported");
 	}
@@ -162,10 +166,7 @@ public class Yaml2XmlSwitch {
 		// topologyTemplate.getDocumentation().add(docu);
 		if (elem.getNode_templates() != null) {
 			for (final Map.Entry<String, NodeTemplate> nt : elem.getNode_templates().entrySet()) {
-				final TNodeTemplate xnode = case_NodeTemplate(nt.getValue());
-				// override name and id of the nodetemplate
-				xnode.setName(nt.getKey());
-				xnode.setId(name2id(nt.getKey()));
+				final TNodeTemplate xnode = case_NodeTemplate(nt.getValue(), nt.getKey());
 				topologyTemplate.getNodeTemplateOrRelationshipTemplate().add(xnode);
 			}
 		}
@@ -325,18 +326,18 @@ public class Yaml2XmlSwitch {
 		return docu;
 	}
 
-	private TNodeTemplate case_NodeTemplate(NodeTemplate elem) {
+	private TNodeTemplate case_NodeTemplate(NodeTemplate elem, String nodename) {
 		final TNodeTemplate result = new TNodeTemplate();
 		// result.setCapabilities(cap);
 		// result.setDeploymentArtifacts(depa);
-		result.setId(unique("nodetemplate"));
+		result.setId(name2id(nodename));
 		// result.setMaxInstances(maxinst);
 		// result.setMinInstances(mininst);
-		result.setName(unique("Nodetemplate"));
+		result.setName(nodename);
 		// result.setPolicies(poli);
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
 		final QName type = new QName(elem.getType());
-		final AnyMap properties = new AnyMap(elem.getProperties());
+		final AnyMap properties = new AnyMap(parseProperties(elem.getProperties(), nodename));
 		prop.setAny(properties);
 		result.setProperties(prop);
 		// result.setPropertyConstraints(propconstr);
@@ -345,6 +346,29 @@ public class Yaml2XmlSwitch {
 		// result.getAny().add(any);
 		result.getDocumentation().add(toDocumentation(elem.getDescription()));
 		// result.getOtherAttributes().put(name, attr)
+		return result;
+	}
+
+	private Map<String, String> parseProperties(Map<String, Object> properties, String nodename) {
+		final Map<String, String> result = new HashMap<String, String>();
+		for (final Entry<String, Object> entry : properties.entrySet()) {
+			String value = "";
+			if (isGetter(entry.getValue())) {
+				@SuppressWarnings("unchecked")
+				final Map<String, List<String>> getterMap = (Map<String, List<String>>) entry.getValue();
+				for (final Entry<String, List<String>> getter : getterMap.entrySet()) {
+					value += getter.getKey() + "(";
+					for (final String lelem : getter.getValue()) {
+						value += "#" + lelem;
+					}
+					value += ")";
+				}
+			} else {
+				this.propertyvalues.put(nodename + "#" + entry.getKey(), entry.getValue().toString());
+				value = (String) entry.getValue();
+			}
+			result.put(entry.getKey(), value);
+		}
 		return result;
 	}
 
@@ -372,5 +396,18 @@ public class Yaml2XmlSwitch {
 	 */
 	private String name2id(String name) {
 		return name.split(",")[0];
+	}
+
+	/**
+	 * Checks wether the Object is a Getter or just a normal property.
+	 *
+	 * @param value
+	 * @return true if getter, false if property
+	 */
+	private boolean isGetter(Object value) {
+		if (value instanceof Map<?, ?>) {
+			return true;
+		}
+		return false;
 	}
 }

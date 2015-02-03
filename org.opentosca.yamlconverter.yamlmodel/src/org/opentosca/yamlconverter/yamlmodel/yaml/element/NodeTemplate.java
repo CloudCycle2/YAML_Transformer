@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class NodeTemplate extends YAMLElement {
 	private String type;
-	private Map<String, String> properties;
+	private Map<String, Object> properties;
 	private Map<String, String> requirements;
 	private Map<String, String> capabilities;
 	private Map<String, String> interfaces;
@@ -48,11 +48,11 @@ public class NodeTemplate extends YAMLElement {
 		return this.type;
 	}
 
-	public void setProperties(Map<String, String> properties) {
+	public void setProperties(Map<String, Object> properties) {
 		this.properties = properties;
 	}
 
-	public Map<String, String> getProperties() {
+	public Map<String, Object> getProperties() {
 		return this.properties;
 	}
 

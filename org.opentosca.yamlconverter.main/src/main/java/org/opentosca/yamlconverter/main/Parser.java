@@ -1,5 +1,9 @@
 package org.opentosca.yamlconverter.main;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
@@ -7,9 +11,6 @@ import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Parser implements IToscaYamlParser {
 
@@ -49,8 +50,16 @@ public class Parser implements IToscaYamlParser {
 	}
 
 	private String fillGetter() {
-		// TODO: implement me :)
-		return this.xml;
+		String result = this.xml;
+		// TODO: this only replaces known inputs and properties --> switch to usage of regex
+		for (final Entry<String, String> repdata : this.inputs.entrySet()) {
+			result = result.replace("get_input(#" + repdata.getKey() + ")", repdata.getValue());
+		}
+		for (final Entry<String, String> repdata : this.b2b.getPropertyValues().entrySet()) {
+			result = result.replace("get_property(#" + repdata.getKey() + ")", repdata.getValue());
+		}
+		// TODO: get_ref_property
+		return result;
 	}
 
 	@Override
@@ -83,6 +92,7 @@ public class Parser implements IToscaYamlParser {
 
 	/**
 	 * TODO: add description
+	 *
 	 * @param currentInput
 	 * @param descriptionForUser
 	 * @return
@@ -90,13 +100,13 @@ public class Parser implements IToscaYamlParser {
 	private String addConstraintsToDescription(Input currentInput, String descriptionForUser) {
 		descriptionForUser += "Constraints: ";
 		// TODO: improve the following iterations
-		for (Map<String, String> constraints : currentInput.getConstraints()) {
-            if (constraints != null) {
-                for (String key : constraints.keySet()) {
-                    descriptionForUser += key + ": " + constraints.get(key) + ",";
-                }
-            }
-        }
+		for (final Map<String, String> constraints : currentInput.getConstraints()) {
+			if (constraints != null) {
+				for (final String key : constraints.keySet()) {
+					descriptionForUser += key + ": " + constraints.get(key) + ",";
+				}
+			}
+		}
 		return descriptionForUser;
 	}
 
