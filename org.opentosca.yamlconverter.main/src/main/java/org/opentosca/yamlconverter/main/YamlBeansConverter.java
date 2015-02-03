@@ -51,7 +51,6 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 	}
 
 	public void adjustConfig(YamlConfig config) {
-		config.setPropertyElementType(ServiceTemplate.class, "imports", Import.class);
 		config.setPropertyElementType(ServiceTemplate.class, "inputs", Input.class);
 		config.setPropertyElementType(ServiceTemplate.class, "node_templates", NodeTemplate.class);
 		config.setPropertyElementType(ServiceTemplate.class, "node_types", NodeType.class);

@@ -1,5 +1,6 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
+import java.util.List;
 import java.util.Map;
 
 public class ServiceTemplate extends YAMLElement {
@@ -8,7 +9,7 @@ public class ServiceTemplate extends YAMLElement {
 	private String template_name;
 	private String template_author;
 	private String template_version;
-	private Map<String, Import> imports;
+	private List<String> imports;
 	private Map<String, Input> inputs;
 	private Map<String, NodeTemplate> node_templates;
 	private Map<String, NodeType> node_types;
@@ -114,11 +115,11 @@ public class ServiceTemplate extends YAMLElement {
 		return this.template_version;
 	}
 
-	public void setImports(Map<String, Import> imports) {
+	public void setImports(List<String> imports) {
 		this.imports = imports;
 	}
 
-	public Map<String, Import> getImports() {
+	public List<String> getImports() {
 		return this.imports;
 	}
 

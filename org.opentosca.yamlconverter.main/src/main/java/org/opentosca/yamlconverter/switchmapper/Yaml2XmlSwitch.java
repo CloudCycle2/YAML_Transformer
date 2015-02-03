@@ -1,37 +1,18 @@
 package org.opentosca.yamlconverter.switchmapper;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.xml.namespace.QName;
-
-import org.opentosca.model.tosca.Definitions;
-import org.opentosca.model.tosca.TCapabilityDefinition;
-import org.opentosca.model.tosca.TCapabilityType;
-import org.opentosca.model.tosca.TDocumentation;
-import org.opentosca.model.tosca.TEntityTemplate;
+import org.opentosca.model.tosca.*;
 import org.opentosca.model.tosca.TEntityType.DerivedFrom;
 import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.model.tosca.TImport;
-import org.opentosca.model.tosca.TInterface;
-import org.opentosca.model.tosca.TNodeTemplate;
-import org.opentosca.model.tosca.TNodeType;
 import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
 import org.opentosca.model.tosca.TNodeType.Interfaces;
 import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
-import org.opentosca.model.tosca.TRelationshipType;
-import org.opentosca.model.tosca.TRequirementDefinition;
-import org.opentosca.model.tosca.TServiceTemplate;
-import org.opentosca.model.tosca.TTopologyTemplate;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Import;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.*;
+
+import javax.xml.namespace.QName;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Yaml2XmlSwitch {
 	private static final String XMLSCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
@@ -141,11 +122,11 @@ public class Yaml2XmlSwitch {
 		// result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(case_ArtifactType(artType));
 		// }
 		if (elem.getImports() != null) {
-			for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
+//			for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
 				// TODO: How do we handle imports?
 				// result.getImport().add(case_Import(importelem));
 				// TODO: add types import
-			}
+//			}
 		}
 		result.getImport().add(createTypeImport());
 		// serviceTemplate.setBoundaryDefinitions(value);
