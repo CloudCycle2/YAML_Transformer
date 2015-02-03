@@ -5,8 +5,8 @@
     Id="m.rpMFKFS_nqHAPm" Leaf="false" Name="type"
     OrderingInProfile="-1" PmAuthor="Def"
     PmCreateDateTime="2014-12-02T21:00:52.697"
-    PmLastModified="2014-12-02T21:04:29.851" QualityScore="-1"
-    UserIDLastNumericValue="0" Visibility="private">
+    PmLastModified="2014-12-10T08:50:04.098" QualityReason="2&#x9;2"
+    QualityScore="97" UserIDLastNumericValue="0" Visibility="private">
     <FromEnd>
         <AssociationEnd AggregationKind="None" ConnectToCodeModel="1"
             Derived="false" DerivedUnion="false" Documentation_plain=""
