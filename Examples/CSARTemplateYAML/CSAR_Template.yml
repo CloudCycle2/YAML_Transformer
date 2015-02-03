@@ -17,7 +17,6 @@ description: Service Template for installing VMServ
  
 imports: 
   # list of import statements for importing other definitions files 
- 
 inputs: 
   # list of global input parameters 
  minRAM:
@@ -88,9 +87,9 @@ node_types:
    sshKey:
     type: string
    script:
-    type: string
+    type: string     
   artifacts:
-   - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: <artifact_file_URI>  
+   - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: org_opentosca_types_Ubuntu__InterfaceUbuntu.war  
       type: WAR 
       description: <artifact_description>
       properties:
@@ -124,15 +123,21 @@ node_types:
     type: string
    privKey:
     type: string
+   interfaces:
+    Custom_InstallVM:
+	 InstallVMwithCustomKeypair:
+	 InstallVMWithGeneratedKeypair:
+     InstallVMwithVustomFlavor:
+     InstallVMwithCustomImage:	 
    artifacts:
-    - InstallOpenStackVM_IA: <artifact_file_URI>  
+    - InstallOpenStackVM_IA: InstallOpenStackVM_Custom_InstallVM.war 
        type: WAR 
        description: <artifact_description>
        properties:
         ServiceEndpoint: /services/InstallOpenStackVM_Custom_InstallVMPort
         PortType: {http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM #TODO define interface
         InvocationType: SOAP/HTTP  
- 
+     interfaces: installcustomVm 
 capability_types: 
   # list of capability type definitions 
  
@@ -147,26 +152,16 @@ artifact_types:
   file_ext: war 
   properties: #TODO define properties
     ServiceEndpoint:
+     type: string
     PortType:
+     type: string
     InvocationType:
+     type: string
  
 groups: 
   # list of groups defined in service template 
  
 outputs: 
   # list of output parameters
- selfserviceApplicationUrl:	
-  description: This is the self service application URL
-  value:
- selfserviceMessage:
-  description: This is the self service message
-  value:
- selfservicePolicyMessage:
-  description: This is the self service policy message
-  value:
- selfserviceStatus:
-  description: This is the self service status
-  value:
- CorrelationID:
-  description: This is the correlation ID
-  value:
+ serverId:	
+  value: {get_property: [InstallOpenStackVMTemplate, serverId]}
