@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class NodeType extends YAMLElement {
 	private String derived_from;
-	private Map<String, String> properties;
+	private Map<String, Map<String, String>> properties;
 	private Map<String, String> requirements;
 	private Map<String, String> capabilities;
 	private Map<String, String> interfaces;
@@ -57,11 +57,11 @@ public class NodeType extends YAMLElement {
 		this.derived_from = derived_from;
 	}
 
-	public Map<String, String> getProperties() {
+	public Map<String, Map<String, String>> getProperties() {
 		return this.properties;
 	}
 
-	public void setProperties(Map<String, String> properties) {
+	public void setProperties(Map<String, Map<String, String>> properties) {
 		this.properties = properties;
 	}
 

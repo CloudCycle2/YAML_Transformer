@@ -13,6 +13,7 @@ import org.opentosca.model.tosca.TDocumentation;
 import org.opentosca.model.tosca.TEntityTemplate;
 import org.opentosca.model.tosca.TEntityType.DerivedFrom;
 import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.model.tosca.TImport;
 import org.opentosca.model.tosca.TInterface;
 import org.opentosca.model.tosca.TNodeTemplate;
 import org.opentosca.model.tosca.TNodeType;
@@ -33,6 +34,10 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 public class Yaml2XmlSwitch {
+	private static final String XMLSCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
+
+	private static final String NS = "http://www.example.org/tosca/yamlgen";
+
 	private static String TYPESNS = "http://www.example.org/tosca/yamlgen/types";
 
 	private long uniqueID = 0;
@@ -58,7 +63,10 @@ public class Yaml2XmlSwitch {
 	 * @return additional XSD.
 	 */
 	public String getXSD() {
-		return this.xsd.toString();
+		final String pre = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\""
+				+ "targetNamespace=\"" + TYPESNS + "\" xmlns=\"" + TYPESNS + "\">\n";
+		final String post = "</xs:schema>";
+		return pre + this.xsd.toString() + post;
 	}
 
 	public Map<String, String> getInputRequirements() {
@@ -87,8 +95,8 @@ public class Yaml2XmlSwitch {
 		if (elem.getInputs() != null) {
 			for (final Entry<String, Input> entry : elem.getInputs().entrySet()) {
 				final String value = entry.getValue().getDescription() + " Has to be of type " +
-				// TODO: YAMLmodel Input
-				// entry.getValue().getType() +
+						// TODO: YAMLmodel Input
+						// entry.getValue().getType() +
 						"<notdefined>" + ".";
 				this.inputReq.put(entry.getKey(), value);
 			}
@@ -99,13 +107,16 @@ public class Yaml2XmlSwitch {
 		final TTopologyTemplate topologyTemplate = new TTopologyTemplate();
 		result.setId(unique("root"));
 		result.setName(unique("Root"));
-		// TODO: set correct namespace as soon as it's known
-		result.setTargetNamespace("example.com/yamlconverter");
+		if (elem.getTosca_default_namespace() != null && !elem.getTosca_default_namespace().isEmpty()) {
+			result.setTargetNamespace(elem.getTosca_default_namespace());
+		} else {
+			result.setTargetNamespace(NS);
+		}
 		result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(serviceTemplate);
 		// result.setExtensions();
 		// result.setTypes();
 		result.getDocumentation().add(toDocumentation(elem.getDescription()));
-		// result.getOtherAttributes().put(name, attribute);
+		result.getOtherAttributes().put(new QName("xmlns:types"), TYPESNS);
 		if (elem.getCapability_types() != null) {
 			for (final Entry<String, CapabilityType> capType : elem.getCapability_types().entrySet()) {
 				final TCapabilityType ct = case_CapabilityType(capType);
@@ -136,6 +147,7 @@ public class Yaml2XmlSwitch {
 				// TODO: add types import
 			}
 		}
+		result.getImport().add(createTypeImport());
 		// serviceTemplate.setBoundaryDefinitions(value);
 		serviceTemplate.setId(unique("serviceTemplate"));
 		serviceTemplate.setName("ServiceTemplate");
@@ -158,6 +170,14 @@ public class Yaml2XmlSwitch {
 			}
 		}
 		// topologyTemplate.getOtherAttributes().put(key, value);
+		return result;
+	}
+
+	private TImport createTypeImport() {
+		final TImport result = new TImport();
+		result.setImportType(XMLSCHEMA_NS);
+		result.setLocation("types.xsd");
+		result.setNamespace(TYPESNS);
 		return result;
 	}
 
@@ -202,17 +222,29 @@ public class Yaml2XmlSwitch {
 		final TNodeType result = new TNodeType();
 		// TODO: value.getArtifacts() ?
 		// result.setAbstract(value);
-		result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
-		result.setDerivedFrom(parseNodeTypeDerivedFrom(value.getDerived_from()));
+		if (value.getCapabilities() != null) {
+			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
+		}
+		if (value.getDerived_from() != null) {
+			result.setDerivedFrom(parseNodeTypeDerivedFrom(value.getDerived_from()));
+		}
 		// result.setFinal(value);
 		// result.setInstanceStates(value);
-		result.setInterfaces(parseNodeTypeInterfaces(value.getInterfaces()));
+		if (value.getInterfaces() != null) {
+			result.setInterfaces(parseNodeTypeInterfaces(value.getInterfaces()));
+		}
 		result.setName(name);
-		result.setPropertiesDefinition(parseNodeTypePropertiesDefinition(value.getProperties(), name));
-		result.setRequirementDefinitions(parseNodeTypeRequirementDefinitions(value.getRequirements()));
+		if (value.getProperties() != null) {
+			result.setPropertiesDefinition(parseNodeTypePropertiesDefinition(value.getProperties(), name));
+		}
+		if (value.getRequirements() != null) {
+			result.setRequirementDefinitions(parseNodeTypeRequirementDefinitions(value.getRequirements()));
+		}
 		// result.setTags(value);
 		// result.setTargetNamespace(value);
-		result.getDocumentation().add(toDocumentation(value.getDescription()));
+		if (value.getDescription() != null) {
+			result.getDocumentation().add(toDocumentation(value.getDescription()));
+		}
 		// result.getAny().add(e);
 		// result.getOtherAttributes().put(key, value);
 		return result;
@@ -232,7 +264,7 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
-	private PropertiesDefinition parseNodeTypePropertiesDefinition(Map<String, String> properties, String typename) {
+	private PropertiesDefinition parseNodeTypePropertiesDefinition(Map<String, Map<String, String>> properties, String typename) {
 		final PropertiesDefinition result = new PropertiesDefinition();
 		// TODO: setElement()?!
 		// result.setElement(value);
@@ -241,14 +273,14 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
-	private void generateTypeXSD(Map<String, String> properties, String name) {
-		this.xsd.append("<xs:complexType name=\"" + name + "\">");
-		this.xsd.append("<xs:sequence>");
-		for (final Entry<String, String> entry : properties.entrySet()) {
-			this.xsd.append("<xs:element name=\"" + entry.getKey() + "\" type=\"xs:" + entry.getValue() + "\"");
+	private void generateTypeXSD(Map<String, Map<String, String>> properties, String name) {
+		this.xsd.append("<xs:complexType name=\"" + name + "\">\n");
+		this.xsd.append("<xs:sequence>\n");
+		for (final Entry<String, Map<String, String>> entry : properties.entrySet()) {
+			this.xsd.append("<xs:element name=\"" + entry.getKey() + "\" type=\"xs:" + entry.getValue().get("type") + "\" />\n");
 		}
-		this.xsd.append("</xs:sequence>");
-		this.xsd.append("</xs:complexType>");
+		this.xsd.append("</xs:sequence>\n");
+		this.xsd.append("</xs:complexType>\n");
 	}
 
 	private Interfaces parseNodeTypeInterfaces(Map<String, String> interfaces) {
