@@ -66,9 +66,9 @@ public class YamlBeansConverterTest extends BaseTest {
 	public void testReadYamlInputs_useInputs() throws Exception {
 		final ServiceTemplate templ = this.converter.yaml2yamlbean(this.testUtils.readYamlTestResource("/yaml/useInputs.yaml"));
 		Assert.assertNotNull(templ);
-		Assert.assertNotNull(templ.getNode_templates().get("my_server").getProperties().get("mem_size"));
-		// TODO: to check this properly, we need to change the model of NodeTemplate
-		// TODO: (instead Map<String, String> we need Map<String, Object> to support storing { get_input : xy } )
+		Object memSize = templ.getNode_templates().get("my_server").getProperties().get("mem_size");
+		Assert.assertNotNull(memSize);
+		Assert.assertTrue(((Map<String, Object>) memSize).containsKey("get_input"));
 	}
 
 	@Test
