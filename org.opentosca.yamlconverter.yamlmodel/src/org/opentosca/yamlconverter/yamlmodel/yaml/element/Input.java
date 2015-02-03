@@ -7,7 +7,7 @@ import java.util.Map;
 public class Input extends YAMLElement {
 
 	private String type = "";
-	private String defaultValue = "%%USER_INPUT%%";
+	private String defaultValue = "%%USER_INPUT_REQUIRED%%";
 	private List<Map<String, String>> constraints = new ArrayList<Map<String, String>>();
 
 	public String getType() {
