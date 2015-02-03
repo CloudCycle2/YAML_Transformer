@@ -2,30 +2,31 @@
 tosca_definitions_version: tosca_simple_yaml_1_0
 
 InstallOpenStackVM:
-	derived_from: RootNodeType
-	description: InstallOpenStackVM
+ derived_from: RootNodeType
+ description: InstallOpenStackVM
 	
 # Here it is possible to set default values	
-	properties:
-		credentials:
-			type: string
-		endpointsAPI:
-			type: string		
-		keypair:
-			type: string
-		minDisk:
-			type: string
-		minRAM:
-			type: string
-		flavorId:
-			type: string
-		imageId:
-			type: string
-		imageName:
-			type: string
-		floatingIp:
-			type: string
-		serverId:
-			type: string
-		privKey:
-	interfaces: [ Custom_InstallVM ]
+ properties:
+  credentials:
+   type: string
+  endpointsAPI:
+   type: string		
+  keypair:
+   type: string
+  minDisk:
+   type: string
+  minRAM:
+   type: string
+  flavorId:
+   type: string
+  imageId:
+   type: string
+  imageName:
+   type: string
+  floatingIp:
+   type: string
+  serverId:
+   type: string
+  privKey:
+ interfaces: [ Custom_InstallVM ]
+	
