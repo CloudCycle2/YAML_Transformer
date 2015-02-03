@@ -20,16 +20,12 @@ public class SwitchMapperConverter implements IToscaBean2BeanConverter {
 		return this.switchmapper.parse(yamlBean);
 	}
 
-	public Map<String, String> getInputRequirements() {
-		return this.switchmapper.getInputRequirements();
-	}
-
-	public Map<String, String> getPropertyValues() {
-		return this.switchmapper.getPropertyValues();
-	}
-
 	public String getXSD() {
 		return this.switchmapper.getXSD();
+	}
+
+	public void setInputs(Map<String, String> inputs) {
+		this.switchmapper.setInputs(inputs);
 	}
 
 }

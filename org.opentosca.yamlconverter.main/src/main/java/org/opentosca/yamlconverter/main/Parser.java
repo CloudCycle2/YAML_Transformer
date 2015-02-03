@@ -2,7 +2,6 @@ package org.opentosca.yamlconverter.main;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
@@ -22,50 +21,38 @@ public class Parser implements IToscaYamlParser {
 	private ServiceTemplate serviceTempl = null;
 	private Definitions definition = null;
 
-	// TODO: Is this map still needed?! Yes, in fillGetter()
-	private Map<String, String> inputs = new HashMap<>();
-
 	@Override
 	public void parse(String yamlString) {
 		if (yamlString == null || yamlString.equals("")) {
 			throw new IllegalArgumentException("YAML string may not be empty!");
 		}
 		try {
-			// TODO: how to handle the inputs? Suggestion: Give a default value to
-			// yaml2yamlbean as additional parameter and add interceptor like logic (see alberts approach)
 			this.serviceTempl = this.y2yb.yaml2yamlbean(yamlString);
 		} catch (final ConverterException e) {
 			throw new RuntimeException(e);
 		}
-		this.definition = this.b2b.yamlb2xmlb(this.serviceTempl);
-		this.xml = this.x2xb.xmlbean2xml(this.definition);
 	}
 
 	@Override
 	public String getXML() {
-		if (this.xml.equals("")) {
+		if (this.serviceTempl == null) {
 			throw new IllegalStateException("Call parse(..) before calling getXML()");
 		}
-		return fillGetter();
-	}
-
-	private String fillGetter() {
-		String result = this.xml;
-		// TODO: this only replaces known inputs and properties --> switch to usage of regex
-		for (final Entry<String, String> repdata : this.inputs.entrySet()) {
-			result = result.replace("get_input(#" + repdata.getKey() + ")", repdata.getValue());
+		if (this.xml.equals("")) {
+			this.definition = this.b2b.yamlb2xmlb(this.serviceTempl);
+			this.xml = this.x2xb.xmlbean2xml(this.definition);
 		}
-		for (final Entry<String, String> repdata : this.b2b.getPropertyValues().entrySet()) {
-			result = result.replace("get_property(#" + repdata.getKey() + ")", repdata.getValue());
-		}
-		// TODO: get_ref_property
-		return result;
+		return this.xml.toString();
 	}
 
 	@Override
 	public String getXSD() {
-		if (this.xml.equals("")) {
+		if (this.serviceTempl == null) {
 			throw new IllegalStateException("Call parse(..) before calling getXSD()");
+		}
+		if (this.xml.equals("")) {
+			this.definition = this.b2b.yamlb2xmlb(this.serviceTempl);
+			this.xml = this.x2xb.xmlbean2xml(this.definition);
 		}
 		return this.b2b.getXSD();
 	}
@@ -112,7 +99,7 @@ public class Parser implements IToscaYamlParser {
 
 	@Override
 	public void setInputValues(Map<String, String> input) {
-		this.inputs = input;
+		this.b2b.setInputs(input);
 	}
 
 }
