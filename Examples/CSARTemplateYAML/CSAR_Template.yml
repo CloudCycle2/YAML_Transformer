@@ -17,6 +17,8 @@ description: Service Template for installing VMServ
  
 imports: 
   # list of import statements for importing other definitions files 
+ - TOSCA_definition.yaml
+ 
 inputs: 
   # list of global input parameters 
  minRAM:
@@ -73,11 +75,8 @@ node_templates:
  
 node_types: 
   # list of node type definitions
- RootNodeType:
-  description: Root NodeType
-
  OperatingSystem:
-  derived_from: RootNodeType
+  derived_from: tosca.nodes.Root
   description: Operating System
   properties:
    hostname:
@@ -87,7 +86,9 @@ node_types:
    sshKey:
     type: string
    script:
-    type: string     
+    type: string 
+  interfaces: 
+   InterfaceUbuntu:  
   artifacts:
    - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: org_opentosca_types_Ubuntu__InterfaceUbuntu.war  
       type: WAR 
@@ -98,7 +99,7 @@ node_types:
        InvocationType: SOAP/HTTP 
 
  InstallOpenStackVM:
-  derived_from: RootNodeType
+  derived_from: tosca.nodes.Root
   description: InstallOpenStackVM
   properties:
    credentials:
@@ -126,9 +127,13 @@ node_types:
    interfaces:
     Custom_InstallVM:
 	 InstallVMwithCustomKeypair:
+	  implementation: InstallOpenStackVM_IA
 	 InstallVMWithGeneratedKeypair:
+	  implementation: InstallOpenStackVM_IA
      InstallVMwithVustomFlavor:
-     InstallVMwithCustomImage:	 
+	  implementation: InstallOpenStackVM_IA
+     InstallVMwithCustomImage:
+      implementation: InstallOpenStackVM_IA	 
    artifacts:
     - InstallOpenStackVM_IA: InstallOpenStackVM_Custom_InstallVM.war 
        type: WAR 
@@ -137,7 +142,7 @@ node_types:
         ServiceEndpoint: /services/InstallOpenStackVM_Custom_InstallVMPort
         PortType: {http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM #TODO define interface
         InvocationType: SOAP/HTTP  
-     interfaces: installcustomVm 
+		
 capability_types: 
   # list of capability type definitions 
  
@@ -150,7 +155,7 @@ artifact_types:
   description: <artifact_description> 
   mime_type: application/x-zip 
   file_ext: war 
-  properties: #TODO define properties
+  properties:
     ServiceEndpoint:
      type: string
     PortType:
