@@ -2,6 +2,16 @@ package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
 public class Output extends YAMLElement {
 
+	private Object value;
+
+	public Object getValue() {
+		return value;
+	}
+
+	public void setValue(Object value) {
+		this.value = value;
+	}
+
 	public int hashCode() {
 		int hashCode = 0;
 		if ( hashCode == 0 ) {

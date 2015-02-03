@@ -1,5 +1,6 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
+@Deprecated
 public class Import extends YAMLElement {
 
 	public int hashCode() {
