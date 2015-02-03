@@ -261,7 +261,7 @@ capability_types:
  # definitions for a modelable entity (e.g., a Node or Relationship Type)
  # as defined within the TOSCA Simple Profile specification.
 ##########################################################################
-interface:
+interfaces:
  tosca.interfaces.node.Lifecycle:
    create:
      description: Basic lifecycle create operation.
