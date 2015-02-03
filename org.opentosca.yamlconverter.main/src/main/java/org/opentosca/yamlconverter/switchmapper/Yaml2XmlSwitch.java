@@ -28,7 +28,6 @@ import org.opentosca.model.tosca.TTopologyTemplate;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Import;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
@@ -44,8 +43,10 @@ public class Yaml2XmlSwitch {
 	private long uniqueID = 0;
 
 	private StringBuilder xsd;
-	private Map<String, String> inputReq;
-	private Map<String, String> propertyvalues;
+
+	private ServiceTemplate st;
+
+	private Map<String, String> inputs = new HashMap<>();
 
 	/**
 	 * Parses {@link ServiceTemplate} to {@link Definitions}.
@@ -55,8 +56,7 @@ public class Yaml2XmlSwitch {
 	 */
 	public Definitions parse(ServiceTemplate st) {
 		this.xsd = new StringBuilder(); // reset
-		this.inputReq = new HashMap<>();
-		this.propertyvalues = new HashMap<>();
+		this.st = st;
 		return case_ServiceTemplate(st);
 	}
 
@@ -72,12 +72,12 @@ public class Yaml2XmlSwitch {
 		return pre + this.xsd.toString() + post;
 	}
 
-	public Map<String, String> getInputRequirements() {
-		return this.inputReq;
+	private Map<String, String> getInputs() {
+		return this.inputs;
 	}
 
-	public Map<String, String> getPropertyValues() {
-		return this.propertyvalues;
+	public void setInputs(Map<String, String> inputs) {
+		this.inputs = inputs;
 	}
 
 	/**
@@ -96,16 +96,6 @@ public class Yaml2XmlSwitch {
 	}
 
 	private Definitions case_ServiceTemplate(ServiceTemplate elem) {
-		if (elem.getInputs() != null) {
-			for (final Entry<String, Input> entry : elem.getInputs().entrySet()) {
-				final String value = entry.getValue().getDescription() + " Has to be of type " +
-						// TODO: YAMLmodel Input
-						// entry.getValue().getType() +
-						"<notdefined>" + ".";
-				this.inputReq.put(entry.getKey(), value);
-			}
-		}
-
 		final Definitions result = new Definitions();
 		final TServiceTemplate serviceTemplate = new TServiceTemplate();
 		final TTopologyTemplate topologyTemplate = new TTopologyTemplate();
@@ -349,27 +339,44 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Map<String, String> parseProperties(Map<String, Object> properties, String nodename) {
 		final Map<String, String> result = new HashMap<String, String>();
 		for (final Entry<String, Object> entry : properties.entrySet()) {
 			String value = "";
 			if (isGetter(entry.getValue())) {
-				@SuppressWarnings("unchecked")
-				final Map<String, List<String>> getterMap = (Map<String, List<String>>) entry.getValue();
-				for (final Entry<String, List<String>> getter : getterMap.entrySet()) {
-					value += getter.getKey() + "(";
-					for (final String lelem : getter.getValue()) {
-						value += "#" + lelem;
-					}
-					value += ")";
-				}
+				value = parseGetter((Map<String, Object>) entry.getValue());
 			} else {
-				this.propertyvalues.put(nodename + "#" + entry.getKey(), entry.getValue().toString());
 				value = (String) entry.getValue();
 			}
 			result.put(entry.getKey(), value);
 		}
 		return result;
+	}
+
+	private String parseGetter(Map<String, Object> getterMap) {
+		for (final Entry<String, Object> getter : getterMap.entrySet()) {
+			switch (getter.getKey()) {
+			case "get_input":
+				final String inputvar = (String) getter.getValue();
+				if (getInputs().containsKey(inputvar)) {
+					return getInputs().get(inputvar);
+				}
+				// TODO: defaults
+				break;
+			case "get_property":
+				@SuppressWarnings("unchecked")
+				final List<String> list = (List<String>) getter.getValue();
+				final String template = list.get(0);
+				final String property = list.get(1);
+				return (String) this.st.getNode_templates().get(template).getProperties().get(property);
+			case "get_ref_property":
+				return "DEFAULTREFPROPERTY";
+			default:
+				return "DEFAULTGETTERINPUT";
+			}
+		}
+		return "";
 	}
 
 	/**
