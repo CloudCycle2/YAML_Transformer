@@ -86,13 +86,17 @@ public class Parser implements IToscaYamlParser {
 	 */
 	private String addConstraintsToDescription(Input currentInput, String descriptionForUser) {
 		descriptionForUser += "Constraints: ";
-		// TODO: improve the following iterations
-		for (final Map<String, String> constraints : currentInput.getConstraints()) {
-			if (constraints != null) {
-				for (final String key : constraints.keySet()) {
-					descriptionForUser += key + ": " + constraints.get(key) + ",";
+		if (currentInput.getConstraints().size() > 0) {
+			// TODO: improve the following iterations
+			for (Map<String, String> constraints : currentInput.getConstraints()) {
+				if (constraints != null) {
+					for (String key : constraints.keySet()) {
+						descriptionForUser += key + ": " + constraints.get(key) + ",";
+					}
 				}
 			}
+		} else {
+			descriptionForUser += "None";
 		}
 		return descriptionForUser;
 	}

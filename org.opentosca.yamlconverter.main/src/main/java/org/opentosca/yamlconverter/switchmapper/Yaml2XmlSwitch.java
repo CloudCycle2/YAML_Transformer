@@ -135,11 +135,11 @@ public class Yaml2XmlSwitch {
 		// result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(case_ArtifactType(artType));
 		// }
 		if (elem.getImports() != null) {
-			for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
+//			for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
 				// TODO: How do we handle imports?
 				// result.getImport().add(case_Import(importelem));
 				// TODO: add types import
-			}
+//			}
 		}
 		result.getImport().add(createTypeImport());
 		// serviceTemplate.setBoundaryDefinitions(value);

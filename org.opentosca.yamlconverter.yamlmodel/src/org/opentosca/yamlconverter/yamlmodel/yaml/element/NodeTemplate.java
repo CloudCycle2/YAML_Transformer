@@ -1,47 +1,22 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class NodeTemplate extends YAMLElement {
-	private String type;
-	private Map<String, Object> properties;
-	private Map<String, String> requirements;
-	private Map<String, String> capabilities;
-	private Map<String, String> interfaces;
-	private Map<String, String> artifacts;
 
-	@Override
-	public int hashCode() {
-		int hashCode = 0;
-		if (this.type != null) {
-			hashCode += this.type.hashCode();
-		}
-		if (hashCode == 0) {
-			hashCode = super.hashCode();
-		}
-		return hashCode;
-	}
+	private String type = "";
+	private Map<String, Object> properties = new HashMap<String, Object>();
+	private Map<String, String> requirements = new HashMap<String, String>();
+	private Map<String, String> capabilities = new HashMap<String, String>();
+	private Map<String, String> interfaces = new HashMap<String, String>();
+	private Map<String, String> artifacts = new HashMap<String, String>();
 
-	@Override
-	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (object instanceof NodeTemplate) {
-			final NodeTemplate nodeTemplateObject = (NodeTemplate) object;
-			boolean equals = true;
-			equals &= this.type == nodeTemplateObject.type || this.type != null && this.type.equals(nodeTemplateObject.type);
-			equals &= this.properties == nodeTemplateObject.properties;
-			equals &= this.requirements == nodeTemplateObject.requirements;
-			equals &= this.capabilities == nodeTemplateObject.capabilities;
-			equals &= this.interfaces == nodeTemplateObject.interfaces;
-			equals &= this.artifacts == nodeTemplateObject.artifacts;
-			return equals;
-		}
-		return false;
-	}
 
 	public void setType(String type) {
-		this.type = type;
+		if (type != null) {
+			this.type = type;
+		}
 	}
 
 	public String getType() {
@@ -49,7 +24,9 @@ public class NodeTemplate extends YAMLElement {
 	}
 
 	public void setProperties(Map<String, Object> properties) {
-		this.properties = properties;
+		if (properties != null) {
+			this.properties = properties;
+		}
 	}
 
 	public Map<String, Object> getProperties() {
@@ -57,7 +34,9 @@ public class NodeTemplate extends YAMLElement {
 	}
 
 	public void setRequirements(Map<String, String> requirements) {
-		this.requirements = requirements;
+		if (requirements != null) {
+			this.requirements = requirements;
+		}
 	}
 
 	public Map<String, String> getRequirements() {
@@ -65,10 +44,42 @@ public class NodeTemplate extends YAMLElement {
 	}
 
 	public void setCapabilities(Map<String, String> capabilities) {
-		this.capabilities = capabilities;
+		if (capabilities != null) {
+			this.capabilities = capabilities;
+		}
 	}
 
 	public Map<String, String> getCapabilities() {
 		return this.capabilities;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		NodeTemplate that = (NodeTemplate) o;
+
+		if (!artifacts.equals(that.artifacts)) return false;
+		if (!capabilities.equals(that.capabilities)) return false;
+		if (!interfaces.equals(that.interfaces)) return false;
+		if (!properties.equals(that.properties)) return false;
+		if (!requirements.equals(that.requirements)) return false;
+		if (!type.equals(that.type)) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + type.hashCode();
+		result = 31 * result + properties.hashCode();
+		result = 31 * result + requirements.hashCode();
+		result = 31 * result + capabilities.hashCode();
+		result = 31 * result + interfaces.hashCode();
+		result = 31 * result + artifacts.hashCode();
+		return result;
 	}
 }
