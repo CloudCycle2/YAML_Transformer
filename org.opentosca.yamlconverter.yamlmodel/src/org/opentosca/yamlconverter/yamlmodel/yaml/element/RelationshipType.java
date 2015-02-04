@@ -1,5 +1,6 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,9 @@ public class RelationshipType extends YAMLElement {
 	}
 
 	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
+		if (properties != null) {
+			this.properties = properties;
+		}
 	}
 
 	public Map<String, String> getInterfaces() {
@@ -22,7 +25,9 @@ public class RelationshipType extends YAMLElement {
 	}
 
 	public void setInterfaces(Map<String, String> interfaces) {
-		this.interfaces = interfaces;
+		if (interfaces != null) {
+			this.interfaces = interfaces;
+		}
 	}
 
 	public String[] getTargets() {
@@ -30,25 +35,32 @@ public class RelationshipType extends YAMLElement {
 	}
 
 	public void setTargets(String[] targets) {
-		this.targets = targets;
+		if (targets != null) {
+			this.targets = targets;
+		}
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		RelationshipType that = (RelationshipType) o;
+
+		if (!interfaces.equals(that.interfaces)) return false;
+		if (!properties.equals(that.properties)) return false;
+		if (!Arrays.equals(targets, that.targets)) return false;
+
+		return true;
+	}
+
+	@Override
 	public int hashCode() {
-		int hashCode = 0;
-		if ( hashCode == 0 ) {
-			hashCode = super.hashCode();
-		}
-		return hashCode;
-	}
-
-	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (object instanceof RelationshipType) {
-			RelationshipType relationshipTypeObject = (RelationshipType) object;
-			boolean equals = true;
-			return equals;
-		}
-		return false;
+		int result = super.hashCode();
+		result = 31 * result + properties.hashCode();
+		result = 31 * result + interfaces.hashCode();
+		result = 31 * result + (targets != null ? Arrays.hashCode(targets) : 0);
+		return result;
 	}
 }

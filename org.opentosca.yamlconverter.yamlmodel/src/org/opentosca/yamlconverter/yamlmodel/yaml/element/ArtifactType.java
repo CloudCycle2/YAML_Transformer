@@ -1,11 +1,12 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ArtifactType extends YAMLElement {
 
-	private String mime_type;
+	private String mime_type = "";
 	private String[] file_ext;
 	private Map<String, String> properties = new HashMap<String, String>();
 
@@ -14,7 +15,9 @@ public class ArtifactType extends YAMLElement {
 	}
 
 	public void setMime_type(String mime_type) {
-		this.mime_type = mime_type;
+		if (mime_type != null) {
+			this.mime_type = mime_type;
+		}
 	}
 
 	public String[] getFile_ext() {
@@ -22,7 +25,9 @@ public class ArtifactType extends YAMLElement {
 	}
 
 	public void setFile_ext(String[] file_ext) {
-		this.file_ext = file_ext;
+		if (file_ext != null) {
+			this.file_ext = file_ext;
+		}
 	}
 
 	public Map<String, String> getProperties() {
@@ -30,25 +35,32 @@ public class ArtifactType extends YAMLElement {
 	}
 
 	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
+		if (properties != null) {
+			this.properties = properties;
+		}
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		ArtifactType that = (ArtifactType) o;
+
+		if (!Arrays.equals(file_ext, that.file_ext)) return false;
+		if (!mime_type.equals(that.mime_type)) return false;
+		if (!properties.equals(that.properties)) return false;
+
+		return true;
+	}
+
+	@Override
 	public int hashCode() {
-		int hashCode = 0;
-		if ( hashCode == 0 ) {
-			hashCode = super.hashCode();
-		}
-		return hashCode;
-	}
-
-	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (object instanceof ArtifactType) {
-			ArtifactType artifactTypeObject = (ArtifactType) object;
-			boolean equals = true;
-			return equals;
-		}
-		return false;
+		int result = super.hashCode();
+		result = 31 * result + mime_type.hashCode();
+		result = 31 * result + (file_ext != null ? Arrays.hashCode(file_ext) : 0);
+		result = 31 * result + properties.hashCode();
+		return result;
 	}
 }
