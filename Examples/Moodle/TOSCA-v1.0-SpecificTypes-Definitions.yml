@@ -1,0 +1,115 @@
+capability_types:
+	ApacheWebApplicationContainerCapability:
+		derived_from: ns1:WebApplicationContainerCapability # TODO
+		description: Apache Web Application Container Capability
+		
+	ApacheModuleContainerCapability:
+		derived_from: tosca.capabilities.Container
+		description: Apache Module Container Capability
+		
+	MySQLDatabaseContainerCapability:
+		derived_from: ns1:DatabaseContainerCapability" # TODO
+	    description: MySQL Database Container Capability
+
+    MySQLDatabaseEndpointCapability:
+		derived_from: tosca.capabilities.DatabaseEndpoint
+	    description: MySQL Database Endpoint Capability
+
+    PHPRuntimeCapability:
+		derived_from: tosca.capabilities.Feature
+	    description: PHP Runtime Capability
+
+node_types:
+	ApacheWebServer:
+		derived_from: tosca.nodes.WebServer
+		description: Apache Web Server
+		properties:
+			tns:ApacheWebServerProperties # TODO
+		capabilities: 
+			ApacheWebApplicationContainerCapability
+		interfaces:
+			tosca.interfaces.node.Lifecycle
+			
+    <CapabilityDefinitions>
+      <CapabilityDefinition
+        capabilityType="tns:ApacheWebApplicationContainerCapability"
+        lowerBound="0" name="webapps" upperBound="unbounded"/>
+      <CapabilityDefinition
+        capabilityType="tns:ApacheModuleContainerCapability"
+        lowerBound="0" name="modules" upperBound="unbounded"/>
+      <CapabilityDefinition capabilityType="ns1:HTTPEndpointCapability"
+        lowerBound="0" name="clients" upperBound="unbounded"/>
+    </CapabilityDefinitions>
+ 
+	ApacheWebApplication:
+		derived_from: tosca.nodes.WebApplication
+		description: Apache Web Application
+
+    <RequirementDefinitions>
+      <RequirementDefinition lowerBound="1" name="container"
+        requirementType="tns:ApacheWebApplicationContainerRequirement" upperBound="1"/>
+    </RequirementDefinitions>
+
+	
+	ApacheModule:
+		derived_from: tosca.nodes.Root
+		description: Apache Module
+		
+    <RequirementDefinitions>
+      <RequirementDefinition lowerBound="1" name="container"
+        requirementType="tns:ApacheModuleContainerRequirement" upperBound="1"/>
+    </RequirementDefinitions>
+
+	ApachePHPModule:
+		derived_from: ApacheModule
+		description: Apache PHP Module
+		interfaces:
+			tosca.interfaces.node.lifecycle
+				
+		
+    <CapabilityDefinitions>
+      <CapabilityDefinition capabilityType="tns:PHPRuntimeCapability"
+        lowerBound="0" name="phpApps" upperBound="unbounded"/>
+    </CapabilityDefinitions>
+
+  
+    ApacheLoadbalancerModule:
+		derived_from: ApacheModule
+		description: Apache Loadbalancer Module
+		interfaces:
+			tosca.interfaces.node.lifecycle
+
+    <PropertiesDefinition element="tns:ApacheLoadbalancerModuleProperties"/>
+    <RequirementDefinitions>
+      <RequirementDefinition lowerBound="1" name="members"
+        requirementType="ns1:HTTPEndpointRequirement" upperBound="1"/>
+    </RequirementDefinitions>
+
+  
+    MySQL:
+		derived_from: tosca.nodes.DBMS
+		description: MySQL
+		interfaces:
+			tosca.interfaces.node.lifecycle
+
+    <PropertiesDefinition element="tns:MySQLProperties"/>
+    <CapabilityDefinitions>
+      <CapabilityDefinition
+        capabilityType="tns:MySQLDatabaseContainerCapability"
+        lowerBound="0" name="databases" upperBound="unbounded"/>
+    </CapabilityDefinitions>
+
+  
+    MySQLDatabase:
+		derived_from: tosca.nodes.Database
+		description: MySQL Database
+  
+    <RequirementDefinitions>
+      <RequirementDefinition lowerBound="1" name="container"
+        requirementType="tns:MySQLDatabaseContainerRequirement" upperBound="1"/>
+    </RequirementDefinitions>
+    <CapabilityDefinitions>
+      <CapabilityDefinition
+        capabilityType="tns:MySQLDatabaseEndpointCapability"
+        lowerBound="0" name="clients" upperBound="unbounded"/>
+    </CapabilityDefinitions>
