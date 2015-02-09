@@ -1,11 +1,13 @@
 package org.opentosca.yamlconverter.main;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Map;
 
 public class MasterParserTest extends BaseTest {
 	private final IToscaYamlParser parser = new Parser();
@@ -19,5 +21,26 @@ public class MasterParserTest extends BaseTest {
 		// parser.setInputValues(input);
 		final String xml = this.parser.getXML();
 		System.out.println(xml);
+	}
+
+	@Test
+	public void testGetInputRequirements() throws Exception {
+		final String yamlInput = this.testUtils.readYamlTestResource("/yaml/inputs.yaml");
+		this.parser.parse(yamlInput);
+		final Map<String, String> inputs = this.parser.getInputRequirements();
+		Assert.assertNotNull(inputs);
+		Assert.assertEquals(1, inputs.size());
+		Assert.assertTrue("contains an input with key 'foo'", inputs.containsKey("foo"));
+	}
+
+	@Test
+	public void testGetInputRequirements_WithoutConstraints() throws Exception {
+		final String yamlInput = this.testUtils.readYamlTestResource("/yaml/inputs_emptyConstraints.yaml");
+		this.parser.parse(yamlInput);
+		final Map<String, String> inputs = this.parser.getInputRequirements();
+		Assert.assertNotNull(inputs);
+		Assert.assertEquals(1, inputs.size());
+		Assert.assertTrue("contains an input with key 'foo'", inputs.containsKey("foo"));
+		Assert.assertTrue("constraints are not in description", inputs.get("foo").toLowerCase().contains("constraints: none"));
 	}
 }

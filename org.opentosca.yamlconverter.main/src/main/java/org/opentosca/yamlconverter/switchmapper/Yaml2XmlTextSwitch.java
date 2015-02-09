@@ -9,6 +9,7 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
+@Deprecated
 public class Yaml2XmlTextSwitch {
 	public static final String TYPES_XSD_FILENAME = "TypesGen.xsd";
 
