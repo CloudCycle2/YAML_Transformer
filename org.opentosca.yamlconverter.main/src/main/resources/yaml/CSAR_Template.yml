@@ -1,0 +1,144 @@
+# Required TOSCA Definitions version string
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+# Optional. default namespace (schema, types version) 
+tosca_default_namespace: http://types.opentosca.org 
+
+# Optional name of this service template
+template_name: InstallVMServTemplate   
+
+# Optional author of this service template           
+template_author:     
+
+# Optional version of this service template       
+template_version:           
+ 
+description: Service Template for installing VMServ 
+ 
+imports: 
+  # list of import statements for importing other definitions files 
+  - TOSCA_definition.yaml
+ 
+inputs: 
+  # list of global input parameters 
+  minRAM:
+    type: string
+    description: Number of RAM
+  credentials:
+    type: string
+    description: Credentials
+  endpointsAPI:
+    type: string
+    description: Endpoint API
+  flavorId:
+    type: string
+    description: Flavor ID
+    default: 3  
+  keypair:
+    type: string
+    description: keypair
+  imageId:
+    type: string
+    description: image ID
+  imageName:
+    type: string
+    description: Name of the image
+    default: ubuntu-12.04-server-cloudimg-amd64
+  minDisk:
+    type: string
+    description: Minimal number of disks
+ 
+node_templates: 
+  # list of node templates
+  InstallOpenStackVMTemplate:
+    type: InstallOpenStackVM
+    properties:
+      credentials: {"auth": {"tenantId": "4114e1b404404565ac2ccbcc76b8078e","passwordCredentials": {"username": "marzie.dehghanipour","password": "piorkaun"}}}
+      endpointsAPI: {"os-identity-api": "http://129.69.209.127: 5000/v2.0","os-tenantId": "4114e1b404404565ac2ccbcc76b8078e"}
+      keypair: {get_input: keypair} 
+      minDisk: {get_input: minDisk}
+      minRAM: {get_input: minRAM}
+      flavorId: {get_input: flavorId}
+      imageId: {get_input: imageId}
+      imageName: {get_input: imageName}
+      floatingIp:
+      serverId:
+      privKey:
+
+  LinuxOperatingSystem:
+    type: OperatingSystem
+    properties:
+      hostname:
+      sshUser: ubuntu
+      sshKey:
+      script: uname -a
+ 
+node_types: 
+  # list of node type definitions
+  OperatingSystem:
+    derived_from: tosca.nodes.Root
+    description: Operating System
+    properties:
+      hostname:
+        type: string
+      sshUser:
+        type: string
+      sshKey:
+        type: string
+      script:
+        type: string 
+    interfaces: 
+      InterfaceUbuntu:  
+    artifacts:
+      UbuntuNodeTypeImplementation_IA_ArtifactTemplate:
+        type: WAR
+        description: <artifact_description>
+        properties:
+          ServiceEndpoint: /services/org_opentosca_types_Ubuntu__InterfaceUbuntuPort
+          PortType: "{http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu" #TODO define interface
+          InvocationType: SOAP/HTTP
+
+  InstallOpenStackVM:
+    derived_from: tosca.nodes.Root
+    description: InstallOpenStackVM
+    properties:
+      credentials:
+        type: string
+      endpointsAPI:
+        type: string
+      keypair:
+        type: string
+      minDisk:
+        type: string
+      minRAM:
+        type: string
+      flavorId:
+        type: string
+      imageId:
+        type: string
+      imageName:
+        type: string
+      floatingIp:
+        type: string
+      serverId:
+        type: string
+      privKey:
+        type: string
+    interfaces:
+      Custom_InstallVM:
+        InstallVMwithCustomKeypair:
+          implementation: InstallOpenStackVM_IA
+        InstallVMWithGeneratedKeypair:
+          implementation: InstallOpenStackVM_IA
+        InstallVMwithVustomFlavor:
+          implementation: InstallOpenStackVM_IA
+        InstallVMwithCustomImage:
+          implementation: InstallOpenStackVM_IA
+    artifacts:
+      InstallOpenStackVM_IA:
+        type: WAR
+        description: <artifact_description>
+        properties:
+          ServiceEndpoint: /services/InstallOpenStackVM_Custom_InstallVMPort
+          PortType: "{http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM" #TODO define interface
+          InvocationType: SOAP/HTTP
