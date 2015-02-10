@@ -401,7 +401,6 @@ public class Yaml2XmlSwitch {
 			case "get_ref_property":
 				return DEFAULT_USER_INPUT;
 			default:
-				// TODO: unknown object -> serialize map to yaml-string
 				final String result = serializeYAML(getterMap);
 				if (result != null) {
 					return result;
