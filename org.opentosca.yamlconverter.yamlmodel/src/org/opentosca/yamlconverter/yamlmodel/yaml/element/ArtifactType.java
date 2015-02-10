@@ -8,7 +8,7 @@ public class ArtifactType extends YAMLElement {
 
 	private String mime_type = "";
 	private String[] file_ext;
-	private Map<String, String> properties = new HashMap<String, String>();
+	private Map<String, PropertyDefinition> properties = new HashMap<String, PropertyDefinition>();
 
 	public String getMime_type() {
 		return mime_type;
@@ -30,11 +30,11 @@ public class ArtifactType extends YAMLElement {
 		}
 	}
 
-	public Map<String, String> getProperties() {
+	public Map<String, PropertyDefinition> getProperties() {
 		return properties;
 	}
 
-	public void setProperties(Map<String, String> properties) {
+	public void setProperties(Map<String, PropertyDefinition> properties) {
 		if (properties != null) {
 			this.properties = properties;
 		}
