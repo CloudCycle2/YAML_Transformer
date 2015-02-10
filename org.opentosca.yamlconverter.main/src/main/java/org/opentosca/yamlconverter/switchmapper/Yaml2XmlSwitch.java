@@ -184,7 +184,7 @@ public class Yaml2XmlSwitch {
 
 	private TRelationshipType case_RelationshipType(Entry<String, RelationshipType> relType) {
 		final TRelationshipType result = new TRelationshipType();
-		for (final Entry<String, Map<String, InterfaceDefinition>> iface : relType.getValue().getInterfaces().entrySet()) {
+		for (final Entry<String, Map<String, Map<String, OperationDefinition>>> iface : relType.getValue().getInterfaces().entrySet()) {
 			// TODO
 		}
 		for (final Entry<String, PropertyDefinition> prop : relType.getValue().getProperties().entrySet()) {
