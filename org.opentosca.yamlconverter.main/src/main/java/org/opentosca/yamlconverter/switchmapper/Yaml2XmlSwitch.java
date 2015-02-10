@@ -1,5 +1,7 @@
 package org.opentosca.yamlconverter.switchmapper;
 
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,16 +29,20 @@ import org.opentosca.model.tosca.TServiceTemplate;
 import org.opentosca.model.tosca.TTopologyTemplate;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Import;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlWriter;
+
 public class Yaml2XmlSwitch {
 	private static final String XMLSCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
 
 	private static final String NS = "http://www.example.org/tosca/yamlgen";
+
+	private static final String DEFAULT_USER_INPUT = null;
 
 	private static String TYPESNS = "http://www.example.org/tosca/yamlgen/types";
 
@@ -135,11 +141,10 @@ public class Yaml2XmlSwitch {
 		// result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(case_ArtifactType(artType));
 		// }
 		if (elem.getImports() != null) {
-//			for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
-				// TODO: How do we handle imports?
-				// result.getImport().add(case_Import(importelem));
-				// TODO: add types import
-//			}
+			// for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
+			// TODO: How do we handle imports?
+			// result.getImport().add(case_Import(importelem));
+			// }
 		}
 		result.getImport().add(createTypeImport());
 		// serviceTemplate.setBoundaryDefinitions(value);
@@ -174,12 +179,20 @@ public class Yaml2XmlSwitch {
 
 	private TRelationshipType case_RelationshipType(Entry<String, RelationshipType> relType) {
 		final TRelationshipType result = new TRelationshipType();
-		// TODO: YAMLmodel RelationshipType
+		for (final Entry<String, String> iface : relType.getValue().getInterfaces().entrySet()) {
+			// TODO
+		}
+		for (final Entry<String, String> prop : relType.getValue().getProperties().entrySet()) {
+			// TODO
+		}
+		for (final String target : relType.getValue().getTargets()) {
+			// TODO
+		}
 		// result.setAbstract(value);
 		// result.setDerivedFrom(value);
 		// result.setFinal(value);
 		// result.setInstanceStates(value);
-		// result.setName(value);
+		result.setName(relType.getKey());
 		// result.setPropertiesDefinition(value);
 		// result.setSourceInterfaces(value);
 		// result.setTags(value);
@@ -195,12 +208,18 @@ public class Yaml2XmlSwitch {
 
 	private TCapabilityType case_CapabilityType(Entry<String, CapabilityType> capType) {
 		final TCapabilityType result = new TCapabilityType();
+		for (final Entry<String, String> prop : capType.getValue().getProperties().entrySet()) {
+			// TODO
+		}
+		// PropertiesDefinition propDef = new PropertiesDefinition();
+		// propDef.setElement(value);
+		// propDef.setType(value);
+		// result.setPropertiesDefinition(propDef );
 		// TODO: YAMLmodel CapabilityType
 		// result.setAbstract(value);
 		// result.setDerivedFrom(value);
 		// result.setFinal(value);
-		// result.setName(value);
-		// result.setPropertiesDefinition(value);
+		result.setName(capType.getKey());
 		// result.setTags(value);
 		// result.setTargetNamespace(value);
 		// result.getAny().add();
@@ -362,21 +381,48 @@ public class Yaml2XmlSwitch {
 				if (getInputs().containsKey(inputvar)) {
 					return getInputs().get(inputvar);
 				}
-				// TODO: defaults
-				break;
+				if (this.st.getInputs().containsKey(inputvar)) {
+					if (this.st.getInputs().get(inputvar).getDefault() != null && !this.st.getInputs().get(inputvar).getDefault().isEmpty()) {
+						return this.st.getInputs().get(inputvar).getDefault();
+					}
+				}
+				// TODO: *Type-defaults
+				return DEFAULT_USER_INPUT;
 			case "get_property":
 				@SuppressWarnings("unchecked")
 				final List<String> list = (List<String>) getter.getValue();
 				final String template = list.get(0);
 				final String property = list.get(1);
-				return (String) this.st.getNode_templates().get(template).getProperties().get(property);
+				if (this.st.getNode_templates().containsKey(template)) {
+					if (this.st.getNode_templates().get(template).getProperties().containsKey(property)) {
+						return (String) this.st.getNode_templates().get(template).getProperties().get(property);
+					}
+				}
 			case "get_ref_property":
-				return "DEFAULTREFPROPERTY";
+				return DEFAULT_USER_INPUT;
 			default:
-				return "DEFAULTGETTERINPUT";
+				// TODO: unknown object -> serialize map to yaml-string
+				final String result = serializeYAML(getterMap);
+				if (result != null) {
+					return result;
+				} else {
+					return DEFAULT_USER_INPUT;
+				}
 			}
 		}
 		return "";
+	}
+
+	private String serializeYAML(Map<String, Object> getterMap) {
+		final Writer output = new StringWriter();
+		final YamlWriter writer = new YamlWriter(output);
+		try {
+			writer.write(getterMap);
+			writer.close();
+		} catch (final YamlException e) {
+			return null;
+		}
+		return output.toString();
 	}
 
 	/**
