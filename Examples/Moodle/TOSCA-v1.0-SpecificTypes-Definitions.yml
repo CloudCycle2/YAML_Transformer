@@ -1,142 +1,155 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+description: Template for deploying a single server with predefined properties.
+
 capability_types:
-	ApacheWebApplicationContainerCapability:
-		derived_from: WebApplicationContainerCapability
-		description: Apache Web Application Container Capability
-	
-	WebApplicationContainerCapability:
-		derived_from: ContainerCapability
-		description: Web Application Container Capability
-		
-	# TODO: Check if YAML tosca.capabilities.container can be used, but this is derived from tosca.capabilities.Feature which is derived from tosca.capabilities.Root
-	ContainerCapability
-		derived_from: tosca.capabilities.Root
-		description: Container Capability
-	
-	ApacheModuleContainerCapability:
-		derived_from: ContainerCapability
-		description: Apache Module Container Capability
-		
-	HTTPEndpointCapability:
-		derived_from: IPEndpointCapability
-		description: HTTP Endpoint Capability
-	
-	IPEndpointCapability:
-		derived_from: EndpointCapability
-		description: IP Endpoint Capability
-	
-	EndpointCapability
-		derived_from: tosca.capabilities.Endpoint
-		description: Endpoint Capability
-		
-	DatabaseContainerCapability:	
-		derived_from: Container Capability
-		description: Database Container Capability
-	
-	MySQLDatabaseContainerCapability:
-		derived_from: DatabaseContainerCapability"
-	    description: MySQL Database Container Capability
+  ApacheWebApplicationContainerCapability:
+    derived_from: WebApplicationContainerCapability
+    description: Apache Web Application Container Capability
 
-    MySQLDatabaseEndpointCapability:
-		derived_from: tosca.capabilities.DatabaseEndpoint
-	    description: MySQL Database Endpoint Capability
+  WebApplicationContainerCapability:
+    derived_from: ContainerCapability
+    description: Web Application Container Capability
 
-    PHPRuntimeCapability:
-		derived_from: tosca.capabilities.Feature
-	    description: PHP Runtime Capability
+# TODO: Check if YAML tosca.capabilities.container can be used, but this is derived from tosca.capabilities.Feature which is derived from tosca.capabilities.Root
+  ContainerCapability:
+    derived_from: tosca.capabilities.Root
+    description: Container Capability
+
+  ApacheModuleContainerCapability:
+    derived_from: ContainerCapability
+    description: Apache Module Container Capability
+
+  HTTPEndpointCapability:
+    derived_from: IPEndpointCapability
+    description: HTTP Endpoint Capability
+
+  IPEndpointCapability:
+    derived_from: EndpointCapability
+    description: IP Endpoint Capability
+
+  EndpointCapability:
+    derived_from: EndpointCapability
+    description: IP Endpoint Capability
+
+  DatabaseContainerCapability:
+    derived_from: Container Capability
+    description: Database Container Capability
+
+  MySQLDatabaseContainerCapability:
+    derived_from: DatabaseContainerCapability
+    description: MySQL Database Container Capability
+
+  MySQLDatabaseEndpointCapability:
+    derived_from: tosca.capabilities.DatabaseEndpoint
+    description: MySQL Database Endpoint Capability
+
+  PHPRuntimeCapability:
+    derived_from: tosca.capabilities.Feature
+    description: PHP Runtime Capability
 
 node_types:
-	ApacheWebServer:
-		derived_from: tosca.nodes.WebServer
-		description: Apache Web Server
-		properties:
-			httpdport:
-				type: int
-				default: 80
-				description: Apache HTTP Port (default 80)
-		capabilities: 
-			webapps:
-				type: ApacheWebApplicationContainerCapability
-			modules:
-				type: ApacheModuleContainerCapability
-			clients:
-				type: HTTPEndpointCapability
-		interfaces:
-			[tosca.interfaces.node.Lifecycle] # TODO: do I have to name the operations?
-				install:
-					implementation: at-ApacheWebServer-install
-				configure:
-					implementation: at-ApacheWebServer-configure
-				start:
-					implementation: at-ApacheWebServer-start
-				stop:
-					implementation: at-ApacheWebServer-stop
+  ApacheWebServer:
+    derived_from: tosca.nodes.WebServer
+    description: Apache Web Server
+    properties:
+      httpdport:
+        type: int
+        default: 80
+        description: Apache HTTP Port (default 80)
+    capabilities: 
+      webapps:
+        type: ApacheWebApplicationContainerCapability
+      modules:
+        type: ApacheModuleContainerCapability
+      clients:
+        type: HTTPEndpointCapability
+    interfaces:
+      [tosca.interfaces.node.Lifecycle]:# TODO: do I have to name the operations?
+        install:
+          implementation: at-ApacheWebServer-install
+        configure:
+          implementation: at-ApacheWebServer-configure
+        start:
+          implementation: at-ApacheWebServer-start
+        stop:
+          implementation: at-ApacheWebServer-stop
+    artifacts:
+      at-ApacheWebServer-install: scripts/ApacheWebServer/install.sh
+        derived_from: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApacheWebServer/install.sh
+      at-ApacheWebServer-configure:
+      at-ApacheWebServer-start:
+      at-ApacheWebServer-stop:
 
-	WebApplication: 
-		derived_from: tosca.nodes.Root
-		description: Web Application
-		requirements:
-			- container: ApacheWebApplicationContainerCapability # XML: big ******* inheritance
-		
-	ApacheWebApplication:
-		derived_from: WebApplication # TODO: check if tosca.nodes.WebApplication can be used (requirement host instead of container)
-		description: Apache Web Application
-	
-	ApacheModule:
-		derived_from: tosca.nodes.Root
-		description: Apache Module
-		requirements:
-			- container: ApacheModuleContainerCapability
+  WebApplication: 
+    derived_from: tosca.nodes.Root
+    description: Web Application
+    requirements:
+      - container: ApacheWebApplicationContainerCapability # XML: big ******* inheritance
 
-	ApachePHPModule:
-		derived_from: ApacheModule
-		description: Apache PHP Module
-		capabilities:
-			phpApps:
-				type: PHPRuntimeCapability
-		interfaces:
-			[tosca.interfaces.node.lifecycle]
-				configure:
-					implementation: at-ApacheWebServer-configure
-				start:
-					implementation: at-ApacheWebServer-start
-  
-    ApacheLoadbalancerModule:
-		derived_from: ApacheModule
-		description: Apache Loadbalancer Module
-		properties:
-			httpdport:
-				type: int
-				description: httpdocsApache WebServer Portnumber (default:80)
-				default: 80
-		requirements:
-			- members: HTTPEndpointCapability
-		interfaces:
-			[tosca.interfaces.node.lifecycle]
-				configure:
-					implementation: at-ApacheWebServer-configure
-				start:
-					implementation: at-ApacheWebServer-start
- 
-    MySQL:
-		derived_from: tosca.nodes.DBMS # TODO check YAML and XML - it iks different????
-		description: MySQL
-		capabilities:
-			databases: MySQLDatabaseContainerCapability
-		interfaces:
-			[tosca.interfaces.node.Lifecycle] # TODO: do I have to name the operations?
-				install:
-					implementation: at-ApacheWebServer-install
-				configure:
-					implementation: at-ApacheWebServer-configure
-				start:
-					implementation: at-ApacheWebServer-start
-				stop:
-					implementation: at-ApacheWebServer-stop
-  
-    MySQLDatabase:
-		derived_from: tosca.nodes.Database # TODO: check if this is the same
-		description: MySQL Database
-		requirements:
-			- container: MySQLDatabaseContainerCapability
-		capabilities:
-			clients: MySQLDatabaseEndpointCapability
+  ApacheWebApplication:
+    derived_from: WebApplication # TODO: check if tosca.nodes.WebApplication can be used (requirement host instead of container)
+    description: Apache Web Application
+
+  ApacheModule:
+    derived_from: tosca.nodes.Root
+    description: Apache Module
+    requirements:
+      - container: ApacheModuleContainerCapability
+
+  ApachePHPModule:
+    derived_from: ApacheModule
+    description: Apache PHP Module
+    capabilities:
+      phpApps:
+        type: PHPRuntimeCapability
+    interfaces:
+      [tosca.interfaces.node.lifecycle]:
+        configure:
+          implementation: at-ApacheWebServer-configure
+        start:
+          implementation: at-ApacheWebServer-start
+
+  ApacheLoadbalancerModule:
+    derived_from: ApacheModule
+    description: Apache Loadbalancer Module
+    properties:
+      httpdport:
+        type: int
+        description: httpdocsApache WebServer Portnumber (default:80)
+        default: 80
+    requirements:
+      - members: HTTPEndpointCapability
+    interfaces:
+      [tosca.interfaces.node.lifecycle]:
+        configure:
+          implementation: at-ApacheWebServer-configure
+        start:
+          implementation: at-ApacheWebServer-start
+
+  MySQL:
+    derived_from: tosca.nodes.DBMS # TODO check YAML and XML - it is different????
+    description: MySQL
+    capabilities:
+      databases: MySQLDatabaseContainerCapability
+    interfaces:
+      [tosca.interfaces.node.Lifecycle]:# TODO do I have to name the operations?
+        install:
+          implementation: at-ApacheWebServer-install
+        configure:
+          implementation: at-ApacheWebServer-configure
+        start:
+          implementation: at-ApacheWebServer-start
+        stop:
+          implementation: at-ApacheWebServer-stop
+
+  MySQLDatabase:
+    derived_from: tosca.nodes.Database # TODO: check if this is the same
+    description: MySQL Database
+    requirements:
+      - container: MySQLDatabaseContainerCapability
+    capabilities:
+      clients: MySQLDatabaseEndpointCapability
