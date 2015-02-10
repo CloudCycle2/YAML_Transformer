@@ -59,6 +59,9 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 		config.setPropertyElementType(ServiceTemplate.class, "artifact_types", ArtifactType.class);
 		config.setPropertyElementType(ServiceTemplate.class, "groups", Group.class);
 		config.setPropertyElementType(ServiceTemplate.class, "outputs", Output.class);
+		config.setPropertyElementType(NodeType.class, "properties", PropertyDefinition.class);
+		config.setPropertyElementType(RelationshipType.class, "properties", PropertyDefinition.class);
+		config.setPropertyElementType(CapabilityType.class, "properties", PropertyDefinition.class);
 	}
 
 }

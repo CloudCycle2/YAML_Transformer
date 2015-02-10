@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class CapabilityType extends YAMLElement {
 
-	private Map<String, String> properties = new HashMap<String, String>();
+	private Map<String, PropertyDefinition> properties = new HashMap<String, PropertyDefinition>();
 
-	public Map<String, String> getProperties() {
+	public Map<String, PropertyDefinition> getProperties() {
 		return properties;
 	}
 
-	public void setProperties(Map<String, String> properties) {
+	public void setProperties(Map<String, PropertyDefinition> properties) {
 		this.properties = properties;
 	}
 

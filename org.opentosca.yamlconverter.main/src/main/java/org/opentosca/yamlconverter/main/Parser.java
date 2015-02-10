@@ -1,8 +1,5 @@
 package org.opentosca.yamlconverter.main;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
@@ -10,6 +7,9 @@ import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Parser implements IToscaYamlParser {
 
@@ -42,7 +42,7 @@ public class Parser implements IToscaYamlParser {
 			this.definition = this.b2b.yamlb2xmlb(this.serviceTempl);
 			this.xml = this.x2xb.xmlbean2xml(this.definition);
 		}
-		return this.xml.toString();
+		return this.xml;
 	}
 
 	@Override

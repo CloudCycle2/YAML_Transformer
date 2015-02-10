@@ -6,20 +6,20 @@ import java.util.Map;
 public class NodeType extends YAMLElement {
 
 	private String derived_from = "";
-	private Map<String, Map<String, String>> properties = new HashMap<String, Map<String, String>>();
-	private Map<String, String> requirements = new HashMap<String, String>();
-	private Map<String, String> capabilities = new HashMap<String, String>();
-	private Map<String, String> interfaces = new HashMap<String, String>();
-	private Map<String, String> artifacts = new HashMap<String, String>();
+	private Map<String, PropertyDefinition> properties = new HashMap<String, PropertyDefinition>();
+	private Map<String, Object> requirements = new HashMap<String, Object>();
+	private Map<String, Object> capabilities = new HashMap<String, Object>();
+	private Map<String, Map<String, InterfaceDefinition>> interfaces = new HashMap<String, Map<String, InterfaceDefinition>>();
+	private Map<String, Object> artifacts = new HashMap<String, Object>();
 
 
-	public void setArtifacts(Map<String, String> artifacts) {
+	public void setArtifacts(Map<String, Object> artifacts) {
 		if (artifacts != null) {
 			this.artifacts = artifacts;
 		}
 	}
 
-	public Map<String, String> getArtifacts() {
+	public Map<String, Object> getArtifacts() {
 		return this.artifacts;
 	}
 
@@ -33,41 +33,41 @@ public class NodeType extends YAMLElement {
 		}
 	}
 
-	public Map<String, Map<String, String>> getProperties() {
+	public Map<String, PropertyDefinition> getProperties() {
 		return this.properties;
 	}
 
-	public void setProperties(Map<String, Map<String, String>> properties) {
+	public void setProperties(Map<String, PropertyDefinition> properties) {
 		if (properties != null) {
 			this.properties = properties;
 		}
 	}
 
-	public Map<String, String> getRequirements() {
+	public Map<String, Object> getRequirements() {
 		return this.requirements;
 	}
 
-	public void setRequirements(Map<String, String> requirements) {
+	public void setRequirements(Map<String, Object> requirements) {
 		if (requirements != null) {
 			this.requirements = requirements;
 		}
 	}
 
-	public Map<String, String> getCapabilities() {
+	public Map<String, Object> getCapabilities() {
 		return this.capabilities;
 	}
 
-	public void setCapabilities(Map<String, String> capabilities) {
+	public void setCapabilities(Map<String, Object> capabilities) {
 		if (capabilities != null) {
 			this.capabilities = capabilities;
 		}
 	}
 
-	public Map<String, String> getInterfaces() {
+	public Map<String, Map<String, InterfaceDefinition>> getInterfaces() {
 		return this.interfaces;
 	}
 
-	public void setInterfaces(Map<String, String> interfaces) {
+	public void setInterfaces(Map<String, Map<String, InterfaceDefinition>> interfaces) {
 		if (interfaces != null) {
 			this.interfaces = interfaces;
 		}
