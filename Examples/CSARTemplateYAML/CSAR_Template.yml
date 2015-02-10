@@ -79,12 +79,12 @@ node_types:
     derived_from: tosca.nodes.Root
     description: Operating System
     properties:
-     hostname:
-       type: string
-     sshUser:
-       type: string
+      hostname:
+        type: string
+      sshUser:
+        type: string
       sshKey:
-       type: string
+        type: string
       script:
         type: string 
     interfaces: 
@@ -126,12 +126,12 @@ node_types:
         type: string
     interfaces:
       Custom_InstallVM:
-	    InstallVMwithCustomKeypair:
-	      implementation: InstallOpenStackVM_IA
-	    InstallVMWithGeneratedKeypair:
-	      implementation: InstallOpenStackVM_IA
+        InstallVMwithCustomKeypair:
+          implementation: InstallOpenStackVM_IA
+        InstallVMWithGeneratedKeypair:
+          implementation: InstallOpenStackVM_IA
         InstallVMwithVustomFlavor:
-	      implementation: InstallOpenStackVM_IA
+          implementation: InstallOpenStackVM_IA
         InstallVMwithCustomImage:
           implementation: InstallOpenStackVM_IA	 
     artifacts:
