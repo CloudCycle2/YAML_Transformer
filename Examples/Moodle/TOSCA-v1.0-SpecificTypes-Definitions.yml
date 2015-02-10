@@ -2,6 +2,9 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 
 description: Template for deploying a single server with predefined properties.
 
+imports:
+  - MoodleTypes-Definitions.yml # Because of ScriptArtifact
+
 capability_types:
   ApacheWebApplicationContainerCapability:
     derived_from: WebApplicationContainerCapability
@@ -75,14 +78,26 @@ node_types:
         stop:
           implementation: at-ApacheWebServer-stop
     artifacts:
-      at-ApacheWebServer-install: scripts/ApacheWebServer/install.sh
-        derived_from: ScriptArtifact # TODO
+      - at-ApacheWebServer-install: scripts/ApacheWebServer/install.sh
+        type: ScriptArtifact # TODO
         properties:
           ScriptLanguage: sh
           PrimaryScript: scripts/ApacheWebServer/install.sh
-      at-ApacheWebServer-configure:
-      at-ApacheWebServer-start:
-      at-ApacheWebServer-stop:
+      - at-ApacheWebServer-configure: scripts/ApacheWebServer/configure.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApacheWebServer/configure.sh
+      - at-ApacheWebServer-start: scripts/ApacheWebServer/start.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApacheWebServer/start.sh
+      - at-ApacheWebServer-stop: scripts/ApacheWebServer/stop.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApacheWebServer/stop.sh
 
   WebApplication: 
     derived_from: tosca.nodes.Root
@@ -109,9 +124,20 @@ node_types:
     interfaces:
       [tosca.interfaces.node.lifecycle]:
         configure:
-          implementation: at-ApacheWebServer-configure
+          implementation: at-ApachePHPModule-configure
         start:
-          implementation: at-ApacheWebServer-start
+          implementation: at-ApachePHPModule-start
+    artifacts:
+      - at-ApachePHPModule-configure: scripts/ApachePHPModule/configure.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApachePHPModule/configure.sh
+      - at-ApachePHPModule-start: scripts/ApachePHPModule/start.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApachePHPModule/start.sh
 
   ApacheLoadbalancerModule:
     derived_from: ApacheModule
@@ -126,9 +152,20 @@ node_types:
     interfaces:
       [tosca.interfaces.node.lifecycle]:
         configure:
-          implementation: at-ApacheWebServer-configure
+          implementation: at-ApacheLoadbalancerModule-configure
         start:
-          implementation: at-ApacheWebServer-start
+          implementation: at-ApacheLoadbalancerModule-start
+    artifacts:
+    - at-ApacheLoadbalancerModule-configure: scripts/ApacheLoadbalancerModule/configure.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/ApacheLoadbalancerModule/configure.sh
+    - at-ApacheLoadbalancerModule-start: scripts/ApacheLoadbalancerModule/start.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/ApacheLoadbalancerModule/start.sh
 
   MySQL:
     derived_from: tosca.nodes.DBMS # TODO check YAML and XML - it is different????
@@ -138,14 +175,35 @@ node_types:
     interfaces:
       [tosca.interfaces.node.Lifecycle]:# TODO do I have to name the operations?
         install:
-          implementation: at-ApacheWebServer-install
+          implementation: at-MySQL-install
         configure:
-          implementation: at-ApacheWebServer-configure
+          implementation: at-MySQL-configure
         start:
-          implementation: at-ApacheWebServer-start
+          implementation: at-MySQL-start
         stop:
-          implementation: at-ApacheWebServer-stop
-
+          implementation: at-MySQL-stop
+    artifacts:
+    - at-MySQL-configure: scripts/MySQL/configure.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/MySQL/configure.sh
+    - at-MySQL-start: scripts/MySQL/start.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/MySQL/start.sh
+    - at-MySQL-stop: scripts/MySQL/stop.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/MySQL/stop.sh
+    - at-MySQL-install: scripts/MySQL/install.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/MySQL/install.sh
+        
   MySQLDatabase:
     derived_from: tosca.nodes.Database # TODO: check if this is the same
     description: MySQL Database
@@ -153,3 +211,7 @@ node_types:
       - container: MySQLDatabaseContainerCapability
     capabilities:
       clients: MySQLDatabaseEndpointCapability
+
+relationship_types:
+  MySQLDatabaseHostedOnMySQL:
+    derived_from: Hosted_On
