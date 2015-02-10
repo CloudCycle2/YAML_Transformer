@@ -19,21 +19,49 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * This class can parse ServiceTemplates (YAML bean) to Definitions (XML bean).
+ *
+ */
 public class Yaml2XmlSwitch {
+	/**
+	 * The XML-Namespace of XML-Schemas.
+	 */
 	private static final String XMLSCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
 
+	/**
+	 * The XML-Namespace of the created document.
+	 */
 	private static final String NS = "http://www.example.org/tosca/yamlgen";
 
-	private static final String DEFAULT_USER_INPUT = null;
+	/**
+	 * The default user input.
+	 */
+	private static final String DEFAULT_USER_INPUT = "DEFAULTUSERINPUT";
 
+	/**
+	 * The XML-Namespace of the types.
+	 */
 	private static String TYPESNS = "http://www.example.org/tosca/yamlgen/types";
 
+	/**
+	 * A counter for creating unique IDs.
+	 */
 	private long uniqueID = 0;
 
+	/**
+	 * StringBuilder for the XSD.
+	 */
 	private StringBuilder xsd;
 
+	/**
+	 * The service template to parse.
+	 */
 	private ServiceTemplate st;
 
+	/**
+	 * InputVarName -> InputVarValue
+	 */
 	private Map<String, String> inputs = new HashMap<>();
 
 	/**
@@ -60,27 +88,22 @@ public class Yaml2XmlSwitch {
 		return pre + this.xsd.toString() + post;
 	}
 
+	/**
+	 * Getter for InputVariables.
+	 * 
+	 * @return InputVarName -> InputVarValue
+	 */
 	private Map<String, String> getInputs() {
 		return this.inputs;
 	}
 
+	/**
+	 * Set the map for Input-Variables.
+	 * 
+	 * @param inputs InputVarName -> InputVarValue
+	 */
 	public void setInputs(Map<String, String> inputs) {
 		this.inputs = inputs;
-	}
-
-	/**
-	 * Deprecated. Use parse(..).
-	 *
-	 * @param elem element to parse
-	 * @return parsed object
-	 * @deprecated please use parse(ServiceTemplate st)
-	 */
-	@Deprecated
-	public Object doswitch(Object elem) {
-		if (elem instanceof ServiceTemplate) {
-			return case_ServiceTemplate((ServiceTemplate) elem);
-		}
-		throw new UnsupportedOperationException("Object not yet supported");
 	}
 
 	private Definitions case_ServiceTemplate(ServiceTemplate elem) {
