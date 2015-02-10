@@ -25,12 +25,6 @@ public class ToscaYaml2XmlConverter implements IToscaYaml2XmlConverter {
 		final ServiceTemplate yroot = this.y2yb.yaml2yamlbean(yamlstring);
 		final Definitions xroot = this.b2b.yamlb2xmlb(yroot);
 		return this.x2xb.xmlbean2xml(xroot);
-
-		// final YamlRootElement yamlroot = new YamlRootElement();
-		// yamlroot.description = "TestDescription";
-
-		// final TestRoot testRoot = this.b2b.yamlb2xmlb(yamlroot);
-		// return testRoot.description;
 	}
 
 	@Override

@@ -11,8 +11,19 @@ import java.util.Map.Entry;
 import org.opentosca.yamlconverter.main.Parser;
 import org.opentosca.yamlconverter.main.utils.FileUtil;
 
+/**
+ * A simple User Interface for Console.
+ *
+ */
 public class ConsoleUI {
+	/**
+	 * The file Util.
+	 */
 	private static FileUtil fileutil = new FileUtil();
+
+	/**
+	 * Whether the cow says it or not.
+	 */
 	private static boolean COW = true;
 
 	public static void main(String[] args) {
@@ -20,6 +31,7 @@ public class ConsoleUI {
 		boolean read = false;
 		String yaml = "";
 		while (!read) {
+			// ask for file
 			String filename = "";
 			if (args.length > 0) {
 				filename = args[0];
@@ -44,10 +56,13 @@ public class ConsoleUI {
 				System.out.println("ERROR: File could not be found! Muh..");
 			}
 		}
+
+		// parse it
 		final Parser parser = new Parser();
 		parser.parse(yaml);
 		final Map<String, String> reqMap = parser.getInputRequirements();
 		if (!reqMap.isEmpty()) {
+			// ask for inputs
 			cowsay("I need some variables you have to define!");
 			final Map<String, String> inputValues = new HashMap<String, String>();
 			for (final Entry<String, String> requirement : reqMap.entrySet()) {
@@ -60,6 +75,9 @@ public class ConsoleUI {
 		} else {
 			// No input fields
 		}
+
+		// give results
+		// XML
 		final String xml = parser.getXML();
 		cowsay("I have some results for you!");
 		System.out.println("Here is your XML-file:");
@@ -74,6 +92,7 @@ public class ConsoleUI {
 			}
 		}
 
+		// XSD
 		final String xsd = parser.getXSD();
 		if (!xsd.isEmpty()) {
 			System.out.println("\nAlso I have an XSD-file for you. Save it as types.xsd!");
@@ -93,6 +112,12 @@ public class ConsoleUI {
 		System.out.println("\n\n  exiting...");
 	}
 
+	/**
+	 * Uses Systems I/O to prompt the user for a lineinput.
+	 *
+	 * @param promptString The description for the input.
+	 * @return the returned line.
+	 */
 	private static String promptString(String promptString) {
 		final BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println(promptString);
@@ -105,6 +130,11 @@ public class ConsoleUI {
 		return result;
 	}
 
+	/**
+	 * Uses System.out to print a message in cowsay, if cowsay is enabled. Else it justs prints the message
+	 *
+	 * @param message the message to print
+	 */
 	private static void cowsay(String message) {
 		if (COW) {
 			final int messageLength = message.length();
