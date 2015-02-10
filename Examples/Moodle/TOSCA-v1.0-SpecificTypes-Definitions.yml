@@ -1,14 +1,39 @@
 capability_types:
 	ApacheWebApplicationContainerCapability:
-		derived_from: ns1:WebApplicationContainerCapability # TODO
+		derived_from: WebApplicationContainerCapability
 		description: Apache Web Application Container Capability
+	
+	WebApplicationContainerCapability:
+		derived_from: ContainerCapability
+		description: Web Application Container Capability
 		
+	# TODO: Check if YAML tosca.capabilities.container can be used, but this is derived from tosca.capabilities.Feature which is derived from tosca.capabilities.Root
+	ContainerCapability
+		derived_from: tosca.capabilities.Root
+		description: Container Capability
+	
 	ApacheModuleContainerCapability:
-		derived_from: tosca.capabilities.Container
+		derived_from: ContainerCapability
 		description: Apache Module Container Capability
 		
+	HTTPEndpointCapability:
+		derived_from: IPEndpointCapability
+		description: HTTP Endpoint Capability
+	
+	IPEndpointCapability:
+		derived_from: EndpointCapability
+		description: IP Endpoint Capability
+	
+	EndpointCapability
+		derived_from: tosca.capabilities.Endpoint
+		description: Endpoint Capability
+		
+	DatabaseContainerCapability:	
+		derived_from: Container Capability
+		description: Database Container Capability
+	
 	MySQLDatabaseContainerCapability:
-		derived_from: ns1:DatabaseContainerCapability" # TODO
+		derived_from: DatabaseContainerCapability"
 	    description: MySQL Database Container Capability
 
     MySQLDatabaseEndpointCapability:
@@ -24,92 +49,94 @@ node_types:
 		derived_from: tosca.nodes.WebServer
 		description: Apache Web Server
 		properties:
-			tns:ApacheWebServerProperties # TODO
+			httpdport:
+				type: int
+				default: 80
+				description: Apache HTTP Port (default 80)
 		capabilities: 
-			ApacheWebApplicationContainerCapability
+			webapps:
+				type: ApacheWebApplicationContainerCapability
+			modules:
+				type: ApacheModuleContainerCapability
+			clients:
+				type: HTTPEndpointCapability
 		interfaces:
-			tosca.interfaces.node.Lifecycle
-			
-    <CapabilityDefinitions>
-      <CapabilityDefinition
-        capabilityType="tns:ApacheWebApplicationContainerCapability"
-        lowerBound="0" name="webapps" upperBound="unbounded"/>
-      <CapabilityDefinition
-        capabilityType="tns:ApacheModuleContainerCapability"
-        lowerBound="0" name="modules" upperBound="unbounded"/>
-      <CapabilityDefinition capabilityType="ns1:HTTPEndpointCapability"
-        lowerBound="0" name="clients" upperBound="unbounded"/>
-    </CapabilityDefinitions>
- 
+			[tosca.interfaces.node.Lifecycle] # TODO: do I have to name the operations?
+				install:
+					implementation: at-ApacheWebServer-install
+				configure:
+					implementation: at-ApacheWebServer-configure
+				start:
+					implementation: at-ApacheWebServer-start
+				stop:
+					implementation: at-ApacheWebServer-stop
+
+	WebApplication: 
+		derived_from: tosca.nodes.Root
+		description: Web Application
+		requirements:
+			- container: ApacheWebApplicationContainerCapability # XML: big ******* inheritance
+		
 	ApacheWebApplication:
-		derived_from: tosca.nodes.WebApplication
+		derived_from: WebApplication # TODO: check if tosca.nodes.WebApplication can be used (requirement host instead of container)
 		description: Apache Web Application
-
-    <RequirementDefinitions>
-      <RequirementDefinition lowerBound="1" name="container"
-        requirementType="tns:ApacheWebApplicationContainerRequirement" upperBound="1"/>
-    </RequirementDefinitions>
-
 	
 	ApacheModule:
 		derived_from: tosca.nodes.Root
 		description: Apache Module
-		
-    <RequirementDefinitions>
-      <RequirementDefinition lowerBound="1" name="container"
-        requirementType="tns:ApacheModuleContainerRequirement" upperBound="1"/>
-    </RequirementDefinitions>
+		requirements:
+			- container: ApacheModuleContainerCapability
 
 	ApachePHPModule:
 		derived_from: ApacheModule
 		description: Apache PHP Module
+		capabilities:
+			phpApps:
+				type: PHPRuntimeCapability
 		interfaces:
-			tosca.interfaces.node.lifecycle
-				
-		
-    <CapabilityDefinitions>
-      <CapabilityDefinition capabilityType="tns:PHPRuntimeCapability"
-        lowerBound="0" name="phpApps" upperBound="unbounded"/>
-    </CapabilityDefinitions>
-
+			[tosca.interfaces.node.lifecycle]
+				configure:
+					implementation: at-ApacheWebServer-configure
+				start:
+					implementation: at-ApacheWebServer-start
   
     ApacheLoadbalancerModule:
 		derived_from: ApacheModule
 		description: Apache Loadbalancer Module
+		properties:
+			httpdport:
+				type: int
+				description: httpdocsApache WebServer Portnumber (default:80)
+				default: 80
+		requirements:
+			- members: HTTPEndpointCapability
 		interfaces:
-			tosca.interfaces.node.lifecycle
-
-    <PropertiesDefinition element="tns:ApacheLoadbalancerModuleProperties"/>
-    <RequirementDefinitions>
-      <RequirementDefinition lowerBound="1" name="members"
-        requirementType="ns1:HTTPEndpointRequirement" upperBound="1"/>
-    </RequirementDefinitions>
-
-  
+			[tosca.interfaces.node.lifecycle]
+				configure:
+					implementation: at-ApacheWebServer-configure
+				start:
+					implementation: at-ApacheWebServer-start
+ 
     MySQL:
-		derived_from: tosca.nodes.DBMS
+		derived_from: tosca.nodes.DBMS # TODO check YAML and XML - it iks different????
 		description: MySQL
+		capabilities:
+			databases: MySQLDatabaseContainerCapability
 		interfaces:
-			tosca.interfaces.node.lifecycle
-
-    <PropertiesDefinition element="tns:MySQLProperties"/>
-    <CapabilityDefinitions>
-      <CapabilityDefinition
-        capabilityType="tns:MySQLDatabaseContainerCapability"
-        lowerBound="0" name="databases" upperBound="unbounded"/>
-    </CapabilityDefinitions>
-
+			[tosca.interfaces.node.Lifecycle] # TODO: do I have to name the operations?
+				install:
+					implementation: at-ApacheWebServer-install
+				configure:
+					implementation: at-ApacheWebServer-configure
+				start:
+					implementation: at-ApacheWebServer-start
+				stop:
+					implementation: at-ApacheWebServer-stop
   
     MySQLDatabase:
-		derived_from: tosca.nodes.Database
+		derived_from: tosca.nodes.Database # TODO: check if this is the same
 		description: MySQL Database
-  
-    <RequirementDefinitions>
-      <RequirementDefinition lowerBound="1" name="container"
-        requirementType="tns:MySQLDatabaseContainerRequirement" upperBound="1"/>
-    </RequirementDefinitions>
-    <CapabilityDefinitions>
-      <CapabilityDefinition
-        capabilityType="tns:MySQLDatabaseEndpointCapability"
-        lowerBound="0" name="clients" upperBound="unbounded"/>
-    </CapabilityDefinitions>
+		requirements:
+			- container: MySQLDatabaseContainerCapability
+		capabilities:
+			clients: MySQLDatabaseEndpointCapability
