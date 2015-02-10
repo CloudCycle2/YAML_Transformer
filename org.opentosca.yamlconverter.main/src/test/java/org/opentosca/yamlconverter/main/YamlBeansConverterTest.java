@@ -1,12 +1,12 @@
 package org.opentosca.yamlconverter.main;
 
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import java.util.Map;
 
 /**
  * @author Sebi
@@ -59,14 +59,14 @@ public class YamlBeansConverterTest extends BaseTest {
 		final Input fooInput = inputs.get("foo");
 		Assert.assertEquals("fooInput must have the type 'string'", "string", fooInput.getType());
 		Assert.assertEquals("fooInput must have 1 constraint", 2, fooInput.getConstraints().size());
-		Assert.assertEquals("constraint min_length is equals 2", "2", fooInput.getConstraints().get(0).get("min_length"));
+		Assert.assertEquals("constraint min_length must equal 2", "2", fooInput.getConstraints().get(0).get("min_length"));
 	}
 
 	@Test
 	public void testReadYamlInputs_useInputs() throws Exception {
 		final ServiceTemplate templ = this.converter.yaml2yamlbean(this.testUtils.readYamlTestResource("/yaml/useInputs.yaml"));
 		Assert.assertNotNull(templ);
-		Object memSize = templ.getNode_templates().get("my_server").getProperties().get("mem_size");
+		final Object memSize = templ.getNode_templates().get("my_server").getProperties().get("mem_size");
 		Assert.assertNotNull(memSize);
 		Assert.assertTrue(((Map<String, Object>) memSize).containsKey("get_input"));
 	}
