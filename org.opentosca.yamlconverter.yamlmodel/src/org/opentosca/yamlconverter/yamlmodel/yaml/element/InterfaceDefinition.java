@@ -7,5 +7,4 @@ package org.opentosca.yamlconverter.yamlmodel.yaml.element;
  */
 public class InterfaceDefinition extends YAMLElement {
 
-
 }

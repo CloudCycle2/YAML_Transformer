@@ -299,9 +299,9 @@ public class Yaml2XmlSwitch {
 		this.xsd.append("</xs:complexType>\n");
 	}
 
-	private Interfaces parseNodeTypeInterfaces(Map<String, Map<String, InterfaceDefinition>> interfaces) {
+	private Interfaces parseNodeTypeInterfaces(Map<String, Map<String, Map<String, OperationDefinition>>> interfaces) {
 		final Interfaces result = new Interfaces();
-		for (final Entry<String, Map<String, InterfaceDefinition>> entry : interfaces.entrySet()) {
+		for (final Entry<String, Map<String, Map<String, OperationDefinition>>> entry : interfaces.entrySet()) {
 			final TInterface inf = new TInterface();
 			inf.setName(entry.getKey());
 			// TODO: YAMLmodel Interface Operations
