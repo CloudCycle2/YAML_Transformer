@@ -87,7 +87,7 @@ public class YamlBeansConverterTest extends BaseTest {
 		}
 
 		constraintTests.clear();
-		constraintTests.add(new ConstraintTest("4 must not be valid because it is not greater or equal 5", 16, false));
+		constraintTests.add(new ConstraintTest("4 must not be valid because it is not greater or equal 5", 4, true));
 		constraintTests.add(new ConstraintTest("5 must be valid", 5, true));
 		constraintTests.add(new ConstraintTest("10 must be valid", 10, true));
 		constraintTests.add(new ConstraintTest("15 must be valid", 15, true));
