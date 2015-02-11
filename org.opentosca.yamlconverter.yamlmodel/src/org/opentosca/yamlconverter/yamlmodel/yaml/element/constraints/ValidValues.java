@@ -8,7 +8,7 @@ public class ValidValues<T> extends TypeList<T, T> {
 
 	@Override
 	public boolean isValid(T constraintValue) {
-		for (final T validValue : this.constraintValues) {
+		for (final T validValue : this.constraintArguments) {
 			if (validValue.equals(constraintValue)) {
 				return true;
 			}

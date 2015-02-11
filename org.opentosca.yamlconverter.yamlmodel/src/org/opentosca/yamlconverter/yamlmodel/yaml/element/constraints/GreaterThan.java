@@ -9,6 +9,6 @@ public class GreaterThan extends TypeScalar<Comparable<?>, Comparable<?>> {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public boolean isValid(Comparable value) {
-		return value.compareTo(this.constraintValue) > 0;
+		return value.compareTo(this.constraintArgument) > 0;
 	}
 }

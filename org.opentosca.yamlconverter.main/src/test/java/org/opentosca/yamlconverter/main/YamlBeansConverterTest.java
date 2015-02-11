@@ -65,6 +65,8 @@ public class YamlBeansConverterTest extends BaseTest {
 		Assert.assertEquals("fooInput must have 3 constraints", 3, fooInput.getConstraints().size());
 		Assert.assertEquals("constraint min_length must equal 2", "2", fooInput.getConstraints().get(0).get("min_length"));
 
+		// constraints validity checking
+
 		List<ConstraintClause<Object>> constraints = toConstraints(fooInput.getConstraints(), fooInput.getType());
 
 		final List<ConstraintTest> constraintTests = new ArrayList<ConstraintTest>();
@@ -91,6 +93,7 @@ public class YamlBeansConverterTest extends BaseTest {
 		constraintTests.add(new ConstraintTest("15 must be valid", 15, true));
 		constraintTests.add(new ConstraintTest("16 must not be valid because it is not in the valid values list", 16, false));
 		constraintTests.add(new ConstraintTest("20 must be valid", 20, true));
+		constraintTests.add(new ConstraintTest("25 must not be valid", 25, false));
 
 		final Input barInput = inputs.get("bar");
 		constraints = toConstraints(barInput.getConstraints(), barInput.getType());

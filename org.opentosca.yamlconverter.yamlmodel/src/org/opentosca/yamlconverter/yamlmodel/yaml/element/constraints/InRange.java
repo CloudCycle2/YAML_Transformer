@@ -9,6 +9,6 @@ public class InRange extends TypeDualScalar<Comparable<?>, Comparable<?>> {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public boolean isValid(Comparable value) {
-		return value.compareTo(this.constraintValue1) >= 0 && value.compareTo(this.constraintValue2) <= 0;
+		return value.compareTo(this.constraintArgument1) >= 0 && value.compareTo(this.constraintArgument2) <= 0;
 	}
 }

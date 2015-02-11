@@ -8,7 +8,7 @@ public class Equal<T> extends TypeScalar<T, T> {
 
 	@Override
 	public boolean isValid(T value) {
-		return this.constraintValue.equals(value);
+		return this.constraintArgument.equals(value);
 	}
 
 }

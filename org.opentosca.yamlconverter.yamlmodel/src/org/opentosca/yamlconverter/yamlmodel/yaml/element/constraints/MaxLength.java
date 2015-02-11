@@ -8,11 +8,13 @@ public class MaxLength extends TypeScalar<String, Integer> {
 
 	@Override
 	public boolean isValid(String value) {
-		return this.constraintValue >= value.length();
+		return this.constraintArgument >= value.length();
 	}
 
 	@Override
 	protected Object convert(String value) {
+		// overwrite, as the data type of the constraint argument is not the same
+		// as the data type of the constraint value. The length is always integer
 		return value.length() == 0 ? null : Integer.decode(value);
 	}
 

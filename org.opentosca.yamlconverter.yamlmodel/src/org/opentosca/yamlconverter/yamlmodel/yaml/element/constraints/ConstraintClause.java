@@ -4,8 +4,23 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * Represents a single constraint clause. Must be initialized with the factory method {@link #toConstraintClause(Map, Class)}.
+ *
+ * @param <T> type of values to check against
+ */
 public abstract class ConstraintClause<T> {
+	private final Class<?> dataType;
 
+	/**
+	 * Creates a constraint clause. Input should be a map with one single entry. The key of this entry is the constraint operator in string
+	 * representation. The value of this entry is the constraint argument. The constraint argument can be a scalar value, a dual scalar
+	 * value, a list or a regex.
+	 *
+	 * @param input key = constraint operator; value = constraint argument
+	 * @param dataType the data type of the constraint. Can be any primitive or {@link Date}
+	 * @return the specific constraint clause implementation
+	 */
 	@SuppressWarnings("unchecked")
 	public static ConstraintClause<Object> toConstraintClause(Map<String, Object> input, Class<?> dataType) {
 		final String key = input.keySet().iterator().next();
@@ -20,8 +35,6 @@ public abstract class ConstraintClause<T> {
 		}
 	}
 
-	private final Class<?> dataType;
-
 	public static Map<String, Object> toMap(ConstraintClause<?> input) {
 		// TODO is it even needed?
 		throw new UnsupportedOperationException("Not yet implemented");
@@ -31,45 +44,57 @@ public abstract class ConstraintClause<T> {
 		this.dataType = dataType;
 	}
 
+	/**
+	 * Checks whether the given value is valid in terms of this constraint.
+	 *
+	 * @param value the value for checking its validity
+	 * @return whether this constraint accepts the given value.
+	 */
 	public abstract boolean isValid(T value);
 
-	protected Object convert(String value) {
+	/**
+	 * Converts the given string representation of a value into its data type specific value
+	 *
+	 * @param representedValue String representation of a value to convert to a data type specific value
+	 * @return the given string converted into its respective data type.
+	 */
+	protected Object convert(String representedValue) {
 		final Class<?> type = this.dataType;
 		Object convertedValue = null;
 		if (type == String.class) {
-			convertedValue = value;
+			convertedValue = representedValue;
 		} else if (type == Integer.TYPE) {
-			convertedValue = value.length() == 0 ? 0 : Integer.decode(value);
+			convertedValue = representedValue.length() == 0 ? 0 : Integer.decode(representedValue);
 		} else if (type == Integer.class) {
-			convertedValue = value.length() == 0 ? null : Integer.decode(value);
+			convertedValue = representedValue.length() == 0 ? null : Integer.decode(representedValue);
 		} else if (type == Boolean.TYPE) {
-			convertedValue = value.length() == 0 ? false : Boolean.valueOf(value);
+			convertedValue = representedValue.length() == 0 ? false : Boolean.valueOf(representedValue);
 		} else if (type == Boolean.class) {
-			convertedValue = value.length() == 0 ? null : Boolean.valueOf(value);
+			convertedValue = representedValue.length() == 0 ? null : Boolean.valueOf(representedValue);
 		} else if (type == Float.TYPE) {
-			convertedValue = value.length() == 0 ? 0 : Float.valueOf(value);
+			convertedValue = representedValue.length() == 0 ? 0 : Float.valueOf(representedValue);
 		} else if (type == Float.class) {
-			convertedValue = value.length() == 0 ? null : Float.valueOf(value);
+			convertedValue = representedValue.length() == 0 ? null : Float.valueOf(representedValue);
 		} else if (type == Double.TYPE) {
-			convertedValue = value.length() == 0 ? 0 : Double.valueOf(value);
+			convertedValue = representedValue.length() == 0 ? 0 : Double.valueOf(representedValue);
 		} else if (type == Double.class) {
-			convertedValue = value.length() == 0 ? null : Double.valueOf(value);
+			convertedValue = representedValue.length() == 0 ? null : Double.valueOf(representedValue);
 		} else if (type == Long.TYPE) {
-			convertedValue = value.length() == 0 ? 0 : Long.decode(value);
+			convertedValue = representedValue.length() == 0 ? 0 : Long.decode(representedValue);
 		} else if (type == Long.class) {
-			convertedValue = value.length() == 0 ? null : Long.decode(value);
+			convertedValue = representedValue.length() == 0 ? null : Long.decode(representedValue);
 		} else if (type == Short.TYPE) {
-			convertedValue = value.length() == 0 ? 0 : Short.decode(value);
+			convertedValue = representedValue.length() == 0 ? 0 : Short.decode(representedValue);
 		} else if (type == Short.class) {
-			convertedValue = value.length() == 0 ? null : Short.decode(value);
+			convertedValue = representedValue.length() == 0 ? null : Short.decode(representedValue);
 		} else if (type == Character.TYPE) {
-			convertedValue = value.length() == 0 ? 0 : value.charAt(0);
+			convertedValue = representedValue.length() == 0 ? 0 : representedValue.charAt(0);
 		} else if (type == Character.class) {
-			convertedValue = value.length() == 0 ? null : value.charAt(0);
+			convertedValue = representedValue.length() == 0 ? null : representedValue.charAt(0);
 		} else if (type == Byte.TYPE) {
-			convertedValue = value.length() == 0 ? 0 : Byte.decode(value);
+			convertedValue = representedValue.length() == 0 ? 0 : Byte.decode(representedValue);
 		} else if (type == Byte.class) {
-			convertedValue = value.length() == 0 ? null : Byte.decode(value);
+			convertedValue = representedValue.length() == 0 ? null : Byte.decode(representedValue);
 		} else if (type == Date.class) {
 			// TODO date parser
 		}

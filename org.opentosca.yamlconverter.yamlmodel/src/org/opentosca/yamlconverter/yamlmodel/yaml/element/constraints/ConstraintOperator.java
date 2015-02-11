@@ -1,5 +1,8 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
+/**
+ * Maps the constraint operators to the respective specific class implementations.
+ */
 @SuppressWarnings("rawtypes")
 public enum ConstraintOperator {
 	equal(Equal.class),

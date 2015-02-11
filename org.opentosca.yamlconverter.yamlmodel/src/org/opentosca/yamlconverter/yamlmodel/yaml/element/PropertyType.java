@@ -5,6 +5,12 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Maps yaml primitive types to their respective java classes.
+ *
+ * @usage {@link PropertyType#get(String)}
+ * @example <code>PropertyType.get("integer")</code>
+ */
 public enum PropertyType {
 	stringType("string", String.class),
 	integerType("integer", Integer.class),
