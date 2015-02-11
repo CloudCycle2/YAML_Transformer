@@ -1,18 +1,14 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class MinLength extends TypeScalar {
+public class MinLength extends TypeScalar<String> {
 
-	public MinLength(Object value) {
-		super(value);
+	public MinLength(Class<String> dataType, Object constraintObject) {
+		super(dataType, constraintObject);
 	}
 
 	@Override
-	public boolean isValid(Object value) {
-		if (value instanceof String) {
-			final int length = Integer.parseInt(this.constraintValue);
-			return ((String) value).length() >= length;
-		}
-		return false;
+	public boolean isValid(String value) {
+		return this.constraintValue.length() <= value.length();
 	}
 
 }

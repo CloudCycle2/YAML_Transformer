@@ -1,10 +1,11 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public abstract class TypeScalar extends ConstraintClause {
-	protected final String constraintValue;
+public abstract class TypeScalar<T> extends ConstraintClause<T> {
+	protected final T constraintValue;
 
-	public TypeScalar(Object value) {
-		super(value);
-		this.constraintValue = (String) value;
+	@SuppressWarnings("unchecked")
+	public TypeScalar(Class<T> dataType, Object constraintObject) {
+		super(dataType);
+		this.constraintValue = (T) (constraintObject instanceof String ? convert((String) constraintObject) : constraintObject);
 	}
 }

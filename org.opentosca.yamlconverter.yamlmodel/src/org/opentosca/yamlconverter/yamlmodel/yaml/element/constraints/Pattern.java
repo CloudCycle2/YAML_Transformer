@@ -1,17 +1,14 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class Pattern extends TypeRegex {
+public class Pattern extends TypeRegex<String> {
 
-	public Pattern(Object value) {
-		super(value);
+	public Pattern(Class<String> dataType, Object constraintPattern) {
+		super(dataType, constraintPattern);
 	}
 
 	@Override
-	public boolean isValid(Object value) {
-		if (value instanceof String) {
-			return this.constraintPattern.matcher((String) value).matches();
-		}
-		return false;
+	public boolean isValid(String value) {
+		return this.constraintPattern.matcher(value).matches();
 	}
 
 }

@@ -1,11 +1,12 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
+@SuppressWarnings("rawtypes")
 public enum ConstraintOperator {
 	equal(Equal.class),
 	greater_than(GreaterThan.class),
-	greater_or_equal(GreaterOrEqualTo.class),
+	greater_or_equal(GreaterOrEqual.class),
 	less_than(LessThan.class),
-	less_or_equal(LessOrEqualTo.class),
+	less_or_equal(LessOrEqual.class),
 	in_range(InRange.class),
 	valid_values(ValidValues.class),
 	length(Length.class),

@@ -1,20 +1,16 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class ValidValues extends TypeList {
+public class ValidValues<T> extends TypeList<T> {
 
-	public ValidValues(Object value) {
-		super(value);
+	public ValidValues(Class<T> dataType, Object constraintObjects) {
+		super(dataType, constraintObjects);
 	}
 
 	@Override
-	public boolean isValid(Object value) {
-		if (isScalar(value.getClass())) {
-
-		} else {
-			for (final String validValue : this.constraintValues) {
-				if (validValue.equals(value)) {
-					return true;
-				}
+	public boolean isValid(T constraintValue) {
+		for (final T validValue : this.constraintValues) {
+			if (validValue.equals(constraintValue)) {
+				return true;
 			}
 		}
 		return false;

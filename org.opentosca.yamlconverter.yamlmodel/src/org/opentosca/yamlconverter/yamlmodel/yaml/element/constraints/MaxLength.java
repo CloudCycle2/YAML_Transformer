@@ -1,18 +1,14 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class MaxLength extends TypeScalar {
+public class MaxLength extends TypeScalar<String> {
 
-	public MaxLength(Object value) {
-		super(value);
+	public MaxLength(Class<String> dataType, Object constraintObject) {
+		super(dataType, constraintObject);
 	}
 
 	@Override
-	public boolean isValid(Object value) {
-		if (value instanceof String) {
-			final int length = Integer.parseInt(this.constraintValue);
-			return ((String) value).length() <= length;
-		}
-		return false;
+	public boolean isValid(String value) {
+		return this.constraintValue.length() >= value.length();
 	}
 
 }

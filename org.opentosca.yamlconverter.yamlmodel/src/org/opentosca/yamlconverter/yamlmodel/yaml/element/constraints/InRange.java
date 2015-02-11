@@ -1,20 +1,14 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class InRange extends TypeDualScalar {
+public class InRange extends TypeDualScalar<Comparable<?>> {
 
-	public InRange(Object value) {
-		super(value);
+	public InRange(Class<Comparable<?>> dataType, Object constraintObject) {
+		super(dataType, constraintObject);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public boolean isValid(Object value) {
-		if (value instanceof Integer) {
-			final Integer comparedValued1 = Integer.parseInt(this.constraintValue1);
-			final Integer comparedValued2 = Integer.parseInt(this.constraintValue2);
-			return comparedValued1 <= (Integer) value && (Integer) value <= comparedValued2;
-		}
-		return false;
+	public boolean isValid(Comparable value) {
+		return value.compareTo(this.constraintValue1) >= 0 && value.compareTo(this.constraintValue2) <= 0;
 	}
-
 }

@@ -1,11 +1,12 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public abstract class TypeRegex extends ConstraintClause {
+public abstract class TypeRegex<T> extends ConstraintClause<T> {
+
 	protected final java.util.regex.Pattern constraintPattern;
 
-	public TypeRegex(Object value) {
-		super(value);
-		this.constraintPattern = java.util.regex.Pattern.compile((String) value);
+	public TypeRegex(Class<T> dataType, Object constraintPattern) {
+		super(dataType);
+		this.constraintPattern = java.util.regex.Pattern.compile((String) constraintPattern);
 	}
 
 }

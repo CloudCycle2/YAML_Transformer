@@ -1,17 +1,14 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class GreaterThan extends TypeScalar {
+public class GreaterThan extends TypeScalar<Comparable<?>> {
 
-	public GreaterThan(Object value) {
-		super(value);
+	public GreaterThan(Class<Comparable<?>> dataType, Object constraintObject) {
+		super(dataType, constraintObject);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public boolean isValid(Object value) {
-		if (value.getClass().equals(this.constraintValue.getClass()) && this.constraintValue instanceof Comparable) {
-			return ((Comparable) this.constraintValue).compareTo(value) > 0;
-		}
-		return false;
+	public boolean isValid(Comparable value) {
+		return value.compareTo(this.constraintValue) > 0;
 	}
 }

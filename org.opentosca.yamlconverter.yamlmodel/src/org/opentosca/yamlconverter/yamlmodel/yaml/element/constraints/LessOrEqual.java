@@ -1,14 +1,14 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class LessThan extends TypeScalar<Comparable<?>> {
+public class LessOrEqual extends TypeScalar<Comparable<?>> {
 
-	public LessThan(Class<Comparable<?>> dataType, Object constraintObject) {
+	public LessOrEqual(Class<Comparable<?>> dataType, Object constraintObject) {
 		super(dataType, constraintObject);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public boolean isValid(Comparable value) {
-		return value.compareTo(this.constraintValue) < 0;
+		return value.compareTo(this.constraintValue) <= 0;
 	}
 }

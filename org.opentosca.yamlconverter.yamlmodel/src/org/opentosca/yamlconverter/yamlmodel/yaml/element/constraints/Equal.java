@@ -1,19 +1,14 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class Equal extends TypeScalar {
+public class Equal<T> extends TypeScalar<T> {
 
-	public Equal(Object value) {
-		super(value);
+	public Equal(Class<T> dataType, Object constraintObject) {
+		super(dataType, constraintObject);
 	}
 
 	@Override
-	public boolean isValid(Object value) {
-		if (value instanceof String) {
-			return this.constraintValue.equals(value);
-		} else {
-
-		}
-		return false;
+	public boolean isValid(T value) {
+		return this.constraintValue.equals(value);
 	}
 
 }
