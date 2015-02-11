@@ -1,5 +1,8 @@
 package org.opentosca.yamlconverter.main;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
@@ -7,9 +10,6 @@ import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Parser implements IToscaYamlParser {
 
@@ -88,9 +88,9 @@ public class Parser implements IToscaYamlParser {
 		descriptionForUser += "Constraints: ";
 		if (currentInput.getConstraints().size() > 0) {
 			// TODO: improve the following iterations
-			for (Map<String, String> constraints : currentInput.getConstraints()) {
+			for (final Map<String, Object> constraints : currentInput.getConstraints()) {
 				if (constraints != null) {
-					for (String key : constraints.keySet()) {
+					for (final String key : constraints.keySet()) {
 						descriptionForUser += key + ": " + constraints.get(key) + ",";
 					}
 				}

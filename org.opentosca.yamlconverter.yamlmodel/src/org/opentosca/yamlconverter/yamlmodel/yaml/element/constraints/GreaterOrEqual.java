@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class GreaterOrEqual extends TypeScalar<Comparable<?>> {
+public class GreaterOrEqual extends TypeScalar<Comparable<?>, Comparable<?>> {
 
 	public GreaterOrEqual(Class<Comparable<?>> dataType, Object constraintObject) {
 		super(dataType, constraintObject);

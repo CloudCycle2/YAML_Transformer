@@ -8,10 +8,10 @@ public class Input extends YAMLElement {
 
 	private String type = "";
 	private String defaultValue = "";
-	private List<Map<String, String>> constraints = new ArrayList<Map<String, String>>();
+	private List<Map<String, Object>> constraints = new ArrayList<Map<String, Object>>();
 
 	public String getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setType(String type) {
@@ -21,7 +21,7 @@ public class Input extends YAMLElement {
 	}
 
 	public String getDefault() {
-		return defaultValue;
+		return this.defaultValue;
 	}
 
 	public void setDefault(String defaultValue) {
@@ -30,11 +30,11 @@ public class Input extends YAMLElement {
 		}
 	}
 
-	public List<Map<String, String>> getConstraints() {
-		return constraints;
+	public List<Map<String, Object>> getConstraints() {
+		return this.constraints;
 	}
 
-	public void setConstraints(List<Map<String, String>> constraints) {
+	public void setConstraints(List<Map<String, Object>> constraints) {
 		if (constraints != null) {
 			this.constraints = constraints;
 		}
@@ -42,15 +42,27 @@ public class Input extends YAMLElement {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		if (!super.equals(o)) {
+			return false;
+		}
 
-		Input input = (Input) o;
+		final Input input = (Input) o;
 
-		if (!constraints.equals(input.constraints)) return false;
-		if (!defaultValue.equals(input.defaultValue)) return false;
-		if (!type.equals(input.type)) return false;
+		if (!this.constraints.equals(input.constraints)) {
+			return false;
+		}
+		if (!this.defaultValue.equals(input.defaultValue)) {
+			return false;
+		}
+		if (!this.type.equals(input.type)) {
+			return false;
+		}
 
 		return true;
 	}
@@ -58,9 +70,9 @@ public class Input extends YAMLElement {
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
-		result = 31 * result + type.hashCode();
-		result = 31 * result + defaultValue.hashCode();
-		result = 31 * result + constraints.hashCode();
+		result = 31 * result + this.type.hashCode();
+		result = 31 * result + this.defaultValue.hashCode();
+		result = 31 * result + this.constraints.hashCode();
 		return result;
 	}
 }

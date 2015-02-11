@@ -2,7 +2,6 @@ package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ConstraintClause<T> {
@@ -21,21 +20,21 @@ public abstract class ConstraintClause<T> {
 		}
 	}
 
-	private final Class<T> dataType;
+	private final Class<?> dataType;
 
-	public static Map<String, Object> toMap(ConstraintClause input) {
-		// TODO
-		return new HashMap<String, Object>();
+	public static Map<String, Object> toMap(ConstraintClause<?> input) {
+		// TODO is it even needed?
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
-	public ConstraintClause(Class<T> dataType) {
+	public ConstraintClause(Class<?> dataType) {
 		this.dataType = dataType;
 	}
 
 	public abstract boolean isValid(T value);
 
-	protected final Object convert(String value) {
-		final Class<T> type = this.dataType;
+	protected Object convert(String value) {
+		final Class<?> type = this.dataType;
 		Object convertedValue = null;
 		if (type == String.class) {
 			convertedValue = value;

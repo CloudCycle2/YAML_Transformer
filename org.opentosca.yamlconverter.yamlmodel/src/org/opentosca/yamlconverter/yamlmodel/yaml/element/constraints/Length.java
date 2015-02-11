@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class Length extends TypeScalar<String> {
+public class Length extends TypeScalar<String, Integer> {
 
 	public Length(Class<String> dataType, Object constraintObject) {
 		super(dataType, constraintObject);
@@ -8,6 +8,11 @@ public class Length extends TypeScalar<String> {
 
 	@Override
 	public boolean isValid(String value) {
-		return this.constraintValue.length() == value.length();
+		return this.constraintValue == value.length();
+	}
+
+	@Override
+	protected Object convert(String value) {
+		return value.length() == 0 ? null : Integer.decode(value);
 	}
 }

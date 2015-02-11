@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class InRange extends TypeDualScalar<Comparable<?>> {
+public class InRange extends TypeDualScalar<Comparable<?>, Comparable<?>> {
 
 	public InRange(Class<Comparable<?>> dataType, Object constraintObject) {
 		super(dataType, constraintObject);

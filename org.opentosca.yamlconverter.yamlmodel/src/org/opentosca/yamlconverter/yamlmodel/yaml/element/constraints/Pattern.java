@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
-public class Pattern extends TypeRegex<String> {
+public class Pattern extends TypeRegex {
 
 	public Pattern(Class<String> dataType, Object constraintPattern) {
 		super(dataType, constraintPattern);

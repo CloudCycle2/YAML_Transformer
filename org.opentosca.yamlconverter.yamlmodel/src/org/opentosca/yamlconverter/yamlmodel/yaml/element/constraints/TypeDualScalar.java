@@ -2,9 +2,9 @@ package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
 
 import java.util.Map;
 
-public abstract class TypeDualScalar<T> extends ConstraintClause<T> {
-	protected final T constraintValue1;
-	protected final T constraintValue2;
+public abstract class TypeDualScalar<T, R> extends ConstraintClause<T> {
+	protected final R constraintValue1;
+	protected final R constraintValue2;
 
 	@SuppressWarnings("unchecked")
 	public TypeDualScalar(Class<T> dataType, Object constraintObject) {
@@ -15,7 +15,7 @@ public abstract class TypeDualScalar<T> extends ConstraintClause<T> {
 		}
 		final Object object1 = dualValues.keySet().iterator().next();
 		final Object object2 = dualValues.get(object1);
-		this.constraintValue1 = (T) (object1 instanceof String ? convert((String) object1) : object1);
-		this.constraintValue2 = (T) (object2 instanceof String ? convert((String) object2) : object2);
+		this.constraintValue1 = (R) (object1 instanceof String ? convert((String) object1) : object1);
+		this.constraintValue2 = (R) (object2 instanceof String ? convert((String) object2) : object2);
 	}
 }
