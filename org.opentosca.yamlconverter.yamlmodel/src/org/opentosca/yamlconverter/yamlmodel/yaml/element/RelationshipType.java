@@ -6,37 +6,37 @@ import java.util.Map;
 
 public class RelationshipType extends YAMLElement {
 
-	private Map<String, String> properties = new HashMap<String, String>();
-	private Map<String, String> interfaces = new HashMap<String, String>();
-	private String[] targets;
+	private Map<String, PropertyDefinition> properties = new HashMap<String, PropertyDefinition>();
+	private Map<String, Map<String, InterfaceDefinition>> interfaces = new HashMap<String, Map<String, InterfaceDefinition>>();
+	private String[] valid_targets;
 
-	public Map<String, String> getProperties() {
+	public Map<String, PropertyDefinition> getProperties() {
 		return properties;
 	}
 
-	public void setProperties(Map<String, String> properties) {
+	public void setProperties(Map<String, PropertyDefinition> properties) {
 		if (properties != null) {
 			this.properties = properties;
 		}
 	}
 
-	public Map<String, String> getInterfaces() {
+	public Map<String, Map<String, InterfaceDefinition>> getInterfaces() {
 		return interfaces;
 	}
 
-	public void setInterfaces(Map<String, String> interfaces) {
+	public void setInterfaces(Map<String, Map<String, InterfaceDefinition>> interfaces) {
 		if (interfaces != null) {
 			this.interfaces = interfaces;
 		}
 	}
 
-	public String[] getTargets() {
-		return targets;
+	public String[] getValid_targets() {
+		return valid_targets;
 	}
 
-	public void setTargets(String[] targets) {
-		if (targets != null) {
-			this.targets = targets;
+	public void setValid_targets(String[] valid_targets) {
+		if (valid_targets != null) {
+			this.valid_targets = valid_targets;
 		}
 	}
 
@@ -50,7 +50,7 @@ public class RelationshipType extends YAMLElement {
 
 		if (!interfaces.equals(that.interfaces)) return false;
 		if (!properties.equals(that.properties)) return false;
-		if (!Arrays.equals(targets, that.targets)) return false;
+		if (!Arrays.equals(valid_targets, that.valid_targets)) return false;
 
 		return true;
 	}
@@ -60,7 +60,7 @@ public class RelationshipType extends YAMLElement {
 		int result = super.hashCode();
 		result = 31 * result + properties.hashCode();
 		result = 31 * result + interfaces.hashCode();
-		result = 31 * result + (targets != null ? Arrays.hashCode(targets) : 0);
+		result = 31 * result + (valid_targets != null ? Arrays.hashCode(valid_targets) : 0);
 		return result;
 	}
 }

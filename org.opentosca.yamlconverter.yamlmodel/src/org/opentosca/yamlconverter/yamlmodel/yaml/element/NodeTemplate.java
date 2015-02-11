@@ -8,9 +8,9 @@ public class NodeTemplate extends YAMLElement {
 	private String type = "";
 	private Map<String, Object> properties = new HashMap<String, Object>();
 	private Map<String, String> requirements = new HashMap<String, String>();
-	private Map<String, String> capabilities = new HashMap<String, String>();
+	private Map<String, Object> capabilities = new HashMap<String, Object>();
 	private Map<String, String> interfaces = new HashMap<String, String>();
-	private Map<String, String> artifacts = new HashMap<String, String>();
+	private Map<String, Object> artifacts = new HashMap<String, Object>();
 
 
 	public void setType(String type) {
@@ -43,14 +43,34 @@ public class NodeTemplate extends YAMLElement {
 		return this.requirements;
 	}
 
-	public void setCapabilities(Map<String, String> capabilities) {
+	public void setCapabilities(Map<String, Object> capabilities) {
 		if (capabilities != null) {
 			this.capabilities = capabilities;
 		}
 	}
 
-	public Map<String, String> getCapabilities() {
+	public Map<String, Object> getCapabilities() {
 		return this.capabilities;
+	}
+
+	public Map<String, String> getInterfaces() {
+		return interfaces;
+	}
+
+	public void setInterfaces(Map<String, String> interfaces) {
+		if (interfaces != null) {
+			this.interfaces = interfaces;
+		}
+	}
+
+	public Map<String, Object> getArtifacts() {
+		return artifacts;
+	}
+
+	public void setArtifacts(Map<String, Object> artifacts) {
+		if (artifacts != null) {
+			this.artifacts = artifacts;
+		}
 	}
 
 	@Override

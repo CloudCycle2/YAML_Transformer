@@ -33,13 +33,10 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 
 	@Override
 	public String xmlbean2xml(Definitions root) {
-		// TODO: this is not tested!
 		try {
 			final OutputStream stream = new ByteArrayOutputStream();
 			final JAXBContext jaxbContext = JAXBContext.newInstance(Definitions.class, AnyMap.class);
 			final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-			// TODO: re-enable schema validation when the proper namespaces are set
-			// jaxbMarshaller.setSchema(getToscaSchema());
 
 			// output pretty printed
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -55,7 +52,6 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 
 	@Override
 	public Definitions xml2xmlbean(String xmlstring) {
-		// TODO: this is not tested!
 		final InputStream stream = string2InputStream(xmlstring);
 		try {
 			final JAXBContext jaxbContext = JAXBContext.newInstance(Definitions.class);

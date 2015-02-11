@@ -1,51 +1,67 @@
 package org.opentosca.yamlconverter.switchmapper;
 
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlWriter;
+import org.opentosca.model.tosca.*;
+import org.opentosca.model.tosca.TEntityType.DerivedFrom;
+import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
+import org.opentosca.model.tosca.TNodeType.Interfaces;
+import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.*;
+
+import javax.xml.namespace.QName;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.xml.namespace.QName;
-
-import org.opentosca.model.tosca.Definitions;
-import org.opentosca.model.tosca.TCapabilityDefinition;
-import org.opentosca.model.tosca.TCapabilityType;
-import org.opentosca.model.tosca.TDocumentation;
-import org.opentosca.model.tosca.TEntityTemplate;
-import org.opentosca.model.tosca.TEntityType.DerivedFrom;
-import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.model.tosca.TImport;
-import org.opentosca.model.tosca.TInterface;
-import org.opentosca.model.tosca.TNodeTemplate;
-import org.opentosca.model.tosca.TNodeType;
-import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
-import org.opentosca.model.tosca.TNodeType.Interfaces;
-import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
-import org.opentosca.model.tosca.TRelationshipType;
-import org.opentosca.model.tosca.TRequirementDefinition;
-import org.opentosca.model.tosca.TServiceTemplate;
-import org.opentosca.model.tosca.TTopologyTemplate;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Import;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
+/**
+ * This class can parse ServiceTemplates (YAML bean) to Definitions (XML bean).
+ *
+ */
 public class Yaml2XmlSwitch {
+	/**
+	 * The XML-Namespace of XML-Schemas.
+	 */
 	private static final String XMLSCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
 
+	/**
+	 * The XML-Namespace of the created document.
+	 */
 	private static final String NS = "http://www.example.org/tosca/yamlgen";
 
+	/**
+	 * The default user input.
+	 */
+	private static final String DEFAULT_USER_INPUT = "DEFAULTUSERINPUT";
+
+	/**
+	 * The XML-Namespace of the types.
+	 */
 	private static String TYPESNS = "http://www.example.org/tosca/yamlgen/types";
 
+	/**
+	 * A counter for creating unique IDs.
+	 */
 	private long uniqueID = 0;
 
+	/**
+	 * StringBuilder for the XSD.
+	 */
 	private StringBuilder xsd;
 
+	/**
+	 * The service template to parse.
+	 */
 	private ServiceTemplate st;
 
+	/**
+	 * InputVarName -> InputVarValue
+	 */
 	private Map<String, String> inputs = new HashMap<>();
 
 	/**
@@ -72,27 +88,22 @@ public class Yaml2XmlSwitch {
 		return pre + this.xsd.toString() + post;
 	}
 
+	/**
+	 * Getter for InputVariables.
+	 * 
+	 * @return InputVarName -> InputVarValue
+	 */
 	private Map<String, String> getInputs() {
 		return this.inputs;
 	}
 
+	/**
+	 * Set the map for Input-Variables.
+	 * 
+	 * @param inputs InputVarName -> InputVarValue
+	 */
 	public void setInputs(Map<String, String> inputs) {
 		this.inputs = inputs;
-	}
-
-	/**
-	 * Deprecated. Use parse(..).
-	 *
-	 * @param elem element to parse
-	 * @return parsed object
-	 * @deprecated please use parse(ServiceTemplate st)
-	 */
-	@Deprecated
-	public Object doswitch(Object elem) {
-		if (elem instanceof ServiceTemplate) {
-			return case_ServiceTemplate((ServiceTemplate) elem);
-		}
-		throw new UnsupportedOperationException("Object not yet supported");
 	}
 
 	private Definitions case_ServiceTemplate(ServiceTemplate elem) {
@@ -135,11 +146,10 @@ public class Yaml2XmlSwitch {
 		// result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(case_ArtifactType(artType));
 		// }
 		if (elem.getImports() != null) {
-//			for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
-				// TODO: How do we handle imports?
-				// result.getImport().add(case_Import(importelem));
-				// TODO: add types import
-//			}
+			// for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
+			// TODO: How do we handle imports?
+			// result.getImport().add(case_Import(importelem));
+			// }
 		}
 		result.getImport().add(createTypeImport());
 		// serviceTemplate.setBoundaryDefinitions(value);
@@ -174,12 +184,20 @@ public class Yaml2XmlSwitch {
 
 	private TRelationshipType case_RelationshipType(Entry<String, RelationshipType> relType) {
 		final TRelationshipType result = new TRelationshipType();
-		// TODO: YAMLmodel RelationshipType
+		for (final Entry<String, Map<String, InterfaceDefinition>> iface : relType.getValue().getInterfaces().entrySet()) {
+			// TODO
+		}
+		for (final Entry<String, PropertyDefinition> prop : relType.getValue().getProperties().entrySet()) {
+			// TODO
+		}
+		for (final String target : relType.getValue().getValid_targets()) {
+			// TODO
+		}
 		// result.setAbstract(value);
 		// result.setDerivedFrom(value);
 		// result.setFinal(value);
 		// result.setInstanceStates(value);
-		// result.setName(value);
+		result.setName(relType.getKey());
 		// result.setPropertiesDefinition(value);
 		// result.setSourceInterfaces(value);
 		// result.setTags(value);
@@ -195,12 +213,18 @@ public class Yaml2XmlSwitch {
 
 	private TCapabilityType case_CapabilityType(Entry<String, CapabilityType> capType) {
 		final TCapabilityType result = new TCapabilityType();
+		for (final Entry<String, PropertyDefinition> prop : capType.getValue().getProperties().entrySet()) {
+			// TODO
+		}
+		// PropertiesDefinition propDef = new PropertiesDefinition();
+		// propDef.setElement(value);
+		// propDef.setType(value);
+		// result.setPropertiesDefinition(propDef );
 		// TODO: YAMLmodel CapabilityType
 		// result.setAbstract(value);
 		// result.setDerivedFrom(value);
 		// result.setFinal(value);
-		// result.setName(value);
-		// result.setPropertiesDefinition(value);
+		result.setName(capType.getKey());
 		// result.setTags(value);
 		// result.setTargetNamespace(value);
 		// result.getAny().add();
@@ -241,21 +265,22 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
-	private RequirementDefinitions parseNodeTypeRequirementDefinitions(Map<String, String> requirements) {
+	private RequirementDefinitions parseNodeTypeRequirementDefinitions(Map<String, Object> requirements) {
 		final RequirementDefinitions result = new RequirementDefinitions();
-		for (final Entry<String, String> req : requirements.entrySet()) {
+		for (final Entry<String, Object> req : requirements.entrySet()) {
 			final TRequirementDefinition rd = new TRequirementDefinition();
 			// rd.setConstraints(value);
 			// rd.setLowerBound(value);
 			rd.setName(req.getKey());
-			rd.setRequirementType(new QName(req.getValue()));
+			// TODO: we must check here if value is only a string or a map of values!
+			rd.setRequirementType(new QName(req.getValue().toString()));
 			// rd.setUpperBound(value);
 			result.getRequirementDefinition().add(rd);
 		}
 		return result;
 	}
 
-	private PropertiesDefinition parseNodeTypePropertiesDefinition(Map<String, Map<String, String>> properties, String typename) {
+	private PropertiesDefinition parseNodeTypePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
 		final PropertiesDefinition result = new PropertiesDefinition();
 		// TODO: setElement()?!
 		// result.setElement(value);
@@ -264,19 +289,19 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
-	private void generateTypeXSD(Map<String, Map<String, String>> properties, String name) {
+	private void generateTypeXSD(Map<String, PropertyDefinition> properties, String name) {
 		this.xsd.append("<xs:complexType name=\"" + name + "\">\n");
 		this.xsd.append("<xs:sequence>\n");
-		for (final Entry<String, Map<String, String>> entry : properties.entrySet()) {
-			this.xsd.append("<xs:element name=\"" + entry.getKey() + "\" type=\"xs:" + entry.getValue().get("type") + "\" />\n");
+		for (final Entry<String, PropertyDefinition> entry : properties.entrySet()) {
+			this.xsd.append("<xs:element name=\"" + entry.getKey() + "\" type=\"xs:" + entry.getValue().getType() + "\" />\n");
 		}
 		this.xsd.append("</xs:sequence>\n");
 		this.xsd.append("</xs:complexType>\n");
 	}
 
-	private Interfaces parseNodeTypeInterfaces(Map<String, String> interfaces) {
+	private Interfaces parseNodeTypeInterfaces(Map<String, Map<String, InterfaceDefinition>> interfaces) {
 		final Interfaces result = new Interfaces();
-		for (final Entry<String, String> entry : interfaces.entrySet()) {
+		for (final Entry<String, Map<String, InterfaceDefinition>> entry : interfaces.entrySet()) {
 			final TInterface inf = new TInterface();
 			inf.setName(entry.getKey());
 			// TODO: YAMLmodel Interface Operations
@@ -292,9 +317,9 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
-	private CapabilityDefinitions parseNodeTypeCapabilities(Map<String, String> capabilities) {
+	private CapabilityDefinitions parseNodeTypeCapabilities(Map<String, Object> capabilities) {
 		final CapabilityDefinitions result = new CapabilityDefinitions();
-		for (final Entry<String, String> entr : capabilities.entrySet()) {
+		for (final Entry<String, Object> entr : capabilities.entrySet()) {
 			final TCapabilityDefinition capdef = new TCapabilityDefinition();
 			// TODO YAMLmodel NodeType Capabilities
 			// capdef.setCapabilityType(value);
@@ -362,21 +387,47 @@ public class Yaml2XmlSwitch {
 				if (getInputs().containsKey(inputvar)) {
 					return getInputs().get(inputvar);
 				}
-				// TODO: defaults
-				break;
+				if (this.st.getInputs().containsKey(inputvar)) {
+					if (this.st.getInputs().get(inputvar).getDefault() != null && !this.st.getInputs().get(inputvar).getDefault().isEmpty()) {
+						return this.st.getInputs().get(inputvar).getDefault();
+					}
+				}
+				// TODO: *Type-defaults
+				return DEFAULT_USER_INPUT;
 			case "get_property":
 				@SuppressWarnings("unchecked")
 				final List<String> list = (List<String>) getter.getValue();
 				final String template = list.get(0);
 				final String property = list.get(1);
-				return (String) this.st.getNode_templates().get(template).getProperties().get(property);
+				if (this.st.getNode_templates().containsKey(template)) {
+					if (this.st.getNode_templates().get(template).getProperties().containsKey(property)) {
+						return (String) this.st.getNode_templates().get(template).getProperties().get(property);
+					}
+				}
 			case "get_ref_property":
-				return "DEFAULTREFPROPERTY";
+				return DEFAULT_USER_INPUT;
 			default:
-				return "DEFAULTGETTERINPUT";
+				final String result = serializeYAML(getterMap);
+				if (result != null) {
+					return result;
+				} else {
+					return DEFAULT_USER_INPUT;
+				}
 			}
 		}
 		return "";
+	}
+
+	private String serializeYAML(Map<String, Object> getterMap) {
+		final Writer output = new StringWriter();
+		final YamlWriter writer = new YamlWriter(output);
+		try {
+			writer.write(getterMap);
+			writer.close();
+		} catch (final YamlException e) {
+			return null;
+		}
+		return output.toString();
 	}
 
 	/**

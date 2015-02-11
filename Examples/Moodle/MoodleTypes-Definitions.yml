@@ -1,0 +1,199 @@
+node_types: 
+  # list of node type definitions
+	MoodleApplication:
+    # MoodleApplication -df> ApacheWebApplication -df> Webapplication -df> RootNodeType
+		derived_from: ApacheWebApplication
+		description: Moodle Application
+		properties:
+    # from MoodleTypes.xsd tMoodleApplicationProperties
+			AdminUser:
+				type: string
+			AdminPassword:
+				type: string
+			SiteName:
+				type: string
+			SitePath:
+				type: string
+		artifacts:
+# Implementation Artifacts:
+			-at-MoodleApplication-install: scripts/MoodleApplication/install.sh
+				type: ScriptArtifact
+				description: <description>
+				properties:
+					ScriptLanguage:sh
+					PrimaryScript: scripts/MoodleApplication/configure.sh
+			-at-MoodleApplication-configure: 
+				type: ScriptArtifact
+				description: <description>
+				properties:
+					ScriptLanguage:sh
+					PrimaryScript: scripts/MoodleApplication/configure.sh
+# Deployment Artifacts (properties are XML attributes)
+			-at-MoodleApplication-MoodleApplication-ConfigFiles: files/config.php
+				type: FileArtifact
+				description: <description>
+				properties:
+					fileReference: files/config.php
+					path: /tmp/tosca/artifacts/config.php
+			-at-MoodleApplication-MoodleApplication-archive: files/moodle-2.6.1.tgz
+				type: ArchiveArtifact
+				description: <description>
+				properties:
+					archiveReference: files/moodle-2.6.1.tgz
+					path: /tmp/tosca/artifacts/MoodleInstall
+			-at-MoodleApplication-php-ext-packages: [missing!!!!]
+				type: OsPackageArtifact
+				description: <description>
+				properties:
+					packageName: php-gd
+		interfaces:
+			lifecycle:
+				install:
+					implementaion: at-MoodleApplication-install
+				configure:
+					implementaion: at-MoodleApplication-configure
+		requirements:
+			-database: MySQLDatabaseEndpointCapability	
+#don't know if this is correct to map relationship_type
+			 relationship_type: MoodleDatabaseConnection	
+			-phpRuntime: PHPRuntimeCapability
+			
+			
+		 
+	MoodleDatabase:
+    # MoodleDatabase -df> MySQLDatabase -df> Database -df> RootNodeType
+		derived_from: MySQLDatabase
+		description: Moodle Database
+		properties:
+		#from MoodleTypes.xsd tMoodleDatabaseProperties
+			DBName:
+				type: string
+			DBUser:
+				type: string
+			DBPassword:
+				type: string
+			DBPort:
+				type: int
+		artifacts:
+# Implementation Artifacts
+			-at-MoodleDatabase-configure: scripts/MoodleDatabase/configure.sh
+				type: ScriptArtifact
+				description: <description>
+				properties:
+					ScriptLanguage:sh
+					PrimaryScript: scripts/MoodleDatabase/configure.sh
+# Deployment Artifacts (properties are XML attributes)
+			-at-MoodleDatabase-MoodleDbContent-File: files/moodledb.sql
+				type: FileArtifact
+				description: <description>
+				properties:
+					fileReference: files/moodledb.sql
+					path: /tmp/tosca/artifacts/moodledb.sql
+		interfaces:
+			lifecycle:
+				install:
+				configure:
+					implementaion: at-MoodleDatabase-configure
+					
+	Server:
+		derived_from: tosca.nodes.Root
+		description: Server
+		properties:
+		artifacts:
+			-AmazonEC2VMNodeTypeImplementation_IA_ArtifactTemplate: IAs/AmazonEC2VMNodeType/org_opentosca_types_AmazonEC2VM__InterfaceAmazonEC2VM.war
+				type: WAR
+				description: <description>
+				properties:
+					ServiceEndpoint: /services/org_opentosca_types_AmazonEC2VM__InterfaceAmazonEC2VMPort
+					PortType: {http://opentosca.org/types}org_opentosca_types_AmazonEC2VM__InterfaceAmazonEC2VM
+					InvocationType: SOAP/HTTP
+		interfaces:
+			InterfaceAmazonEC2VM:
+			
+	OperatingSystem:
+		derived_from: tosca.nodes.Root
+		description: Operating System
+		properties:
+		artifacts:
+			-UbuntuNodeTypeImplementation_IA_ArtifactTemplate: IAs/UbuntuNodeType/org_opentosca_types_Ubuntu__InterfaceUbuntu.war
+			type: WAR
+			description: <description>
+			properties:
+				ServiceEndpoint: /services/org_opentosca_types_Ubuntu__InterfaceUbuntuPort
+				PortType: {http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu
+				InvocationType: SOAP/HTTP
+		interfaces:
+			InterfaceUbuntu:
+
+relationship_types:
+	MoodleDatabaseConnection:
+		derived_from: MySQLDatabaseConnection
+		description: Connects to
+# in spec there are no artifacts, but there is also relationshipTypeImplementation like for nodeTypes
+		artifacts:
+			-at-MoodleDatabaseConnection-Source-preConfigureEndpoint: scripts/MoodleDatabaseConnection/configureDatabaseEndpoint.sh
+			type: ScriptArtifact
+			description: <description>
+			properties:
+				ScriptLanguage: sh
+				PrimaryScript: scripts/MoodleDatabaseConnection/configureDatabaseEndpoint.sh
+		interfaces:
+			http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/RelationshipType/Source:
+				preConfigureEndpoint:
+					implementaion: at-MoodleDatabaseConnection-Source-preConfigureEndpoint
+		valid_targets: MySQLDatabaseEndpointCapability
+
+capability_types:
+# from file Specific Types Definitions
+	PHPRuntimeCapability
+		derived_from: FeatureCapability
+	MySQLDatabaseEndpointCapability
+		derived_from: DatabaseEndpointRequirement
+	
+		
+artifact_types: 
+  # list of artifact type definitions 
+	ScriptArtifact: 
+		description: <artifact_description> 
+		mime_type: script/sh
+		file_ext: sh
+		properties:
+			ScriptLanguage:
+				type: anyURI
+			PrimaryScript:
+				type: string
+	FileArtifact:
+		description: <artifact_description>
+		properties:
+			fileReference:
+				type: string 
+			path:
+				type: string
+	OsPackageArtifact:
+		description: <artifact_description>
+		properties:
+			packageName:
+				type: string
+	ArchiveArtifact:
+		description: <artifact_description>
+		properties:
+			archiveReference:
+				type: string
+			path:
+				type: string
+	WAR:
+		description: <artifact_description>
+		mime_type: application/x-zip 
+		file_ext: war 
+		properties:
+			ServiceEndpoint:
+				type: string
+			PortType:
+				type: string
+			InvocationType:
+				type: string
+		
+			
+			
+
+	

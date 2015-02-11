@@ -3,8 +3,6 @@ package org.opentosca.yamlconverter.main.interfaces;
 import java.util.Map;
 
 public interface IToscaYamlParser {
-	// TODO: YAMLFileRoot -> ServiceTemplate
-
 	/**
 	 * Tell the parser to parse the yamlString to XML.
 	 *
