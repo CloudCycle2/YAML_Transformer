@@ -25,5 +25,5 @@ node_templates:
       os_type: windows
   #for current usage until the porperties are no longer contrained to String, String
   #    os_distribution: { get_property: [my_server, os_distribution] } 
-      os_distribution: rhel
+      os_distribution: rheli
       os_version: 7.0
