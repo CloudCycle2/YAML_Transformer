@@ -1,23 +1,44 @@
 package org.opentosca.yamlconverter.switchmapper;
 
-import com.esotericsoftware.yamlbeans.YamlException;
-import com.esotericsoftware.yamlbeans.YamlWriter;
-import org.opentosca.model.tosca.*;
-import org.opentosca.model.tosca.TEntityType.DerivedFrom;
-import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
-import org.opentosca.model.tosca.TNodeType.Interfaces;
-import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.*;
-
-import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.xml.namespace.QName;
+
+import org.opentosca.model.tosca.Definitions;
+import org.opentosca.model.tosca.TCapabilityDefinition;
+import org.opentosca.model.tosca.TCapabilityType;
+import org.opentosca.model.tosca.TDocumentation;
+import org.opentosca.model.tosca.TEntityTemplate;
+import org.opentosca.model.tosca.TEntityType.DerivedFrom;
+import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.model.tosca.TImport;
+import org.opentosca.model.tosca.TInterface;
+import org.opentosca.model.tosca.TNodeTemplate;
+import org.opentosca.model.tosca.TNodeType;
+import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
+import org.opentosca.model.tosca.TNodeType.Interfaces;
+import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
+import org.opentosca.model.tosca.TOperation;
+import org.opentosca.model.tosca.TRelationshipType;
+import org.opentosca.model.tosca.TRequirementDefinition;
+import org.opentosca.model.tosca.TServiceTemplate;
+import org.opentosca.model.tosca.TTopologyTemplate;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.OperationDefinition;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlWriter;
 
 /**
  * This class can parse ServiceTemplates (YAML bean) to Definitions (XML bean).
@@ -90,7 +111,7 @@ public class Yaml2XmlSwitch {
 
 	/**
 	 * Getter for InputVariables.
-	 * 
+	 *
 	 * @return InputVarName -> InputVarValue
 	 */
 	private Map<String, String> getInputs() {
@@ -99,7 +120,7 @@ public class Yaml2XmlSwitch {
 
 	/**
 	 * Set the map for Input-Variables.
-	 * 
+	 *
 	 * @param inputs InputVarName -> InputVarValue
 	 */
 	public void setInputs(Map<String, String> inputs) {
@@ -187,8 +208,12 @@ public class Yaml2XmlSwitch {
 		for (final Entry<String, Map<String, Map<String, OperationDefinition>>> iface : relType.getValue().getInterfaces().entrySet()) {
 			// TODO
 		}
-		for (final Entry<String, PropertyDefinition> prop : relType.getValue().getProperties().entrySet()) {
-			// TODO
+		if (relType.getValue().getProperties() != null && !relType.getValue().getProperties().isEmpty()) {
+			generateTypeXSD(relType.getValue().getProperties(), relType.getKey());
+			final PropertiesDefinition propDef = new PropertiesDefinition();
+			propDef.setElement(new QName(TYPESNS, relType.getKey() + "Properties", "types"));
+			// propDef.setType(value);
+			result.setPropertiesDefinition(propDef);
 		}
 		for (final String target : relType.getValue().getValid_targets()) {
 			// TODO
@@ -213,14 +238,13 @@ public class Yaml2XmlSwitch {
 
 	private TCapabilityType case_CapabilityType(Entry<String, CapabilityType> capType) {
 		final TCapabilityType result = new TCapabilityType();
-		for (final Entry<String, PropertyDefinition> prop : capType.getValue().getProperties().entrySet()) {
-			// TODO
+		if (capType.getValue().getProperties() != null && !capType.getValue().getProperties().isEmpty()) {
+			generateTypeXSD(capType.getValue().getProperties(), capType.getKey());
+			final PropertiesDefinition propDef = new PropertiesDefinition();
+			propDef.setElement(new QName(TYPESNS, capType.getKey() + "Properties", "types"));
+			// propDef.setType(value);
+			result.setPropertiesDefinition(propDef);
 		}
-		// PropertiesDefinition propDef = new PropertiesDefinition();
-		// propDef.setElement(value);
-		// propDef.setType(value);
-		// result.setPropertiesDefinition(propDef );
-		// TODO: YAMLmodel CapabilityType
 		// result.setAbstract(value);
 		// result.setDerivedFrom(value);
 		// result.setFinal(value);
@@ -282,9 +306,9 @@ public class Yaml2XmlSwitch {
 
 	private PropertiesDefinition parseNodeTypePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
 		final PropertiesDefinition result = new PropertiesDefinition();
-		// TODO: setElement()?!
-		// result.setElement(value);
-		result.setType(new QName(TYPESNS, typename + "Properties", "types"));
+		// TODO: setType()?!
+		result.setElement(new QName(TYPESNS, typename + "Properties", "types"));
+		// result.setType(new QName(TYPESNS, typename + "Properties", "types"));
 		generateTypeXSD(properties, typename + "Properties");
 		return result;
 	}
@@ -304,8 +328,16 @@ public class Yaml2XmlSwitch {
 		for (final Entry<String, Map<String, Map<String, OperationDefinition>>> entry : interfaces.entrySet()) {
 			final TInterface inf = new TInterface();
 			inf.setName(entry.getKey());
-			// TODO: YAMLmodel Interface Operations
-			// inf.getOperation().add(e)
+			// TODO: is this right?!
+			for (final Entry<String, Map<String, OperationDefinition>> op : entry.getValue().entrySet()) {
+				for (final Entry<String, OperationDefinition> sop : op.getValue().entrySet()) {
+					final TOperation top = new TOperation();
+					// top.setInputParameters(value);
+					top.setName(sop.getValue().getImplementation());
+					// top.setOutputParameters(value);
+					inf.getOperation().add(top);
+				}
+			}
 			result.getInterface().add(inf);
 		}
 		return result;
