@@ -27,7 +27,7 @@ public class MasterParserTest extends BaseTest {
 	public void testGetInputRequirements() throws Exception {
 		final String yamlInput = this.testUtils.readYamlTestResource("/yaml/inputs.yaml");
 		this.parser.parse(yamlInput);
-		final Map<String, String> inputs = this.parser.getInputRequirements();
+		final Map<String, String> inputs = this.parser.getInputRequirementsText();
 		Assert.assertNotNull(inputs);
 		Assert.assertEquals(1, inputs.size());
 		Assert.assertTrue("must contain an input with key 'foo'", inputs.containsKey("foo"));
@@ -37,7 +37,7 @@ public class MasterParserTest extends BaseTest {
 	public void testGetInputRequirements_WithoutConstraints() throws Exception {
 		final String yamlInput = this.testUtils.readYamlTestResource("/yaml/inputs_emptyConstraints.yaml");
 		this.parser.parse(yamlInput);
-		final Map<String, String> inputs = this.parser.getInputRequirements();
+		final Map<String, String> inputs = this.parser.getInputRequirementsText();
 		Assert.assertNotNull(inputs);
 		Assert.assertEquals(1, inputs.size());
 		Assert.assertTrue("must contain an input with key 'foo'", inputs.containsKey("foo"));

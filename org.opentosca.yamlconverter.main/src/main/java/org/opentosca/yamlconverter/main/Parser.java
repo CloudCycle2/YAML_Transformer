@@ -58,7 +58,7 @@ public class Parser implements IToscaYamlParser {
 	}
 
 	@Override
-	public Map<String, String> getInputRequirements() {
+	public Map<String, String> getInputRequirementsText() {
 		if (this.serviceTempl == null) {
 			throw new IllegalStateException("Call parse(..) before calling getInputRequirements()");
 		}
@@ -75,6 +75,13 @@ public class Parser implements IToscaYamlParser {
 			}
 		}
 		return result;
+	}
+
+	public Map<String, Input> getInputRequirements() {
+		if (this.serviceTempl == null) {
+			throw new IllegalStateException("Call parse(..) before calling getInputRequirements()");
+		}
+		return this.serviceTempl.getInputs();
 	}
 
 	/**

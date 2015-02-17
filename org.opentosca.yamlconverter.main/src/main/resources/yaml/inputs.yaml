@@ -2,12 +2,24 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 
 inputs:
   foo:
-    type: int
-    description: memsize of myserver
-    default: 4
+    type: string
+    description: Test
+    default: t123
     constraints:
-      - min_length: 1
-      - max_length: 4
+      - min_length: 2
+      - max_length: 5
+      - pattern: a(a|b)*
+  bar:
+    type: integer
+    description: Test
+    default: 20
+    constraints:
+      - in_range: {4, 20}
+      - less_than: 1000
+      - less_or_equal: 20
+      - greater_than: 3
+      - greater_or_equal: 4
+      - valid_values: [3, 4, 5, 10, 15, 20, 25]
       
 node_templates:
   my_server:
@@ -16,10 +28,10 @@ node_templates:
       # compute properties
       disk_size: 10
       num_cpus: 2
-      mem_size: { get_input: foo }
+      mem_size: { get_input: bar }
       # host image properties
       os_arch: x86_64
-      os_type: linux
+      os_type: { get_input: foo }
       os_distribution: rhel
       os_version: 6.5
   your_server:
