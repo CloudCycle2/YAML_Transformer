@@ -7,4 +7,17 @@ inputs:
     default: t123
     constraints:
       - min_length: 2
-      - max_length: 4
+      - max_length: 5
+      - pattern: a(a|b)*
+  bar:
+    type: integer
+    description: Test
+    default: 20
+    constraints:
+      - in_range: {4, 20}
+      - less_than: 1000
+      - less_or_equal: 20
+      - greater_than: 3
+      - greater_or_equal: 4
+      - valid_values: [3, 4, 5, 10, 15, 20, 25]
+      

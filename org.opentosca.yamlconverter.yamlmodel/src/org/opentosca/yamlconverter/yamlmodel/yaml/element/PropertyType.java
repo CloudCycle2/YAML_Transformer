@@ -1,23 +1,40 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
-public abstract class PropertyType {
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 
-	public int hashCode() {
-		int hashCode = 0;
-		if ( hashCode == 0 ) {
-			hashCode = super.hashCode();
+/**
+ * Maps yaml primitive types to their respective java classes.
+ *
+ * @usage {@link PropertyType#get(String)}
+ * @example <code>PropertyType.get("integer")</code>
+ */
+public enum PropertyType {
+	stringType("string", String.class),
+	integerType("integer", Integer.class),
+	floatType("float", Float.class),
+	booleanType("boolean", Boolean.class),
+	timestampType("timestamp", Date.class);
+
+	private static final Map<String, Class<?>> aliases = new HashMap<String, Class<?>>();
+	private final String alias;
+	private final Class<?> dataType;
+
+	static {
+		for (final PropertyType type : EnumSet.allOf(PropertyType.class)) {
+			aliases.put(type.alias, type.dataType);
 		}
-		return hashCode;
 	}
 
-	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		} else if (object instanceof PropertyType) {
-			PropertyType propertyTypeObject = (PropertyType) object;
-			boolean equals = true;
-			return equals;
-		}
-		return false;
+	PropertyType(String alias, Class<?> dataType) {
+		this.alias = alias;
+		this.dataType = dataType;
 	}
+
+	public static Class<?> get(String alias) {
+		return aliases.get(alias);
+	}
+
 }

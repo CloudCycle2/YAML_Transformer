@@ -5,6 +5,8 @@ inputs:
     type: string
     description: Test
     default: 123
+    constraints:
+      - min_length: 5
   bla:
     type: string
     description: TEST2
