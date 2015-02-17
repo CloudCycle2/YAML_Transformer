@@ -184,7 +184,7 @@ public class Yaml2XmlSwitch {
 
 	private TRelationshipType case_RelationshipType(Entry<String, RelationshipType> relType) {
 		final TRelationshipType result = new TRelationshipType();
-		for (final Entry<String, Map<String, InterfaceDefinition>> iface : relType.getValue().getInterfaces().entrySet()) {
+		for (final Entry<String, Map<String, Map<String, OperationDefinition>>> iface : relType.getValue().getInterfaces().entrySet()) {
 			// TODO
 		}
 		for (final Entry<String, PropertyDefinition> prop : relType.getValue().getProperties().entrySet()) {
@@ -299,9 +299,9 @@ public class Yaml2XmlSwitch {
 		this.xsd.append("</xs:complexType>\n");
 	}
 
-	private Interfaces parseNodeTypeInterfaces(Map<String, Map<String, InterfaceDefinition>> interfaces) {
+	private Interfaces parseNodeTypeInterfaces(Map<String, Map<String, Map<String, OperationDefinition>>> interfaces) {
 		final Interfaces result = new Interfaces();
-		for (final Entry<String, Map<String, InterfaceDefinition>> entry : interfaces.entrySet()) {
+		for (final Entry<String, Map<String, Map<String, OperationDefinition>>> entry : interfaces.entrySet()) {
 			final TInterface inf = new TInterface();
 			inf.setName(entry.getKey());
 			// TODO: YAMLmodel Interface Operations

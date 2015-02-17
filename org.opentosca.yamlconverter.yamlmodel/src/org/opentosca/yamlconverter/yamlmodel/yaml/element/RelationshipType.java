@@ -7,7 +7,8 @@ import java.util.Map;
 public class RelationshipType extends YAMLElement {
 
 	private Map<String, PropertyDefinition> properties = new HashMap<String, PropertyDefinition>();
-	private Map<String, Map<String, InterfaceDefinition>> interfaces = new HashMap<String, Map<String, InterfaceDefinition>>();
+	private Map<String, Map<String, Map<String, OperationDefinition>>> interfaces =
+			new HashMap<String, Map<String, Map<String, OperationDefinition>>>();
 	private String[] valid_targets;
 
 	public Map<String, PropertyDefinition> getProperties() {
@@ -20,11 +21,11 @@ public class RelationshipType extends YAMLElement {
 		}
 	}
 
-	public Map<String, Map<String, InterfaceDefinition>> getInterfaces() {
+	public Map<String, Map<String, Map<String, OperationDefinition>>> getInterfaces() {
 		return interfaces;
 	}
 
-	public void setInterfaces(Map<String, Map<String, InterfaceDefinition>> interfaces) {
+	public void setInterfaces(Map<String, Map<String, Map<String, OperationDefinition>>> interfaces) {
 		if (interfaces != null) {
 			this.interfaces = interfaces;
 		}
