@@ -9,7 +9,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.opentosca.yamlconverter.main.Parser;
+import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
 import org.opentosca.yamlconverter.main.utils.FileUtil;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 
 /**
  * A simple User Interface for Console.
@@ -60,15 +62,26 @@ public class ConsoleUI {
 		// parse it
 		final Parser parser = new Parser();
 		parser.parse(yaml);
-		final Map<String, String> reqMap = parser.getInputRequirements();
+		final Map<String, Input> reqMap = parser.getInputRequirements();
+		final Map<String, String> reqText = parser.getInputRequirementsText();
 		if (!reqMap.isEmpty()) {
 			// ask for inputs
 			cowsay("I need some variables you have to define!");
 			final Map<String, String> inputValues = new HashMap<String, String>();
-			for (final Entry<String, String> requirement : reqMap.entrySet()) {
-				final String userinput = promptString("Variable " + requirement.getKey() + " (" + requirement.getValue() + "):");
-				if (!userinput.isEmpty()) {
-					inputValues.put(requirement.getKey(), userinput);
+			for (final Entry<String, Input> requirement : reqMap.entrySet()) {
+				String userinput = promptString("Variable " + requirement.getKey() + " (" + reqText.get(requirement.getKey()) + "):");
+				boolean valid = false;
+				while (!valid) {
+					valid = true;
+					if (!userinput.isEmpty()) {
+						valid = ConstraintUtils.matchesConstraints(userinput, requirement.getValue());
+						if (valid) {
+							inputValues.put(requirement.getKey(), userinput);
+						} else {
+							userinput = promptString("ERROR: User Input did not fulfill the constraints. Try again.\nVariable "
+									+ requirement.getKey() + " (" + reqText.get(requirement.getKey()) + "):");
+						}
+					}
 				}
 			}
 			parser.setInputValues(inputValues);

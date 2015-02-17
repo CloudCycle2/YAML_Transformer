@@ -31,7 +31,7 @@ public interface IToscaYamlParser {
 	 *
 	 * @return input requirements map
 	 */
-	public Map<String, String> getInputRequirements();
+	public Map<String, String> getInputRequirementsText();
 
 	/**
 	 * Set the values for the input Variables. Map: inputvarname -> inputvarvalue
