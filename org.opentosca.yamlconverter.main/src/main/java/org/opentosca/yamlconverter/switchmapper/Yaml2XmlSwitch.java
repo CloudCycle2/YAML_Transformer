@@ -1,44 +1,24 @@
 package org.opentosca.yamlconverter.switchmapper;
 
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlWriter;
+import org.opentosca.model.tosca.*;
+import org.opentosca.model.tosca.TEntityType.DerivedFrom;
+import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
+import org.opentosca.model.tosca.TNodeType.Interfaces;
+import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.*;
+
+import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.xml.namespace.QName;
-
-import org.opentosca.model.tosca.Definitions;
-import org.opentosca.model.tosca.TCapabilityDefinition;
-import org.opentosca.model.tosca.TCapabilityType;
-import org.opentosca.model.tosca.TDocumentation;
-import org.opentosca.model.tosca.TEntityTemplate;
-import org.opentosca.model.tosca.TEntityType.DerivedFrom;
-import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.model.tosca.TImport;
-import org.opentosca.model.tosca.TInterface;
-import org.opentosca.model.tosca.TNodeTemplate;
-import org.opentosca.model.tosca.TNodeType;
-import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
-import org.opentosca.model.tosca.TNodeType.Interfaces;
-import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
-import org.opentosca.model.tosca.TOperation;
-import org.opentosca.model.tosca.TRelationshipType;
-import org.opentosca.model.tosca.TRequirementDefinition;
-import org.opentosca.model.tosca.TServiceTemplate;
-import org.opentosca.model.tosca.TTopologyTemplate;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.OperationDefinition;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import com.esotericsoftware.yamlbeans.YamlException;
-import com.esotericsoftware.yamlbeans.YamlWriter;
 
 /**
  * This class can parse ServiceTemplates (YAML bean) to Definitions (XML bean).
@@ -163,9 +143,10 @@ public class Yaml2XmlSwitch {
 				result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(rt);
 			}
 		}
-		// for (final ArtifactType artType : elem.getArtifactType()) {
-		// result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(case_ArtifactType(artType));
-		// }
+		if (elem.getArtifact_types() != null) {
+			result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation()
+					.addAll(processArtifactTypes(elem.getArtifact_types()));
+		}
 		if (elem.getImports() != null) {
 			// for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
 			// TODO: How do we handle imports?
@@ -195,6 +176,43 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
+	private List<TArtifactType> processArtifactTypes(Object objArtifactTypes) {
+		List<TArtifactType> artifactTypes = new ArrayList<TArtifactType>();
+		if (objArtifactTypes instanceof HashMap) {
+            // old yaml spec supports artifacts only in special notation (issue #74):
+            // [SHORT]
+            // artifacts:
+            //   - artifact_name: artifact_file.war
+            //
+            // new yaml spec supports artifacts as:
+            // [LONG]
+            // artifacts:
+            //   - artifact_name:
+            //       type: WAR
+            //       implementation: artifact_file.war
+            for (Object objEntry : ((HashMap) objArtifactTypes).entrySet()) {
+                if (objEntry instanceof Entry) {
+                    TArtifactType artifactType = new TArtifactType();
+
+                    Entry entry = (Entry) objEntry;
+                    artifactType.setName((String) entry.getKey());
+
+                    // TODO: how to set artifact attributes like type, description, mime_type ?? as PropertyDefinition?
+                    if (entry.getValue() instanceof ArtifactType) {
+                        // TODO: set attributes while using ArtifactType/long notation
+
+                    } else if (entry.getValue() instanceof String) {
+                        // TODO: set attribute while using short notation
+                    }
+
+					artifactTypes.add(artifactType);
+                }
+            }
+        }
+
+		return artifactTypes;
+	}
+
 	private TImport createTypeImport() {
 		final TImport result = new TImport();
 		result.setImportType(XMLSCHEMA_NS);
@@ -205,7 +223,7 @@ public class Yaml2XmlSwitch {
 
 	private TRelationshipType case_RelationshipType(Entry<String, RelationshipType> relType) {
 		final TRelationshipType result = new TRelationshipType();
-		for (final Entry<String, Map<String, Map<String, OperationDefinition>>> iface : relType.getValue().getInterfaces().entrySet()) {
+		for (final Entry<String, Map<String, Map<String, String>>> iface : relType.getValue().getInterfaces().entrySet()) {
 			// TODO
 		}
 		if (relType.getValue().getProperties() != null && !relType.getValue().getProperties().isEmpty()) {
@@ -259,7 +277,10 @@ public class Yaml2XmlSwitch {
 
 	private TNodeType case_NodeType(NodeType value, String name) {
 		final TNodeType result = new TNodeType();
-		// TODO: value.getArtifacts() ?
+		if (value.getArtifacts() != null) {
+			// here are only artifact definitions!!
+			// TODO: how to handle artifacts??
+		}
 		// result.setAbstract(value);
 		if (value.getCapabilities() != null) {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
@@ -323,20 +344,20 @@ public class Yaml2XmlSwitch {
 		this.xsd.append("</xs:complexType>\n");
 	}
 
-	private Interfaces parseNodeTypeInterfaces(Map<String, Map<String, Map<String, OperationDefinition>>> interfaces) {
+	private Interfaces parseNodeTypeInterfaces(Map<String, Map<String, Map<String, String>>> interfaces) {
 		final Interfaces result = new Interfaces();
-		for (final Entry<String, Map<String, Map<String, OperationDefinition>>> entry : interfaces.entrySet()) {
+		for (final Entry<String, Map<String, Map<String, String>>> entry : interfaces.entrySet()) {
 			final TInterface inf = new TInterface();
 			inf.setName(entry.getKey());
 			// TODO: is this right?!
-			for (final Entry<String, Map<String, OperationDefinition>> op : entry.getValue().entrySet()) {
-				for (final Entry<String, OperationDefinition> sop : op.getValue().entrySet()) {
-					final TOperation top = new TOperation();
-					// top.setInputParameters(value);
-					top.setName(sop.getValue().getImplementation());
-					// top.setOutputParameters(value);
-					inf.getOperation().add(top);
-				}
+			for (final Entry<String, Map<String, String>> op : entry.getValue().entrySet()) {
+				final TOperation top = new TOperation();
+				// top.setInputParameters(value);
+				top.setName(op.getKey());
+				// value contains keys "implementation" and "description" eventually
+				// TODO: how to use implementation name??
+				// top.setOutputParameters(value);
+				inf.getOperation().add(top);
 			}
 			result.getInterface().add(inf);
 		}

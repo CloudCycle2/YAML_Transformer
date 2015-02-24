@@ -86,9 +86,7 @@ node_types:
       sshKey:
         type: string
       script:
-        type: string 
-    interfaces: 
-      InterfaceUbuntu:  
+        type: string
     artifacts:
       UbuntuNodeTypeImplementation_IA_ArtifactTemplate:
         type: WAR
@@ -142,3 +140,9 @@ node_types:
           ServiceEndpoint: /services/InstallOpenStackVM_Custom_InstallVMPort
           PortType: "{http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM" #TODO define interface
           InvocationType: SOAP/HTTP
+
+artifact_types:
+  InstallOpenStackVM_IA:
+    mime_type: war
+    description: bla
+

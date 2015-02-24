@@ -9,8 +9,8 @@ public class NodeType extends YAMLElement {
 	private Map<String, PropertyDefinition> properties = new HashMap<String, PropertyDefinition>();
 	private Map<String, Object> requirements = new HashMap<String, Object>();
 	private Map<String, Object> capabilities = new HashMap<String, Object>();
-	private Map<String, Map<String, Map<String, OperationDefinition>>> interfaces =
-			new HashMap<String, Map<String, Map<String, OperationDefinition>>>();
+	private Map<String, Map<String, Map<String, String>>> interfaces =
+			new HashMap<String, Map<String, Map<String, String>>>();
 	private Map<String, Object> artifacts = new HashMap<String, Object>();
 
 
@@ -64,11 +64,11 @@ public class NodeType extends YAMLElement {
 		}
 	}
 
-	public Map<String, Map<String, Map<String, OperationDefinition>>> getInterfaces() {
+	public Map<String, Map<String, Map<String, String>>> getInterfaces() {
 		return this.interfaces;
 	}
 
-	public void setInterfaces(Map<String, Map<String, Map<String, OperationDefinition>>> interfaces) {
+	public void setInterfaces(Map<String, Map<String, Map<String, String>>> interfaces) {
 		if (interfaces != null) {
 			this.interfaces = interfaces;
 		}
