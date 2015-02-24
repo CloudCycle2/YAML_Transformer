@@ -46,10 +46,16 @@ node_types:
         configure:
           implementaion: at-MoodleApplication-configure
     requirements:
-      - database:
-          node: MoodleApplication
+      - connectsTo:
+          node: MoodleDatabase
           relationship: MoodleDatabaseConnection
           capability: MySQLDatabaseEndpointCapability
+      - host:
+          node: ApacheWebServer
+          relationship: tosca.relationships.HostedOn
+      - dependsOn:
+          node: ApachePHPModule
+          relationship: tosca.relationships.DependsOn
          
   MoodleDatabase:
     # MoodleDatabase -df> MySQLDatabase -df> Database -df> RootNodeType
@@ -81,6 +87,10 @@ node_types:
       tosca.interfaces.node.lifecycle.Standard:
         configure:
           implementation: at-MoodleDatabase-configure
+    requirements:
+      - host:
+          node: MySQLDatabase
+          relationship: MySQLDatabaseHostedOnMySQL
           
   Server:
     derived_from: tosca.nodes.Root
