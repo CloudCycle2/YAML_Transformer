@@ -108,15 +108,16 @@ public class Yaml2XmlSwitch {
 	}
 
 	private Definitions processServiceTemplate(ServiceTemplate yamlServiceTemplate) {
+		// TODO: discuss if result should be made available for all methods to avoid adding it as a parameter each time
 		final Definitions result = new Definitions();
 		final TServiceTemplate serviceTemplate = new TServiceTemplate();
 		final TTopologyTemplate topologyTemplate = new TTopologyTemplate();
 		setInitialProperties(yamlServiceTemplate, result, serviceTemplate, topologyTemplate);
 
 		processCapabilityTypes(yamlServiceTemplate, result);
-		processNodeTypes(yamlServiceTemplate, result);
 		processRelationshipTypes(yamlServiceTemplate, result);
 		processArtifactTypes(yamlServiceTemplate, result);
+		processNodeTypes(yamlServiceTemplate, result);
 		processImports(yamlServiceTemplate);
 		processNodeTemplates(yamlServiceTemplate, topologyTemplate);
 
@@ -393,27 +394,50 @@ public class Yaml2XmlSwitch {
 		return docu;
 	}
 
-	private TNodeTemplate createNodeTemplate(NodeTemplate elem, String nodename) {
+	private TNodeTemplate createNodeTemplate(NodeTemplate nodeTemplate, String nodename) {
 		final TNodeTemplate result = new TNodeTemplate();
-		// result.setCapabilities(cap);
-		// result.setDeploymentArtifacts(depa);
+		// first set simple attributes like id, name, etc.
 		result.setId(name2id(nodename));
-		// result.setMaxInstances(maxinst);
-		// result.setMinInstances(mininst);
 		result.setName(nodename);
-		// result.setPolicies(poli);
+		result.getDocumentation().add(toDocumentation(nodeTemplate.getDescription()));
+		result.setType(new QName(nodeTemplate.getType()));
+
+		// then process more difficult things
+		processCapabilitiesInNodeTemplate(nodeTemplate, result);
+		processPropertiesInNodeTemplate(nodeTemplate, nodename, result);
+
+		return result;
+	}
+
+	private void processCapabilitiesInNodeTemplate(NodeTemplate nodeTemplate, TNodeTemplate result) {
+		TNodeTemplate.Capabilities capabilities = new TNodeTemplate.Capabilities();
+
+		for (Entry<String, Object> nodeTemplateCapability : nodeTemplate.getCapabilities().entrySet()) {
+			if (nodeTemplateCapability.getValue() instanceof HashMap) {
+				Map capabilityDefinition = (HashMap) nodeTemplateCapability.getValue();
+				TCapability tCapability = new TCapability();
+				tCapability.setName(nodeTemplateCapability.getKey());
+				String capabilityType = "CAPABILITY_TYPE";
+				try {
+					capabilityType = (String) capabilityDefinition.get("type");
+				} catch (Exception e) {
+					System.out.println("No capability type defined or illegal value, using default.");
+				}
+				tCapability.setType(new QName(capabilityType));
+				tCapability.setId(result.getId() + "_" + nodeTemplateCapability.getKey());
+				// TODO: set properties if any available
+				capabilities.getCapability().add(tCapability);
+			}
+		}
+
+		result.setCapabilities(capabilities);
+	}
+
+	private void processPropertiesInNodeTemplate(NodeTemplate nodeTemplate, String nodename, TNodeTemplate result) {
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
-		final QName type = new QName(elem.getType());
-		final AnyMap properties = new AnyMap(parseProperties(elem.getProperties(), nodename));
+		final AnyMap properties = new AnyMap(parseProperties(nodeTemplate.getProperties(), nodename));
 		prop.setAny(properties);
 		result.setProperties(prop);
-		// result.setPropertyConstraints(propconstr);
-		// result.setRequirements(req);
-		result.setType(type);
-		// result.getAny().add(any);
-		result.getDocumentation().add(toDocumentation(elem.getDescription()));
-		// result.getOtherAttributes().put(name, attr)
-		return result;
 	}
 
 	@SuppressWarnings("unchecked")

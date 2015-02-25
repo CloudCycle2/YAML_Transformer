@@ -64,6 +64,9 @@ node_templates:
       floatingIp:
       serverId:
       privKey:
+    capabilities:
+      warhammer:
+        type: testCap
 
   LinuxOperatingSystem:
     type: OperatingSystem
