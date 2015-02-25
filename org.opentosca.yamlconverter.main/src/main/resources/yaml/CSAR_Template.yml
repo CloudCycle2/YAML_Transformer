@@ -67,6 +67,8 @@ node_templates:
     capabilities:
       warhammer:
         type: testCap
+      linuxmaster:
+        type: niceCap
 
   LinuxOperatingSystem:
     type: OperatingSystem
@@ -156,3 +158,9 @@ capability_types:
     properties:
       server_name:
         type: string
+  niceCap:
+    derived_from: testCap
+    description: Another capability
+    properties:
+      port:
+        type: integer

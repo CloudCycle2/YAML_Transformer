@@ -272,6 +272,7 @@ public class Yaml2XmlSwitch {
 		final TCapabilityType result = new TCapabilityType();
 		final CapabilityType capabilityType = capType.getValue();
 		if (capabilityType.getProperties() != null && !capabilityType.getProperties().isEmpty()) {
+			// TODO: What about the "real" properties?! Don't we need to set them here?
 			generateTypeXSD(capabilityType.getProperties(), capType.getKey());
 			final PropertiesDefinition propDef = new PropertiesDefinition();
 			propDef.setElement(new QName(TYPESNS, capType.getKey() + "Properties", "types"));
