@@ -74,7 +74,7 @@ public class Yaml2XmlSwitch {
 	public Definitions parse(ServiceTemplate st) {
 		this.xsd = new StringBuilder(); // reset
 		this.st = st;
-		return case_ServiceTemplate(st);
+		return processServiceTemplate(st);
 	}
 
 	/**
@@ -107,89 +107,115 @@ public class Yaml2XmlSwitch {
 		this.inputs = inputs;
 	}
 
-	private Definitions case_ServiceTemplate(ServiceTemplate elem) {
+	private Definitions processServiceTemplate(ServiceTemplate yamlServiceTemplate) {
 		final Definitions result = new Definitions();
 		final TServiceTemplate serviceTemplate = new TServiceTemplate();
 		final TTopologyTemplate topologyTemplate = new TTopologyTemplate();
+		setInitialProperties(yamlServiceTemplate, result, serviceTemplate, topologyTemplate);
+
+		processCapabilityTypes(yamlServiceTemplate, result);
+		processNodeTypes(yamlServiceTemplate, result);
+		processRelationshipTypes(yamlServiceTemplate, result);
+		processArtifactTypes(yamlServiceTemplate, result);
+		processImports(yamlServiceTemplate);
+		processNodeTemplates(yamlServiceTemplate, topologyTemplate);
+
+		result.getImport().add(createTypeImport());
+
+		return result;
+	}
+
+	private void setInitialProperties(ServiceTemplate yamlServiceTemplate, Definitions result,
+									  TServiceTemplate serviceTemplate, TTopologyTemplate topologyTemplate) {
 		result.setId(unique("root"));
 		result.setName(unique("Root"));
-		if (elem.getTosca_default_namespace() != null && !elem.getTosca_default_namespace().isEmpty()) {
-			result.setTargetNamespace(elem.getTosca_default_namespace());
+		if (yamlServiceTemplate.getTosca_default_namespace() != null && !yamlServiceTemplate.getTosca_default_namespace().isEmpty()) {
+			result.setTargetNamespace(yamlServiceTemplate.getTosca_default_namespace());
 		} else {
 			result.setTargetNamespace(NS);
 		}
 		result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(serviceTemplate);
-		// result.setExtensions();
-		// result.setTypes();
-		result.getDocumentation().add(toDocumentation(elem.getDescription()));
+		result.getDocumentation().add(toDocumentation(yamlServiceTemplate.getDescription()));
 		result.getOtherAttributes().put(new QName("xmlns:types"), TYPESNS);
-		if (elem.getCapability_types() != null) {
-			for (final Entry<String, CapabilityType> capType : elem.getCapability_types().entrySet()) {
-				final TCapabilityType ct = case_CapabilityType(capType);
+		serviceTemplate.setId(unique("serviceTemplate"));
+		serviceTemplate.setName("ServiceTemplate");
+		serviceTemplate.setTopologyTemplate(topologyTemplate);
+	}
+
+	private void processCapabilityTypes(ServiceTemplate yamlServiceTemplate, Definitions result) {
+		if (yamlServiceTemplate.getCapability_types() != null) {
+			for (final Entry<String, CapabilityType> capType : yamlServiceTemplate.getCapability_types().entrySet()) {
+				final TCapabilityType ct = createCapabilityType(capType);
 				ct.setName(capType.getKey());
 				result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(ct);
 			}
 		}
-		if (elem.getNode_types() != null) {
-			for (final Entry<String, NodeType> nt : elem.getNode_types().entrySet()) {
-				final TNodeType xnode = case_NodeType(nt.getValue(), nt.getKey());
+	}
+
+	private void processNodeTypes(ServiceTemplate yamlServiceTemplate, Definitions result) {
+		if (yamlServiceTemplate.getNode_types() != null) {
+			for (final Entry<String, NodeType> nt : yamlServiceTemplate.getNode_types().entrySet()) {
+				final TNodeType xnode = createNodeType(nt.getValue(), nt.getKey());
 				result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(xnode);
 			}
 		}
-		if (elem.getRelationship_types() != null) {
-			for (final Entry<String, RelationshipType> relType : elem.getRelationship_types().entrySet()) {
-				final TRelationshipType rt = case_RelationshipType(relType);
+	}
+
+	private void processRelationshipTypes(ServiceTemplate yamlServiceTemplate, Definitions result) {
+		if (yamlServiceTemplate.getRelationship_types() != null) {
+			for (final Entry<String, RelationshipType> relType : yamlServiceTemplate.getRelationship_types().entrySet()) {
+				final TRelationshipType rt = createRelationshipType(relType);
 				rt.setName(relType.getKey());
 				result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(rt);
 			}
 		}
-		if (elem.getArtifact_types() != null) {
+	}
+
+	private void processArtifactTypes(ServiceTemplate yamlServiceTemplate, Definitions result) {
+		if (yamlServiceTemplate.getArtifact_types() != null) {
 			result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation()
-					.addAll(processArtifactTypes(elem.getArtifact_types()));
+					.addAll(getArtifactTypesFromYaml(yamlServiceTemplate.getArtifact_types()));
 		}
-		if (elem.getImports() != null) {
+	}
+
+	private void processImports(ServiceTemplate yamlServiceTemplate) {
+		if (yamlServiceTemplate.getImports() != null) {
 			// for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
 			// TODO: How do we handle imports?
 			// result.getImport().add(case_Import(importelem));
 			// }
 		}
-		result.getImport().add(createTypeImport());
-		// serviceTemplate.setBoundaryDefinitions(value);
-		serviceTemplate.setId(unique("serviceTemplate"));
-		serviceTemplate.setName("ServiceTemplate");
-		// serviceTemplate.setPlans(value);
-		// serviceTemplate.setSubstitutableNodeType(value);
-		// serviceTemplate.setTags(value);
-		// serviceTemplate.setTargetNamespace(value);
-		serviceTemplate.setTopologyTemplate(topologyTemplate);
-		// serviceTemplate.getDocumentation().add(docu);
-		// serviceTemplate.getOtherAttributes().put(key, value);
-		// topologyTemplate.getAny().add(o);
-		// topologyTemplate.getDocumentation().add(docu);
-		if (elem.getNode_templates() != null) {
-			for (final Map.Entry<String, NodeTemplate> nt : elem.getNode_templates().entrySet()) {
-				final TNodeTemplate xnode = case_NodeTemplate(nt.getValue(), nt.getKey());
+	}
+
+	private void processNodeTemplates(ServiceTemplate yamlServiceTemplate, TTopologyTemplate topologyTemplate) {
+		if (yamlServiceTemplate.getNode_templates() != null) {
+			for (final Entry<String, NodeTemplate> nt : yamlServiceTemplate.getNode_templates().entrySet()) {
+				final TNodeTemplate xnode = createNodeTemplate(nt.getValue(), nt.getKey());
 				topologyTemplate.getNodeTemplateOrRelationshipTemplate().add(xnode);
 			}
 		}
-		// topologyTemplate.getOtherAttributes().put(key, value);
-		return result;
 	}
 
-	private List<TArtifactType> processArtifactTypes(Object objArtifactTypes) {
+	/**
+	 * Read artifact types from yaml.
+	 * Old yaml spec supports artifacts only in special notation (issue #74):
+	 * [SHORT]
+	 * artifacts:
+	 *   - artifact_name: artifact_file.war
+	 *
+	 * new yaml spec supports artifacts as:
+	 * [LONG]
+	 * artifacts:
+	 *   artifact_name:
+	 *     type: WAR
+	 *     implementation: artifact_file.war
+	 * @param objArtifactTypes
+	 * @return
+	 */
+	private List<TArtifactType> getArtifactTypesFromYaml(Object objArtifactTypes) {
 		List<TArtifactType> artifactTypes = new ArrayList<TArtifactType>();
 		if (objArtifactTypes instanceof HashMap) {
-            // old yaml spec supports artifacts only in special notation (issue #74):
-            // [SHORT]
-            // artifacts:
-            //   - artifact_name: artifact_file.war
-            //
-            // new yaml spec supports artifacts as:
-            // [LONG]
-            // artifacts:
-            //   - artifact_name:
-            //       type: WAR
-            //       implementation: artifact_file.war
+
             for (Object objEntry : ((HashMap) objArtifactTypes).entrySet()) {
                 if (objEntry instanceof Entry) {
                     TArtifactType artifactType = new TArtifactType();
@@ -221,7 +247,7 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
-	private TRelationshipType case_RelationshipType(Entry<String, RelationshipType> relType) {
+	private TRelationshipType createRelationshipType(Entry<String, RelationshipType> relType) {
 		final TRelationshipType result = new TRelationshipType();
 		for (final Entry<String, Map<String, Map<String, String>>> iface : relType.getValue().getInterfaces().entrySet()) {
 			// TODO
@@ -236,46 +262,29 @@ public class Yaml2XmlSwitch {
 		for (final String target : relType.getValue().getValid_targets()) {
 			// TODO
 		}
-		// result.setAbstract(value);
-		// result.setDerivedFrom(value);
-		// result.setFinal(value);
-		// result.setInstanceStates(value);
 		result.setName(relType.getKey());
-		// result.setPropertiesDefinition(value);
-		// result.setSourceInterfaces(value);
-		// result.setTags(value);
-		// result.setTargetInterfaces(value);
-		// result.setTargetNamespace(value);
-		// result.setValidSource(value);
-		// result.setValidTarget(value);
-		// result.getAny().add(e);
 		result.getDocumentation().add(toDocumentation(relType.getValue().getDescription()));
-		// result.getOtherAttributes().put(key, value);
 		return result;
 	}
 
-	private TCapabilityType case_CapabilityType(Entry<String, CapabilityType> capType) {
+	private TCapabilityType createCapabilityType(Entry<String, CapabilityType> capType) {
 		final TCapabilityType result = new TCapabilityType();
-		if (capType.getValue().getProperties() != null && !capType.getValue().getProperties().isEmpty()) {
-			generateTypeXSD(capType.getValue().getProperties(), capType.getKey());
+		final CapabilityType capabilityType = capType.getValue();
+		if (capabilityType.getProperties() != null && !capabilityType.getProperties().isEmpty()) {
+			generateTypeXSD(capabilityType.getProperties(), capType.getKey());
 			final PropertiesDefinition propDef = new PropertiesDefinition();
 			propDef.setElement(new QName(TYPESNS, capType.getKey() + "Properties", "types"));
-			// propDef.setType(value);
 			result.setPropertiesDefinition(propDef);
 		}
-		// result.setAbstract(value);
-		// result.setDerivedFrom(value);
-		// result.setFinal(value);
 		result.setName(capType.getKey());
-		// result.setTags(value);
-		// result.setTargetNamespace(value);
-		// result.getAny().add();
-		result.getDocumentation().add(toDocumentation(capType.getValue().getDescription()));
-		// result.getOtherAttributes().put(key, value);
+		DerivedFrom derivedFrom = new DerivedFrom();
+		derivedFrom.setTypeRef(new QName(TYPESNS, capabilityType.getDerived_from()));
+		result.setDerivedFrom(derivedFrom);
+		result.getDocumentation().add(toDocumentation(capabilityType.getDescription()));
 		return result;
 	}
 
-	private TNodeType case_NodeType(NodeType value, String name) {
+	private TNodeType createNodeType(NodeType value, String name) {
 		final TNodeType result = new TNodeType();
 		if (value.getArtifacts() != null) {
 			// here are only artifact definitions!!
@@ -300,13 +309,9 @@ public class Yaml2XmlSwitch {
 		if (value.getRequirements() != null) {
 			result.setRequirementDefinitions(parseNodeTypeRequirementDefinitions(value.getRequirements()));
 		}
-		// result.setTags(value);
-		// result.setTargetNamespace(value);
 		if (value.getDescription() != null) {
 			result.getDocumentation().add(toDocumentation(value.getDescription()));
 		}
-		// result.getAny().add(e);
-		// result.getOtherAttributes().put(key, value);
 		return result;
 	}
 
@@ -314,12 +319,9 @@ public class Yaml2XmlSwitch {
 		final RequirementDefinitions result = new RequirementDefinitions();
 		for (final Entry<String, Object> req : requirements.entrySet()) {
 			final TRequirementDefinition rd = new TRequirementDefinition();
-			// rd.setConstraints(value);
-			// rd.setLowerBound(value);
 			rd.setName(req.getKey());
 			// TODO: we must check here if value is only a string or a map of values!
 			rd.setRequirementType(new QName(req.getValue().toString()));
-			// rd.setUpperBound(value);
 			result.getRequirementDefinition().add(rd);
 		}
 		return result;
@@ -329,7 +331,6 @@ public class Yaml2XmlSwitch {
 		final PropertiesDefinition result = new PropertiesDefinition();
 		// TODO: setType()?!
 		result.setElement(new QName(TYPESNS, typename + "Properties", "types"));
-		// result.setType(new QName(TYPESNS, typename + "Properties", "types"));
 		generateTypeXSD(properties, typename + "Properties");
 		return result;
 	}
@@ -352,11 +353,9 @@ public class Yaml2XmlSwitch {
 			// TODO: is this right?!
 			for (final Entry<String, Map<String, String>> op : entry.getValue().entrySet()) {
 				final TOperation top = new TOperation();
-				// top.setInputParameters(value);
 				top.setName(op.getKey());
 				// value contains keys "implementation" and "description" eventually
 				// TODO: how to use implementation name??
-				// top.setOutputParameters(value);
 				inf.getOperation().add(top);
 			}
 			result.getInterface().add(inf);
@@ -394,7 +393,7 @@ public class Yaml2XmlSwitch {
 		return docu;
 	}
 
-	private TNodeTemplate case_NodeTemplate(NodeTemplate elem, String nodename) {
+	private TNodeTemplate createNodeTemplate(NodeTemplate elem, String nodename) {
 		final TNodeTemplate result = new TNodeTemplate();
 		// result.setCapabilities(cap);
 		// result.setDeploymentArtifacts(depa);
