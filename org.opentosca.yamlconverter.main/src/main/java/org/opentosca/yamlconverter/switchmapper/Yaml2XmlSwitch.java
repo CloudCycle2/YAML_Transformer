@@ -373,18 +373,20 @@ public class Yaml2XmlSwitch {
 
 	private CapabilityDefinitions parseNodeTypeCapabilities(Map<String, Object> capabilities) {
 		final CapabilityDefinitions result = new CapabilityDefinitions();
-		for (final Entry<String, Object> entr : capabilities.entrySet()) {
-			final TCapabilityDefinition capdef = new TCapabilityDefinition();
-			// TODO YAMLmodel NodeType Capabilities
-			// capdef.setCapabilityType(value);
-			// capdef.setConstraints(value);
-			// capdef.setLowerBound(value);
-			capdef.setName(entr.getKey());
-			// capdef.setUpperBound(value);
-			// capdef.getAny().add(e);
-			// capdef.getDocumentation().add(e);
-			// capdef.getOtherAttributes().put(key, value);
-			result.getCapabilityDefinition().add(capdef);
+		for (final Entry<String, Object> capabilityEntry : capabilities.entrySet()) {
+			final TCapabilityDefinition capabilityDefinition = new TCapabilityDefinition();
+			capabilityDefinition.setName(capabilityEntry.getKey());
+			if (capabilityEntry.getValue() instanceof HashMap) {
+				Map capability = (HashMap) capabilityEntry.getValue();
+				String capabilityType = "CAPABILITY_TYPE";
+				try {
+					capabilityType = (String) capability.get("type");
+				} catch (Exception e) {
+					System.out.println("No capability type defined or illegal value, using default.");
+				}
+				capabilityDefinition.setCapabilityType(new QName(capabilityType));
+			}
+			result.getCapabilityDefinition().add(capabilityDefinition);
 		}
 		return result;
 	}

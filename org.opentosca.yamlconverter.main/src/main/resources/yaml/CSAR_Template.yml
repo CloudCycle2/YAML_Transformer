@@ -100,6 +100,9 @@ node_types:
           ServiceEndpoint: /services/org_opentosca_types_Ubuntu__InterfaceUbuntuPort
           PortType: "{http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu" #TODO define interface
           InvocationType: SOAP/HTTP
+    capabilities:
+      warhammer2:
+        type: niceCap
 
   InstallOpenStackVM:
     derived_from: tosca.nodes.Root
