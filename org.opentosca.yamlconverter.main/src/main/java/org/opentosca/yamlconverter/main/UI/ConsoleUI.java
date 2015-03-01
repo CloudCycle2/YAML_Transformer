@@ -73,7 +73,7 @@ public class ConsoleUI {
 				boolean valid = false;
 				while (!valid) {
 					valid = true;
-					if (!userinput.isEmpty()) {
+					if (userinput != null && !userinput.isEmpty()) {
 						valid = ConstraintUtils.matchesConstraints(userinput, requirement.getValue());
 						if (valid) {
 							inputValues.put(requirement.getKey(), userinput);
@@ -110,7 +110,7 @@ public class ConsoleUI {
 			System.out.println(xsd);
 
 			final String xsdfilename = promptString("\nIf you want to save this XSD, enter a filename, else just hit ENTER...");
-			if (!xsdfilename.isEmpty()) {
+			if (xsdfilename != null && !xsdfilename.isEmpty()) {
 				try {
 					fileutil.saveStringAsFile(xsdfilename, xsd);
 				} catch (final IOException e) {
