@@ -86,6 +86,7 @@ node_types:
     requirements:
       - host: tosca.nodes.WebServer
         relationship_type: MoodleDatabaseConnection
+      - database: MySQL
     properties:
       hostname:
         type: string
