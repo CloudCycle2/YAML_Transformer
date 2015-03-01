@@ -250,21 +250,40 @@ public class Yaml2XmlSwitch {
 
 	private TRelationshipType createRelationshipType(Entry<String, RelationshipType> relType) {
 		final TRelationshipType result = new TRelationshipType();
-		for (final Entry<String, Map<String, Map<String, String>>> iface : relType.getValue().getInterfaces().entrySet()) {
-			// TODO
+		RelationshipType relationshipType = relType.getValue();
+		result.setName(relType.getKey());
+
+		// set derived from
+		TEntityType.DerivedFrom derivedFrom = new TEntityType.DerivedFrom();
+		derivedFrom.setTypeRef(new QName(relationshipType.getDerived_from()));
+		result.setDerivedFrom(derivedFrom);
+
+		// set interfaces
+		TRelationshipType.TargetInterfaces targetInterfaces = new TRelationshipType.TargetInterfaces();
+		for (final Entry<String, Map<String, Map<String, String>>> ifaceEntry : relationshipType.getInterfaces().entrySet()) {
+			if (ifaceEntry.getValue() instanceof HashMap) {
+				TInterface tInterface = getInterfaceWithOperations(ifaceEntry);
+				targetInterfaces.getInterface().add(tInterface);
+			}
 		}
-		if (relType.getValue().getProperties() != null && !relType.getValue().getProperties().isEmpty()) {
-			generateTypeXSD(relType.getValue().getProperties(), relType.getKey());
+		result.setTargetInterfaces(targetInterfaces);
+
+		// set properties
+		if (relationshipType.getProperties() != null && !relationshipType.getProperties().isEmpty()) {
+			generateTypeXSD(relationshipType.getProperties(), relType.getKey());
 			final PropertiesDefinition propDef = new PropertiesDefinition();
 			propDef.setElement(new QName(TYPESNS, relType.getKey() + "Properties", "types"));
 			// propDef.setType(value);
 			result.setPropertiesDefinition(propDef);
 		}
-		for (final String target : relType.getValue().getValid_targets()) {
-			// TODO
+
+		// set valid target (only one possible, thus choose first one)
+		if(relationshipType.getValid_targets().length > 0 && relationshipType.getValid_targets()[0] != null) {
+			TRelationshipType.ValidTarget validTarget = new TRelationshipType.ValidTarget();
+			validTarget.setTypeRef(new QName(relationshipType.getValid_targets()[0]));
+			result.setValidTarget(validTarget);
 		}
-		result.setName(relType.getKey());
-		result.getDocumentation().add(toDocumentation(relType.getValue().getDescription()));
+		result.getDocumentation().add(toDocumentation(relationshipType.getDescription()));
 		return result;
 	}
 
@@ -288,23 +307,21 @@ public class Yaml2XmlSwitch {
 
 	private TNodeType createNodeType(NodeType value, String name) {
 		final TNodeType result = new TNodeType();
+		result.setName(name);
+
 		if (value.getArtifacts() != null) {
 			// here are only artifact definitions!!
 			// TODO: how to handle artifacts??
 		}
-		// result.setAbstract(value);
 		if (value.getCapabilities() != null) {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
 		}
 		if (value.getDerived_from() != null) {
 			result.setDerivedFrom(parseNodeTypeDerivedFrom(value.getDerived_from()));
 		}
-		// result.setFinal(value);
-		// result.setInstanceStates(value);
 		if (value.getInterfaces() != null) {
 			result.setInterfaces(parseNodeTypeInterfaces(value.getInterfaces()));
 		}
-		result.setName(name);
 		if (value.getProperties() != null) {
 			result.setPropertiesDefinition(parseNodeTypePropertiesDefinition(value.getProperties(), name));
 		}
@@ -350,19 +367,24 @@ public class Yaml2XmlSwitch {
 	private Interfaces parseNodeTypeInterfaces(Map<String, Map<String, Map<String, String>>> interfaces) {
 		final Interfaces result = new Interfaces();
 		for (final Entry<String, Map<String, Map<String, String>>> entry : interfaces.entrySet()) {
-			final TInterface inf = new TInterface();
-			inf.setName(entry.getKey());
-			// TODO: is this right?!
-			for (final Entry<String, Map<String, String>> op : entry.getValue().entrySet()) {
-				final TOperation top = new TOperation();
-				top.setName(op.getKey());
-				// value contains keys "implementation" and "description" eventually
-				// TODO: how to use implementation name??
-				inf.getOperation().add(top);
-			}
+			final TInterface inf = getInterfaceWithOperations(entry);
 			result.getInterface().add(inf);
 		}
 		return result;
+	}
+
+	private TInterface getInterfaceWithOperations(Entry<String, Map<String, Map<String, String>>> entry) {
+		final TInterface inf = new TInterface();
+		inf.setName(entry.getKey());
+		// TODO: is this right?!
+		for (final Entry<String, Map<String, String>> op : entry.getValue().entrySet()) {
+			final TOperation top = new TOperation();
+			top.setName(op.getKey());
+			// value contains keys "implementation" and "description" eventually
+			// TODO: how to use implementation name??
+			inf.getOperation().add(top);
+		}
+		return inf;
 	}
 
 	private DerivedFrom parseNodeTypeDerivedFrom(String derived_from) {
