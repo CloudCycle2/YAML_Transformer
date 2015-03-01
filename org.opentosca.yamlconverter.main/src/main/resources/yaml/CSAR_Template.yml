@@ -83,6 +83,9 @@ node_types:
   OperatingSystem:
     derived_from: tosca.nodes.Root
     description: Operating System
+    requirements:
+      - host: tosca.nodes.WebServer
+        relationship_type: MoodleDatabaseConnection
     properties:
       hostname:
         type: string

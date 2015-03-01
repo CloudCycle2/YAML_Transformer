@@ -217,25 +217,25 @@ public class Yaml2XmlSwitch {
 		List<TArtifactType> artifactTypes = new ArrayList<TArtifactType>();
 		if (objArtifactTypes instanceof HashMap) {
 
-            for (Object objEntry : ((HashMap) objArtifactTypes).entrySet()) {
-                if (objEntry instanceof Entry) {
-                    TArtifactType artifactType = new TArtifactType();
+			for (Object objEntry : ((HashMap) objArtifactTypes).entrySet()) {
+				if (objEntry instanceof Entry) {
+					TArtifactType artifactType = new TArtifactType();
 
-                    Entry entry = (Entry) objEntry;
-                    artifactType.setName((String) entry.getKey());
+					Entry entry = (Entry) objEntry;
+					artifactType.setName((String) entry.getKey());
 
-                    // TODO: how to set artifact attributes like type, description, mime_type ?? as PropertyDefinition?
-                    if (entry.getValue() instanceof ArtifactType) {
-                        // TODO: set attributes while using ArtifactType/long notation
+					// TODO: how to set artifact attributes like type, description, mime_type ?? as PropertyDefinition?
+					if (entry.getValue() instanceof ArtifactType) {
+						// TODO: set attributes while using ArtifactType/long notation
 
-                    } else if (entry.getValue() instanceof String) {
-                        // TODO: set attribute while using short notation
-                    }
+					} else if (entry.getValue() instanceof String) {
+						// TODO: set attribute while using short notation
+					}
 
 					artifactTypes.add(artifactType);
-                }
-            }
-        }
+				}
+			}
+		}
 
 		return artifactTypes;
 	}
@@ -252,11 +252,7 @@ public class Yaml2XmlSwitch {
 		final TRelationshipType result = new TRelationshipType();
 		RelationshipType relationshipType = relType.getValue();
 		result.setName(relType.getKey());
-
-		// set derived from
-		TEntityType.DerivedFrom derivedFrom = new TEntityType.DerivedFrom();
-		derivedFrom.setTypeRef(new QName(relationshipType.getDerived_from()));
-		result.setDerivedFrom(derivedFrom);
+		result.setDerivedFrom(parseDerivedFrom(relationshipType.getDerived_from()));
 
 		// set interfaces
 		TRelationshipType.TargetInterfaces targetInterfaces = new TRelationshipType.TargetInterfaces();
@@ -270,11 +266,7 @@ public class Yaml2XmlSwitch {
 
 		// set properties
 		if (relationshipType.getProperties() != null && !relationshipType.getProperties().isEmpty()) {
-			generateTypeXSD(relationshipType.getProperties(), relType.getKey());
-			final PropertiesDefinition propDef = new PropertiesDefinition();
-			propDef.setElement(new QName(TYPESNS, relType.getKey() + "Properties", "types"));
-			// propDef.setType(value);
-			result.setPropertiesDefinition(propDef);
+			result.setPropertiesDefinition(parsePropertiesDefinition(relationshipType.getProperties(), relType.getKey()));
 		}
 
 		// set valid target (only one possible, thus choose first one)
@@ -292,15 +284,10 @@ public class Yaml2XmlSwitch {
 		final CapabilityType capabilityType = capType.getValue();
 		if (capabilityType.getProperties() != null && !capabilityType.getProperties().isEmpty()) {
 			// TODO: What about the "real" properties?! Don't we need to set them here?
-			generateTypeXSD(capabilityType.getProperties(), capType.getKey());
-			final PropertiesDefinition propDef = new PropertiesDefinition();
-			propDef.setElement(new QName(TYPESNS, capType.getKey() + "Properties", "types"));
-			result.setPropertiesDefinition(propDef);
+			result.setPropertiesDefinition(parsePropertiesDefinition(capabilityType.getProperties(), capType.getKey()));
 		}
 		result.setName(capType.getKey());
-		DerivedFrom derivedFrom = new DerivedFrom();
-		derivedFrom.setTypeRef(new QName(TYPESNS, capabilityType.getDerived_from()));
-		result.setDerivedFrom(derivedFrom);
+		result.setDerivedFrom(parseDerivedFrom(capabilityType.getDerived_from()));
 		result.getDocumentation().add(toDocumentation(capabilityType.getDescription()));
 		return result;
 	}
@@ -317,13 +304,13 @@ public class Yaml2XmlSwitch {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
 		}
 		if (value.getDerived_from() != null) {
-			result.setDerivedFrom(parseNodeTypeDerivedFrom(value.getDerived_from()));
+			result.setDerivedFrom(parseDerivedFrom(value.getDerived_from()));
 		}
 		if (value.getInterfaces() != null) {
 			result.setInterfaces(parseNodeTypeInterfaces(value.getInterfaces()));
 		}
 		if (value.getProperties() != null) {
-			result.setPropertiesDefinition(parseNodeTypePropertiesDefinition(value.getProperties(), name));
+			result.setPropertiesDefinition(parsePropertiesDefinition(value.getProperties(), name));
 		}
 		if (value.getRequirements() != null) {
 			result.setRequirementDefinitions(parseNodeTypeRequirementDefinitions(value.getRequirements()));
@@ -334,19 +321,25 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
-	private RequirementDefinitions parseNodeTypeRequirementDefinitions(Map<String, Object> requirements) {
+	private RequirementDefinitions parseNodeTypeRequirementDefinitions(List<Map<String, Object>> requirements) {
 		final RequirementDefinitions result = new RequirementDefinitions();
-		for (final Entry<String, Object> req : requirements.entrySet()) {
+		for (final Map<String, Object> req : requirements) {
 			final TRequirementDefinition rd = new TRequirementDefinition();
-			rd.setName(req.getKey());
-			// TODO: we must check here if value is only a string or a map of values!
-			rd.setRequirementType(new QName(req.getValue().toString()));
+			if (req.size() == 2) {
+				for (final String key : req.keySet()) {
+					if (key.equals("relationship_type")) {
+						rd.setRequirementType(new QName((String) req.get(key)));
+					} else {
+						rd.setName(key);
+					}
+				}
+			}
 			result.getRequirementDefinition().add(rd);
 		}
 		return result;
 	}
 
-	private PropertiesDefinition parseNodeTypePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
+	private PropertiesDefinition parsePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
 		final PropertiesDefinition result = new PropertiesDefinition();
 		// TODO: setType()?!
 		result.setElement(new QName(TYPESNS, typename + "Properties", "types"));
@@ -387,7 +380,7 @@ public class Yaml2XmlSwitch {
 		return inf;
 	}
 
-	private DerivedFrom parseNodeTypeDerivedFrom(String derived_from) {
+	private DerivedFrom parseDerivedFrom(String derived_from) {
 		final DerivedFrom result = new DerivedFrom();
 		result.setTypeRef(new QName(derived_from));
 		return result;
@@ -558,7 +551,7 @@ public class Yaml2XmlSwitch {
 	}
 
 	/**
-	 * Checks wether the Object is a Getter or just a normal property.
+	 * Checks whether the Object is a Getter or just a normal property.
 	 *
 	 * @param value
 	 * @return true if getter, false if property
