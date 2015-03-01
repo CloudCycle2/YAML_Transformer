@@ -13,16 +13,16 @@ public class NodeType extends YAMLElement {
 	private Map<String, Object> capabilities = new HashMap<String, Object>();
 	private Map<String, Map<String, Map<String, String>>> interfaces =
 			new HashMap<String, Map<String, Map<String, String>>>();
-	private Map<String, Object> artifacts = new HashMap<String, Object>();
+	private List<Map<String, Object>> artifacts = new ArrayList<Map<String, Object>>();
 
 
-	public void setArtifacts(Map<String, Object> artifacts) {
+	public void setArtifacts(List<Map<String, Object>> artifacts) {
 		if (artifacts != null) {
 			this.artifacts = artifacts;
 		}
 	}
 
-	public Map<String, Object> getArtifacts() {
+	public List<Map<String, Object>> getArtifacts() {
 		return this.artifacts;
 	}
 

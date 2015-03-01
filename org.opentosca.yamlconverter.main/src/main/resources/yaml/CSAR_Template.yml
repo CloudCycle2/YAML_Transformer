@@ -97,7 +97,7 @@ node_types:
       script:
         type: string
     artifacts:
-      UbuntuNodeTypeImplementation_IA_ArtifactTemplate:
+      - UbuntuNodeTypeImplementation_IA_ArtifactTemplate:
         type: WAR
         description: <artifact_description>
         properties:
@@ -145,7 +145,7 @@ node_types:
         InstallVMwithCustomImage:
           implementation: InstallOpenStackVM_IA
     artifacts:
-      InstallOpenStackVM_IA:
+      - InstallOpenStackVM_IA:
         type: WAR
         description: <artifact_description>
         properties:
@@ -157,6 +157,9 @@ artifact_types:
   InstallOpenStackVM_IA:
     mime_type: war
     description: bla
+    derived_from: tosca.artifact.Root
+    file_ext: [jar]
+    mime_type: application/java-archive
 
 capability_types:
   testCap:

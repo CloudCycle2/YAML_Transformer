@@ -199,42 +199,26 @@ public class Yaml2XmlSwitch {
 
 	/**
 	 * Read artifact types from yaml.
-	 * Old yaml spec supports artifacts only in special notation (issue #74):
-	 * [SHORT]
-	 * artifacts:
-	 *   - artifact_name: artifact_file.war
-	 *
-	 * new yaml spec supports artifacts as:
-	 * [LONG]
+	 * Example notation:
 	 * artifacts:
 	 *   artifact_name:
-	 *     type: WAR
-	 *     implementation: artifact_file.war
+	 *     derived_from: tosca.artifact.Root
+	 *     mime_type: application/java-archive
 	 * @param objArtifactTypes
 	 * @return
 	 */
-	private List<TArtifactType> getArtifactTypesFromYaml(Object objArtifactTypes) {
+	private List<TArtifactType> getArtifactTypesFromYaml(Map<String, ArtifactType> objArtifactTypes) {
 		List<TArtifactType> artifactTypes = new ArrayList<TArtifactType>();
-		if (objArtifactTypes instanceof HashMap) {
 
-			for (Object objEntry : ((HashMap) objArtifactTypes).entrySet()) {
-				if (objEntry instanceof Entry) {
-					TArtifactType artifactType = new TArtifactType();
+		for (Entry<String, ArtifactType> entry : objArtifactTypes.entrySet()) {
+			TArtifactType artifactType = new TArtifactType();
+			artifactType.setName(entry.getKey());
 
-					Entry entry = (Entry) objEntry;
-					artifactType.setName((String) entry.getKey());
+			ArtifactType value = entry.getValue();
+			artifactType.setDerivedFrom(parseDerivedFrom(value.getDerived_from()));
+			artifactType.setPropertiesDefinition(parsePropertiesDefinition(value.getProperties(), entry.getKey()));
 
-					// TODO: how to set artifact attributes like type, description, mime_type ?? as PropertyDefinition?
-					if (entry.getValue() instanceof ArtifactType) {
-						// TODO: set attributes while using ArtifactType/long notation
-
-					} else if (entry.getValue() instanceof String) {
-						// TODO: set attribute while using short notation
-					}
-
-					artifactTypes.add(artifactType);
-				}
-			}
+			artifactTypes.add(artifactType);
 		}
 
 		return artifactTypes;
