@@ -333,6 +333,8 @@ public class Yaml2XmlSwitch {
 						rd.setName(key);
 					}
 				}
+			} else if (req.size() == 1) {
+				rd.setName((String) req.keySet().toArray()[0]);
 			}
 			result.getRequirementDefinition().add(rd);
 		}
