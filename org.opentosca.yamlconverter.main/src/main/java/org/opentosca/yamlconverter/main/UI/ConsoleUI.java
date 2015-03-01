@@ -1,5 +1,10 @@
 package org.opentosca.yamlconverter.main.UI;
 
+import org.opentosca.yamlconverter.main.Parser;
+import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
+import org.opentosca.yamlconverter.main.utils.FileUtil;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,11 +12,6 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.opentosca.yamlconverter.main.Parser;
-import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
-import org.opentosca.yamlconverter.main.utils.FileUtil;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 
 /**
  * A simple User Interface for Console.
@@ -64,7 +64,7 @@ public class ConsoleUI {
 		parser.parse(yaml);
 		final Map<String, Input> reqMap = parser.getInputRequirements();
 		final Map<String, String> reqText = parser.getInputRequirementsText();
-		if (!reqMap.isEmpty()) {
+		if (reqMap != null && !reqMap.isEmpty()) {
 			// ask for inputs
 			cowsay("I need some variables you have to define!");
 			final Map<String, String> inputValues = new HashMap<String, String>();
@@ -85,8 +85,6 @@ public class ConsoleUI {
 				}
 			}
 			parser.setInputValues(inputValues);
-		} else {
-			// No input fields
 		}
 
 		// give results
@@ -97,7 +95,7 @@ public class ConsoleUI {
 		System.out.println(xml);
 
 		final String xmlfilename = promptString("\nIf you want to save this XML, enter a filename, else just hit ENTER...");
-		if (!xmlfilename.isEmpty()) {
+		if (xmlfilename != null && !xmlfilename.isEmpty()) {
 			try {
 				fileutil.saveStringAsFile(xmlfilename, xml);
 			} catch (final IOException e) {
@@ -107,7 +105,7 @@ public class ConsoleUI {
 
 		// XSD
 		final String xsd = parser.getXSD();
-		if (!xsd.isEmpty()) {
+		if (xsd != null && !xsd.isEmpty()) {
 			System.out.println("\nAlso I have an XSD-file for you. Save it as types.xsd!");
 			System.out.println(xsd);
 
