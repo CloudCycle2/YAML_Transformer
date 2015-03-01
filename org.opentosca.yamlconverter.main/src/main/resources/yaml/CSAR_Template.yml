@@ -33,7 +33,7 @@ inputs:
   flavorId:
     type: string
     description: Flavor ID
-    default: 3  
+    default: 3
   keypair:
     type: string
     description: keypair
@@ -167,3 +167,13 @@ capability_types:
     properties:
       port:
         type: integer
+
+relationship_types:
+  MoodleDatabaseConnection:
+    derived_from: MySQLDatabaseConnection
+    description: Connects to Moodle DB
+    interfaces:
+      EndpointConfiguration:
+        preConfigureEndpoint:
+          implementaion: impl
+    valid_targets: [MySQLDatabaseEndpointCapability]
