@@ -152,6 +152,13 @@ node_types:
           ServiceEndpoint: /services/InstallOpenStackVM_Custom_InstallVMPort
           PortType: "{http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM"
           InvocationType: SOAP/HTTP
+      - DeleteOpenStackVM_IA: DeleteOpenStackVM_Custom_InstallVM.war
+        type: WAR
+        description: <artifact_description>
+        properties:
+          ServiceEndpoint: /services/DeleteOpenStackVM_Custom_DeleteVMPort
+          PortType: "{http://types.opentosca.org}DeleteOpenStackVM_Custom_DeleteVM"
+          InvocationType: SOAP/HTTP
 
 artifact_types:
   WAR:

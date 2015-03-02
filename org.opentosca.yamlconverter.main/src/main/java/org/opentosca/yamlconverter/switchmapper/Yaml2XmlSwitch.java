@@ -1,5 +1,17 @@
 package org.opentosca.yamlconverter.switchmapper;
 
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlWriter;
+import org.opentosca.model.tosca.*;
+import org.opentosca.model.tosca.TEntityType.DerivedFrom;
+import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
+import org.opentosca.model.tosca.TNodeType.Interfaces;
+import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.*;
+
+import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -7,41 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.xml.namespace.QName;
-
-import org.opentosca.model.tosca.Definitions;
-import org.opentosca.model.tosca.TArtifactType;
-import org.opentosca.model.tosca.TCapability;
-import org.opentosca.model.tosca.TCapabilityDefinition;
-import org.opentosca.model.tosca.TCapabilityType;
-import org.opentosca.model.tosca.TDocumentation;
-import org.opentosca.model.tosca.TEntityTemplate;
-import org.opentosca.model.tosca.TEntityType.DerivedFrom;
-import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.model.tosca.TImport;
-import org.opentosca.model.tosca.TInterface;
-import org.opentosca.model.tosca.TNodeTemplate;
-import org.opentosca.model.tosca.TNodeType;
-import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
-import org.opentosca.model.tosca.TNodeType.Interfaces;
-import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
-import org.opentosca.model.tosca.TOperation;
-import org.opentosca.model.tosca.TRelationshipType;
-import org.opentosca.model.tosca.TRequirementDefinition;
-import org.opentosca.model.tosca.TServiceTemplate;
-import org.opentosca.model.tosca.TTopologyTemplate;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ArtifactType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import com.esotericsoftware.yamlbeans.YamlException;
-import com.esotericsoftware.yamlbeans.YamlWriter;
 
 /**
  * This class can parse ServiceTemplates (YAML bean) to Definitions (XML bean).
@@ -88,6 +65,8 @@ public class Yaml2XmlSwitch {
 	 */
 	private Map<String, String> inputs = new HashMap<>();
 
+	private Definitions toscaResult = new Definitions();
+
 	/**
 	 * Parses {@link ServiceTemplate} to {@link Definitions}.
 	 *
@@ -131,42 +110,40 @@ public class Yaml2XmlSwitch {
 	}
 
 	private Definitions processServiceTemplate(ServiceTemplate yamlServiceTemplate) {
-		// TODO: discuss if result should be made available for all methods to avoid adding it as a parameter each time
-		final Definitions result = new Definitions();
 		final TServiceTemplate serviceTemplate = new TServiceTemplate();
 		final TTopologyTemplate topologyTemplate = new TTopologyTemplate();
-		setInitialProperties(yamlServiceTemplate, result, serviceTemplate, topologyTemplate);
+		setInitialProperties(yamlServiceTemplate, serviceTemplate, topologyTemplate);
 
-		processCapabilityTypes(yamlServiceTemplate, result);
-		processRelationshipTypes(yamlServiceTemplate, result);
-		processArtifactTypes(yamlServiceTemplate, result);
-		processNodeTypes(yamlServiceTemplate, result);
+		processCapabilityTypes(yamlServiceTemplate);
+		processRelationshipTypes(yamlServiceTemplate);
+		processArtifactTypes(yamlServiceTemplate);
+		processNodeTypes(yamlServiceTemplate);
 		processImports(yamlServiceTemplate);
 		processNodeTemplates(yamlServiceTemplate, topologyTemplate);
 
-		result.getImport().add(createTypeImport());
+		this.toscaResult.getImport().add(createTypeImport());
 
-		return result;
+		return this.toscaResult;
 	}
 
-	private void setInitialProperties(ServiceTemplate yamlServiceTemplate, Definitions result, TServiceTemplate serviceTemplate,
+	private void setInitialProperties(ServiceTemplate yamlServiceTemplate, TServiceTemplate serviceTemplate,
 			TTopologyTemplate topologyTemplate) {
-		result.setId(unique("root"));
-		result.setName(unique("Root"));
+		this.toscaResult.setId(unique("root"));
+		this.toscaResult.setName(unique("Root"));
 		if (yamlServiceTemplate.getTosca_default_namespace() != null && !yamlServiceTemplate.getTosca_default_namespace().isEmpty()) {
-			result.setTargetNamespace(yamlServiceTemplate.getTosca_default_namespace());
+			this.toscaResult.setTargetNamespace(yamlServiceTemplate.getTosca_default_namespace());
 		} else {
-			result.setTargetNamespace(NS);
+			this.toscaResult.setTargetNamespace(NS);
 		}
-		result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(serviceTemplate);
-		result.getDocumentation().add(toDocumentation(yamlServiceTemplate.getDescription()));
+		this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(serviceTemplate);
+		this.toscaResult.getDocumentation().add(toDocumentation(yamlServiceTemplate.getDescription()));
 		if (yamlServiceTemplate.getTemplate_author() != null && !yamlServiceTemplate.getTemplate_author().isEmpty()) {
-			result.getDocumentation().add(toDocumentation("Template Author: " + yamlServiceTemplate.getTemplate_author()));
+			this.toscaResult.getDocumentation().add(toDocumentation("Template Author: " + yamlServiceTemplate.getTemplate_author()));
 		}
 		if (yamlServiceTemplate.getTemplate_version() != null && !yamlServiceTemplate.getTemplate_version().isEmpty()) {
-			result.getDocumentation().add(toDocumentation("Template Version: " + yamlServiceTemplate.getTemplate_version()));
+			this.toscaResult.getDocumentation().add(toDocumentation("Template Version: " + yamlServiceTemplate.getTemplate_version()));
 		}
-		result.getOtherAttributes().put(new QName("xmlns:types"), TYPESNS);
+		this.toscaResult.getOtherAttributes().put(new QName("xmlns:types"), TYPESNS);
 		if (yamlServiceTemplate.getTemplate_name() != null && !yamlServiceTemplate.getTemplate_name().isEmpty()) {
 			serviceTemplate.setId(unique(yamlServiceTemplate.getTemplate_name()));
 			serviceTemplate.setName(yamlServiceTemplate.getTemplate_name());
@@ -177,38 +154,38 @@ public class Yaml2XmlSwitch {
 		serviceTemplate.setTopologyTemplate(topologyTemplate);
 	}
 
-	private void processCapabilityTypes(ServiceTemplate yamlServiceTemplate, Definitions result) {
+	private void processCapabilityTypes(ServiceTemplate yamlServiceTemplate) {
 		if (yamlServiceTemplate.getCapability_types() != null) {
 			for (final Entry<String, CapabilityType> capType : yamlServiceTemplate.getCapability_types().entrySet()) {
 				final TCapabilityType ct = createCapabilityType(capType);
 				ct.setName(capType.getKey());
-				result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(ct);
+				this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(ct);
 			}
 		}
 	}
 
-	private void processNodeTypes(ServiceTemplate yamlServiceTemplate, Definitions result) {
+	private void processNodeTypes(ServiceTemplate yamlServiceTemplate) {
 		if (yamlServiceTemplate.getNode_types() != null) {
 			for (final Entry<String, NodeType> nt : yamlServiceTemplate.getNode_types().entrySet()) {
 				final TNodeType xnode = createNodeType(nt.getValue(), nt.getKey());
-				result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(xnode);
+				this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(xnode);
 			}
 		}
 	}
 
-	private void processRelationshipTypes(ServiceTemplate yamlServiceTemplate, Definitions result) {
+	private void processRelationshipTypes(ServiceTemplate yamlServiceTemplate) {
 		if (yamlServiceTemplate.getRelationship_types() != null) {
 			for (final Entry<String, RelationshipType> relType : yamlServiceTemplate.getRelationship_types().entrySet()) {
 				final TRelationshipType rt = createRelationshipType(relType);
 				rt.setName(relType.getKey());
-				result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(rt);
+				this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(rt);
 			}
 		}
 	}
 
-	private void processArtifactTypes(ServiceTemplate yamlServiceTemplate, Definitions result) {
+	private void processArtifactTypes(ServiceTemplate yamlServiceTemplate) {
 		if (yamlServiceTemplate.getArtifact_types() != null) {
-			result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().addAll(
+			this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().addAll(
 					getArtifactTypesFromYaml(yamlServiceTemplate.getArtifact_types()));
 		}
 	}
@@ -298,7 +275,6 @@ public class Yaml2XmlSwitch {
 		final TCapabilityType result = new TCapabilityType();
 		final CapabilityType capabilityType = capType.getValue();
 		if (capabilityType.getProperties() != null && !capabilityType.getProperties().isEmpty()) {
-			// TODO: What about the "real" properties?! Don't we need to set them here?
 			result.setPropertiesDefinition(parsePropertiesDefinition(capabilityType.getProperties(), capType.getKey()));
 		}
 		result.setName(capType.getKey());
@@ -311,9 +287,15 @@ public class Yaml2XmlSwitch {
 		final TNodeType result = new TNodeType();
 		result.setName(name);
 
+		final TNodeTypeImplementation nodeTypeImplementation = new TNodeTypeImplementation();
+		final List<TArtifactTemplate> artifactTemplates = new ArrayList<TArtifactTemplate>();
+		final TImplementationArtifacts implementationArtifacts = new TImplementationArtifacts();
+		nodeTypeImplementation.setImplementationArtifacts(implementationArtifacts);
+		nodeTypeImplementation.setName(name+"Implementation");
+
 		if (value.getArtifacts() != null) {
 			// here are only artifact definitions!!
-			parseNodeTypeArtifacts(value.getArtifacts());
+			parseNodeTypeArtifacts(value.getArtifacts(), artifactTemplates, implementationArtifacts);
 		}
 		if (value.getCapabilities() != null) {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
@@ -322,7 +304,9 @@ public class Yaml2XmlSwitch {
 			result.setDerivedFrom(parseDerivedFrom(value.getDerived_from()));
 		}
 		if (value.getInterfaces() != null) {
-			result.setInterfaces(parseNodeTypeInterfaces(value.getInterfaces()));
+			final Interfaces nodeTypeInterfaces = parseNodeTypeInterfaces(value.getInterfaces());
+			addInterfaceDefinitionsToImplementationArtifacts(implementationArtifacts, nodeTypeInterfaces);
+			result.setInterfaces(nodeTypeInterfaces);
 		}
 		if (value.getProperties() != null) {
 			result.setPropertiesDefinition(parsePropertiesDefinition(value.getProperties(), name));
@@ -333,10 +317,31 @@ public class Yaml2XmlSwitch {
 		if (value.getDescription() != null) {
 			result.getDocumentation().add(toDocumentation(value.getDescription()));
 		}
+
+		this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().addAll(artifactTemplates);
+		this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(nodeTypeImplementation);
+
 		return result;
 	}
 
-	private void parseNodeTypeArtifacts(List<Map<String, Object>> artifacts) {
+	private void addInterfaceDefinitionsToImplementationArtifacts(final TImplementationArtifacts implementationArtifacts,
+																  final Interfaces nodeTypeInterfaces) {
+		// TODO: find a better solution to map interfaces to implementation artifacts
+		for (TInterface tInterface : nodeTypeInterfaces.getInterface()) {
+			for (TOperation tOperation : tInterface.getOperation()) {
+				for (TImplementationArtifacts.ImplementationArtifact implArtifact : implementationArtifacts.getImplementationArtifact()) {
+					if (implArtifact.getArtifactRef().getLocalPart().contains(tOperation.getName())) {
+						implArtifact.setInterfaceName(tInterface.getName());
+						implArtifact.setOperationName(tOperation.getName());
+					}
+				}
+			}
+		}
+	}
+
+	private void parseNodeTypeArtifacts(List<Map<String, Object>> artifacts, List<TArtifactTemplate> artifactTemplates,
+										TImplementationArtifacts implementationArtifacts) {
+
 		for (Map<String, Object> artifact : artifacts) {
 			String artifactName = "";
 			String artifactFileUri = "";
@@ -356,18 +361,62 @@ public class Yaml2XmlSwitch {
 					case "mime_type":
 						artifactMimeType = (String) artifactEntry.getValue();
 						break;
+					case "properties":
+						if (artifactEntry.getValue() instanceof Map<?, ?>) {
+							additionalProperties = (Map) artifactEntry.getValue();
+						}
+						break;
 					default:
 						artifactName = artifactEntry.getKey();
 						if (artifactEntry.getValue() instanceof String) {
 							artifactFileUri = (String) artifactEntry.getValue();
-						} else if (artifactEntry.getValue() instanceof Map<?, ?>) {
-							additionalProperties = (Map) artifactEntry.getValue();
 						}
 						break;
 				}
 			}
-			// TODO: how to handle artifacts??
+			addArtifactTemplate(artifactTemplates, artifactName, artifactFileUri, artifactType, additionalProperties);
+			addImplementationArtifact(implementationArtifacts, artifactName, artifactType);
 		}
+	}
+
+	private TArtifactTemplate addArtifactTemplate(final List<TArtifactTemplate> artifactTemplates, final String artifactName,
+									 final String artifactFileUri, final String artifactType, final Map additionalProperties) {
+		TArtifactTemplate artifactTemplate = new TArtifactTemplate();
+		artifactTemplate.setName(artifactName);
+		artifactTemplate.setId(artifactName);
+		artifactTemplate.setType(new QName(TYPESNS, artifactType));
+
+		TArtifactTemplate.ArtifactReferences artifactReferences = new TArtifactTemplate.ArtifactReferences();
+		TArtifactReference artifactReference = new TArtifactReference();
+		TArtifactReference.Include include = new TArtifactReference.Include();
+		int lastIndexOfSlash = artifactFileUri.lastIndexOf("/");
+		if (lastIndexOfSlash > 0) {
+			artifactReference.setReference(artifactFileUri.substring(0, lastIndexOfSlash));
+			include.setPattern(artifactFileUri.substring(artifactFileUri.lastIndexOf("/")));
+		} else {
+			artifactReference.setReference("");
+			include.setPattern(artifactFileUri);
+		}
+		artifactReference.getIncludeOrExclude().add(include);
+		artifactReferences.getArtifactReference().add(artifactReference);
+		artifactTemplate.setArtifactReferences(artifactReferences);
+
+		TEntityTemplate.Properties properties = new TEntityTemplate.Properties();
+		properties.setAny(new AnyMap(parseProperties(additionalProperties, artifactType)));
+		artifactTemplate.setProperties(properties);
+
+		artifactTemplates.add(artifactTemplate);
+
+		return artifactTemplate;
+	}
+
+	private void addImplementationArtifact(final TImplementationArtifacts implementationArtifacts,
+										   final String artifactName, final String artifactType) {
+		TImplementationArtifacts.ImplementationArtifact implementationArtifact =
+				new TImplementationArtifacts.ImplementationArtifact();
+		implementationArtifact.setArtifactRef(new QName(artifactName));
+		implementationArtifact.setArtifactType(new QName(artifactType));
+		implementationArtifacts.getImplementationArtifact().add(implementationArtifact);
 	}
 
 	private RequirementDefinitions parseNodeTypeRequirementDefinitions(List<Map<String, Object>> requirements) {
