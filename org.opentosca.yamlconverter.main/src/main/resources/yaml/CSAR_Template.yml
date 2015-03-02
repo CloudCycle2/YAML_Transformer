@@ -97,7 +97,7 @@ node_types:
       script:
         type: string
     artifacts:
-      - UbuntuNodeTypeImplementation_IA_ArtifactTemplate:
+      - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: org_opentosca_types_Ubuntu__InterfaceUbuntu.war
         type: WAR
         description: <artifact_description>
         properties:
@@ -145,21 +145,26 @@ node_types:
         InstallVMwithCustomImage:
           implementation: InstallOpenStackVM_IA
     artifacts:
-      - InstallOpenStackVM_IA:
+      - InstallOpenStackVM_IA: InstallOpenStackVM_Custom_InstallVM.war
         type: WAR
         description: <artifact_description>
         properties:
           ServiceEndpoint: /services/InstallOpenStackVM_Custom_InstallVMPort
-          PortType: "{http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM" #TODO define interface
+          PortType: "{http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM"
           InvocationType: SOAP/HTTP
 
 artifact_types:
-  InstallOpenStackVM_IA:
-    mime_type: war
-    description: bla
-    derived_from: tosca.artifact.Root
-    file_ext: [jar]
-    mime_type: application/java-archive
+  WAR:
+    description: <artifact_description>
+    mime_type: application/x-zip
+    file_ext: [war]
+    properties:
+      ServiceEndpoint:
+        type: string
+      PortType:
+        type: string
+      InvocationType:
+        type: string
 
 capability_types:
   testCap:

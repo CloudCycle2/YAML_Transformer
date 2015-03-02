@@ -282,7 +282,7 @@ public class Yaml2XmlSwitch {
 
 		if (value.getArtifacts() != null) {
 			// here are only artifact definitions!!
-			// TODO: how to handle artifacts??
+			parseNodeTypeArtifacts(value.getArtifacts());
 		}
 		if (value.getCapabilities() != null) {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
@@ -303,6 +303,40 @@ public class Yaml2XmlSwitch {
 			result.getDocumentation().add(toDocumentation(value.getDescription()));
 		}
 		return result;
+	}
+
+	private void parseNodeTypeArtifacts(List<Map<String, Object>> artifacts) {
+		for (Map<String, Object> artifact : artifacts) {
+			String artifactName = "";
+			String artifactFileUri = "";
+			String artifactType = "";
+			String artifactDescription = "";
+			String artifactMimeType = "";
+			Map additionalProperties = null;
+
+			for (Entry<String, Object> artifactEntry : artifact.entrySet()) {
+				switch (artifactEntry.getKey()) {
+					case "type":
+						artifactType = (String) artifactEntry.getValue();
+						break;
+					case "description":
+						artifactDescription = (String) artifactEntry.getValue();
+						break;
+					case "mime_type":
+						artifactMimeType = (String) artifactEntry.getValue();
+						break;
+					default:
+						artifactName = artifactEntry.getKey();
+						if (artifactEntry.getValue() instanceof String) {
+							artifactFileUri = (String) artifactEntry.getValue();
+						} else if (artifactEntry.getValue() instanceof Map<?, ?>) {
+							additionalProperties = (Map) artifactEntry.getValue();
+						}
+						break;
+				}
+			}
+			// TODO: how to handle artifacts??
+		}
 	}
 
 	private RequirementDefinitions parseNodeTypeRequirementDefinitions(List<Map<String, Object>> requirements) {

@@ -95,7 +95,7 @@ node_types:
         description: <artifact_description>
         properties:
           ServiceEndpoint: /services/org_opentosca_types_Ubuntu__InterfaceUbuntuPort
-          PortType: {http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu #TODO define interface
+          PortType: "{http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu" #TODO define interface
           InvocationType: SOAP/HTTP
 
   InstallOpenStackVM:
@@ -140,7 +140,7 @@ node_types:
         description: <artifact_description>
         properties:
           ServiceEndpoint: /services/InstallOpenStackVM_Custom_InstallVMPort
-          PortType: {http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM
+          PortType: "{http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM"
           InvocationType: SOAP/HTTP
 
 capability_types:
@@ -154,7 +154,7 @@ artifact_types:
   WAR:
     description: <artifact_description>
     mime_type: application/x-zip
-    file_ext: war
+    file_ext: [war]
     properties:
       ServiceEndpoint:
         type: string
