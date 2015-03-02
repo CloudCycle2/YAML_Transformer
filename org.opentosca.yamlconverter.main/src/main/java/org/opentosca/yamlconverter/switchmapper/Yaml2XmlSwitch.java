@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.opentosca.model.tosca.Definitions;
@@ -471,7 +472,9 @@ public class Yaml2XmlSwitch {
 	private void processPropertiesInNodeTemplate(NodeTemplate nodeTemplate, String nodename, TNodeTemplate result) {
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
 		final AnyMap properties = new AnyMap(parseProperties(nodeTemplate.getProperties(), nodename));
-		prop.setAny(properties);
+		final JAXBElement<AnyMap> jaxbprop = new JAXBElement<AnyMap>(new QName(TYPESNS, nodename + "Properties", "types"), AnyMap.class,
+				properties);
+		prop.setAny(jaxbprop);
 		result.setProperties(prop);
 	}
 
