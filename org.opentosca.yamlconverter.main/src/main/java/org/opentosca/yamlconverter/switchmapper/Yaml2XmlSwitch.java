@@ -291,7 +291,7 @@ public class Yaml2XmlSwitch {
 		final List<TArtifactTemplate> artifactTemplates = new ArrayList<TArtifactTemplate>();
 		final TImplementationArtifacts implementationArtifacts = new TImplementationArtifacts();
 		nodeTypeImplementation.setImplementationArtifacts(implementationArtifacts);
-		nodeTypeImplementation.setName(name+"Implementation");
+		nodeTypeImplementation.setName(name + "Implementation");
 
 		if (value.getArtifacts() != null) {
 			// here are only artifact definitions!!
@@ -554,7 +554,9 @@ public class Yaml2XmlSwitch {
 	private void processPropertiesInNodeTemplate(NodeTemplate nodeTemplate, String nodename, TNodeTemplate result) {
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
 		final AnyMap properties = new AnyMap(parseProperties(nodeTemplate.getProperties(), nodename));
-		prop.setAny(properties);
+		final JAXBElement<AnyMap> jaxbprop = new JAXBElement<AnyMap>(new QName(TYPESNS, nodename + "Properties", "types"), AnyMap.class,
+				properties);
+		prop.setAny(jaxbprop);
 		result.setProperties(prop);
 	}
 
