@@ -11,6 +11,7 @@ import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.*;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -402,7 +403,7 @@ public class Yaml2XmlSwitch {
 		artifactTemplate.setArtifactReferences(artifactReferences);
 
 		TEntityTemplate.Properties properties = new TEntityTemplate.Properties();
-		properties.setAny(new AnyMap(parseProperties(additionalProperties, artifactType)));
+		properties.setAny(getAnyMapForProperties(additionalProperties, artifactType));
 		artifactTemplate.setProperties(properties);
 
 		artifactTemplates.add(artifactTemplate);
@@ -553,15 +554,19 @@ public class Yaml2XmlSwitch {
 
 	private void processPropertiesInNodeTemplate(NodeTemplate nodeTemplate, String nodename, TNodeTemplate result) {
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
-		final AnyMap properties = new AnyMap(parseProperties(nodeTemplate.getProperties(), nodename));
-		final JAXBElement<AnyMap> jaxbprop = new JAXBElement<AnyMap>(new QName(TYPESNS, nodename + "Properties", "types"), AnyMap.class,
-				properties);
+		final JAXBElement<AnyMap> jaxbprop = getAnyMapForProperties(nodeTemplate.getProperties(), nodename);
 		prop.setAny(jaxbprop);
 		result.setProperties(prop);
 	}
 
+	private JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodename) {
+		final AnyMap properties = new AnyMap(parseProperties(customMap));
+		return new JAXBElement<AnyMap>(new QName(TYPESNS, nodename + "Properties", "types"), AnyMap.class,
+				properties);
+	}
+
 	@SuppressWarnings("unchecked")
-	private Map<String, String> parseProperties(Map<String, Object> properties, String nodename) {
+	private Map<String, String> parseProperties(Map<String, Object> properties) {
 		final Map<String, String> result = new HashMap<String, String>();
 		for (final Entry<String, Object> entry : properties.entrySet()) {
 			String value = "";
