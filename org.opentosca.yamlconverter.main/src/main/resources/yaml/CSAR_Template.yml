@@ -33,7 +33,7 @@ inputs:
   flavorId:
     type: string
     description: Flavor ID
-    default: 3  
+    default: 3
   keypair:
     type: string
     description: keypair
@@ -64,6 +64,11 @@ node_templates:
       floatingIp:
       serverId:
       privKey:
+    capabilities:
+      warhammer:
+        type: testCap
+      linuxmaster:
+        type: niceCap
 
   LinuxOperatingSystem:
     type: OperatingSystem
@@ -78,6 +83,10 @@ node_types:
   OperatingSystem:
     derived_from: tosca.nodes.Root
     description: Operating System
+    requirements:
+      - host: tosca.nodes.WebServer
+        relationship_type: MoodleDatabaseConnection
+      - database: MySQL
     properties:
       hostname:
         type: string
@@ -86,17 +95,18 @@ node_types:
       sshKey:
         type: string
       script:
-        type: string 
-    interfaces: 
-      InterfaceUbuntu:  
+        type: string
     artifacts:
-      UbuntuNodeTypeImplementation_IA_ArtifactTemplate:
+      - UbuntuNodeTypeImplementation_IA_ArtifactTemplate:
         type: WAR
         description: <artifact_description>
         properties:
           ServiceEndpoint: /services/org_opentosca_types_Ubuntu__InterfaceUbuntuPort
           PortType: "{http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu" #TODO define interface
           InvocationType: SOAP/HTTP
+    capabilities:
+      warhammer2:
+        type: niceCap
 
   InstallOpenStackVM:
     derived_from: tosca.nodes.Root
@@ -135,10 +145,42 @@ node_types:
         InstallVMwithCustomImage:
           implementation: InstallOpenStackVM_IA
     artifacts:
-      InstallOpenStackVM_IA:
+      - InstallOpenStackVM_IA:
         type: WAR
         description: <artifact_description>
         properties:
           ServiceEndpoint: /services/InstallOpenStackVM_Custom_InstallVMPort
           PortType: "{http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM" #TODO define interface
           InvocationType: SOAP/HTTP
+
+artifact_types:
+  InstallOpenStackVM_IA:
+    mime_type: war
+    description: bla
+    derived_from: tosca.artifact.Root
+    file_ext: [jar]
+    mime_type: application/java-archive
+
+capability_types:
+  testCap:
+    derived_from: parent_capability
+    description: xy bla bla
+    properties:
+      server_name:
+        type: string
+  niceCap:
+    derived_from: testCap
+    description: Another capability
+    properties:
+      port:
+        type: integer
+
+relationship_types:
+  MoodleDatabaseConnection:
+    derived_from: MySQLDatabaseConnection
+    description: Connects to Moodle DB
+    interfaces:
+      EndpointConfiguration:
+        preConfigureEndpoint:
+          implementaion: impl
+    valid_targets: [MySQLDatabaseEndpointCapability]

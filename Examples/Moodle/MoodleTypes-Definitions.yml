@@ -145,9 +145,9 @@ relationship_types:
 
 capability_types:
 # from file Specific Types Definitions
-	PHPRuntimeCapability
+	PHPRuntimeCapability:
 		derived_from: FeatureCapability
-	MySQLDatabaseEndpointCapability
+	MySQLDatabaseEndpointCapability:
 		derived_from: DatabaseEndpointRequirement
 	
 		
