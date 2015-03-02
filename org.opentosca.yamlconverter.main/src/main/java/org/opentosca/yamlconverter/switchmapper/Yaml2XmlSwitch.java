@@ -1,17 +1,5 @@
 package org.opentosca.yamlconverter.switchmapper;
 
-import com.esotericsoftware.yamlbeans.YamlException;
-import com.esotericsoftware.yamlbeans.YamlWriter;
-import org.opentosca.model.tosca.*;
-import org.opentosca.model.tosca.TEntityType.DerivedFrom;
-import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
-import org.opentosca.model.tosca.TNodeType.Interfaces;
-import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.*;
-
-import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -19,6 +7,41 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.xml.namespace.QName;
+
+import org.opentosca.model.tosca.Definitions;
+import org.opentosca.model.tosca.TArtifactType;
+import org.opentosca.model.tosca.TCapability;
+import org.opentosca.model.tosca.TCapabilityDefinition;
+import org.opentosca.model.tosca.TCapabilityType;
+import org.opentosca.model.tosca.TDocumentation;
+import org.opentosca.model.tosca.TEntityTemplate;
+import org.opentosca.model.tosca.TEntityType.DerivedFrom;
+import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.model.tosca.TImport;
+import org.opentosca.model.tosca.TInterface;
+import org.opentosca.model.tosca.TNodeTemplate;
+import org.opentosca.model.tosca.TNodeType;
+import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
+import org.opentosca.model.tosca.TNodeType.Interfaces;
+import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
+import org.opentosca.model.tosca.TOperation;
+import org.opentosca.model.tosca.TRelationshipType;
+import org.opentosca.model.tosca.TRequirementDefinition;
+import org.opentosca.model.tosca.TServiceTemplate;
+import org.opentosca.model.tosca.TTopologyTemplate;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ArtifactType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlWriter;
 
 /**
  * This class can parse ServiceTemplates (YAML bean) to Definitions (XML bean).
@@ -126,8 +149,8 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
-	private void setInitialProperties(ServiceTemplate yamlServiceTemplate, Definitions result,
-									  TServiceTemplate serviceTemplate, TTopologyTemplate topologyTemplate) {
+	private void setInitialProperties(ServiceTemplate yamlServiceTemplate, Definitions result, TServiceTemplate serviceTemplate,
+			TTopologyTemplate topologyTemplate) {
 		result.setId(unique("root"));
 		result.setName(unique("Root"));
 		if (yamlServiceTemplate.getTosca_default_namespace() != null && !yamlServiceTemplate.getTosca_default_namespace().isEmpty()) {
@@ -137,9 +160,20 @@ public class Yaml2XmlSwitch {
 		}
 		result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(serviceTemplate);
 		result.getDocumentation().add(toDocumentation(yamlServiceTemplate.getDescription()));
+		if (yamlServiceTemplate.getTemplate_author() != null && !yamlServiceTemplate.getTemplate_author().isEmpty()) {
+			result.getDocumentation().add(toDocumentation("Template Author: " + yamlServiceTemplate.getTemplate_author()));
+		}
+		if (yamlServiceTemplate.getTemplate_version() != null && !yamlServiceTemplate.getTemplate_version().isEmpty()) {
+			result.getDocumentation().add(toDocumentation("Template Version: " + yamlServiceTemplate.getTemplate_version()));
+		}
 		result.getOtherAttributes().put(new QName("xmlns:types"), TYPESNS);
-		serviceTemplate.setId(unique("serviceTemplate"));
-		serviceTemplate.setName("ServiceTemplate");
+		if (yamlServiceTemplate.getTemplate_name() != null && !yamlServiceTemplate.getTemplate_name().isEmpty()) {
+			serviceTemplate.setId(unique(yamlServiceTemplate.getTemplate_name()));
+			serviceTemplate.setName(yamlServiceTemplate.getTemplate_name());
+		} else {
+			serviceTemplate.setId(unique("servicetemplate"));
+			serviceTemplate.setName("ServiceTemplate");
+		}
 		serviceTemplate.setTopologyTemplate(topologyTemplate);
 	}
 
@@ -174,8 +208,8 @@ public class Yaml2XmlSwitch {
 
 	private void processArtifactTypes(ServiceTemplate yamlServiceTemplate, Definitions result) {
 		if (yamlServiceTemplate.getArtifact_types() != null) {
-			result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation()
-					.addAll(getArtifactTypesFromYaml(yamlServiceTemplate.getArtifact_types()));
+			result.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().addAll(
+					getArtifactTypesFromYaml(yamlServiceTemplate.getArtifact_types()));
 		}
 	}
 
@@ -198,23 +232,20 @@ public class Yaml2XmlSwitch {
 	}
 
 	/**
-	 * Read artifact types from yaml.
-	 * Example notation:
-	 * artifacts:
-	 *   artifact_name:
-	 *     derived_from: tosca.artifact.Root
-	 *     mime_type: application/java-archive
+	 * Read artifact types from yaml. Example notation: artifacts: artifact_name: derived_from: tosca.artifact.Root mime_type:
+	 * application/java-archive
+	 *
 	 * @param objArtifactTypes
 	 * @return
 	 */
 	private List<TArtifactType> getArtifactTypesFromYaml(Map<String, ArtifactType> objArtifactTypes) {
-		List<TArtifactType> artifactTypes = new ArrayList<TArtifactType>();
+		final List<TArtifactType> artifactTypes = new ArrayList<TArtifactType>();
 
-		for (Entry<String, ArtifactType> entry : objArtifactTypes.entrySet()) {
-			TArtifactType artifactType = new TArtifactType();
+		for (final Entry<String, ArtifactType> entry : objArtifactTypes.entrySet()) {
+			final TArtifactType artifactType = new TArtifactType();
 			artifactType.setName(entry.getKey());
 
-			ArtifactType value = entry.getValue();
+			final ArtifactType value = entry.getValue();
 			artifactType.setDerivedFrom(parseDerivedFrom(value.getDerived_from()));
 			artifactType.setPropertiesDefinition(parsePropertiesDefinition(value.getProperties(), entry.getKey()));
 
@@ -234,15 +265,15 @@ public class Yaml2XmlSwitch {
 
 	private TRelationshipType createRelationshipType(Entry<String, RelationshipType> relType) {
 		final TRelationshipType result = new TRelationshipType();
-		RelationshipType relationshipType = relType.getValue();
+		final RelationshipType relationshipType = relType.getValue();
 		result.setName(relType.getKey());
 		result.setDerivedFrom(parseDerivedFrom(relationshipType.getDerived_from()));
 
 		// set interfaces
-		TRelationshipType.TargetInterfaces targetInterfaces = new TRelationshipType.TargetInterfaces();
+		final TRelationshipType.TargetInterfaces targetInterfaces = new TRelationshipType.TargetInterfaces();
 		for (final Entry<String, Map<String, Map<String, String>>> ifaceEntry : relationshipType.getInterfaces().entrySet()) {
 			if (ifaceEntry.getValue() instanceof HashMap) {
-				TInterface tInterface = getInterfaceWithOperations(ifaceEntry);
+				final TInterface tInterface = getInterfaceWithOperations(ifaceEntry);
 				targetInterfaces.getInterface().add(tInterface);
 			}
 		}
@@ -254,8 +285,8 @@ public class Yaml2XmlSwitch {
 		}
 
 		// set valid target (only one possible, thus choose first one)
-		if(relationshipType.getValid_targets().length > 0 && relationshipType.getValid_targets()[0] != null) {
-			TRelationshipType.ValidTarget validTarget = new TRelationshipType.ValidTarget();
+		if (relationshipType.getValid_targets().length > 0 && relationshipType.getValid_targets()[0] != null) {
+			final TRelationshipType.ValidTarget validTarget = new TRelationshipType.ValidTarget();
 			validTarget.setTypeRef(new QName(relationshipType.getValid_targets()[0]));
 			result.setValidTarget(validTarget);
 		}
@@ -378,11 +409,11 @@ public class Yaml2XmlSwitch {
 			final TCapabilityDefinition capabilityDefinition = new TCapabilityDefinition();
 			capabilityDefinition.setName(capabilityEntry.getKey());
 			if (capabilityEntry.getValue() instanceof HashMap) {
-				Map capability = (HashMap) capabilityEntry.getValue();
+				final Map capability = (HashMap) capabilityEntry.getValue();
 				String capabilityType = "CAPABILITY_TYPE";
 				try {
 					capabilityType = (String) capability.get("type");
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					System.out.println("No capability type defined or illegal value, using default.");
 				}
 				capabilityDefinition.setCapabilityType(new QName(capabilityType));
@@ -414,17 +445,17 @@ public class Yaml2XmlSwitch {
 	}
 
 	private void processCapabilitiesInNodeTemplate(NodeTemplate nodeTemplate, TNodeTemplate result) {
-		TNodeTemplate.Capabilities capabilities = new TNodeTemplate.Capabilities();
+		final TNodeTemplate.Capabilities capabilities = new TNodeTemplate.Capabilities();
 
-		for (Entry<String, Object> nodeTemplateCapability : nodeTemplate.getCapabilities().entrySet()) {
+		for (final Entry<String, Object> nodeTemplateCapability : nodeTemplate.getCapabilities().entrySet()) {
 			if (nodeTemplateCapability.getValue() instanceof HashMap) {
-				Map capabilityDefinition = (HashMap) nodeTemplateCapability.getValue();
-				TCapability tCapability = new TCapability();
+				final Map capabilityDefinition = (HashMap) nodeTemplateCapability.getValue();
+				final TCapability tCapability = new TCapability();
 				tCapability.setName(nodeTemplateCapability.getKey());
 				String capabilityType = "CAPABILITY_TYPE";
 				try {
 					capabilityType = (String) capabilityDefinition.get("type");
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					System.out.println("No capability type defined or illegal value, using default.");
 				}
 				tCapability.setType(new QName(capabilityType));
