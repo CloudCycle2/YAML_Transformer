@@ -72,14 +72,17 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 
 	protected DerivedFrom parseDerivedFrom(String derived_from) {
 		final DerivedFrom result = new DerivedFrom();
-		result.setTypeRef(new QName(derived_from));
+		result.setTypeRef(toTnsQName(derived_from));
 		return result;
+	}
+
+	protected QName toTnsQName(String localName) {
+		return new QName(getDefinitions().getTargetNamespace(), localName, "tns");
 	}
 
 	protected PropertiesDefinition parsePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
 		final PropertiesDefinition result = new PropertiesDefinition();
-		// TODO: setType()?!
-		result.setElement(new QName(Yaml2XmlSwitch.TYPESNS, typename + "Properties", "types"));
+		result.setType(new QName(Yaml2XmlSwitch.TYPESNS, typename + "Properties", "types"));
 		generateTypeXSD(properties, typename + "Properties");
 		return result;
 	}

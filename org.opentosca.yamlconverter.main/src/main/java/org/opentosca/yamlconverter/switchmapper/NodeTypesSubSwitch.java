@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.xml.namespace.QName;
-
 import org.opentosca.model.tosca.TArtifactReference;
 import org.opentosca.model.tosca.TArtifactTemplate;
 import org.opentosca.model.tosca.TCapabilityDefinition;
@@ -87,7 +85,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			if (req.size() == 2) {
 				for (final String key : req.keySet()) {
 					if (key.equals("relationship_type")) {
-						rd.setRequirementType(new QName((String) req.get(key)));
+						rd.setRequirementType(toTnsQName((String) req.get(key)));
 					} else {
 						rd.setName(key);
 					}
@@ -138,7 +136,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 				} catch (final Exception e) {
 					System.out.println("No capability type defined or illegal value, using default.");
 				}
-				capabilityDefinition.setCapabilityType(new QName(capabilityType));
+				capabilityDefinition.setCapabilityType(toTnsQName(capabilityType));
 			}
 			result.getCapabilityDefinition().add(capabilityDefinition);
 		}
@@ -186,8 +184,8 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 
 	private void addImplementationArtifact(TImplementationArtifacts implementationArtifacts, String artifactName, String artifactType) {
 		final TImplementationArtifacts.ImplementationArtifact implementationArtifact = new TImplementationArtifacts.ImplementationArtifact();
-		implementationArtifact.setArtifactRef(new QName(artifactName));
-		implementationArtifact.setArtifactType(new QName(artifactType));
+		implementationArtifact.setArtifactRef(toTnsQName(artifactName));
+		implementationArtifact.setArtifactType(toTnsQName(artifactType));
 		implementationArtifacts.getImplementationArtifact().add(implementationArtifact);
 	}
 
@@ -196,7 +194,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		final TArtifactTemplate artifactTemplate = new TArtifactTemplate();
 		artifactTemplate.setName(artifactName);
 		artifactTemplate.setId(artifactName);
-		artifactTemplate.setType(new QName(Yaml2XmlSwitch.TYPESNS, artifactType));
+		artifactTemplate.setType(toTnsQName(artifactType));
 
 		final TArtifactTemplate.ArtifactReferences artifactReferences = new TArtifactTemplate.ArtifactReferences();
 		final TArtifactReference artifactReference = new TArtifactReference();
