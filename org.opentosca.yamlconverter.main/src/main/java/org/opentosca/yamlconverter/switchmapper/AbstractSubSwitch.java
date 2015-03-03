@@ -82,13 +82,15 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 
 	protected PropertiesDefinition parsePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
 		final PropertiesDefinition result = new PropertiesDefinition();
+		// setType() works, setElement will throw an error while importing the XML to Winery
 		result.setType(new QName(Yaml2XmlSwitch.TYPESNS, typename + "Properties", "types"));
 		generateTypeXSD(properties, typename + "Properties");
 		return result;
 	}
 
 	private void generateTypeXSD(Map<String, PropertyDefinition> properties, String name) {
-		this.parent.getXSDStringBuilder().append("<xs:complexType name=\"" + name + "\">\n");
+		final String tName = "t" + name;
+		this.parent.getXSDStringBuilder().append("<xs:complexType name=\"" + tName + "\">\n");
 		this.parent.getXSDStringBuilder().append("<xs:sequence>\n");
 		for (final Entry<String, PropertyDefinition> entry : properties.entrySet()) {
 			this.parent.getXSDStringBuilder().append(
@@ -96,6 +98,7 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		}
 		this.parent.getXSDStringBuilder().append("</xs:sequence>\n");
 		this.parent.getXSDStringBuilder().append("</xs:complexType>\n");
+		this.parent.getXSDStringBuilder().append("<xs:element name=\"" + name + "\" type=\"" + tName + "\" />");
 	}
 
 	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodename) {

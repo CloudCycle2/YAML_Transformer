@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/tosca/yamlgen/types" xmlns="http://www.example.org/tosca/yamlgen/types">
+<xs:complexType name="ttestCapProperties">
+<xs:sequence>
+<xs:element name="server_name" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:element name="testCapProperties" type="ttestCapProperties" /><xs:complexType name="tniceCapProperties">
+<xs:sequence>
+<xs:element name="port" type="xs:integer" />
+</xs:sequence>
+</xs:complexType>
+<xs:element name="niceCapProperties" type="tniceCapProperties" /><xs:complexType name="tWARProperties">
+<xs:sequence>
+<xs:element name="InvocationType" type="xs:string" />
+<xs:element name="ServiceEndpoint" type="xs:string" />
+<xs:element name="PortType" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:element name="WARProperties" type="tWARProperties" /><xs:complexType name="tOperatingSystemProperties">
+<xs:sequence>
+<xs:element name="hostname" type="xs:string" />
+<xs:element name="sshKey" type="xs:string" />
+<xs:element name="sshUser" type="xs:string" />
+<xs:element name="script" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:element name="OperatingSystemProperties" type="tOperatingSystemProperties" /><xs:complexType name="tInstallOpenStackVMProperties">
+<xs:sequence>
+<xs:element name="privKey" type="xs:string" />
+<xs:element name="imageId" type="xs:string" />
+<xs:element name="imageName" type="xs:string" />
+<xs:element name="floatingIp" type="xs:string" />
+<xs:element name="credentials" type="xs:string" />
+<xs:element name="endpointsAPI" type="xs:string" />
+<xs:element name="minRAM" type="xs:string" />
+<xs:element name="keypair" type="xs:string" />
+<xs:element name="flavorId" type="xs:string" />
+<xs:element name="minDisk" type="xs:string" />
+<xs:element name="serverId" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:element name="InstallOpenStackVMProperties" type="tInstallOpenStackVMProperties" /></xs:schema>

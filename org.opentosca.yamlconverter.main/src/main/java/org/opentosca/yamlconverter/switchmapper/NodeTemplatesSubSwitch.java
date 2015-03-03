@@ -72,8 +72,9 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 				capabilities.getCapability().add(tCapability);
 			}
 		}
-
-		result.setCapabilities(capabilities);
+		if (!nodeTemplate.getCapabilities().isEmpty()) {
+			result.setCapabilities(capabilities);
+		}
 	}
 
 }

@@ -47,28 +47,29 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		nodeTypeImplementation.setImplementationArtifacts(implementationArtifacts);
 		nodeTypeImplementation.setName(name + "Implementation");
 
-		if (value.getArtifacts() != null) {
+		if (value.getArtifacts() != null && !value.getArtifacts().isEmpty()) {
 			// here are only artifact definitions!!
 			parseNodeTypeArtifacts(value.getArtifacts(), artifactTemplates, implementationArtifacts);
 		}
-		if (value.getCapabilities() != null) {
+		if (value.getCapabilities() != null && !value.getCapabilities().isEmpty()) {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
 		}
-		if (value.getDerived_from() != null) {
+		if (value.getDerived_from() != null && !value.getDerived_from().isEmpty()) {
 			result.setDerivedFrom(parseDerivedFrom(value.getDerived_from()));
 		}
-		if (value.getInterfaces() != null) {
+		if (value.getInterfaces() != null && !value.getInterfaces().isEmpty()) {
 			final Interfaces nodeTypeInterfaces = parseNodeTypeInterfaces(value.getInterfaces());
 			addInterfaceDefinitionsToImplementationArtifacts(implementationArtifacts, nodeTypeInterfaces);
 			result.setInterfaces(nodeTypeInterfaces);
 		}
-		if (value.getProperties() != null) {
+		if (value.getProperties() != null && !value.getProperties().isEmpty()) {
 			result.setPropertiesDefinition(parsePropertiesDefinition(value.getProperties(), name));
 		}
-		if (value.getRequirements() != null) {
-			result.setRequirementDefinitions(parseNodeTypeRequirementDefinitions(value.getRequirements()));
-		}
-		if (value.getDescription() != null) {
+		// TODO: This does not work and crashes Winery!
+		// if (value.getRequirements() != null && !value.getRequirements().isEmpty()) {
+		// result.setRequirementDefinitions(parseNodeTypeRequirementDefinitions(value.getRequirements()));
+		// }
+		if (value.getDescription() != null && !value.getDescription().isEmpty()) {
 			result.getDocumentation().add(toDocumentation(value.getDescription()));
 		}
 

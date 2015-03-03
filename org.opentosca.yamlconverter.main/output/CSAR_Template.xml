@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tosca:Definitions xmlns:tosca="http://docs.oasis-open.org/tosca/ns/2011/12" id="root0" name="Root1" targetNamespace="http://types.opentosca.org" xmlns:types="http://www.example.org/tosca/yamlgen/types">
+    <tosca:documentation>Service Template for installing VMServ</tosca:documentation>
+    <tosca:documentation>Template Author: Team YAML</tosca:documentation>
+    <tosca:documentation>Template Version: 0.1</tosca:documentation>
+    <tosca:Import namespace="http://www.example.org/tosca/yamlgen/types" location="types.xsd" importType="http://www.w3.org/2001/XMLSchema"/>
+    <tosca:ServiceTemplate id="InstallVMServTemplate2" name="InstallVMServTemplate">
+        <tosca:TopologyTemplate>
+            <tosca:NodeTemplate xmlns:tns="http://types.opentosca.org" name="LinuxOperatingSystem" id="LinuxOperatingSystem" type="tns:OperatingSystem">
+                <tosca:Properties>
+                    <types:LinuxOperatingSystemProperties xmlns:types="http://www.example.org/tosca/yamlgen/types" xmlns="http://www.example.org/tosca/yamlgen/types">
+                        <hostname></hostname>
+                        <sshKey></sshKey>
+                        <sshUser>ubuntu</sshUser>
+                        <script>uname -a</script>
+                    </types:LinuxOperatingSystemProperties>
+                </tosca:Properties>
+            </tosca:NodeTemplate>
+            <tosca:NodeTemplate xmlns:tns="http://types.opentosca.org" name="InstallOpenStackVMTemplate" id="InstallOpenStackVMTemplate" type="tns:InstallOpenStackVM">
+                <tosca:Properties>
+                    <types:InstallOpenStackVMTemplateProperties xmlns:types="http://www.example.org/tosca/yamlgen/types" xmlns="http://www.example.org/tosca/yamlgen/types">
+                        <privKey></privKey>
+                        <imageId>DEFAULTUSERINPUT</imageId>
+                        <imageName>ubuntu-12.04-server-cloudimg-amd64</imageName>
+                        <floatingIp></floatingIp>
+                        <credentials>{'auth': {'tenantId': '4114e1b404404565ac2ccbcc76b8078e','passwordCredentials': {'username': 'marzie.dehghanipour','password': 'piorkaun'}}}</credentials>
+                        <endpointsAPI>{'os-identity-api': 'http://129.69.209.127: 5000/v2.0','os-tenantId': '4114e1b404404565ac2ccbcc76b8078e'}</endpointsAPI>
+                        <minRAM>DEFAULTUSERINPUT</minRAM>
+                        <keypair>DEFAULTUSERINPUT</keypair>
+                        <flavorId>3</flavorId>
+                        <minDisk>DEFAULTUSERINPUT</minDisk>
+                        <serverId></serverId>
+                    </types:InstallOpenStackVMTemplateProperties>
+                </tosca:Properties>
+                <tosca:Capabilities>
+                    <tosca:Capability name="linuxmaster" id="InstallOpenStackVMTemplate_linuxmaster" type="tns:niceCap"/>
+                    <tosca:Capability name="warhammer" id="InstallOpenStackVMTemplate_warhammer" type="tns:testCap"/>
+                </tosca:Capabilities>
+            </tosca:NodeTemplate>
+        </tosca:TopologyTemplate>
+    </tosca:ServiceTemplate>
+    <tosca:CapabilityType name="testCap">
+        <tosca:documentation>xy bla bla</tosca:documentation>
+        <tosca:DerivedFrom xmlns:tns="http://types.opentosca.org" typeRef="tns:parent_capability"/>
+        <tosca:PropertiesDefinition xmlns:types="http://www.example.org/tosca/yamlgen/types" type="types:testCapProperties"/>
+    </tosca:CapabilityType>
+    <tosca:CapabilityType name="niceCap">
+        <tosca:documentation>Another capability</tosca:documentation>
+        <tosca:DerivedFrom xmlns:tns="http://types.opentosca.org" typeRef="tns:testCap"/>
+        <tosca:PropertiesDefinition xmlns:types="http://www.example.org/tosca/yamlgen/types" type="types:niceCapProperties"/>
+    </tosca:CapabilityType>
+    <tosca:RelationshipType name="MoodleDatabaseConnection">
+        <tosca:documentation>Connects to Moodle DB</tosca:documentation>
+        <tosca:DerivedFrom xmlns:tns="http://types.opentosca.org" typeRef="tns:MySQLDatabaseConnection"/>
+        <tosca:TargetInterfaces>
+            <tosca:Interface name="EndpointConfiguration">
+                <tosca:Operation name="preConfigureEndpoint"/>
+            </tosca:Interface>
+        </tosca:TargetInterfaces>
+        <tosca:ValidTarget xmlns:tns="http://types.opentosca.org" typeRef="tns:MySQLDatabaseEndpointCapability"/>
+    </tosca:RelationshipType>
+    <tosca:ArtifactType name="WAR">
+        <tosca:DerivedFrom xmlns:tns="http://types.opentosca.org" typeRef="tns:"/>
+        <tosca:PropertiesDefinition xmlns:types="http://www.example.org/tosca/yamlgen/types" type="types:WARProperties"/>
+    </tosca:ArtifactType>
+    <tosca:ArtifactTemplate xmlns:tns="http://types.opentosca.org" name="UbuntuNodeTypeImplementation_IA_ArtifactTemplate" id="UbuntuNodeTypeImplementation_IA_ArtifactTemplate" type="tns:WAR">
+        <tosca:Properties>
+            <types:WARProperties xmlns:types="http://www.example.org/tosca/yamlgen/types" xmlns="http://www.example.org/tosca/yamlgen/types">
+                <InvocationType>SOAP/HTTP</InvocationType>
+                <ServiceEndpoint>/services/org_opentosca_types_Ubuntu__InterfaceUbuntuPort</ServiceEndpoint>
+                <PortType>{http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu</PortType>
+            </types:WARProperties>
+        </tosca:Properties>
+        <tosca:ArtifactReferences>
+            <tosca:ArtifactReference reference="">
+                <tosca:Include pattern="org_opentosca_types_Ubuntu__InterfaceUbuntu.war"/>
+            </tosca:ArtifactReference>
+        </tosca:ArtifactReferences>
+    </tosca:ArtifactTemplate>
+    <tosca:NodeTypeImplementation name="OperatingSystemImplementation">
+        <tosca:ImplementationArtifacts>
+            <tosca:ImplementationArtifact xmlns:tns="http://types.opentosca.org" artifactType="tns:WAR" artifactRef="tns:UbuntuNodeTypeImplementation_IA_ArtifactTemplate"/>
+        </tosca:ImplementationArtifacts>
+    </tosca:NodeTypeImplementation>
+    <tosca:NodeType name="OperatingSystem">
+        <tosca:documentation>Operating System</tosca:documentation>
+        <tosca:DerivedFrom xmlns:tns="http://types.opentosca.org" typeRef="tns:tosca.nodes.Root"/>
+        <tosca:PropertiesDefinition xmlns:types="http://www.example.org/tosca/yamlgen/types" type="types:OperatingSystemProperties"/>
+        <tosca:CapabilityDefinitions>
+            <tosca:CapabilityDefinition xmlns:tns="http://types.opentosca.org" name="warhammer2" capabilityType="tns:niceCap"/>
+        </tosca:CapabilityDefinitions>
+    </tosca:NodeType>
+    <tosca:ArtifactTemplate xmlns:tns="http://types.opentosca.org" name="InstallOpenStackVM_IA" id="InstallOpenStackVM_IA" type="tns:WAR">
+        <tosca:Properties>
+            <types:WARProperties xmlns:types="http://www.example.org/tosca/yamlgen/types" xmlns="http://www.example.org/tosca/yamlgen/types">
+                <InvocationType>SOAP/HTTP</InvocationType>
+                <ServiceEndpoint>/services/InstallOpenStackVM_Custom_InstallVMPort</ServiceEndpoint>
+                <PortType>{http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM</PortType>
+            </types:WARProperties>
+        </tosca:Properties>
+        <tosca:ArtifactReferences>
+            <tosca:ArtifactReference reference="">
+                <tosca:Include pattern="InstallOpenStackVM_Custom_InstallVM.war"/>
+            </tosca:ArtifactReference>
+        </tosca:ArtifactReferences>
+    </tosca:ArtifactTemplate>
+    <tosca:ArtifactTemplate xmlns:tns="http://types.opentosca.org" name="DeleteOpenStackVM_IA" id="DeleteOpenStackVM_IA" type="tns:WAR">
+        <tosca:Properties>
+            <types:WARProperties xmlns:types="http://www.example.org/tosca/yamlgen/types" xmlns="http://www.example.org/tosca/yamlgen/types">
+                <InvocationType>SOAP/HTTP</InvocationType>
+                <ServiceEndpoint>/services/DeleteOpenStackVM_Custom_DeleteVMPort</ServiceEndpoint>
+                <PortType>{http://types.opentosca.org}DeleteOpenStackVM_Custom_DeleteVM</PortType>
+            </types:WARProperties>
+        </tosca:Properties>
+        <tosca:ArtifactReferences>
+            <tosca:ArtifactReference reference="">
+                <tosca:Include pattern="DeleteOpenStackVM_Custom_InstallVM.war"/>
+            </tosca:ArtifactReference>
+        </tosca:ArtifactReferences>
+    </tosca:ArtifactTemplate>
+    <tosca:NodeTypeImplementation name="InstallOpenStackVMImplementation">
+        <tosca:ImplementationArtifacts>
+            <tosca:ImplementationArtifact xmlns:tns="http://types.opentosca.org" artifactType="tns:WAR" artifactRef="tns:InstallOpenStackVM_IA"/>
+            <tosca:ImplementationArtifact xmlns:tns="http://types.opentosca.org" artifactType="tns:WAR" artifactRef="tns:DeleteOpenStackVM_IA"/>
+        </tosca:ImplementationArtifacts>
+    </tosca:NodeTypeImplementation>
+    <tosca:NodeType name="InstallOpenStackVM">
+        <tosca:documentation>InstallOpenStackVM</tosca:documentation>
+        <tosca:DerivedFrom xmlns:tns="http://types.opentosca.org" typeRef="tns:tosca.nodes.Root"/>
+        <tosca:PropertiesDefinition xmlns:types="http://www.example.org/tosca/yamlgen/types" type="types:InstallOpenStackVMProperties"/>
+        <tosca:Interfaces>
+            <tosca:Interface name="Custom_InstallVM">
+                <tosca:Operation name="InstallVMwithCustomImage"/>
+                <tosca:Operation name="InstallVMwithCustomKeypair"/>
+                <tosca:Operation name="InstallVMWithGeneratedKeypair"/>
+                <tosca:Operation name="InstallVMwithVustomFlavor"/>
+            </tosca:Interface>
+        </tosca:Interfaces>
+    </tosca:NodeType>
+</tosca:Definitions>
