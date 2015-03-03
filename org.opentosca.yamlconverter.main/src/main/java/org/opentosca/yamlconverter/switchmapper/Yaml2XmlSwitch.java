@@ -86,7 +86,7 @@ public class Yaml2XmlSwitch {
 	 * @return additional XSD.
 	 */
 	public String getXSD() {
-		final String pre = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\""
+		final String pre = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" "
 				+ "targetNamespace=\"" + TYPESNS + "\" xmlns=\"" + TYPESNS + "\">\n";
 		final String post = "</xs:schema>";
 		return pre + this.xsd.toString() + post;

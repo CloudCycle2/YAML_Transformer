@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
@@ -16,6 +17,8 @@ public class AnyMap extends HashMap<String, String> {
 	private static final long serialVersionUID = 1L;
 	@XmlAnyElement
 	public List<JAXBElement<String>> entries = new ArrayList<JAXBElement<String>>();
+	@XmlAnyAttribute
+	private final Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
 	public AnyMap() { // JAXB required
 	}
@@ -24,6 +27,10 @@ public class AnyMap extends HashMap<String, String> {
 		for (final Map.Entry<String, String> entry : map.entrySet()) {
 			this.entries.add(new JAXBElement<String>(new QName(entry.getKey()), String.class, entry.getValue()));
 		}
+	}
+
+	public Map<QName, String> getOtherAttributes() {
+		return this.otherAttributes;
 	}
 
 }

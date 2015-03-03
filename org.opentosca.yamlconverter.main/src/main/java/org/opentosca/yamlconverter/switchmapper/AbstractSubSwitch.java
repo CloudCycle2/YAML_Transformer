@@ -97,6 +97,7 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 
 	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodename) {
 		final AnyMap properties = new AnyMap(parseProperties(customMap));
+		properties.getOtherAttributes().put(new QName("xmlns"), Yaml2XmlSwitch.TYPESNS);
 		return new JAXBElement<AnyMap>(new QName(Yaml2XmlSwitch.TYPESNS, nodename + "Properties", "types"), AnyMap.class, properties);
 	}
 
