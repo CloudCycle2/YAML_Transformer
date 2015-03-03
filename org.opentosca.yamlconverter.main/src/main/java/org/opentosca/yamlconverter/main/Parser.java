@@ -15,7 +15,7 @@ public class Parser implements IToscaYamlParser {
 
 	private final IToscaYaml2YamlBeanConverter y2yb = new YamlBeansConverter();
 	private final SwitchMapperConverter b2b = new SwitchMapperConverter();
-	private final IToscaXml2XmlBeanConverter x2xb = new JAXBConverter();
+	private final IToscaXml2XmlBeanConverter x2xb = new JAXBConverter(new NSPrefixMapper());
 
 	private String xml = "";
 	private ServiceTemplate serviceTempl = null;

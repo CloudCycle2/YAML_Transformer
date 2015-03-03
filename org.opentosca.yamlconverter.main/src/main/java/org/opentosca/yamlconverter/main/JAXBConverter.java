@@ -22,14 +22,26 @@ import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.xml.sax.SAXException;
 
+import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
+
 /**
  * This converter uses JAXB to convert between Tosca XML and Tosca XML beans.
  *
  * @author Jonas Heinisch
  *
  */
+@SuppressWarnings("restriction")
 public class JAXBConverter implements IToscaXml2XmlBeanConverter {
-	Schema toscaXSD = null;
+	private Schema toscaXSD = null;
+	private NamespacePrefixMapper nsPrefixMapper = null;
+
+	public JAXBConverter() {
+
+	}
+
+	public JAXBConverter(NamespacePrefixMapper nsPre) {
+		this.nsPrefixMapper = nsPre;
+	}
 
 	@Override
 	public String xmlbean2xml(Definitions root) {
@@ -37,6 +49,13 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 			final OutputStream stream = new ByteArrayOutputStream();
 			final JAXBContext jaxbContext = JAXBContext.newInstance(Definitions.class, AnyMap.class);
 			final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+			try {
+				if (this.nsPrefixMapper != null) {
+					jaxbMarshaller.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper", this.nsPrefixMapper);
+				}
+			} catch (final Exception e) {
+			}
 
 			// output pretty printed
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
