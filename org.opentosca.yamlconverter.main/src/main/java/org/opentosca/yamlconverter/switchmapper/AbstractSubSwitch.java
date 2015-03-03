@@ -17,6 +17,7 @@ import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
 import org.opentosca.model.tosca.TExtensibleElements;
 import org.opentosca.model.tosca.TInterface;
 import org.opentosca.model.tosca.TOperation;
+import org.opentosca.model.tosca.TServiceTemplate;
 import org.opentosca.model.tosca.TTopologyTemplate;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
@@ -44,8 +45,8 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	protected TTopologyTemplate getTopologyTemplate() {
 		if (this.topologyCache == null) {
 			for (final TExtensibleElements elem : getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation()) {
-				if (elem instanceof TTopologyTemplate) {
-					this.topologyCache = (TTopologyTemplate) elem;
+				if (elem instanceof TServiceTemplate) {
+					this.topologyCache = ((TServiceTemplate) elem).getTopologyTemplate();
 					break;
 				}
 			}
