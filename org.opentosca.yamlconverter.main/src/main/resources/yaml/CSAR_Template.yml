@@ -53,8 +53,8 @@ node_templates:
   InstallOpenStackVMTemplate:
     type: InstallOpenStackVM
     properties:
-      credentials: {"auth": {"tenantId": "4114e1b404404565ac2ccbcc76b8078e","passwordCredentials": {"username": "marzie.dehghanipour","password": "piorkaun"}}}
-      endpointsAPI: {"os-identity-api": "http://129.69.209.127: 5000/v2.0","os-tenantId": "4114e1b404404565ac2ccbcc76b8078e"}
+      credentials: "{'auth': {'tenantId': '4114e1b404404565ac2ccbcc76b8078e','passwordCredentials': {'username': 'marzie.dehghanipour','password': 'piorkaun'}}}"
+      endpointsAPI: "{'os-identity-api': 'http://129.69.209.127: 5000/v2.0','os-tenantId': '4114e1b404404565ac2ccbcc76b8078e'}"
       keypair: {get_input: keypair} 
       minDisk: {get_input: minDisk}
       minRAM: {get_input: minRAM}
@@ -97,7 +97,7 @@ node_types:
       script:
         type: string
     artifacts:
-      - UbuntuNodeTypeImplementation_IA_ArtifactTemplate:
+      - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: org_opentosca_types_Ubuntu__InterfaceUbuntu.war
         type: WAR
         description: <artifact_description>
         properties:
@@ -145,21 +145,33 @@ node_types:
         InstallVMwithCustomImage:
           implementation: InstallOpenStackVM_IA
     artifacts:
-      - InstallOpenStackVM_IA:
+      - InstallOpenStackVM_IA: InstallOpenStackVM_Custom_InstallVM.war
         type: WAR
         description: <artifact_description>
         properties:
           ServiceEndpoint: /services/InstallOpenStackVM_Custom_InstallVMPort
-          PortType: "{http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM" #TODO define interface
+          PortType: "{http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM"
+          InvocationType: SOAP/HTTP
+      - DeleteOpenStackVM_IA: DeleteOpenStackVM_Custom_InstallVM.war
+        type: WAR
+        description: <artifact_description>
+        properties:
+          ServiceEndpoint: /services/DeleteOpenStackVM_Custom_DeleteVMPort
+          PortType: "{http://types.opentosca.org}DeleteOpenStackVM_Custom_DeleteVM"
           InvocationType: SOAP/HTTP
 
 artifact_types:
-  InstallOpenStackVM_IA:
-    mime_type: war
-    description: bla
-    derived_from: tosca.artifact.Root
-    file_ext: [jar]
-    mime_type: application/java-archive
+  WAR:
+    description: <artifact_description>
+    mime_type: application/x-zip
+    file_ext: [war]
+    properties:
+      ServiceEndpoint:
+        type: string
+      PortType:
+        type: string
+      InvocationType:
+        type: string
 
 capability_types:
   testCap:
