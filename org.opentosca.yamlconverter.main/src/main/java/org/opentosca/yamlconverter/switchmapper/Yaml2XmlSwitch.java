@@ -77,6 +77,7 @@ public class Yaml2XmlSwitch {
 	public Definitions parse(ServiceTemplate st) {
 		this.xsd = new StringBuilder(); // reset
 		this.st = st;
+		this.toscaResult = new Definitions();
 		return processServiceTemplate(st);
 	}
 
