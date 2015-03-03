@@ -1,30 +1,22 @@
 package org.opentosca.yamlconverter.switchmapper;
 
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlWriter;
+import org.opentosca.model.tosca.*;
+import org.opentosca.model.tosca.TEntityType.DerivedFrom;
+import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
-import org.opentosca.model.tosca.Definitions;
-import org.opentosca.model.tosca.TDocumentation;
-import org.opentosca.model.tosca.TEntityType.DerivedFrom;
-import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.model.tosca.TExtensibleElements;
-import org.opentosca.model.tosca.TInterface;
-import org.opentosca.model.tosca.TOperation;
-import org.opentosca.model.tosca.TServiceTemplate;
-import org.opentosca.model.tosca.TTopologyTemplate;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import com.esotericsoftware.yamlbeans.YamlException;
-import com.esotericsoftware.yamlbeans.YamlWriter;
 
 public abstract class AbstractSubSwitch implements ISubSwitch {
 	private final Yaml2XmlSwitch parent;
@@ -78,14 +70,15 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 
 	protected PropertiesDefinition parsePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
 		final PropertiesDefinition result = new PropertiesDefinition();
-		// TODO: setType()?!
-		result.setElement(new QName(Yaml2XmlSwitch.TYPESNS, typename + "Properties", "types"));
+		// setType() works, setElement will throw an error while importing the XML to Winery
+		result.setType(new QName(Yaml2XmlSwitch.TYPESNS, typename + "Properties", "types"));
 		generateTypeXSD(properties, typename + "Properties");
 		return result;
 	}
 
 	private void generateTypeXSD(Map<String, PropertyDefinition> properties, String name) {
-		this.parent.getXSDStringBuilder().append("<xs:complexType name=\"" + name + "\">\n");
+		String tName = "t" + name;
+		this.parent.getXSDStringBuilder().append("<xs:complexType name=\"" + tName + "\">\n");
 		this.parent.getXSDStringBuilder().append("<xs:sequence>\n");
 		for (final Entry<String, PropertyDefinition> entry : properties.entrySet()) {
 			this.parent.getXSDStringBuilder().append(
@@ -93,6 +86,7 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		}
 		this.parent.getXSDStringBuilder().append("</xs:sequence>\n");
 		this.parent.getXSDStringBuilder().append("</xs:complexType>\n");
+		this.parent.getXSDStringBuilder().append("<xs:element name=\"" + name + "\" type=\"" + tName + "\"");
 	}
 
 	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodename) {
