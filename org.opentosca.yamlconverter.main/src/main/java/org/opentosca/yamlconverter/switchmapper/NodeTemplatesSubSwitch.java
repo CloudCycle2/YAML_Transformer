@@ -34,7 +34,9 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		// first set simple attributes like id, name, etc.
 		result.setId(name2id(nodename));
 		result.setName(nodename);
-		result.getDocumentation().add(toDocumentation(nodeTemplate.getDescription()));
+		if (nodeTemplate.getDescription() != null && !nodeTemplate.getDescription().isEmpty()) {
+			result.getDocumentation().add(toDocumentation(nodeTemplate.getDescription()));
+		}
 		result.setType(new QName(nodeTemplate.getType()));
 
 		// then process more difficult things
