@@ -53,8 +53,8 @@ node_templates:
   InstallOpenStackVMTemplate:
     type: InstallOpenStackVM
     properties:
-      credentials: {"auth": {"tenantId": "4114e1b404404565ac2ccbcc76b8078e","passwordCredentials": {"username": "marzie.dehghanipour","password": "piorkaun"}}}
-      endpointsAPI: {"os-identity-api": "http://129.69.209.127: 5000/v2.0","os-tenantId": "4114e1b404404565ac2ccbcc76b8078e"}
+      credentials: "{'auth': {'tenantId': '4114e1b404404565ac2ccbcc76b8078e','passwordCredentials': {'username': 'marzie.dehghanipour','password': 'piorkaun'}}}"
+      endpointsAPI: "{'os-identity-api': 'http://129.69.209.127: 5000/v2.0','os-tenantId': '4114e1b404404565ac2ccbcc76b8078e'}"
       keypair: {get_input: keypair} 
       minDisk: {get_input: minDisk}
       minRAM: {get_input: minRAM}
