@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.xml.namespace.QName;
-
 import org.opentosca.model.tosca.TInterface;
 import org.opentosca.model.tosca.TRelationshipType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
@@ -51,7 +49,7 @@ public class RelationshipTypesSubSwitch extends AbstractSubSwitch {
 		// set valid target (only one possible, thus choose first one)
 		if (relationshipType.getValid_targets().length > 0 && relationshipType.getValid_targets()[0] != null) {
 			final TRelationshipType.ValidTarget validTarget = new TRelationshipType.ValidTarget();
-			validTarget.setTypeRef(new QName(relationshipType.getValid_targets()[0]));
+			validTarget.setTypeRef(toTnsQName(relationshipType.getValid_targets()[0]));
 			result.setValidTarget(validTarget);
 		}
 		result.getDocumentation().add(toDocumentation(relationshipType.getDescription()));

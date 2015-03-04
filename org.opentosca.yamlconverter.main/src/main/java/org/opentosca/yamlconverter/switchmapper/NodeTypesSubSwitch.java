@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.xml.namespace.QName;
-
 import org.opentosca.model.tosca.TArtifactReference;
 import org.opentosca.model.tosca.TArtifactTemplate;
 import org.opentosca.model.tosca.TCapabilityDefinition;
@@ -49,28 +47,29 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		nodeTypeImplementation.setImplementationArtifacts(implementationArtifacts);
 		nodeTypeImplementation.setName(name + "Implementation");
 
-		if (value.getArtifacts() != null) {
+		if (value.getArtifacts() != null && !value.getArtifacts().isEmpty()) {
 			// here are only artifact definitions!!
 			parseNodeTypeArtifacts(value.getArtifacts(), artifactTemplates, implementationArtifacts);
 		}
-		if (value.getCapabilities() != null) {
+		if (value.getCapabilities() != null && !value.getCapabilities().isEmpty()) {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
 		}
-		if (value.getDerived_from() != null) {
+		if (value.getDerived_from() != null && !value.getDerived_from().isEmpty()) {
 			result.setDerivedFrom(parseDerivedFrom(value.getDerived_from()));
 		}
-		if (value.getInterfaces() != null) {
+		if (value.getInterfaces() != null && !value.getInterfaces().isEmpty()) {
 			final Interfaces nodeTypeInterfaces = parseNodeTypeInterfaces(value.getInterfaces());
 			addInterfaceDefinitionsToImplementationArtifacts(implementationArtifacts, nodeTypeInterfaces);
 			result.setInterfaces(nodeTypeInterfaces);
 		}
-		if (value.getProperties() != null) {
+		if (value.getProperties() != null && !value.getProperties().isEmpty()) {
 			result.setPropertiesDefinition(parsePropertiesDefinition(value.getProperties(), name));
 		}
-		if (value.getRequirements() != null) {
-			result.setRequirementDefinitions(parseNodeTypeRequirementDefinitions(value.getRequirements()));
-		}
-		if (value.getDescription() != null) {
+		// TODO: This does not work and crashes Winery!
+		// if (value.getRequirements() != null && !value.getRequirements().isEmpty()) {
+		// result.setRequirementDefinitions(parseNodeTypeRequirementDefinitions(value.getRequirements()));
+		// }
+		if (value.getDescription() != null && !value.getDescription().isEmpty()) {
 			result.getDocumentation().add(toDocumentation(value.getDescription()));
 		}
 
@@ -87,7 +86,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			if (req.size() == 2) {
 				for (final String key : req.keySet()) {
 					if (key.equals("relationship_type")) {
-						rd.setRequirementType(new QName((String) req.get(key)));
+						rd.setRequirementType(toTnsQName((String) req.get(key)));
 					} else {
 						rd.setName(key);
 					}
@@ -138,7 +137,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 				} catch (final Exception e) {
 					System.out.println("No capability type defined or illegal value, using default.");
 				}
-				capabilityDefinition.setCapabilityType(new QName(capabilityType));
+				capabilityDefinition.setCapabilityType(toTnsQName(capabilityType));
 			}
 			result.getCapabilityDefinition().add(capabilityDefinition);
 		}
@@ -186,8 +185,8 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 
 	private void addImplementationArtifact(TImplementationArtifacts implementationArtifacts, String artifactName, String artifactType) {
 		final TImplementationArtifacts.ImplementationArtifact implementationArtifact = new TImplementationArtifacts.ImplementationArtifact();
-		implementationArtifact.setArtifactRef(new QName(artifactName));
-		implementationArtifact.setArtifactType(new QName(artifactType));
+		implementationArtifact.setArtifactRef(toTnsQName(artifactName));
+		implementationArtifact.setArtifactType(toTnsQName(artifactType));
 		implementationArtifacts.getImplementationArtifact().add(implementationArtifact);
 	}
 
@@ -196,7 +195,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		final TArtifactTemplate artifactTemplate = new TArtifactTemplate();
 		artifactTemplate.setName(artifactName);
 		artifactTemplate.setId(artifactName);
-		artifactTemplate.setType(new QName(Yaml2XmlSwitch.TYPESNS, artifactType));
+		artifactTemplate.setType(toTnsQName(artifactType));
 
 		final TArtifactTemplate.ArtifactReferences artifactReferences = new TArtifactTemplate.ArtifactReferences();
 		final TArtifactReference artifactReference = new TArtifactReference();

@@ -1,22 +1,30 @@
 package org.opentosca.yamlconverter.switchmapper;
 
-import com.esotericsoftware.yamlbeans.YamlException;
-import com.esotericsoftware.yamlbeans.YamlWriter;
-import org.opentosca.model.tosca.*;
-import org.opentosca.model.tosca.TEntityType.DerivedFrom;
-import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
+import org.opentosca.model.tosca.Definitions;
+import org.opentosca.model.tosca.TDocumentation;
+import org.opentosca.model.tosca.TEntityType.DerivedFrom;
+import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.model.tosca.TExtensibleElements;
+import org.opentosca.model.tosca.TInterface;
+import org.opentosca.model.tosca.TOperation;
+import org.opentosca.model.tosca.TServiceTemplate;
+import org.opentosca.model.tosca.TTopologyTemplate;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlWriter;
 
 public abstract class AbstractSubSwitch implements ISubSwitch {
 	private final Yaml2XmlSwitch parent;
@@ -64,8 +72,12 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 
 	protected DerivedFrom parseDerivedFrom(String derived_from) {
 		final DerivedFrom result = new DerivedFrom();
-		result.setTypeRef(new QName(derived_from));
+		result.setTypeRef(toTnsQName(derived_from));
 		return result;
+	}
+
+	protected QName toTnsQName(String localName) {
+		return new QName(getDefinitions().getTargetNamespace(), localName, "tns");
 	}
 
 	protected PropertiesDefinition parsePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
@@ -77,7 +89,7 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	}
 
 	private void generateTypeXSD(Map<String, PropertyDefinition> properties, String name) {
-		String tName = "t" + name;
+		final String tName = "t" + name;
 		this.parent.getXSDStringBuilder().append("<xs:complexType name=\"" + tName + "\">\n");
 		this.parent.getXSDStringBuilder().append("<xs:sequence>\n");
 		for (final Entry<String, PropertyDefinition> entry : properties.entrySet()) {
@@ -86,7 +98,7 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		}
 		this.parent.getXSDStringBuilder().append("</xs:sequence>\n");
 		this.parent.getXSDStringBuilder().append("</xs:complexType>\n");
-		this.parent.getXSDStringBuilder().append("<xs:element name=\"" + name + "\" type=\"" + tName + "\"");
+		this.parent.getXSDStringBuilder().append("<xs:element name=\"" + name + "\" type=\"" + tName + "\" />");
 	}
 
 	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodename) {

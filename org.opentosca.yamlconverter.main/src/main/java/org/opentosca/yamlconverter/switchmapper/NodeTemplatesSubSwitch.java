@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 
 import org.opentosca.model.tosca.TCapability;
 import org.opentosca.model.tosca.TEntityTemplate;
@@ -37,7 +36,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		if (nodeTemplate.getDescription() != null && !nodeTemplate.getDescription().isEmpty()) {
 			result.getDocumentation().add(toDocumentation(nodeTemplate.getDescription()));
 		}
-		result.setType(new QName(nodeTemplate.getType()));
+		result.setType(toTnsQName(nodeTemplate.getType()));
 
 		// then process more difficult things
 		processCapabilitiesInNodeTemplate(nodeTemplate, result);
@@ -67,14 +66,15 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 				} catch (final Exception e) {
 					System.out.println("No capability type defined or illegal value, using default.");
 				}
-				tCapability.setType(new QName(capabilityType));
+				tCapability.setType(toTnsQName(capabilityType));
 				tCapability.setId(result.getId() + "_" + nodeTemplateCapability.getKey());
 				// TODO: set properties if any available
 				capabilities.getCapability().add(tCapability);
 			}
 		}
-
-		result.setCapabilities(capabilities);
+		if (!nodeTemplate.getCapabilities().isEmpty()) {
+			result.setCapabilities(capabilities);
+		}
 	}
 
 }
