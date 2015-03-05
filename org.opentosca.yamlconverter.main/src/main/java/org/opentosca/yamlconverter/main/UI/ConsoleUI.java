@@ -1,10 +1,5 @@
 package org.opentosca.yamlconverter.main.UI;
 
-import org.opentosca.yamlconverter.main.Parser;
-import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
-import org.opentosca.yamlconverter.main.utils.FileUtil;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,6 +7,12 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.opentosca.yamlconverter.main.Parser;
+import org.opentosca.yamlconverter.main.utils.CSARUtil;
+import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
+import org.opentosca.yamlconverter.main.utils.FileUtil;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 
 /**
  * A simple User Interface for Console.
@@ -97,7 +98,7 @@ public class ConsoleUI {
 		final String xmlfilename = promptString("\nIf you want to save this XML, enter a filename, else just hit ENTER...");
 		if (xmlfilename != null && !xmlfilename.isEmpty()) {
 			try {
-				fileutil.saveStringAsFile(xmlfilename, xml);
+				FileUtil.saveStringAsFile(xmlfilename, xml);
 			} catch (final IOException e) {
 				System.out.println("ERROR: File has not been saved, because of an IOException. Muh..");
 			}
@@ -112,10 +113,20 @@ public class ConsoleUI {
 			final String xsdfilename = promptString("\nIf you want to save this XSD, enter a filename, else just hit ENTER...");
 			if (xsdfilename != null && !xsdfilename.isEmpty()) {
 				try {
-					fileutil.saveStringAsFile(xsdfilename, xsd);
+					FileUtil.saveStringAsFile(xsdfilename, xsd);
 				} catch (final IOException e) {
 					System.out.println("ERROR: File has not been saved, because of an IOException. Muh..");
 				}
+			}
+		}
+
+		final String tempfolder = "tmp_" + System.currentTimeMillis();
+		final String csarfilename = promptString("\nIf you want to save the results as a CSAR-File, enter a filename, else just hit ENTER...");
+		if (csarfilename != null && !csarfilename.isEmpty()) {
+			try {
+				CSARUtil.createCSAR(parser.getServiceTemplate(), xml, xsd, tempfolder, csarfilename);
+			} catch (final IOException e) {
+				System.out.println("ERROR: File has not been saved, because of an IOException. Muh..");
 			}
 		}
 

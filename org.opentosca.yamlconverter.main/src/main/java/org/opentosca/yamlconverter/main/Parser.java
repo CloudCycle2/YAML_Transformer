@@ -113,4 +113,8 @@ public class Parser implements IToscaYamlParser {
 		this.b2b.setInputs(input);
 	}
 
+	public ServiceTemplate getServiceTemplate() {
+		return this.serviceTempl;
+	}
+
 }
