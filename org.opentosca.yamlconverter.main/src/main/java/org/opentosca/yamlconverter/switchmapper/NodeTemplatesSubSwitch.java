@@ -116,39 +116,35 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 	private void processRequirements(final NodeTemplate nodeTemplate, final TNodeTemplate result) {
 		final TNodeTemplate.Requirements resultRequirements = new TNodeTemplate.Requirements();
 		this.relationshipRequirements.put(result, new ArrayList<Map<String, Object>>());
-		for (Map<String, Object> requirement : nodeTemplate.getRequirements()) {
-			if (requirement.containsKey("relationship_type") && requirement.size() == 2) {
-				// Here: produce relationship template based on requirement
-				// store requirement for later processing, because we need to access the processed node templates
-				// -> otherwise it's possible to request a node template which hasn't processed so far
-				this.relationshipRequirements.get(result).add(requirement);
-			} else if (requirement.size() == 1) {
-				// Here: produce requirement by using the capability name
-				String requirementName = (String) requirement.keySet().toArray()[0];
-				String capability = (String) requirement.values().toArray()[0];
-				if (capability.endsWith("Capability")) {
-					// TODO: check if requirement type already exists and use this
-					// create requirement type for requirement or use existing one
-					TRequirementType requirementType = new TRequirementType();
-					String requirementTypeName = capability.replace("Capability", "Requirement");
-					requirementType.setName(requirementTypeName);
-					requirementType.setRequiredCapabilityType(this.toTnsQName(capability));
-					getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
 
-					// create requirement
-					TRequirement tRequirement = new TRequirement();
-					tRequirement.setName(requirementName);
-					tRequirement.setType(this.toTnsQName(requirementTypeName));
-					resultRequirements.getRequirement().add(tRequirement);
-				} else {
-					throw new RuntimeException("This type of requirements definition is not supported." +
-							"Convention: name = [...]Capability");
-				}
-			} else {
-				throw new RuntimeException("This type of requirements definition is not supported.");
-			}
+		// process all requirements
+		for (Map<String, Object> requirement : nodeTemplate.getRequirements()) {
+			processSingleRequirement(result, resultRequirements, requirement);
 		}
 		result.setRequirements(resultRequirements);
+	}
+
+	/**
+	 * For information about what is processed, take a look at
+	 * {@link #processRequirements(org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate,
+	 * org.opentosca.model.tosca.TNodeTemplate)}
+	 * @param result node template object for XML
+	 * @param resultRequirements object containing requirements for {@code result}
+	 * @param requirement
+	 */
+	private void processSingleRequirement(final TNodeTemplate result, final TNodeTemplate.Requirements resultRequirements,
+										  final Map<String, Object> requirement) {
+		if (requirement.containsKey("relationship_type") && requirement.size() == 2) {
+            // Here: produce relationship template based on requirement
+            // store requirement for later processing, because we need to access the processed node templates
+            // -> otherwise it's possible to request a node template which hasn't processed so far
+            this.relationshipRequirements.get(result).add(requirement);
+        } else if (requirement.size() == 1) {
+            // Here: produce requirement by using the capability name
+            createRequirement(resultRequirements, requirement);
+        } else {
+            throw new RuntimeException("This type of requirements definition is not supported.");
+        }
 	}
 
 	/**
@@ -159,7 +155,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 	 * @param requirement
 	 */
 	private void processRelationshipRequirements(final TNodeTemplate result, final Map<String, Object> requirement) {
-		TRelationshipTemplate relationshipTemplate = new TRelationshipTemplate();
+		final TRelationshipTemplate relationshipTemplate = new TRelationshipTemplate();
 		// set properties by using values of requirement
 		for (String key : requirement.keySet()) {
             if (key.equals("relationship_type")) {
@@ -169,13 +165,13 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
                 relationshipTemplate.setId(key);
 
 				// set source element
-                TRelationshipTemplate.SourceElement source = new TRelationshipTemplate.SourceElement();
+                final TRelationshipTemplate.SourceElement source = new TRelationshipTemplate.SourceElement();
                 source.setRef(result);
                 relationshipTemplate.setSourceElement(source);
 
 				// set target element; if no reference is found, throw exception
-                TRelationshipTemplate.TargetElement target = new TRelationshipTemplate.TargetElement();
-                TNodeTemplate targetTemplate = getTargetNodeTemplate(result, (String) requirement.get(key));
+                final TRelationshipTemplate.TargetElement target = new TRelationshipTemplate.TargetElement();
+                final TNodeTemplate targetTemplate = getTargetNodeTemplate(result, (String) requirement.get(key));
                 if (targetTemplate == null) {
                     throw new RuntimeException("Illegal reference. "+
                             (String) requirement.get(key) + " is no valid NodeTemplate id.");
@@ -188,13 +184,40 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		getTopologyTemplate().getNodeTemplateOrRelationshipTemplate().add(relationshipTemplate);
 	}
 
-	private TNodeTemplate getTargetNodeTemplate(final TNodeTemplate result, final String nodeTemplateId) {
-		if (result.getId().equals(nodeTemplateId)) {
-			return result;
+	/**
+	 * For information about what is processed, take a look at
+	 * {@link #processRequirements(org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate,
+	 * org.opentosca.model.tosca.TNodeTemplate)}
+	 * @param resultRequirements object storing requirements for a corresponding XML node template
+	 * @param requirement map containing requirement attributes; mapping size must be 1
+	 */
+	private void createRequirement(final TNodeTemplate.Requirements resultRequirements, final Map<String, Object> requirement) {
+		final String requirementName = (String) requirement.keySet().toArray()[0];
+		final String capability = (String) requirement.values().toArray()[0];
+		if (capability.endsWith("Capability")) {
+			// TODO: check if requirement type already exists and use this
+			// create requirement type for requirement or use existing one
+			final TRequirementType requirementType = new TRequirementType();
+			String requirementTypeName = capability.replace("Capability", "Requirement");
+			requirementType.setName(requirementTypeName);
+			requirementType.setRequiredCapabilityType(this.toTnsQName(capability));
+			getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
+
+			// create requirement
+			final TRequirement tRequirement = new TRequirement();
+			tRequirement.setName(requirementName);
+			tRequirement.setType(this.toTnsQName(requirementTypeName));
+			resultRequirements.getRequirement().add(tRequirement);
+		} else {
+			throw new RuntimeException("This type of requirements definition is not supported." +
+					"Convention: name = [...]Capability");
 		}
+	}
+
+	private TNodeTemplate getTargetNodeTemplate(final TNodeTemplate result, final String nodeTemplateId) {
 		for (TEntityTemplate entityTemplate : getTopologyTemplate().getNodeTemplateOrRelationshipTemplate()) {
 			if (entityTemplate instanceof TNodeTemplate) {
-				TNodeTemplate nodeTemplate = (TNodeTemplate) entityTemplate;
+				final TNodeTemplate nodeTemplate = (TNodeTemplate) entityTemplate;
 				if (nodeTemplate.getId().equals(nodeTemplateId)) {
 					return nodeTemplate;
 				}
