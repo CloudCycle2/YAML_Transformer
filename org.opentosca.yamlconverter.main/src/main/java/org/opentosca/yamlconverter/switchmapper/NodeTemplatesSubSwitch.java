@@ -144,7 +144,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
             }
         }
 
-		getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(relationshipTemplate);
+		getTopologyTemplate().getNodeTemplateOrRelationshipTemplate().add(relationshipTemplate);
 	}
 
 	private TNodeTemplate getTargetNodeTemplate(final TNodeTemplate result, final String nodeTemplateId) {
