@@ -1,18 +1,20 @@
 package org.opentosca.yamlconverter.switchmapper;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.xml.bind.JAXBElement;
-
-import org.opentosca.model.tosca.TCapability;
-import org.opentosca.model.tosca.TEntityTemplate;
-import org.opentosca.model.tosca.TNodeTemplate;
+import org.opentosca.model.tosca.*;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 
+import javax.xml.bind.JAXBElement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
+
+	private Map<TNodeTemplate, List<Map<String, Object>>> relationshipRequirements =
+			new HashMap<TNodeTemplate, List<Map<String, Object>>>();
 
 	public NodeTemplatesSubSwitch(Yaml2XmlSwitch parentSwitch) {
 		super(parentSwitch);
@@ -24,6 +26,11 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 			for (final Entry<String, NodeTemplate> nt : getServiceTemplate().getNode_templates().entrySet()) {
 				final TNodeTemplate xnode = createNodeTemplate(nt.getValue(), nt.getKey());
 				getTopologyTemplate().getNodeTemplateOrRelationshipTemplate().add(xnode);
+			}
+			for (Entry<TNodeTemplate, List<Map<String, Object>>> relationshipRequirement : relationshipRequirements.entrySet()) {
+				for (Map<String, Object> requirement : relationshipRequirement.getValue()) {
+					processRelationshipRequirements(relationshipRequirement.getKey(), requirement);
+				}
 			}
 		}
 	}
@@ -41,15 +48,11 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		// then process more difficult things
 		processCapabilitiesInNodeTemplate(nodeTemplate, result);
 		processPropertiesInNodeTemplate(nodeTemplate, nodename, result);
+		if (nodeTemplate.getRequirements() != null && !nodeTemplate.getRequirements().isEmpty()) {
+			processRequirements(nodeTemplate, result);
+		}
 
 		return result;
-	}
-
-	private void processPropertiesInNodeTemplate(NodeTemplate nodeTemplate, String nodename, TNodeTemplate result) {
-		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
-		final JAXBElement<AnyMap> jaxbprop = getAnyMapForProperties(nodeTemplate.getProperties(), nodename);
-		prop.setAny(jaxbprop);
-		result.setProperties(prop);
 	}
 
 	private void processCapabilitiesInNodeTemplate(NodeTemplate nodeTemplate, TNodeTemplate result) {
@@ -75,6 +78,88 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		if (!nodeTemplate.getCapabilities().isEmpty()) {
 			result.setCapabilities(capabilities);
 		}
+	}
+
+	private void processPropertiesInNodeTemplate(NodeTemplate nodeTemplate, String nodename, TNodeTemplate result) {
+		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
+		final JAXBElement<AnyMap> jaxbprop = getAnyMapForProperties(nodeTemplate.getProperties(), nodename);
+		prop.setAny(jaxbprop);
+		result.setProperties(prop);
+	}
+
+	private void processRequirements(final NodeTemplate nodeTemplate, final TNodeTemplate result) {
+		final TNodeTemplate.Requirements resultRequirements = new TNodeTemplate.Requirements();
+		this.relationshipRequirements.put(result, new ArrayList<Map<String, Object>>());
+		for (Map<String, Object> requirement : nodeTemplate.getRequirements()) {
+			if (requirement.containsKey("relationship_type") && requirement.size() == 2) {
+				this.relationshipRequirements.get(result).add(requirement);
+			} else if (requirement.size() == 1) {
+				String requirementName = (String) requirement.keySet().toArray()[0];
+				String capability = (String) requirement.values().toArray()[0];
+				if (capability.endsWith("Capability")) {
+					// TODO: check if requirement type already exists
+					TRequirementType requirementType = new TRequirementType();
+					String requirementTypeName = capability.replace("Capability", "Requirement");
+					requirementType.setName(requirementTypeName);
+					requirementType.setRequiredCapabilityType(this.toTnsQName(capability));
+					getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
+
+					TRequirement tRequirement = new TRequirement();
+					tRequirement.setName(requirementName);
+					tRequirement.setType(this.toTnsQName(requirementTypeName));
+					resultRequirements.getRequirement().add(tRequirement);
+				} else {
+					throw new RuntimeException("This type of requirements definition is not supported." +
+							"Convention: name = [...]Capability");
+				}
+			} else {
+				throw new RuntimeException("This type of requirements definition is not supported.");
+			}
+		}
+		result.setRequirements(resultRequirements);
+	}
+
+	private void processRelationshipRequirements(final TNodeTemplate result, final Map<String, Object> requirement) {
+		TRelationshipTemplate relationshipTemplate = new TRelationshipTemplate();
+
+		for (String key : requirement.keySet()) {
+            if (key.equals("relationship_type")) {
+                String relationshipType = (String) requirement.get(key);
+                relationshipTemplate.setType(this.toTnsQName(relationshipType));
+            } else {
+                relationshipTemplate.setId(key);
+
+                TRelationshipTemplate.SourceElement source = new TRelationshipTemplate.SourceElement();
+                source.setRef(result);
+                relationshipTemplate.setSourceElement(source);
+
+                TRelationshipTemplate.TargetElement target = new TRelationshipTemplate.TargetElement();
+                TNodeTemplate targetTemplate = getTargetNodeTemplate(result, (String) requirement.get(key));
+                if (targetTemplate == null) {
+                    throw new RuntimeException("Illegal reference. "+
+                            (String) requirement.get(key) + " is no valid NodeTemplate id.");
+                }
+                target.setRef(targetTemplate);
+                relationshipTemplate.setTargetElement(target);
+            }
+        }
+
+		getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(relationshipTemplate);
+	}
+
+	private TNodeTemplate getTargetNodeTemplate(final TNodeTemplate result, final String nodeTemplateId) {
+		if (result.getId().equals(nodeTemplateId)) {
+			return result;
+		}
+		for (TEntityTemplate entityTemplate : getTopologyTemplate().getNodeTemplateOrRelationshipTemplate()) {
+			if (entityTemplate instanceof TNodeTemplate) {
+				TNodeTemplate nodeTemplate = (TNodeTemplate) entityTemplate;
+				if (nodeTemplate.getId().equals(nodeTemplateId)) {
+					return nodeTemplate;
+				}
+			}
+		}
+		return null;
 	}
 
 }

@@ -77,9 +77,35 @@ node_templates:
       sshUser: ubuntu
       sshKey:
       script: uname -a
- 
+
+  VmApache:
+    type: tosca.nodes.Compute
+    properties:
+      num_cpus: 1
+      mem_size:
+    requirements:
+      - Vm_apache_networks: NetworkAttachementCapability
+      - Vm_apache_container: ServerContainerCapability
+      - Vm_apache_volumes: VolumeAttachementCapability
+      - dummy_relationship: LinuxOperatingSystem
+        relationship_type: dummy_relationship_type
+    capabilities:
+      VmApache_os:
+        type: OperatingSystemContainerCapability
+
+  OsApache:
+    type: OperatingSystem
+    requirements:
+      - OsApache_container: OperatingSystemContainerCapability
+      - OsApache_HostedOn_VmApache: VmApache
+        relationship_type: tosca.relationship.HostedOn
+    capabilities:
+      OsApache_software:
+        type: SoftwareContainerCapability
+
 node_types: 
   # list of node type definitions
+
   OperatingSystem:
     derived_from: tosca.nodes.Root
     description: Operating System
@@ -186,6 +212,21 @@ capability_types:
     properties:
       port:
         type: integer
+  NetworkAttachementCapability:
+    derived_from: tosca.capabilities.Endpoint
+    description: Network Attachment Capability
+  ServerContainerCapability:
+    derived_from: tosca.capabilities.Container
+    description: Server Container Capability
+  VolumeAttachementCapability:
+    derived_from: tosca.capabilities.Endpoint
+    description: Volume Attachement Capability
+  OperatingSystemContainerCapability:
+    derived_from: tosca.capabilities.Container
+    description: Operating System Container Capability
+  SoftwareContainerCapability:
+    derived_from: tosca.capabilities.Container
+    description: Software Container Capability
 
 relationship_types:
   MoodleDatabaseConnection:
@@ -196,3 +237,5 @@ relationship_types:
         preConfigureEndpoint:
           implementaion: impl
     valid_targets: [MySQLDatabaseEndpointCapability]
+  dummy_relationship_type:
+    valid_targets: [dummy_node]

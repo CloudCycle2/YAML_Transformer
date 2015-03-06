@@ -1,13 +1,15 @@
 package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class NodeTemplate extends YAMLElement {
 
 	private String type = "";
 	private Map<String, Object> properties = new HashMap<String, Object>();
-	private Map<String, String> requirements = new HashMap<String, String>();
+	private List<Map<String, Object>> requirements = new ArrayList<Map<String, Object>>();
 	private Map<String, Object> capabilities = new HashMap<String, Object>();
 	private Map<String, String> interfaces = new HashMap<String, String>();
 	private Map<String, Object> artifacts = new HashMap<String, Object>();
@@ -33,13 +35,13 @@ public class NodeTemplate extends YAMLElement {
 		return this.properties;
 	}
 
-	public void setRequirements(Map<String, String> requirements) {
+	public void setRequirements(List<Map<String, Object>> requirements) {
 		if (requirements != null) {
 			this.requirements = requirements;
 		}
 	}
 
-	public Map<String, String> getRequirements() {
+	public List<Map<String, Object>> getRequirements() {
 		return this.requirements;
 	}
 
