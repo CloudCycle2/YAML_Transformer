@@ -158,28 +158,28 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		final TRelationshipTemplate relationshipTemplate = new TRelationshipTemplate();
 		// set properties by using values of requirement
 		for (String key : requirement.keySet()) {
-            if (key.equals("relationship_type")) {
-                String relationshipType = (String) requirement.get(key);
-                relationshipTemplate.setType(this.toTnsQName(relationshipType));
-            } else {
-                relationshipTemplate.setId(key);
+			if (key.equals("relationship_type")) {
+				String relationshipType = (String) requirement.get(key);
+				relationshipTemplate.setType(this.toTnsQName(relationshipType));
+			} else {
+				relationshipTemplate.setId(key);
 
 				// set source element
-                final TRelationshipTemplate.SourceElement source = new TRelationshipTemplate.SourceElement();
-                source.setRef(result);
-                relationshipTemplate.setSourceElement(source);
+				final TRelationshipTemplate.SourceElement source = new TRelationshipTemplate.SourceElement();
+				source.setRef(result);
+				relationshipTemplate.setSourceElement(source);
 
 				// set target element; if no reference is found, throw exception
-                final TRelationshipTemplate.TargetElement target = new TRelationshipTemplate.TargetElement();
-                final TNodeTemplate targetTemplate = getTargetNodeTemplate(result, (String) requirement.get(key));
-                if (targetTemplate == null) {
-                    throw new RuntimeException("Illegal reference. "+
-                            (String) requirement.get(key) + " is no valid NodeTemplate id.");
-                }
-                target.setRef(targetTemplate);
-                relationshipTemplate.setTargetElement(target);
-            }
-        }
+				final TRelationshipTemplate.TargetElement target = new TRelationshipTemplate.TargetElement();
+				final TNodeTemplate targetTemplate = getTargetNodeTemplate(result, (String) requirement.get(key));
+				if (targetTemplate == null) {
+					throw new RuntimeException("Illegal reference. " +
+							(String) requirement.get(key) + " is no valid NodeTemplate id.");
+				}
+				target.setRef(targetTemplate);
+				relationshipTemplate.setTargetElement(target);
+			}
+		}
 
 		getTopologyTemplate().getNodeTemplateOrRelationshipTemplate().add(relationshipTemplate);
 	}
