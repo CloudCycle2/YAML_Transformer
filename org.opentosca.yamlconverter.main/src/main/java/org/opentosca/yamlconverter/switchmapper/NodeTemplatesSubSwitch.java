@@ -87,23 +87,55 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		result.setProperties(prop);
 	}
 
+	/**
+	 * Process requirements from {@code nodeTemplate} and add them to {@code result}.
+	 * There are two possible notations of requirements:
+	 * <br />
+	 * 1)
+	 * requirements:
+	 *   - requirementId: someCapability
+	 * => will produce:
+	 *   <Requirements>
+	 *     <Requirement id="requirementId" type="tns:someRequirement" />
+	 *   </Requirements>
+	 * NOTE: There is a convention for "someCapability": It must end with "Capability", otherwise no requirement will
+	 * be created!
+	 * <br />
+	 * 2)
+	 * requirements:
+	 *   - relationshipTemplateId: targetElementId
+	 *     relationship_type: someRelationshipType
+	 * => will produce:
+	 *   <RelationshipTemplate id="relationshipTemplateId" type="tns:relationshipType">
+	 *     <SourceElement ref="{@code result}.id"></SourceElement>
+	 *     <TargetElement ref="targetElementId"></TargetElement>
+	 *   </RelationshipTemplate>
+	 * @param nodeTemplate node template from YAML
+	 * @param result corresponding node template for XML
+	 */
 	private void processRequirements(final NodeTemplate nodeTemplate, final TNodeTemplate result) {
 		final TNodeTemplate.Requirements resultRequirements = new TNodeTemplate.Requirements();
 		this.relationshipRequirements.put(result, new ArrayList<Map<String, Object>>());
 		for (Map<String, Object> requirement : nodeTemplate.getRequirements()) {
 			if (requirement.containsKey("relationship_type") && requirement.size() == 2) {
+				// Here: produce relationship template based on requirement
+				// store requirement for later processing, because we need to access the processed node templates
+				// -> otherwise it's possible to request a node template which hasn't processed so far
 				this.relationshipRequirements.get(result).add(requirement);
 			} else if (requirement.size() == 1) {
+				// Here: produce requirement by using the capability name
 				String requirementName = (String) requirement.keySet().toArray()[0];
 				String capability = (String) requirement.values().toArray()[0];
 				if (capability.endsWith("Capability")) {
-					// TODO: check if requirement type already exists
+					// TODO: check if requirement type already exists and use this
+					// create requirement type for requirement or use existing one
 					TRequirementType requirementType = new TRequirementType();
 					String requirementTypeName = capability.replace("Capability", "Requirement");
 					requirementType.setName(requirementTypeName);
 					requirementType.setRequiredCapabilityType(this.toTnsQName(capability));
 					getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
 
+					// create requirement
 					TRequirement tRequirement = new TRequirement();
 					tRequirement.setName(requirementName);
 					tRequirement.setType(this.toTnsQName(requirementTypeName));
@@ -119,9 +151,16 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		result.setRequirements(resultRequirements);
 	}
 
+	/**
+	 * For information about what is processed, take a look at
+	 * {@link #processRequirements(org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate,
+	 * org.opentosca.model.tosca.TNodeTemplate)}
+	 * @param result
+	 * @param requirement
+	 */
 	private void processRelationshipRequirements(final TNodeTemplate result, final Map<String, Object> requirement) {
 		TRelationshipTemplate relationshipTemplate = new TRelationshipTemplate();
-
+		// set properties by using values of requirement
 		for (String key : requirement.keySet()) {
             if (key.equals("relationship_type")) {
                 String relationshipType = (String) requirement.get(key);
@@ -129,10 +168,12 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
             } else {
                 relationshipTemplate.setId(key);
 
+				// set source element
                 TRelationshipTemplate.SourceElement source = new TRelationshipTemplate.SourceElement();
                 source.setRef(result);
                 relationshipTemplate.setSourceElement(source);
 
+				// set target element; if no reference is found, throw exception
                 TRelationshipTemplate.TargetElement target = new TRelationshipTemplate.TargetElement();
                 TNodeTemplate targetTemplate = getTargetNodeTemplate(result, (String) requirement.get(key));
                 if (targetTemplate == null) {
