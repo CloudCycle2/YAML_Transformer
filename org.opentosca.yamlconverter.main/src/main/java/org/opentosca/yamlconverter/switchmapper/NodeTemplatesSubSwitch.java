@@ -135,16 +135,16 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 	private void processSingleRequirement(final TNodeTemplate result, final TNodeTemplate.Requirements resultRequirements,
 										  final Map<String, Object> requirement) {
 		if (requirement.containsKey("relationship_type") && requirement.size() == 2) {
-            // Here: produce relationship template based on requirement
-            // store requirement for later processing, because we need to access the processed node templates
-            // -> otherwise it's possible to request a node template which hasn't processed so far
-            this.relationshipRequirements.get(result).add(requirement);
-        } else if (requirement.size() == 1) {
-            // Here: produce requirement by using the capability name
-            createRequirement(resultRequirements, requirement);
-        } else {
-            throw new RuntimeException("This type of requirements definition is not supported.");
-        }
+			// Here: produce relationship template based on requirement
+			// store requirement for later processing, because we need to access the processed node templates
+			// -> otherwise it's possible to request a node template which hasn't processed so far
+			this.relationshipRequirements.get(result).add(requirement);
+		} else if (requirement.size() == 1) {
+			// Here: produce requirement by using the capability name
+			createRequirement(resultRequirements, requirement);
+		} else {
+			throw new RuntimeException("This type of requirements definition is not supported.");
+		}
 	}
 
 	/**
