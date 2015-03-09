@@ -1,0 +1,41 @@
+node_types:
+  OperatingSystem:
+    derived_from: tosca.nodes.Root
+    description: Operating System
+    properties:
+      hostname:
+        type: string
+      sshUser:
+        type: string
+    artifacts:
+      - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: org_opentosca_types_Ubuntu__InterfaceUbuntu.war
+        type: WAR
+        description: <artifact_description>
+        properties:
+          ServiceEndpoint: /services/org_opentosca_types_Ubuntu__InterfaceUbuntuPort
+          PortType: "{http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu"
+          InvocationType: SOAP/HTTP
+    capabilities:
+      warhammer2:
+        type: niceCap
+
+artifact_types:
+  WAR:
+    description: <artifact_description>
+    mime_type: application/x-zip
+    file_ext: [war]
+    properties:
+      ServiceEndpoint:
+        type: string
+      PortType:
+        type: string
+      InvocationType:
+        type: string
+
+capability_types:
+  niceCap:
+    derived_from: testCap
+    description: Another capability
+    properties:
+      port:
+        type: integer

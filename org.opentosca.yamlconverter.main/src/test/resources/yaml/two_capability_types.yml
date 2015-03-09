@@ -1,0 +1,13 @@
+capability_types:
+  testCap:
+    derived_from: parent_capability
+    description: xy bla bla
+    properties:
+      server_name:
+        type: string
+  niceCap:
+    derived_from: testCap
+    description: Another capability
+    properties:
+      port:
+        type: integer

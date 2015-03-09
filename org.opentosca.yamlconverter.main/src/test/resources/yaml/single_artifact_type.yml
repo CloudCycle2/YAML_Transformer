@@ -1,0 +1,12 @@
+artifact_types:
+  WAR:
+    description: <artifact_description>
+    mime_type: application/x-zip
+    file_ext: [war]
+    properties:
+      ServiceEndpoint:
+        type: string
+      PortType:
+        type: string
+      InvocationType:
+        type: string
