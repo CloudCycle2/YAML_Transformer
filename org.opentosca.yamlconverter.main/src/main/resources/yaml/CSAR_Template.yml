@@ -24,6 +24,8 @@ inputs:
   minRAM:
     type: string
     description: Number of RAM
+    constraints:
+      - in_range: {2,4}
   credentials:
     type: string
     description: Credentials
@@ -37,6 +39,8 @@ inputs:
   keypair:
     type: string
     description: keypair
+    constraints:
+      - min_length: 5
   imageId:
     type: string
     description: image ID
