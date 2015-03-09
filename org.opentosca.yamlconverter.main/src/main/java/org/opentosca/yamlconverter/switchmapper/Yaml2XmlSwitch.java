@@ -12,6 +12,7 @@ import java.util.Map;
  *
  */
 public class Yaml2XmlSwitch {
+
 	/**
 	 * The XML-Namespace of XML-Schemas.
 	 */

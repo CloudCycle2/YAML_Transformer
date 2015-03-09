@@ -10,7 +10,7 @@ public interface IToscaYaml2XmlConverter {
 	 * @return A Tosca XML in a String
 	 * @throws ConverterException
 	 */
-	public String yaml2xml(String yamlstring) throws ConverterException;
+	public String convertToXml(String yamlstring) throws ConverterException;
 
 	/**
 	 * Converts Tosca XML to Tosca YAML.
@@ -19,5 +19,5 @@ public interface IToscaYaml2XmlConverter {
 	 * @return A Tosca YAML in a String
 	 * @throws ConverterException
 	 */
-	public String xml2yaml(String xmlstring) throws ConverterException;
+	public String convertToYaml(String xmlstring) throws ConverterException;
 }

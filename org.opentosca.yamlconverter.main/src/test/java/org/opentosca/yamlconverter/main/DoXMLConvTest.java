@@ -20,7 +20,7 @@ public class DoXMLConvTest extends BaseTest {
 		} catch (final IOException e) {
 			System.out.println("IOexception on fileread");
 		}
-		final TDefinitions root = x2xb.xml2xmlbean(xmlstr);
+		final TDefinitions root = x2xb.convertToXmlBean(xmlstr);
 		System.out.println("result: " + root);
 	}
 

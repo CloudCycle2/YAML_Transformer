@@ -16,22 +16,23 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
  *
  */
 public class ToscaYaml2XmlConverter implements IToscaYaml2XmlConverter {
-	private final IToscaYaml2YamlBeanConverter y2yb = new YamlBeansConverter();
-	private final IToscaBean2BeanConverter b2b = new SwitchMapperConverter();
-	private final IToscaXml2XmlBeanConverter x2xb = new JAXBConverter();
+
+	private final IToscaYaml2YamlBeanConverter yamlConverter = new YamlBeansConverter();
+	private final IToscaBean2BeanConverter yamlXmlConverter = new SwitchMapperConverter();
+	private final IToscaXml2XmlBeanConverter xmlConverter = new JAXBConverter();
 
 	@Override
-	public String yaml2xml(String yamlstring) throws ConverterException {
-		final ServiceTemplate yroot = this.y2yb.yaml2yamlbean(yamlstring);
-		final Definitions xroot = this.b2b.yamlb2xmlb(yroot);
-		return this.x2xb.xmlbean2xml(xroot);
+	public String convertToXml(String yamlString) throws ConverterException {
+		final ServiceTemplate yamlRoot = this.yamlConverter.convertToYamlBean(yamlString);
+		final Definitions xmlRoot = this.yamlXmlConverter.convertToXmlBean(yamlRoot);
+		return this.xmlConverter.convertToXml(xmlRoot);
 	}
 
 	@Override
-	public String xml2yaml(String xmlstring) throws ConverterException {
-		final Definitions xroot = this.x2xb.xml2xmlbean(xmlstring);
-		final YAMLElement yroot = this.b2b.xmlb2yamlb(xroot);
-		return this.y2yb.yamlbean2yaml(yroot);
+	public String convertToYaml(String xmlString) throws ConverterException {
+		final Definitions xroot = this.xmlConverter.convertToXmlBean(xmlString);
+		final YAMLElement yroot = this.yamlXmlConverter.convertToYamlBean(xroot);
+		return this.yamlConverter.convertToYaml(yroot);
 	}
 
 }

@@ -18,9 +18,9 @@ public class Yaml2XmlSwitchTest extends BaseTest {
 	@Test
 	public void testYaml2xml() throws URISyntaxException, IOException, ConverterException {
 		final String yaml = this.testUtils.readYamlTestResource("/yaml/helloworld.yaml");
-		final ServiceTemplate root = this.c.yaml2yamlbean(yaml);
+		final ServiceTemplate root = this.c.convertToYamlBean(yaml);
 		final Yaml2XmlSwitch mapper = new Yaml2XmlSwitch();
 		final Definitions d = mapper.parse(root);
-		System.out.println(this.conv.xmlbean2xml(d));
+		System.out.println(this.conv.convertToXml(d));
 	}
 }

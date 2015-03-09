@@ -47,7 +47,7 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 	 * @return produced XML as a String
 	 */
 	@Override
-	public String xmlbean2xml(Definitions root) {
+	public String convertToXml(Definitions root) {
 		try {
 			final OutputStream stream = new ByteArrayOutputStream();
 			final JAXBContext jaxbContext = JAXBContext.newInstance(Definitions.class, AnyMap.class);
@@ -78,7 +78,7 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 	 * @return the Tosca root element
 	 */
 	@Override
-	public Definitions xml2xmlbean(String xmlstring) {
+	public Definitions convertToXmlBean(String xmlstring) {
 		final InputStream stream = string2InputStream(xmlstring);
 		try {
 			final JAXBContext jaxbContext = JAXBContext.newInstance(Definitions.class);

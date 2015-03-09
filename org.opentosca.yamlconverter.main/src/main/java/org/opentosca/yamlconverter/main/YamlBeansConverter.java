@@ -20,7 +20,7 @@ import java.io.Writer;
 public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
 	@Override
-	public ServiceTemplate yaml2yamlbean(String yamlstring) throws ConverterException {
+	public ServiceTemplate convertToYamlBean(String yamlstring) throws ConverterException {
 		if (yamlstring == null || yamlstring.equals("")) {
 			throw new IllegalArgumentException("YAML string may not be empty!");
 		}
@@ -34,7 +34,7 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 	}
 
 	@Override
-	public String yamlbean2yaml(YAMLElement root) throws ConverterException {
+	public String convertToYaml(YAMLElement root) throws ConverterException {
 		if (root == null) {
 			throw new IllegalArgumentException("Root element may not be null!");
 		}

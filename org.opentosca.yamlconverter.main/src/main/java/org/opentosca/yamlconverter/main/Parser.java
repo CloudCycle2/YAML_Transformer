@@ -1,8 +1,5 @@
 package org.opentosca.yamlconverter.main;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
@@ -11,11 +8,14 @@ import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Parser implements IToscaYamlParser {
 
-	private final IToscaYaml2YamlBeanConverter y2yb = new YamlBeansConverter();
-	private final SwitchMapperConverter b2b = new SwitchMapperConverter();
-	private final IToscaXml2XmlBeanConverter x2xb = new JAXBConverter(new NSPrefixMapper());
+	private final IToscaYaml2YamlBeanConverter yamlConverter = new YamlBeansConverter();
+	private final SwitchMapperConverter yamlXmlConverter = new SwitchMapperConverter();
+	private final IToscaXml2XmlBeanConverter xmlConverter = new JAXBConverter(new NSPrefixMapper());
 
 	private String xml = "";
 	private ServiceTemplate serviceTempl = null;
@@ -27,7 +27,7 @@ public class Parser implements IToscaYamlParser {
 			throw new IllegalArgumentException("YAML string may not be empty!");
 		}
 		try {
-			this.serviceTempl = this.y2yb.yaml2yamlbean(yamlString);
+			this.serviceTempl = this.yamlConverter.convertToYamlBean(yamlString);
 		} catch (final ConverterException e) {
 			throw new RuntimeException(e);
 		}
@@ -39,8 +39,8 @@ public class Parser implements IToscaYamlParser {
 			throw new IllegalStateException("Call parse(..) before calling getXML()");
 		}
 		if (this.xml.equals("")) {
-			this.definition = this.b2b.yamlb2xmlb(this.serviceTempl);
-			this.xml = this.x2xb.xmlbean2xml(this.definition);
+			this.definition = this.yamlXmlConverter.convertToXmlBean(this.serviceTempl);
+			this.xml = this.xmlConverter.convertToXml(this.definition);
 		}
 		return this.xml;
 	}
@@ -51,10 +51,10 @@ public class Parser implements IToscaYamlParser {
 			throw new IllegalStateException("Call parse(..) before calling getXSD()");
 		}
 		if (this.xml.equals("")) {
-			this.definition = this.b2b.yamlb2xmlb(this.serviceTempl);
-			this.xml = this.x2xb.xmlbean2xml(this.definition);
+			this.definition = this.yamlXmlConverter.convertToXmlBean(this.serviceTempl);
+			this.xml = this.xmlConverter.convertToXml(this.definition);
 		}
-		return this.b2b.getXSD();
+		return this.yamlXmlConverter.getXSD();
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class Parser implements IToscaYamlParser {
 
 	@Override
 	public void setInputValues(Map<String, String> input) {
-		this.b2b.setInputs(input);
+		this.yamlXmlConverter.setInputs(input);
 	}
 
 	public ServiceTemplate getServiceTemplate() {
