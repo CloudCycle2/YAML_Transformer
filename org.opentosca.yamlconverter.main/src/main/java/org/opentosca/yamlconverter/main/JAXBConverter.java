@@ -1,13 +1,10 @@
 package org.opentosca.yamlconverter.main;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
+import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
+import org.opentosca.model.tosca.Definitions;
+import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -16,22 +13,22 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-
-import org.opentosca.model.tosca.Definitions;
-import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.xml.sax.SAXException;
-
-import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * This converter uses JAXB to convert between Tosca XML and Tosca XML beans.
+ * It needs a schema from {@link #FILE_NAME_TOSCA_V1_0_XSD} to create beans based on XML.
  *
  * @author Jonas Heinisch
  *
  */
 @SuppressWarnings("restriction")
 public class JAXBConverter implements IToscaXml2XmlBeanConverter {
+
+	public static final String FILE_NAME_TOSCA_V1_0_XSD = "TOSCA-v1.0.xsd";
+	public static final String DEFAULT_XMLSCHEMA = "http://www.w3.org/2001/XMLSchema";
+
 	private Schema toscaXSD = null;
 	private NamespacePrefixMapper nsPrefixMapper = null;
 
@@ -43,6 +40,12 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 		this.nsPrefixMapper = nsPre;
 	}
 
+	/**
+	 * Produce XML based on Tosca XML bean(s) defined in {@code root}.
+	 *
+	 * @param root The Tosca XML root bean
+	 * @return produced XML as a String
+	 */
 	@Override
 	public String xmlbean2xml(Definitions root) {
 		try {
@@ -50,11 +53,11 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 			final JAXBContext jaxbContext = JAXBContext.newInstance(Definitions.class, AnyMap.class);
 			final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-			try {
-				if (this.nsPrefixMapper != null) {
-					jaxbMarshaller.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper", this.nsPrefixMapper);
-				}
-			} catch (final Exception e) {
+			if (this.nsPrefixMapper != null) {
+				jaxbMarshaller.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper", this.nsPrefixMapper);
+			} else {
+				System.out.println("Can't set property 'com.sun.xml.internal.bind.namespacePrefixMapper' " +
+						"for JAXB marshaller, because no prefix mapper is defined.");
 			}
 
 			// output pretty printed
@@ -62,13 +65,18 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 			jaxbMarshaller.marshal(root, stream);
 
 			return stream.toString();
-
-		} catch (final JAXBException e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
+	/**
+	 * Produce Tosca XML beans based on a XML document as string.
+	 *
+	 * @param xmlstring A Tosca XML-containing String
+	 * @return the Tosca root element
+	 */
 	@Override
 	public Definitions xml2xmlbean(String xmlstring) {
 		final InputStream stream = string2InputStream(xmlstring);
@@ -78,9 +86,7 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 			final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			jaxbUnmarshaller.setSchema(getToscaSchema());
 
-			final Definitions xroot = (Definitions) jaxbUnmarshaller.unmarshal(stream);
-			return xroot;
-
+			return (Definitions) jaxbUnmarshaller.unmarshal(stream);
 		} catch (final JAXBException e) {
 			e.printStackTrace();
 			return null;
@@ -91,19 +97,19 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 		return new ByteArrayInputStream(xmlstring.getBytes(StandardCharsets.UTF_8));
 	}
 
-	public Schema getToscaSchema() {
+	private Schema getToscaSchema() {
 		if (this.toscaXSD == null) {
 			try {
-				final SchemaFactory fac = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
-				final InputStream is = new FileInputStream(new File("TOSCA-v1.0.xsd"));
+				final SchemaFactory fac = SchemaFactory.newInstance(DEFAULT_XMLSCHEMA);
+				final InputStream is = new FileInputStream(new File(FILE_NAME_TOSCA_V1_0_XSD));
 				final StreamSource ss = new StreamSource(is);
 				this.toscaXSD = fac.newSchema(ss);
 			} catch (final FileNotFoundException e) {
 				// file not found
-				System.err.println("Schema file for the report not found");
+				System.err.println("Schema file "+FILE_NAME_TOSCA_V1_0_XSD+" for the report not found");
 			} catch (final SAXException e) {
 				// Error during parsing the schema file
-				System.err.println("Schema file for the report could not be parsed:");
+				System.err.println("Schema file "+FILE_NAME_TOSCA_V1_0_XSD+"for the report could not be parsed:");
 				e.printStackTrace();
 			}
 		}

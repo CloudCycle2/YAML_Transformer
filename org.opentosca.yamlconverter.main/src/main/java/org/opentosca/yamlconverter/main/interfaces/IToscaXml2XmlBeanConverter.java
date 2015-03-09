@@ -2,7 +2,11 @@ package org.opentosca.yamlconverter.main.interfaces;
 
 import org.opentosca.model.tosca.Definitions;
 
+/**
+ * This interface defines methods to convert from/to XML from/to Tosca XML beans.
+ */
 public interface IToscaXml2XmlBeanConverter {
+
 	/**
 	 * Converts Tosca XML beans to Tosca XML
 	 *
@@ -13,6 +17,7 @@ public interface IToscaXml2XmlBeanConverter {
 
 	/**
 	 * Converts Tosca XML to Tosca XML beans.
+	 * This requires a schema (XSD file) usually.
 	 *
 	 * @param xmlstring A Tosca XML-containing String
 	 * @return The Tosca XML root bean
