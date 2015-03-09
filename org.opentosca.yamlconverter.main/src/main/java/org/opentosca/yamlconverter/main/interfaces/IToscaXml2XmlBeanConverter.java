@@ -3,7 +3,7 @@ package org.opentosca.yamlconverter.main.interfaces;
 import org.opentosca.model.tosca.Definitions;
 
 /**
- * This interface defines methods to convert from/to XML from/to Tosca XML beans.
+ * This interface defines methods to convert XML beans to XML or vice versa.
  */
 public interface IToscaXml2XmlBeanConverter {
 

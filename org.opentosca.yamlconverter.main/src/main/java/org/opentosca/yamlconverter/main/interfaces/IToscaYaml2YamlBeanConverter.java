@@ -4,6 +4,9 @@ import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
 
+/**
+ * This interface provides methods to convert a YAML string to a YAML bean or vice versa.
+ */
 public interface IToscaYaml2YamlBeanConverter {
 
 	/**

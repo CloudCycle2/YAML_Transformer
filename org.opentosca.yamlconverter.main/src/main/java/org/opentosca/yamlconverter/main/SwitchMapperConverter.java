@@ -8,7 +8,8 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 import java.util.Map;
 
 /**
- *
+ * This class implements methods to convert YAML beans to XML beans.
+ * Currently XML beans to YAML beans is not supported.
  */
 public class SwitchMapperConverter implements IToscaBean2BeanConverter {
 

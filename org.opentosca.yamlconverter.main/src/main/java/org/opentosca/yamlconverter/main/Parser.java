@@ -11,9 +11,15 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This implementation of {@link org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser} uses different converter
+ * to convert from YAML string to YAML bean to XML bean to XML string. Methods to get an additional XSD schema, get
+ * and set input parameters are provided.
+ */
 public class Parser implements IToscaYamlParser {
 
 	private final IToscaYaml2YamlBeanConverter yamlConverter = new YamlBeansConverter();
+	// TODO: make use of the interface, i.e. IToscaYaml2XmlConverter yamlXmlConverter = ...;
 	private final SwitchMapperConverter yamlXmlConverter = new SwitchMapperConverter();
 	private final IToscaXml2XmlBeanConverter xmlConverter = new JAXBConverter(new NSPrefixMapper());
 
@@ -77,6 +83,10 @@ public class Parser implements IToscaYamlParser {
 		return result;
 	}
 
+	/**
+	 * TODO: Clarify why this method is still used in {@link org.opentosca.yamlconverter.main.UI.ConsoleUI}
+	 * @return
+	 */
 	public Map<String, Input> getInputRequirements() {
 		if (this.serviceTempl == null) {
 			throw new IllegalStateException("Call parse(..) before calling getInputRequirements()");
@@ -85,16 +95,16 @@ public class Parser implements IToscaYamlParser {
 	}
 
 	/**
-	 * TODO: add description
+	 * This method collects all constraints and their description, adds them to {@code descriptionForUser} and returns
+	 * the string so that it can be used. If no constraints are labelled with the input, "None" will be added.
 	 *
-	 * @param currentInput
-	 * @param descriptionForUser
-	 * @return
+	 * @param currentInput class containing an input from a YAML string/document
+	 * @param descriptionForUser current output for the input variable
+	 * @return the output description with information about the constraints for the given input object
 	 */
 	private String addConstraintsToDescription(Input currentInput, String descriptionForUser) {
 		descriptionForUser += "Constraints: ";
 		if (currentInput.getConstraints().size() > 0) {
-			// TODO: improve the following iterations
 			for (final Map<String, Object> constraints : currentInput.getConstraints()) {
 				if (constraints != null) {
 					for (final String key : constraints.keySet()) {
@@ -108,6 +118,11 @@ public class Parser implements IToscaYamlParser {
 		return descriptionForUser;
 	}
 
+	/**
+	 * Set the input variables.
+	 *
+	 * @param input the inputVariable map
+	 */
 	@Override
 	public void setInputValues(Map<String, String> input) {
 		this.yamlXmlConverter.setInputs(input);
