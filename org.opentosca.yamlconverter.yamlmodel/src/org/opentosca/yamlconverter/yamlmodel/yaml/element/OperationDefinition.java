@@ -3,6 +3,7 @@ package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 /**
  * @author Sebi
  */
+@Deprecated
 public class OperationDefinition {
 
     private String implementation = "";
