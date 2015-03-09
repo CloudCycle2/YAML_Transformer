@@ -1,9 +1,5 @@
 package org.opentosca.yamlconverter.main;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
@@ -11,6 +7,10 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints.ConstraintClause;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Sebi
@@ -133,7 +133,7 @@ public class YamlBeansConverterTest extends BaseTest {
 
 	@Test
 	public void testReadYamlInputs_useInputs() throws Exception {
-		final ServiceTemplate templ = this.converter.convertToYamlBean(this.testUtils.readYamlTestResource("/yaml/useInputs.yaml"));
+		final ServiceTemplate templ = this.converter.convertToYamlBean(this.testUtils.readYamlTestResource("/yaml/useInputs.yml"));
 		Assert.assertNotNull(templ);
 		final Object memSize = templ.getNode_templates().get("my_server").getProperties().get("mem_size");
 		Assert.assertNotNull(memSize);
@@ -142,10 +142,10 @@ public class YamlBeansConverterTest extends BaseTest {
 
 	@Test
 	public void testReadYamlInputs_imports() throws Exception {
-		final ServiceTemplate templ = this.converter.convertToYamlBean(this.testUtils.readYamlTestResource("/yaml/imports.yaml"));
+		final ServiceTemplate templ = this.converter.convertToYamlBean(this.testUtils.readYamlTestResource("/yaml/imports.yml"));
 		Assert.assertNotNull(templ);
 		Assert.assertNotNull(templ.getImports());
 		Assert.assertEquals(2, templ.getImports().size());
-		Assert.assertEquals("inputs.yaml", templ.getImports().get(0));
+		Assert.assertEquals("inputs.yml", templ.getImports().get(0));
 	}
 }
