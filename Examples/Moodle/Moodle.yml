@@ -1,0 +1,500 @@
+# Required TOSCA Definitions version string
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+# Optional. default namespace (schema, types version)
+tosca_default_namespace: http://types.opentosca.org
+
+# Optional name of this service template
+template_name: Moodle
+
+# Optional author of this service template
+template_author:
+
+# Optional version of this service template
+template_version:
+
+description: Service Template for Moodle
+
+imports:
+  # list of import statements for importing other definitions files
+  - TOSCA_definition.yml
+
+capability_types:
+# from file Specific Types Definitions
+  MySQLDatabaseEndpointCapability
+  # MySQLDatabaseEndpointCapability -df> DatabaseEndpointCapability -df> IPEndpointCapability
+  # -df> EndpointCapability -df> EndpointCapability
+    derived_from: DatabaseEndpointCapability
+    
+  ApacheWebApplicationContainerCapability:
+    derived_from: WebApplicationContainerCapability
+    description: Apache Web Application Container Capability
+
+  WebApplicationContainerCapability:
+    derived_from: ContainerCapability
+    description: Web Application Container Capability
+
+# TODO: Check if YAML tosca.capabilities.container can be used, but this is derived from tosca.capabilities.Feature which is derived from tosca.capabilities.Root
+  ContainerCapability:
+    derived_from: tosca.capabilities.Root
+    description: Container Capability
+
+  ApacheModuleContainerCapability:
+    derived_from: ContainerCapability
+    description: Apache Module Container Capability
+
+  HTTPEndpointCapability:
+    derived_from: IPEndpointCapability
+    description: HTTP Endpoint Capability
+
+  IPEndpointCapability:
+    derived_from: EndpointCapability
+    description: IP Endpoint Capability
+
+  EndpointCapability:
+    derived_from: EndpointCapability
+    description: IP Endpoint Capability
+
+  DatabaseContainerCapability:
+    derived_from: Container Capability
+    description: Database Container Capability
+
+  MySQLDatabaseContainerCapability:
+    derived_from: DatabaseContainerCapability
+    description: MySQL Database Container Capability
+
+  MySQLDatabaseEndpointCapability:
+    derived_from: tosca.capabilities.DatabaseEndpoint
+    description: MySQL Database Endpoint Capability
+
+  PHPRuntimeCapability:
+    derived_from: tosca.capabilities.Feature
+    description: PHP Runtime Capability
+
+node_types:
+  MoodleApplication:
+    # MoodleApplication -df> ApacheWebApplication -df> Webapplication -df> RootNodeType
+    derived_from: ApacheWebApplication
+    description: Moodle Application
+    properties:
+    # from MoodleTypes.xsd tMoodleApplicationProperties
+      AdminUser:
+        type: string
+      AdminPassword:
+        type: string
+      SiteName:
+        type: string
+      SitePath:
+        type: string
+    artifacts:
+      # Implementation Artifacts:
+      - at-MoodleApplication-install: 
+          implementation: scripts/MoodleApplication/install.sh
+          type: ScriptArtifact
+          description: Install Script
+      - at-MoodleApplication-configure:
+          implementation: scripts/MoodleApplication/configure.sh
+          type: ScriptArtifact
+          description: Configure Script
+      # Deployment Artifacts (properties are XML attributes)
+      - at-MoodleApplication-MoodleApplication-ConfigFiles: 
+          implementation: files/config.php
+          type: FileArtifact
+          description: File config.php
+          deploy_path: /tmp/tosca/artifacts/config.php
+      - at-MoodleApplication-MoodleApplication-archive: 
+          implementation: files/moodle-2.6.1.tgz
+          type: ArchiveArtifact
+          description: Archive file moodle
+          deploy_path: /tmp/tosca/artifacts/MoodleInstall
+      - at-MoodleApplication-php-ext-packages: 
+          implementation: [missing!!!!]
+          type: OsPackageArtifact
+          description: <description>
+    interfaces:
+      tosca.interfaces.node.lifecycle.Standard:
+        install:
+          implementaion: at-MoodleApplication-install
+        configure:
+          implementaion: at-MoodleApplication-configure
+    requirements:
+      - connectsTo:
+          node: MoodleDatabase
+          relationship_type: MoodleDatabaseConnection
+          capability: MySQLDatabaseEndpointCapability
+      - host:
+          node: ApacheWebServer
+          relationship_type: tosca.relationships.HostedOn
+      - dependsOn:
+          node: ApachePHPModule
+          relationship_type: tosca.relationships.DependsOn
+         
+  MoodleDatabase:
+    # MoodleDatabase -df> MySQLDatabase -df> Database -df> RootNodeType
+    derived_from: MySQLDatabase
+    description: Moodle Database
+    properties:
+    #from MoodleTypes.xsd tMoodleDatabaseProperties
+      DBName:
+        type: string
+      DBUser:
+        type: string
+      DBPassword:
+        type: string
+      DBPort:
+        type: int
+    artifacts:
+        #Implementation Artifacts
+      - at-MoodleDatabase-configure: 
+          implementation: scripts/MoodleDatabase/configure.sh
+          type: ScriptArtifact
+          description: <description>
+        #Deployment Artifacts (properties are XML attributes)
+      - at-MoodleDatabase-MoodleDbContent-File: 
+          implementation: files/moodledb.sql
+          type: FileArtifact
+          description: <description>
+          deploy_path: /tmp/tosca/artifacts/moodledb.sql
+    interfaces:
+      tosca.interfaces.node.lifecycle.Standard:
+        configure:
+          implementation: at-MoodleDatabase-configure
+    requirements:
+      - host:
+          node: MySQLDatabase
+          relationship_type: MySQLDatabaseHostedOnMySQL
+          
+  Server:
+    derived_from: tosca.nodes.Root
+    description: Server
+    properties:
+    artifacts:
+      - AmazonEC2VMNodeTypeImplementation_IA_ArtifactTemplate: 
+          implementation: IAs/AmazonEC2VMNodeType/org_opentosca_types_AmazonEC2VM__InterfaceAmazonEC2VM.war
+          type: WAR
+          description: <description>
+    interfaces:
+      InterfaceAmazonEC2VM:
+        #Operation is missing
+      
+  OperatingSystem:
+    derived_from: tosca.nodes.Root
+    description: Operating System
+    properties:
+    artifacts:
+      - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: 
+          implementation: IAs/UbuntuNodeType/org_opentosca_types_Ubuntu__InterfaceUbuntu.war
+          type: WAR
+          description: <description>
+    interfaces:
+      InterfaceUbuntu:
+        #Operation is missing
+        
+  ApacheWebServer:
+    derived_from: tosca.nodes.WebServer
+    description: Apache Web Server
+    properties:
+      httpdport:
+        type: int
+        default: 80
+        description: Apache HTTP Port (default 80)
+    capabilities: 
+      webapps:
+        type: ApacheWebApplicationContainerCapability
+      modules:
+        type: ApacheModuleContainerCapability
+      clients:
+        type: HTTPEndpointCapability
+    interfaces:
+      [tosca.interfaces.node.Lifecycle]:# TODO: do I have to name the operations?
+        install:
+          implementation: at-ApacheWebServer-install
+        configure:
+          implementation: at-ApacheWebServer-configure
+        start:
+          implementation: at-ApacheWebServer-start
+        stop:
+          implementation: at-ApacheWebServer-stop
+    artifacts:
+      - at-ApacheWebServer-install: scripts/ApacheWebServer/install.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApacheWebServer/install.sh
+      - at-ApacheWebServer-configure: scripts/ApacheWebServer/configure.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApacheWebServer/configure.sh
+      - at-ApacheWebServer-start: scripts/ApacheWebServer/start.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApacheWebServer/start.sh
+      - at-ApacheWebServer-stop: scripts/ApacheWebServer/stop.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApacheWebServer/stop.sh
+
+  WebApplication: 
+    derived_from: tosca.nodes.Root
+    description: Web Application
+    requirements:
+      - container: ApacheWebApplicationContainerCapability # XML: big ******* inheritance
+
+  ApacheWebApplication:
+    derived_from: WebApplication # TODO: check if tosca.nodes.WebApplication can be used (requirement host instead of container)
+    description: Apache Web Application
+
+  ApacheModule:
+    derived_from: tosca.nodes.Root
+    description: Apache Module
+    requirements:
+      - container: ApacheModuleContainerCapability
+
+  ApachePHPModule:
+    derived_from: ApacheModule
+    description: Apache PHP Module
+    capabilities:
+      phpApps:
+        type: PHPRuntimeCapability
+    interfaces:
+      [tosca.interfaces.node.lifecycle]:
+        configure:
+          implementation: at-ApachePHPModule-configure
+        start:
+          implementation: at-ApachePHPModule-start
+    artifacts:
+      - at-ApachePHPModule-configure: scripts/ApachePHPModule/configure.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApachePHPModule/configure.sh
+      - at-ApachePHPModule-start: scripts/ApachePHPModule/start.sh
+        type: ScriptArtifact # TODO
+        properties:
+          ScriptLanguage: sh
+          PrimaryScript: scripts/ApachePHPModule/start.sh
+
+  ApacheLoadbalancerModule:
+    derived_from: ApacheModule
+    description: Apache Loadbalancer Module
+    properties:
+      httpdport:
+        type: int
+        description: httpdocsApache WebServer Portnumber (default:80)
+        default: 80
+    requirements:
+      - members: HTTPEndpointCapability
+    interfaces:
+      [tosca.interfaces.node.lifecycle]:
+        configure:
+          implementation: at-ApacheLoadbalancerModule-configure
+        start:
+          implementation: at-ApacheLoadbalancerModule-start
+    artifacts:
+    - at-ApacheLoadbalancerModule-configure: scripts/ApacheLoadbalancerModule/configure.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/ApacheLoadbalancerModule/configure.sh
+    - at-ApacheLoadbalancerModule-start: scripts/ApacheLoadbalancerModule/start.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/ApacheLoadbalancerModule/start.sh
+
+  MySQL:
+    derived_from: tosca.nodes.DBMS # TODO check YAML and XML - it is different????
+    description: MySQL
+    capabilities:
+      databases: MySQLDatabaseContainerCapability
+    interfaces:
+      [tosca.interfaces.node.Lifecycle]:# TODO do I have to name the operations?
+        install:
+          implementation: at-MySQL-install
+        configure:
+          implementation: at-MySQL-configure
+        start:
+          implementation: at-MySQL-start
+        stop:
+          implementation: at-MySQL-stop
+    artifacts:
+    - at-MySQL-configure: scripts/MySQL/configure.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/MySQL/configure.sh
+    - at-MySQL-start: scripts/MySQL/start.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/MySQL/start.sh
+    - at-MySQL-stop: scripts/MySQL/stop.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/MySQL/stop.sh
+    - at-MySQL-install: scripts/MySQL/install.sh
+      type: ScriptArtifact # TODO
+      properties:
+        ScriptLanguage: sh
+        PrimaryScript: scripts/MySQL/install.sh
+        
+  MySQLDatabase:
+    derived_from: tosca.nodes.Database # TODO: check if this is the same
+    description: MySQL Database
+    requirements:
+      - container: MySQLDatabaseContainerCapability
+    capabilities:
+      clients: MySQLDatabaseEndpointCapability
+
+relationship_types:
+  MySQLDatabaseHostedOnMySQL:
+    derived_from: Hosted_On
+ 
+  MoodleDatabaseConnection:
+#MoodleDatabaseConnection -df> MySQLDatabaseConnection -df>ConnectsTo
+    derived_from: MySQLDatabaseConnection
+    interfaces:
+      tosca.interfaces.relationship.Configure:  # Standard interface type for relationship, SHOULD be used
+        pre_configure_target:
+          implementation: scripts/MoodleDatabaseConnection/configureDatabaseEndpoint.sh
+    valid_targets: MySQLDatabaseEndpointCapability
+
+artifact_types: 
+  # list of artifact type definitions 
+  ScriptArtifact: 
+    description: <artifact_description> 
+    mime_type: script/sh
+    file_ext: sh
+    properties:
+      ScriptLanguage:
+        type: anyURI
+      PrimaryScript:
+        type: string
+  FileArtifact:
+    description: <artifact_description>
+    properties:
+      fileReference:
+        type: string 
+      path:
+        type: string
+  OsPackageArtifact:
+    description: <artifact_description>
+    properties:
+      packageName:
+        type: string
+  ArchiveArtifact:
+    description: <artifact_description>
+    properties:
+      archiveReference:
+        type: string
+      path:
+        type: string
+  WAR:
+    description: <artifact_description>
+    mime_type: application/x-zip 
+    file_ext: war 
+    properties:
+      ServiceEndpoint:
+        type: string
+      PortType:
+        type: string
+      InvocationType:
+        type: string
+        
+node_templates:
+  VmApache:
+    type: tosca.nodes.Compute
+    properties:
+      num_cpus: 1
+      mem_size: 1024
+    capabilities:
+      VmApache_os: #TODO: Define Capability Type
+        type: OperatingSystemContainerCapability
+    requirements:
+      - VmApache_networks: NetworkAttachmentCapability
+      - VmApache_container: ServerContainerCapability
+      - VmApache_volumes: VolumeAttachmentCapability
+      
+  OsApache:
+    type: OperatingSystem
+    capabilities:
+      OsApache_software: #TODO: Define Capability Type
+        type: SoftwareContainerCapability
+    requirements:
+      - OsApache_container: OperatingSystemContainerCapability
+  
+  ApacheWebServer:
+    type: ApacheWebServer
+    properties:
+      httpdport: 80
+    capabilities: #TODO: Define Capability Type
+      ApacheWebServer_webapps:
+        type: ApacheWebApplicationContainerCapability
+      ApacheWebServer_modules:
+        type: ApacheModuleContainerCapability
+      ApacheWebServer_clients:
+        type: HTTPEndpointCapability
+    requirements:
+      - ApacheWebServer_container: SoftwareContainerCapability
+      - Apache_HostedOn_OsApache: OsApache
+        relationship_type: tosca.relationships.HostedOn
+  MoodleApp:
+    type: MoodleApplication
+    properties:
+      AdminUser: admin
+      AdminPassword: moodle123
+      SiteName: My Moodle
+      SitePath: mymoodle
+    requirements:
+      - MoodleApp_phpRuntime: PHPRuntimeCapability
+      - MoodleApp_database: MoodleDatabaseEndpointCapability
+      - MoodleApp_container: ApacheWebApplicationContainerCapability
+      - MoodleApp_HostedOn_Apache: ApacheWebServer
+        relationship_type: tosca.relationships.HostedOn
+      - MoodleApp_DependsOn_PhpModule: PhpModule
+        relationship_type: tosca.relationships.DependsOn
+      - MoodleApp_ConnectsTo_MoodleDb: MoodleDb
+        relationship_type: tosca.relationships.ConnectsTo
+  PhpModule:
+    type: ApachePHPModule
+    capabilities:
+      PhpModule_phpapps: #TODO: Define Capability Type
+        type: PHPRuntimeCapability
+    requirements:
+      - PhpModule_container: ApacheModuleContainerCapability
+      - PhpModule_HostedOn_Apache: ApacheWebServer
+        relationship_type: tosca.relationships.HostedOn
+  MySql:
+    type: MySQL
+    properties:
+      RootPassword: password
+    capabilities:
+      MySql_database: #TODO: Define Capability Type
+        type: MySQLDatabaseContainerCapability
+    requirements:
+      - MySql_container: SoftwareContainerCapability
+      - MySqlHostedOnOsApache: OsApache
+        relationship_type: tosca.relationships.HostedOn
+  
+  MoodleDb:
+    type: MoodleDatabase
+    properties:
+      DBName: moodledb
+      DBUser: mdladmin
+      DBPassword: mdladmin
+      DBPort: 3306
+    capabilities:
+      MoodleDb_clients:
+        type: MySQLDatabaseEndpoint
+    requirements:
+      - MoodleDb_container: MySQLDatabaseContainerCapability
+      - MoodleDb_HostedOn_MySql: MySql
+        relationship_type: tosca.relationships.HostedOn
+        
+    
+      
+    
