@@ -164,7 +164,7 @@ public class Yaml2XmlSwitch {
 	private TImport createTypeImport() {
 		final TImport result = new TImport();
 		result.setImportType(XMLSCHEMA_NS);
-		result.setLocation("types.xsd");
+		result.setLocation("Definitions/types.xsd");
 		result.setNamespace(TYPESNS);
 		return result;
 	}
