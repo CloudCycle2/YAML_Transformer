@@ -55,12 +55,18 @@ public class Yaml2XmlSwitch {
 
 	private Definitions toscaResult = new Definitions();
 
+	private String usedNamespace = NS;
+
 	Definitions getToscaResult() {
 		return this.toscaResult;
 	}
 
 	ServiceTemplate getServiceTemplate() {
 		return this.st;
+	}
+
+	String getUsedNamespace() {
+		return this.usedNamespace;
 	}
 
 	/**
@@ -132,10 +138,9 @@ public class Yaml2XmlSwitch {
 		this.toscaResult.setId(unique("root"));
 		this.toscaResult.setName(unique("Root"));
 		if (yamlServiceTemplate.getTosca_default_namespace() != null && !yamlServiceTemplate.getTosca_default_namespace().isEmpty()) {
-			this.toscaResult.setTargetNamespace(yamlServiceTemplate.getTosca_default_namespace());
-		} else {
-			this.toscaResult.setTargetNamespace(NS);
+			this.usedNamespace = yamlServiceTemplate.getTosca_default_namespace();
 		}
+		this.toscaResult.setTargetNamespace(this.usedNamespace);
 		this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(serviceTemplate);
 		this.toscaResult.getDocumentation().add(toDocumentation(yamlServiceTemplate.getDescription()));
 		if (yamlServiceTemplate.getTemplate_author() != null && !yamlServiceTemplate.getTemplate_author().isEmpty()) {
@@ -153,12 +158,13 @@ public class Yaml2XmlSwitch {
 			serviceTemplate.setName("ServiceTemplate");
 		}
 		serviceTemplate.setTopologyTemplate(topologyTemplate);
+		serviceTemplate.setTargetNamespace(this.usedNamespace);
 	}
 
 	private TImport createTypeImport() {
 		final TImport result = new TImport();
 		result.setImportType(XMLSCHEMA_NS);
-		result.setLocation("types.xsd");
+		result.setLocation("Definitions/types.xsd");
 		result.setNamespace(TYPESNS);
 		return result;
 	}
