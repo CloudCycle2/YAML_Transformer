@@ -1,16 +1,11 @@
 package org.opentosca.yamlconverter.switchmapper;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.opentosca.model.tosca.*;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 import javax.xml.namespace.QName;
-
-import org.opentosca.model.tosca.Definitions;
-import org.opentosca.model.tosca.TDocumentation;
-import org.opentosca.model.tosca.TImport;
-import org.opentosca.model.tosca.TServiceTemplate;
-import org.opentosca.model.tosca.TTopologyTemplate;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class can parse ServiceTemplates (YAML bean) to Definitions (XML bean).
