@@ -1,17 +1,15 @@
 package org.opentosca.yamlconverter.main.utils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
+import org.opentosca.yamlconverter.constraints.ConstraintClause;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints.ConstraintClause;
 
 /**
  * This class helps you to handle Constraints.
- * 
+ *
  * @author Jonas Heinisch
  *
  */
@@ -23,41 +21,25 @@ public class ConstraintUtils {
 	private static final String DATEFORMAT = "EEE MMM d HH:mm:ss zzz yyyy";
 
 	/**
-	 * Converts constraints from yamlbeans to a {@link List} of {@link ConstraintClause}.
-	 * 
-	 * @param constraintsListMap The list/map from yamlbeans.
-	 * @param dataType The expected datatype.
-	 * @return A list of {@link ConstraintClause}.
-	 */
-	public static List<ConstraintClause<Object>> toConstraints(List<Map<String, Object>> constraintsListMap, String dataType) {
-		final List<ConstraintClause<Object>> constraints = new ArrayList<ConstraintClause<Object>>();
-		for (final Map<String, Object> constraint : constraintsListMap) {
-			final Class<?> dataTypeCls = PropertyType.get(dataType.toLowerCase());
-			final ConstraintClause<Object> constraintClause = ConstraintClause.toConstraintClause(constraint, dataTypeCls);
-			constraints.add(constraintClause);
-		}
-		return constraints;
-	}
-
-	/**
 	 * Converts the constraints of the {@link Input} to a {@link List} of {@link ConstraintClause}.
-	 * 
+	 *
 	 * @param input The defined {@link Input}.
 	 * @return The {@link List} of {@link ConstraintClause}.
 	 */
 	public static List<ConstraintClause<Object>> toConstraints(Input input) {
-		return toConstraints(input.getConstraints(), input.getType());
+		final Class<?> dataTypeCls = PropertyType.get(input.getType());
+		return ConstraintClause.toConstraints(input.getConstraints(), dataTypeCls);
 	}
 
 	/**
 	 * Checks if an userinput matches the Constraints of an {@link Input}. Including typecheck.
-	 * 
+	 *
 	 * @param userinput The input made by the user.
 	 * @param input The required {@link Input}.
 	 * @return Is the userinput matching the constraints?
 	 */
 	public static boolean matchesConstraints(String userinput, Input input) {
-		final Object value = convertToType(userinput, input.getType());
+		final Object value = convert(userinput, input.getType());
 		if (value == null) {
 			return false;
 		}
@@ -72,36 +54,66 @@ public class ConstraintUtils {
 
 	/**
 	 * Converts a string to a specific type. Returns null if conversion fails.
-	 * 
+	 *
 	 * @param string The string to convert.
-	 * @param type The type to convert to. (Default: String)
+	 * @param type The type to convert to. See {@link PropertyType} for valid values.
 	 * @return The converted value.
 	 */
-	public static Object convertToType(String string, String type) {
-		if (type == null) {
-			return string;
-		}
+	public static Object convert(String representedValue, String type) {
+		return convert(representedValue, PropertyType.get(type.toLowerCase()));
+	}
+
+	/**
+	 * Converts a string to a specific type. Returns null if conversion fails.
+	 *
+	 * @param string The string to convert.
+	 * @param type The type to convert to.
+	 * @return The converted value.
+	 */
+	public static Object convert(String representedValue, Class<?> type) {
 		try {
-			switch (type.toLowerCase()) {
-			case "int":
-			case "integer":
-				return Integer.parseInt(string);
-			case "double":
-				return Double.parseDouble(string);
-			case "float":
-				return Float.parseFloat(string);
-			case "long":
-				return Long.parseLong(string);
-			case "timestamp":
-				return new SimpleDateFormat(DATEFORMAT).parse(string);
-			case "boolean":
-				return Boolean.parseBoolean(string);
-			case "string":
-			case "text":
-				return string;
+			Object convertedValue = null;
+			if (type == String.class) {
+				convertedValue = representedValue;
+			} else if (type == Integer.TYPE) {
+				convertedValue = representedValue.length() == 0 ? 0 : Integer.decode(representedValue);
+			} else if (type == Integer.class) {
+				convertedValue = representedValue.length() == 0 ? null : Integer.decode(representedValue);
+			} else if (type == Boolean.TYPE) {
+				convertedValue = representedValue.length() == 0 ? false : Boolean.valueOf(representedValue);
+			} else if (type == Boolean.class) {
+				convertedValue = representedValue.length() == 0 ? null : Boolean.valueOf(representedValue);
+			} else if (type == Float.TYPE) {
+				convertedValue = representedValue.length() == 0 ? 0 : Float.valueOf(representedValue);
+			} else if (type == Float.class) {
+				convertedValue = representedValue.length() == 0 ? null : Float.valueOf(representedValue);
+			} else if (type == Double.TYPE) {
+				convertedValue = representedValue.length() == 0 ? 0 : Double.valueOf(representedValue);
+			} else if (type == Double.class) {
+				convertedValue = representedValue.length() == 0 ? null : Double.valueOf(representedValue);
+			} else if (type == Long.TYPE) {
+				convertedValue = representedValue.length() == 0 ? 0 : Long.decode(representedValue);
+			} else if (type == Long.class) {
+				convertedValue = representedValue.length() == 0 ? null : Long.decode(representedValue);
+			} else if (type == Short.TYPE) {
+				convertedValue = representedValue.length() == 0 ? 0 : Short.decode(representedValue);
+			} else if (type == Short.class) {
+				convertedValue = representedValue.length() == 0 ? null : Short.decode(representedValue);
+			} else if (type == Character.TYPE) {
+				convertedValue = representedValue.length() == 0 ? 0 : representedValue.charAt(0);
+			} else if (type == Character.class) {
+				convertedValue = representedValue.length() == 0 ? null : representedValue.charAt(0);
+			} else if (type == Byte.TYPE) {
+				convertedValue = representedValue.length() == 0 ? 0 : Byte.decode(representedValue);
+			} else if (type == Byte.class) {
+				convertedValue = representedValue.length() == 0 ? null : Byte.decode(representedValue);
+			} else if (type == Date.class) {
+				convertedValue = new SimpleDateFormat(DATEFORMAT).parse(representedValue);
 			}
+			return convertedValue;
 		} catch (final Exception e) {
-			// empty
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}
