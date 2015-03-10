@@ -123,11 +123,10 @@ public class ConsoleUI {
 			}
 		}
 
-		final String tempfolder = "tmp_" + System.currentTimeMillis();
 		final String csarfilename = promptString("\nIf you want to save the results as a CSAR-File, enter a filename, else just hit ENTER...");
 		if (csarfilename != null && !csarfilename.isEmpty()) {
 			try {
-				CSARUtil.createCSAR(parser.getServiceTemplate(), xml, xsd, tempfolder, csarfilename);
+				CSARUtil.createCSAR(parser.getServiceTemplate(), xml, xsd, csarfilename);
 			} catch (final IOException e) {
 				System.out.println("ERROR: File has not been saved, because of an IOException. Muh..");
 			}

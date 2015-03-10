@@ -16,15 +16,18 @@ public class CSARUtil {
 	private static final String DEFAULT_TEMPLATE_VERSION = "1.0";
 	private static final String DEFAULT_TEMPLATE_AUTHOR = "YAML";
 
-	public static void createCSAR(ServiceTemplate st, String xml, String xsd, String tempfolder, String csarfilename) throws IOException {
-		FileUtil.saveStringAsFile(tempfolder + "/" + DEFINITIONS_FOLDER + "/" + XSD_FILENAME, xsd);
-		FileUtil.saveStringAsFile(tempfolder + "/" + DEFINITIONS_FOLDER + "/" + XML_FILENAME, xml);
-		FileUtil.saveStringAsFile(tempfolder + "/" + META_FOLDER + "/" + META_FILENAME, generateMetaFileContent(st));
-		final ZipUtils appZip = new ZipUtils(tempfolder);
-		appZip.generateFileList(new File(tempfolder + "/" + META_FOLDER));
-		appZip.generateFileList(new File(tempfolder + "/" + DEFINITIONS_FOLDER));
+	public static void createCSAR(ServiceTemplate st, String xml, String xsd, String csarfilename) throws IOException {
+		FileUtil.saveStringAsFile(DEFINITIONS_FOLDER + "/" + XSD_FILENAME, xsd);
+		FileUtil.saveStringAsFile(DEFINITIONS_FOLDER + "/" + XML_FILENAME, xml);
+		FileUtil.saveStringAsFile(META_FOLDER + "/" + META_FILENAME, generateMetaFileContent(st));
+		final ZipUtils appZip = new ZipUtils();
+		final File metaFolder = new File(META_FOLDER);
+		final File definitionsFolder = new File(DEFINITIONS_FOLDER);
+		appZip.generateFileList(metaFolder);
+		appZip.generateFileList(definitionsFolder);
 		appZip.zipIt(csarfilename);
-		FileUtil.deleteDirectory(new File(tempfolder));
+		FileUtil.deleteDirectory(definitionsFolder);
+		FileUtil.deleteDirectory(metaFolder);
 	}
 
 	private static String generateMetaFileContent(ServiceTemplate st) {

@@ -11,44 +11,41 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipUtils {
 
-	private final List<String> fileList;
-	private final String sourceFolder;
+	private final List<File> fileList;
 
-	public ZipUtils(String sourceFolder) {
-		this.fileList = new ArrayList<String>();
-		this.sourceFolder = sourceFolder;
+	public ZipUtils() {
+		this.fileList = new ArrayList<File>();
 	}
 
 	public void zipIt(String zipFile) {
 		final byte[] buffer = new byte[1024];
-		String source = "";
 		FileOutputStream fos = null;
 		ZipOutputStream zos = null;
 		try {
-			try {
-				source = this.sourceFolder.substring(this.sourceFolder.lastIndexOf("\\") + 1, this.sourceFolder.length());
-			} catch (final Exception e) {
-				source = this.sourceFolder;
-			}
 			fos = new FileOutputStream(zipFile);
 			zos = new ZipOutputStream(fos);
 
 			System.out.println("Output to Zip : " + zipFile);
 			FileInputStream in = null;
 
-			for (final String file : this.fileList) {
-				System.out.println("File Added : " + file);
-				final ZipEntry ze = new ZipEntry(file);
+			for (final File file : this.fileList) {
+				System.out.println("Trying to add file : " + file.getPath().replace("\\", "/"));
+				final ZipEntry ze = new ZipEntry(file.getPath().replace("\\", "/"));
 				zos.putNextEntry(ze);
 				try {
-					in = new FileInputStream(this.sourceFolder + File.separator + file);
+					in = new FileInputStream(file);
 					int len;
 					while ((len = in.read(buffer)) > 0) {
 						zos.write(buffer, 0, len);
 					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				} finally {
-					in.close();
+					if (in != null) {
+						in.close();
+					}
 				}
+				System.out.println("File Added : " + file);
 			}
 
 			zos.closeEntry();
@@ -57,31 +54,29 @@ public class ZipUtils {
 		} catch (final IOException ex) {
 			ex.printStackTrace();
 		} finally {
-			try {
-				zos.close();
-			} catch (final IOException e) {
-				e.printStackTrace();
+			if (zos != null) {
+				try {
+					zos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
 
 	public void generateFileList(File node) {
-
 		// add file only
 		if (node.isFile()) {
-			this.fileList.add(generateZipEntry(node.toString()));
-
+			this.fileList.add(node);
 		}
 
 		if (node.isDirectory()) {
-			final String[] subNote = node.list();
-			for (final String filename : subNote) {
-				generateFileList(new File(node, filename));
+			final File[] files = node.listFiles();
+			if (files != null) {
+				for (final File file : files) {
+					generateFileList(file);
+				}
 			}
 		}
-	}
-
-	private String generateZipEntry(String file) {
-		return file.substring(this.sourceFolder.length() + 1, file.length());
 	}
 }

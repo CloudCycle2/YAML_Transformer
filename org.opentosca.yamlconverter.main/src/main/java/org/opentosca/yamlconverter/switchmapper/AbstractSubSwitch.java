@@ -1,30 +1,22 @@
 package org.opentosca.yamlconverter.switchmapper;
 
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlWriter;
+import org.opentosca.model.tosca.*;
+import org.opentosca.model.tosca.TEntityType.DerivedFrom;
+import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
-import org.opentosca.model.tosca.Definitions;
-import org.opentosca.model.tosca.TDocumentation;
-import org.opentosca.model.tosca.TEntityType.DerivedFrom;
-import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.model.tosca.TExtensibleElements;
-import org.opentosca.model.tosca.TInterface;
-import org.opentosca.model.tosca.TOperation;
-import org.opentosca.model.tosca.TServiceTemplate;
-import org.opentosca.model.tosca.TTopologyTemplate;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import com.esotericsoftware.yamlbeans.YamlException;
-import com.esotericsoftware.yamlbeans.YamlWriter;
 
 public abstract class AbstractSubSwitch implements ISubSwitch {
 	private final Yaml2XmlSwitch parent;
@@ -40,6 +32,10 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 
 	protected ServiceTemplate getServiceTemplate() {
 		return this.parent.getServiceTemplate();
+	}
+
+	protected String getUsedNamespace() {
+		return this.parent.getUsedNamespace();
 	}
 
 	protected TTopologyTemplate getTopologyTemplate() {
