@@ -1,4 +1,4 @@
-package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
+package org.opentosca.yamlconverter.constraints;
 
 import java.util.ArrayList;
 import java.util.List;

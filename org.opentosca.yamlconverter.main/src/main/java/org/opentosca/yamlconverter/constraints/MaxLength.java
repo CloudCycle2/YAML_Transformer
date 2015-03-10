@@ -1,4 +1,4 @@
-package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
+package org.opentosca.yamlconverter.constraints;
 
 public class MaxLength extends TypeScalar<String, Integer> {
 
