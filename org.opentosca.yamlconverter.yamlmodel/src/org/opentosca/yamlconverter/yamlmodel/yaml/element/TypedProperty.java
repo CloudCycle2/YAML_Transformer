@@ -3,6 +3,7 @@ package org.opentosca.yamlconverter.yamlmodel.yaml.element;
 /**
  * A.3.9
  */
+@Deprecated
 public class TypedProperty {
 	private TypedProperty default_1;
 	private PropertyType type;

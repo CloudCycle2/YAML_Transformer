@@ -1,5 +1,11 @@
 package org.opentosca.yamlconverter.main.UI;
 
+import org.opentosca.yamlconverter.main.Parser;
+import org.opentosca.yamlconverter.main.utils.CSARUtil;
+import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
+import org.opentosca.yamlconverter.main.utils.FileUtil;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,12 +13,6 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.opentosca.yamlconverter.main.Parser;
-import org.opentosca.yamlconverter.main.utils.CSARUtil;
-import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
-import org.opentosca.yamlconverter.main.utils.FileUtil;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 
 /**
  * A simple User Interface for Console.
@@ -61,8 +61,11 @@ public class ConsoleUI {
 		}
 
 		// parse it
+		// TODO: make use of the interface, i.e. IToscaYamlParser parser = new Parser();
+		// TODO: but before that: put methods to interface if necessary
 		final Parser parser = new Parser();
 		parser.parse(yaml);
+		// TODO: Why can't we just call parser.getInputRequirementsText()? They use the same map...?!
 		final Map<String, Input> reqMap = parser.getInputRequirements();
 		final Map<String, String> reqText = parser.getInputRequirementsText();
 		if (reqMap != null && !reqMap.isEmpty()) {

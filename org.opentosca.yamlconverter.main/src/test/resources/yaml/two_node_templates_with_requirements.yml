@@ -1,0 +1,26 @@
+node_templates:
+  LinuxOperatingSystem:
+    type: OperatingSystem
+    properties:
+      hostname:
+      sshUser: ubuntu
+      sshKey:
+      script: uname -a
+  VmApache:
+    type: tosca.nodes.Compute
+    properties:
+      num_cpus: 1
+      mem_size:
+    requirements:
+      - Vm_apache_volumes: VolumeAttachementCapability
+      - dummy_relationship: LinuxOperatingSystem
+        relationship_type: dummy_relationship_type
+
+capability_types:
+  VolumeAttachementCapability:
+    derived_from: tosca.capabilities.Endpoint
+    description: Volume Attachement Capability
+
+relationship_types:
+  dummy_relationship_type:
+    valid_targets: [dummy_node]

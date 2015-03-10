@@ -13,7 +13,7 @@ public class Yaml2XmlQuickConverterTest extends BaseTest {
 	@Test
 	public void testYaml2xml() throws URISyntaxException, IOException, ConverterException {
 		final String yaml = this.testUtils.readYamlTestResource("/yaml/helloworld.yaml");
-		final String result = this.c.yaml2xml(yaml);
+		final String result = this.c.convertToXml(yaml);
 		// TODO: assertNotEquals is not a correct method! Maybe assertNotSame ?
 //		Assert.assertNotEquals(result, "");
 		System.out.println(result);

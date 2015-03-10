@@ -1,0 +1,16 @@
+# Required TOSCA Definitions version string
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+# Optional. default namespace (schema, types version)
+tosca_default_namespace: http://types.opentosca.org
+
+# Optional name of this service template
+template_name: InstallVMServTemplate
+
+# Optional author of this service template
+template_author: Team YAML
+
+# Optional version of this service template
+template_version: 0.1
+
+description: Service Template for installing VMServ

@@ -1,8 +1,5 @@
 package org.opentosca.yamlconverter.main;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
@@ -11,11 +8,20 @@ import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * This implementation of {@link org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser} uses different converter
+ * to convert from YAML string to YAML bean to XML bean to XML string. Methods to get an additional XSD schema, get
+ * and set input parameters are provided.
+ */
 public class Parser implements IToscaYamlParser {
 
-	private final IToscaYaml2YamlBeanConverter y2yb = new YamlBeansConverter();
-	private final SwitchMapperConverter b2b = new SwitchMapperConverter();
-	private final IToscaXml2XmlBeanConverter x2xb = new JAXBConverter(new NSPrefixMapper());
+	private final IToscaYaml2YamlBeanConverter yamlConverter = new YamlBeansConverter();
+	// TODO: make use of the interface, i.e. IToscaYaml2XmlConverter yamlXmlConverter = ...;
+	private final SwitchMapperConverter yamlXmlConverter = new SwitchMapperConverter();
+	private final IToscaXml2XmlBeanConverter xmlConverter = new JAXBConverter(new NSPrefixMapper());
 
 	private String xml = "";
 	private ServiceTemplate serviceTempl = null;
@@ -27,7 +33,7 @@ public class Parser implements IToscaYamlParser {
 			throw new IllegalArgumentException("YAML string may not be empty!");
 		}
 		try {
-			this.serviceTempl = this.y2yb.yaml2yamlbean(yamlString);
+			this.serviceTempl = this.yamlConverter.convertToYamlBean(yamlString);
 		} catch (final ConverterException e) {
 			throw new RuntimeException(e);
 		}
@@ -39,8 +45,8 @@ public class Parser implements IToscaYamlParser {
 			throw new IllegalStateException("Call parse(..) before calling getXML()");
 		}
 		if (this.xml.equals("")) {
-			this.definition = this.b2b.yamlb2xmlb(this.serviceTempl);
-			this.xml = this.x2xb.xmlbean2xml(this.definition);
+			this.definition = this.yamlXmlConverter.convertToXmlBean(this.serviceTempl);
+			this.xml = this.xmlConverter.convertToXml(this.definition);
 		}
 		return this.xml;
 	}
@@ -51,10 +57,10 @@ public class Parser implements IToscaYamlParser {
 			throw new IllegalStateException("Call parse(..) before calling getXSD()");
 		}
 		if (this.xml.equals("")) {
-			this.definition = this.b2b.yamlb2xmlb(this.serviceTempl);
-			this.xml = this.x2xb.xmlbean2xml(this.definition);
+			this.definition = this.yamlXmlConverter.convertToXmlBean(this.serviceTempl);
+			this.xml = this.xmlConverter.convertToXml(this.definition);
 		}
-		return this.b2b.getXSD();
+		return this.yamlXmlConverter.getXSD();
 	}
 
 	@Override
@@ -77,6 +83,10 @@ public class Parser implements IToscaYamlParser {
 		return result;
 	}
 
+	/**
+	 * TODO: Clarify why this method is still used in {@link org.opentosca.yamlconverter.main.UI.ConsoleUI}
+	 * @return
+	 */
 	public Map<String, Input> getInputRequirements() {
 		if (this.serviceTempl == null) {
 			throw new IllegalStateException("Call parse(..) before calling getInputRequirements()");
@@ -85,16 +95,16 @@ public class Parser implements IToscaYamlParser {
 	}
 
 	/**
-	 * TODO: add description
+	 * This method collects all constraints and their description, adds them to {@code descriptionForUser} and returns
+	 * the string so that it can be used. If no constraints are labelled with the input, "None" will be added.
 	 *
-	 * @param currentInput
-	 * @param descriptionForUser
-	 * @return
+	 * @param currentInput class containing an input from a YAML string/document
+	 * @param descriptionForUser current output for the input variable
+	 * @return the output description with information about the constraints for the given input object
 	 */
 	private String addConstraintsToDescription(Input currentInput, String descriptionForUser) {
 		descriptionForUser += "Constraints: ";
 		if (currentInput.getConstraints().size() > 0) {
-			// TODO: improve the following iterations
 			for (final Map<String, Object> constraints : currentInput.getConstraints()) {
 				if (constraints != null) {
 					for (final String key : constraints.keySet()) {
@@ -108,9 +118,14 @@ public class Parser implements IToscaYamlParser {
 		return descriptionForUser;
 	}
 
+	/**
+	 * Set the input variables.
+	 *
+	 * @param input the inputVariable map
+	 */
 	@Override
 	public void setInputValues(Map<String, String> input) {
-		this.b2b.setInputs(input);
+		this.yamlXmlConverter.setInputs(input);
 	}
 
 	public ServiceTemplate getServiceTemplate() {

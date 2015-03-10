@@ -19,12 +19,22 @@ import java.io.Writer;
  */
 public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
+	/**
+	 * Convert {@code yamlString} to {@link org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate}
+	 * using {@link com.esotericsoftware.yamlbeans.YamlReader}.
+	 * Makes use of {@link #adjustConfig(com.esotericsoftware.yamlbeans.YamlConfig)} to set some properties for
+	 * {@link com.esotericsoftware.yamlbeans.YamlConfig}.
+	 *
+	 * @param yamlString A Tosca YAML in a String
+	 * @return service template containing values from {@code yamlString}
+	 * @throws ConverterException
+	 */
 	@Override
-	public ServiceTemplate yaml2yamlbean(String yamlstring) throws ConverterException {
-		if (yamlstring == null || yamlstring.equals("")) {
+	public ServiceTemplate convertToYamlBean(String yamlString) throws ConverterException {
+		if (yamlString == null || yamlString.equals("")) {
 			throw new IllegalArgumentException("YAML string may not be empty!");
 		}
-		final YamlReader reader = new YamlReader(yamlstring);
+		final YamlReader reader = new YamlReader(yamlString);
 		adjustConfig(reader.getConfig());
 		try {
 			return reader.read(ServiceTemplate.class);
@@ -33,16 +43,27 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 		}
 	}
 
+	/**
+	 * Convert {@link org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement} to a string using
+	 * {@link com.esotericsoftware.yamlbeans.YamlWriter}.
+	 * Makes use of {@link #adjustConfig(com.esotericsoftware.yamlbeans.YamlConfig)} to set properties for
+	 * {@link com.esotericsoftware.yamlbeans.YamlConfig}.
+	 *
+	 * @param yamlRoot child element of {@link org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement}
+	 *                 containing values
+	 * @return {@code yamlRoot} as YAML string
+	 * @throws ConverterException
+	 */
 	@Override
-	public String yamlbean2yaml(YAMLElement root) throws ConverterException {
-		if (root == null) {
+	public String convertToYaml(YAMLElement yamlRoot) throws ConverterException {
+		if (yamlRoot == null) {
 			throw new IllegalArgumentException("Root element may not be null!");
 		}
 		final Writer output = new StringWriter();
 		final YamlWriter writer = new YamlWriter(output);
 		adjustConfig(writer.getConfig());
 		try {
-			writer.write(root);
+			writer.write(yamlRoot);
 			writer.close();
 		} catch (final YamlException e) {
 			throw new ConverterException(e);
@@ -60,9 +81,7 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 		config.setPropertyElementType(ServiceTemplate.class, "groups", Group.class);
 		config.setPropertyElementType(ServiceTemplate.class, "outputs", Output.class);
 		config.setPropertyElementType(NodeType.class, "properties", PropertyDefinition.class);
-//		config.setPropertyElementType(NodeType.class, "interfaces", OperationDefinition.class);
 		config.setPropertyElementType(RelationshipType.class, "properties", PropertyDefinition.class);
-//		config.setPropertyElementType(RelationshipType.class, "interfaces", OperationDefinition.class);
 		config.setPropertyElementType(CapabilityType.class, "properties", PropertyDefinition.class);
 		config.setPropertyElementType(CapabilityDefinition.class, "properties", PropertyDefinition.class);
 		config.setPropertyElementType(ArtifactType.class, "properties", PropertyDefinition.class);

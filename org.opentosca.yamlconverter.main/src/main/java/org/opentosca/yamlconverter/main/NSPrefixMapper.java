@@ -1,12 +1,14 @@
 package org.opentosca.yamlconverter.main;
 
+import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
+import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
-
-import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
-
+/**
+ * This class defines some namespaces to preferred prefixes for XML.
+ */
 @SuppressWarnings("restriction")
 public class NSPrefixMapper extends NamespacePrefixMapper {
 

@@ -15,7 +15,7 @@ public class DoYamlToXmlMapping extends BaseTest {
 
 			final IToscaYaml2XmlConverter yaml2xml = new ToscaYaml2XmlConverter();
 
-			result = yaml2xml.yaml2xml("");
+			result = yaml2xml.convertToXml("");
 		} catch (final ConverterException e) {
 			e.printStackTrace();
 		}

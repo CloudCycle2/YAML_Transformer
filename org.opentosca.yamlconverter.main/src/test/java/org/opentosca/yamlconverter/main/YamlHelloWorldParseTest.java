@@ -18,7 +18,7 @@ public class YamlHelloWorldParseTest extends BaseTest {
 
 	@Test
 	public void testYaml2YamlBean() throws Exception {
-		final ServiceTemplate root = this.converter.yaml2yamlbean(this.testUtils.readYamlTestResource("/yaml/helloworld.yaml"));
+		final ServiceTemplate root = this.converter.convertToYamlBean(this.testUtils.readYamlTestResource("/yaml/helloworld.yaml"));
 		Assert.assertNotNull(root);
 		final ServiceTemplate rootExpected = getHelloWorldRoot();
 		Assert.assertEquals(rootExpected, root);
@@ -27,7 +27,7 @@ public class YamlHelloWorldParseTest extends BaseTest {
 	@Test
 	public void testYamlBean2Yaml() throws Exception {
 		final IToscaYaml2YamlBeanConverter converter = new YamlBeansConverter();
-		final String yaml = converter.yamlbean2yaml(getHelloWorldRoot());
+		final String yaml = converter.convertToYaml(getHelloWorldRoot());
 		this.testUtils.yamlFilesEqual(yaml, "/yaml/helloworld.yaml");
 	}
 

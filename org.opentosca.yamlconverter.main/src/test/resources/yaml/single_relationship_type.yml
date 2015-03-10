@@ -1,0 +1,9 @@
+relationship_types:
+  MoodleDatabaseConnection:
+    derived_from: MySQLDatabaseConnection
+    description: Connects to Moodle DB
+    interfaces:
+      EndpointConfiguration:
+        preConfigureEndpoint:
+          implementaion: impl
+    valid_targets: [MySQLDatabaseEndpointCapability]

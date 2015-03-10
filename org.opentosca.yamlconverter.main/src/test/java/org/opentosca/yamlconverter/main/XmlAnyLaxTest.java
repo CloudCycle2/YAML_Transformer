@@ -1,24 +1,17 @@
 package org.opentosca.yamlconverter.main;
 
-import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import org.junit.Test;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
+import java.io.ByteArrayInputStream;
+import java.util.*;
 
-public class XmlAnyLaxTest {
+public class XmlAnyLaxTest extends BaseTest {
 
 	// @formatter:off
 	private static final String xml = ""+
@@ -33,7 +26,13 @@ public class XmlAnyLaxTest {
 			"</message>";
 	// @formatter:on
 
-	public static void main(String[] args) throws Exception {
+	/**
+	 * This test only tries to prove that using generic properties in XML is possible. It doesn't really test anything
+	 * like matching a string or something else!
+	 * @throws Exception
+	 */
+	@Test
+	public void testUseAnyMapInXml() throws Exception {
 		final JAXBContext jc = JAXBContext
 				.newInstance(Message.class, Customer.class, Address.class, GenericProperties.class, HashMap.class);
 
