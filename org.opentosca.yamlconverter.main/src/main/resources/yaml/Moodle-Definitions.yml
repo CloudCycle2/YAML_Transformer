@@ -1,0 +1,116 @@
+# Required TOSCA Definitions version string
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+# Optional. default namespace (schema, types version)
+tosca_default_namespace: http://types.opentosca.org
+
+# Optional name of this service template
+template_name: Moodle
+
+# Optional author of this service template
+template_author:
+
+# Optional version of this service template
+template_version:
+
+description: Service Template for Moodle
+
+imports:
+  # list of import statements for importing other definitions files
+  - MoodleTypes-Definitions.yml
+  - TOSCA-v1.0-SpecificTypes-Definitions.yml
+  - TOSCA_definition.yml
+  
+node_templates:
+  VmApache:
+    type: tosca.nodes.Compute
+    properties:
+      num_cpus: 1
+      mem_size: 1024
+    capabilities:
+      VmApache_os: #TODO: Define Capability Type
+        type: OperatingSystemContainerCapability
+    requirements:
+      - VmApache_networks: NetworkAttachmentCapability
+      - VmApache_container: ServerContainerCapability
+      - VmApache_volumes: VolumeAttachmentCapability
+      
+  OsApache:
+    type: OperatingSystem
+    capabilities:
+      OsApache_software: #TODO: Define Capability Type
+        type: SoftwareContainerCapability
+    requirements:
+      - OsApache_container: OperatingSystemContainerCapability
+  
+  ApacheWebServer:
+    type: ApacheWebServer
+    properties:
+      httpdport: 80
+    capabilities: #TODO: Define Capability Type
+      ApacheWebServer_webapps:
+        type: ApacheWebApplicationContainerCapability
+      ApacheWebServer_modules:
+        type: ApacheModuleContainerCapability
+      ApacheWebServer_clients:
+        type: HTTPEndpointCapability
+    requirements:
+      - ApacheWebServer_container: SoftwareContainerCapability
+      - Apache_HostedOn_OsApache: OsApache
+        relationship_type: tosca.relationships.HostedOn
+  MoodleApp:
+    type: MoodleApplication
+    properties:
+      AdminUser: admin
+      AdminPassword: moodle123
+      SiteName: My Moodle
+      SitePath: mymoodle
+    requirements:
+      - MoodleApp_phpRuntime: PHPRuntimeCapability
+      - MoodleApp_database: MoodleDatabaseEndpointCapability
+      - MoodleApp_container: ApacheWebApplicationContainerCapability
+      - MoodleApp_HostedOn_Apache: ApacheWebServer
+        relationship_type: tosca.relationships.HostedOn
+      - MoodleApp_DependsOn_PhpModule: PhpModule
+        relationship_type: tosca.relationships.DependsOn
+      - MoodleApp_ConnectsTo_MoodleDb: MoodleDb
+        relationship_type: tosca.relationships.ConnectsTo
+  PhpModule:
+    type: ApachePHPModule
+    capabilities:
+      PhpModule_phpapps: #TODO: Define Capability Type
+        type: PHPRuntimeCapability
+    requirements:
+      - PhpModule_container: ApacheModuleContainerCapability
+      - PhpModule_HostedOn_Apache: ApacheWebServer
+        relationship_type: tosca.relationships.HostedOn
+  MySql:
+    type: MySQL
+    properties:
+      RootPassword: password
+    capabilities:
+      MySql_database: #TODO: Define Capability Type
+        type: MySQLDatabaseContainerCapability
+    requirements:
+      - MySql_container: SoftwareContainerCapability
+      - MySqlHostedOnOsApache: OsApache
+        relationship_type: tosca.relationships.HostedOn
+  
+  MoodleDb:
+    type: MoodleDatabase
+    properties:
+      DBName: moodledb
+      DBUser: mdladmin
+      DBPassword: mdladmin
+      DBPort: 3306
+    capabilities:
+      MoodleDb_clients:
+        type: MySQLDatabaseEndpoint
+    requirements:
+      - MoodleDb_container: MySQLDatabaseContainerCapability
+      - MoodleDb_HostedOn_MySql: MySql
+        relationship_type: tosca.relationships.HostedOn
+        
+    
+      
+    
