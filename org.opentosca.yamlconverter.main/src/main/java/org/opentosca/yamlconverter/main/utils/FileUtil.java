@@ -17,7 +17,7 @@ public class FileUtil {
 	 * @throws IOException
 	 */
 	public String readYamlResource(String path) throws URISyntaxException, IOException {
-		final File simpleYaml = new File(getClass().getResource(path).toURI());
+		final File simpleYaml = new File(path);
 		return FileUtils.readFileToString(simpleYaml);
 	}
 
