@@ -9,7 +9,7 @@ public class NodeType extends YAMLElement {
 
 	private String derived_from = "";
 	private Map<String, PropertyDefinition> properties = new HashMap<String, PropertyDefinition>();
-	private List<Map<String, Object>> requirements = new ArrayList<Map<String, Object>>();
+	private List<Map<String, String>> requirements = new ArrayList<Map<String, String>>();
 	private Map<String, Object> capabilities = new HashMap<String, Object>();
 	private Map<String, Map<String, Map<String, String>>> interfaces =
 			new HashMap<String, Map<String, Map<String, String>>>();
@@ -46,11 +46,11 @@ public class NodeType extends YAMLElement {
 		}
 	}
 
-	public List<Map<String, Object>> getRequirements() {
+	public List<Map<String, String>> getRequirements() {
 		return this.requirements;
 	}
 
-	public void setRequirements(List<Map<String, Object>> requirements) {
+	public void setRequirements(List<Map<String, String>> requirements) {
 		if (requirements != null) {
 			this.requirements = requirements;
 		}

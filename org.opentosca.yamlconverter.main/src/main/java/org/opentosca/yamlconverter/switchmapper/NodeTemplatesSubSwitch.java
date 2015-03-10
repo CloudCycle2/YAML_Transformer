@@ -1,21 +1,15 @@
 package org.opentosca.yamlconverter.switchmapper;
 
+import org.opentosca.model.tosca.*;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
+
+import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.xml.bind.JAXBElement;
-
-import org.opentosca.model.tosca.TCapability;
-import org.opentosca.model.tosca.TEntityTemplate;
-import org.opentosca.model.tosca.TNodeTemplate;
-import org.opentosca.model.tosca.TRelationshipTemplate;
-import org.opentosca.model.tosca.TRequirement;
-import org.opentosca.model.tosca.TRequirementType;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 
 public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 
@@ -182,16 +176,11 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 	 * @param requirement map containing requirement attributes; mapping size must be 1
 	 */
 	private void createRequirement(final TNodeTemplate.Requirements resultRequirements, final Map<String, Object> requirement) {
-		final String requirementName = (String) requirement.keySet().toArray()[0];
 		final String capability = (String) requirement.values().toArray()[0];
 		if (capability.endsWith("Capability")) {
-			// TODO: check if requirement type already exists and use this
-			// create requirement type for requirement or use existing one
-			final TRequirementType requirementType = new TRequirementType();
+			final String requirementName = (String) requirement.keySet().toArray()[0];
 			final String requirementTypeName = capability.replace("Capability", "Requirement");
-			requirementType.setName(requirementTypeName);
-			requirementType.setRequiredCapabilityType(toTnsQName(capability));
-			getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
+			createAndAddRequirementType(capability, requirementTypeName);
 
 			// create requirement
 			final TRequirement tRequirement = new TRequirement();

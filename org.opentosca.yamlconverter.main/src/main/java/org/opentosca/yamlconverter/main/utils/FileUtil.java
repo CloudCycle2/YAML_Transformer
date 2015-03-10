@@ -1,11 +1,11 @@
 package org.opentosca.yamlconverter.main.utils;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-
-import org.apache.commons.io.FileUtils;
 
 public class FileUtil {
 	/**
@@ -17,8 +17,14 @@ public class FileUtil {
 	 * @throws IOException
 	 */
 	public String readYamlResource(String path) throws URISyntaxException, IOException {
-		final File simpleYaml = new File(path);
-		return FileUtils.readFileToString(simpleYaml);
+		File file = new File(getClass().getResource(path).toURI());
+		try {
+			return FileUtils.readFileToString(file);
+		} catch (Exception e) {
+			System.out.println("Can't find resource on classpath. Try to read it was absolute path.");
+			file = new File(path);
+		}
+		return FileUtils.readFileToString(file);
 	}
 
 	/**

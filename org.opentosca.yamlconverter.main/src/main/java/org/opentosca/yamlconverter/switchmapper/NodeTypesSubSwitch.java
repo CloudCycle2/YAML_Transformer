@@ -58,10 +58,9 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		if (value.getProperties() != null && !value.getProperties().isEmpty()) {
 			result.setPropertiesDefinition(parsePropertiesDefinition(value.getProperties(), name));
 		}
-		// TODO: This does not work and crashes Winery!
-		// if (value.getRequirements() != null && !value.getRequirements().isEmpty()) {
-		// result.setRequirementDefinitions(parseNodeTypeRequirementDefinitions(value.getRequirements()));
-		// }
+		if (value.getRequirements() != null && !value.getRequirements().isEmpty()) {
+			result.setRequirementDefinitions(parseNodeTypeRequirementDefinitions(value.getRequirements()));
+		}
 		if (value.getDescription() != null && !value.getDescription().isEmpty()) {
 			result.getDocumentation().add(toDocumentation(value.getDescription()));
 		}
@@ -72,20 +71,17 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		return result;
 	}
 
-	private RequirementDefinitions parseNodeTypeRequirementDefinitions(List<Map<String, Object>> requirements) {
+	private RequirementDefinitions parseNodeTypeRequirementDefinitions(List<Map<String, String>> requirements) {
 		final RequirementDefinitions result = new RequirementDefinitions();
-		for (final Map<String, Object> req : requirements) {
+		for (final Map<String, String> requirement : requirements) {
 			final TRequirementDefinition rd = new TRequirementDefinition();
-			if (req.size() == 2) {
-				for (final String key : req.keySet()) {
-					if (key.equals("relationship_type")) {
-						rd.setRequirementType(toTnsQName((String) req.get(key)));
-					} else {
-						rd.setName(key);
-					}
-				}
-			} else if (req.size() == 1) {
-				rd.setName((String) req.keySet().toArray()[0]);
+			if (requirement.size() == 1) {
+				final String capability = (String) requirement.values().toArray()[0];
+				final String requirementName = (String) requirement.keySet().toArray()[0];
+				final String requirementTypeName = capability.replace("Capability", "Requirement");
+				createAndAddRequirementType(capability, requirementTypeName);
+				rd.setRequirementType(toTnsQName(requirementTypeName));
+				rd.setName(requirementName);
 			}
 			result.getRequirementDefinition().add(rd);
 		}
