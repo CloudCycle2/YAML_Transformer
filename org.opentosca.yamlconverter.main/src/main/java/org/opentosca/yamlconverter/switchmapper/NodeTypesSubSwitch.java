@@ -31,6 +31,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 	private TNodeType createNodeType(NodeType value, String name) {
 		final TNodeType result = new TNodeType();
 		result.setName(name);
+		result.setTargetNamespace(getUsedNamespace());
 
 		final TNodeTypeImplementation nodeTypeImplementation = new TNodeTypeImplementation();
 		final List<TArtifactTemplate> artifactTemplates = new ArrayList<TArtifactTemplate>();
