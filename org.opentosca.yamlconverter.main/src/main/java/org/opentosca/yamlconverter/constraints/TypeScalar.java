@@ -1,4 +1,4 @@
-package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
+package org.opentosca.yamlconverter.constraints;
 
 public abstract class TypeScalar<T, R> extends ConstraintClause<T> {
 	protected final R constraintArgument;

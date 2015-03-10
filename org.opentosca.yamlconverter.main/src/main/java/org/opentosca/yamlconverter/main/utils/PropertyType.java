@@ -1,4 +1,4 @@
-package org.opentosca.yamlconverter.yamlmodel.yaml.element;
+package org.opentosca.yamlconverter.main.utils;
 
 import java.util.Date;
 import java.util.EnumSet;

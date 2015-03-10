@@ -1,4 +1,4 @@
-package org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints;
+package org.opentosca.yamlconverter.constraints;
 
 /**
  * Maps the constraint operators to the respective specific class implementations.

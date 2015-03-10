@@ -2,11 +2,11 @@ package org.opentosca.yamlconverter.main;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.opentosca.yamlconverter.constraints.ConstraintClause;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
+import org.opentosca.yamlconverter.main.utils.PropertyType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.constraints.ConstraintClause;
 
 import java.util.ArrayList;
 import java.util.List;
