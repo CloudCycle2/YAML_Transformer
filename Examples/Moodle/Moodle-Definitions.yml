@@ -31,9 +31,9 @@ node_templates:
       VmApache_os: #TODO: Define Capability Type
         type: OperatingSystemContainerCapability
     requirements:
-      - VmApache_networks: testNetworks
-      - VmApache_container: testContainer
-      - VmApache_volumes: testVolumes
+      - VmApache_networks: NetworkAttachmentCapability
+      - VmApache_container: ServerContainerCapability
+      - VmApache_volumes: VolumeAttachmentCapability
       
   OsApache:
     type: OperatingSystem
@@ -41,7 +41,7 @@ node_templates:
       OsApache_software: #TODO: Define Capability Type
         type: SoftwareContainerCapability
     requirements:
-      - host: VmApache_os
+      - OsApache_container: OperatingSystemContainerCapability
   
   ApacheWebServer:
     type: ApacheWebServer
@@ -55,8 +55,9 @@ node_templates:
       ApacheWebServer_clients:
         type: HTTPEndpointCapability
     requirements:
-      - host: OsApache_software
-  
+      - ApacheWebServer_container: SoftwareContainerCapability
+      - Apache_HostedOn_OsApache: OsApache
+        relationship_type: tosca.relationships.HostedOn
   MoodleApp:
     type: MoodleApplication
     properties:
@@ -65,18 +66,24 @@ node_templates:
       SiteName: My Moodle
       SitePath: mymoodle
     requirements:
-      - host: ApacheWebServer_webapps
-      - dependsOn: PhpModule_phpapps
-      - connectsTo: MoodleDb_clients
-      
+      - MoodleApp_phpRuntime: PHPRuntimeCapability
+      - MoodleApp_database: MoodleDatabaseEndpointCapability
+      - MoodleApp_container: ApacheWebApplicationContainerCapability
+      - MoodleApp_HostedOn_Apache: ApacheWebServer
+        relationship_type: tosca.relationships.HostedOn
+      - MoodleApp_DependsOn_PhpModule: PhpModule
+        relationship_type: tosca.relationships.DependsOn
+      - MoodleApp_ConnectsTo_MoodleDb: MoodleDb
+        relationship_type: tosca.relationships.ConnectsTo
   PhpModule:
     type: ApachePHPModule
     capabilities:
       PhpModule_phpapps: #TODO: Define Capability Type
         type: PHPRuntimeCapability
     requirements:
-      - host: ApacheWebServer_modules
-    
+      - PhpModule_container: ApacheModuleContainerCapability
+      - PhpModule_HostedOn_Apache: ApacheWebServer
+        relationship_type: tosca.relationships.HostedOn
   MySql:
     type: MySQL
     properties:
@@ -85,7 +92,9 @@ node_templates:
       MySql_database: #TODO: Define Capability Type
         type: MySQLDatabaseContainerCapability
     requirements:
-      - host: OsApache_software
+      - MySql_container: SoftwareContainerCapability
+      - MySqlHostedOnOsApache: OsApache
+        relationship_type: tosca.relationships.HostedOn
   
   MoodleDb:
     type: MoodleDatabase
@@ -98,7 +107,9 @@ node_templates:
       MoodleDb_clients:
         type: MySQLDatabaseEndpoint
     requirements:
-      - host: MySql_database
+      - MoodleDb_container: MySQLDatabaseContainerCapability
+      - MoodleDb_HostedOn_MySql: MySql
+        relationship_type: tosca.relationships.HostedOn
         
     
       
