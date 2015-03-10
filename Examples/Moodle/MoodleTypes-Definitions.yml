@@ -48,14 +48,14 @@ node_types:
     requirements:
       - connectsTo:
           node: MoodleDatabase
-          relationship: MoodleDatabaseConnection
+          relationship_type: MoodleDatabaseConnection
           capability: MySQLDatabaseEndpointCapability
       - host:
           node: ApacheWebServer
-          relationship: tosca.relationships.HostedOn
+          relationship_type: tosca.relationships.HostedOn
       - dependsOn:
           node: ApachePHPModule
-          relationship: tosca.relationships.DependsOn
+          relationship_type: tosca.relationships.DependsOn
          
   MoodleDatabase:
     # MoodleDatabase -df> MySQLDatabase -df> Database -df> RootNodeType
@@ -90,7 +90,7 @@ node_types:
     requirements:
       - host:
           node: MySQLDatabase
-          relationship: MySQLDatabaseHostedOnMySQL
+          relationship_type: MySQLDatabaseHostedOnMySQL
           
   Server:
     derived_from: tosca.nodes.Root
