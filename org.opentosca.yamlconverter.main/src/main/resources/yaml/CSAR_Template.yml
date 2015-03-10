@@ -64,11 +64,6 @@ node_templates:
       floatingIp:
       serverId:
       privKey:
-    capabilities:
-      warhammer:
-        type: testCap
-      linuxmaster:
-        type: niceCap
 
   LinuxOperatingSystem:
     type: OperatingSystem
@@ -130,9 +125,6 @@ node_types:
           ServiceEndpoint: /services/org_opentosca_types_Ubuntu__InterfaceUbuntuPort
           PortType: "{http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu" #TODO define interface
           InvocationType: SOAP/HTTP
-    capabilities:
-      warhammer2:
-        type: niceCap
 
   InstallOpenStackVM:
     derived_from: tosca.nodes.Root
@@ -200,18 +192,6 @@ artifact_types:
         type: string
 
 capability_types:
-  testCap:
-    derived_from: parent_capability
-    description: xy bla bla
-    properties:
-      server_name:
-        type: string
-  niceCap:
-    derived_from: testCap
-    description: Another capability
-    properties:
-      port:
-        type: integer
   NetworkAttachementCapability:
     derived_from: tosca.capabilities.Endpoint
     description: Network Attachment Capability
