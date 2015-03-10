@@ -17,14 +17,15 @@ public class CSARUtil {
 	private static final String DEFAULT_TEMPLATE_AUTHOR = "YAML";
 
 	public static void createCSAR(ServiceTemplate st, String xml, String xsd, String tempfolder, String csarfilename) throws IOException {
-		FileUtil.saveStringAsFile(tempfolder + "/" + DEFINITIONS_FOLDER + "/" + XSD_FILENAME, xsd);
-		FileUtil.saveStringAsFile(tempfolder + "/" + DEFINITIONS_FOLDER + "/" + XML_FILENAME, xml);
-		FileUtil.saveStringAsFile(tempfolder + "/" + META_FOLDER + "/" + META_FILENAME, generateMetaFileContent(st));
-		final ZipUtils appZip = new ZipUtils(tempfolder);
-		appZip.generateFileList(new File(tempfolder + "/" + META_FOLDER));
-		appZip.generateFileList(new File(tempfolder + "/" + DEFINITIONS_FOLDER));
+		FileUtil.saveStringAsFile(DEFINITIONS_FOLDER + "/" + XSD_FILENAME, xsd);
+		FileUtil.saveStringAsFile(DEFINITIONS_FOLDER + "/" + XML_FILENAME, xml);
+		FileUtil.saveStringAsFile(META_FOLDER + "/" + META_FILENAME, generateMetaFileContent(st));
+		final ZipUtils appZip = new ZipUtils();
+		appZip.generateFileList(new File(META_FOLDER));
+		appZip.generateFileList(new File(DEFINITIONS_FOLDER));
 		appZip.zipIt(csarfilename);
-		FileUtil.deleteDirectory(new File(tempfolder));
+		FileUtil.deleteDirectory(new File(DEFINITIONS_FOLDER));
+		FileUtil.deleteDirectory(new File(META_FOLDER));
 	}
 
 	private static String generateMetaFileContent(ServiceTemplate st) {
