@@ -6,23 +6,26 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 public class FileUtil {
 	/**
 	 * Read file from path and return String.
 	 *
-	 * @param path filepath
+	 * @param filepath filepath
 	 * @return the file content
 	 * @throws URISyntaxException
 	 * @throws IOException
 	 */
-	public String readYamlResource(String path) throws URISyntaxException, IOException {
-		File file = new File(getClass().getResource(path).toURI());
-		try {
-			return FileUtils.readFileToString(file);
-		} catch (Exception e) {
-			System.out.println("Can't find resource on classpath. Try to read it was absolute path.");
-			file = new File(path);
+	public String readYamlResource(String filepath) throws URISyntaxException, IOException {
+		URL urlToFile = getClass().getResource(filepath);
+		File file = null;
+		if (urlToFile != null) {
+			System.out.println("Try to read YAML file from classpath.");
+			file = new File(getClass().getResource(filepath).toURI());
+		} else {
+			System.out.println("Can't find resource on classpath. Try to read it as absolute path.");
+			file = new File(filepath);
 		}
 		return FileUtils.readFileToString(file);
 	}
