@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -28,6 +29,10 @@ public class FileUtil {
 			file = new File(filepath);
 		}
 		return FileUtils.readFileToString(file);
+	}
+
+	public InputStream getResourceAsStream(String file) {
+		return getClass().getResourceAsStream(file);
 	}
 
 	/**
