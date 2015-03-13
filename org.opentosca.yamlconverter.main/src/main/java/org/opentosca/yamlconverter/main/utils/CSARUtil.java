@@ -33,19 +33,20 @@ public class CSARUtil {
 	public static void createCSAR(ServiceTemplate st, String xml, String xsd, String csarfilename) throws IOException {
 		final ZipUtils appZip = new ZipUtils();
 		final FileUtil fileUtil = new FileUtil();
-		final File metaFolder = new File(META_FOLDER);
-		final File definitionsFolder = new File(DEFINITIONS_FOLDER);
-		final File typesFolder = new File(TOSCA_TYPES_FOLDER);
+		File[] csarFolders = new File[]{new File(META_FOLDER), new File(DEFINITIONS_FOLDER), new File(TOSCA_TYPES_FOLDER)};
 		prepareFoldersWithFiles(st, xml, xsd, fileUtil);
+
 		// generate zip
-		appZip.generateFileList(metaFolder);
-		appZip.generateFileList(definitionsFolder);
-		appZip.generateFileList(typesFolder);
+		for (File folder : csarFolders) {
+			appZip.generateFileList(folder);
+		}
+
 		appZip.zipIt(csarfilename);
+
 		// clean directory
-		FileUtil.deleteDirectory(definitionsFolder);
-		FileUtil.deleteDirectory(metaFolder);
-		FileUtil.deleteDirectory(typesFolder);
+		for (File folder : csarFolders) {
+			FileUtil.deleteDirectory(folder);
+		}
 	}
 
 	private static void prepareFoldersWithFiles(final ServiceTemplate st, final String xml, final String xsd, final FileUtil fileUtil) throws IOException {
