@@ -22,27 +22,31 @@ imports:
 capability_types:
   NetworkAttachmentCapability:
     derived_from: tosca.capabilites.Endpoint
+    description: Network Attachment Capability
     
   ServerContainerCapability:
     derived_from: tosca.capabilities.Container
+    description: Server Container Capability
    
   VolumeAttachmentCapability:
     derived_from: tosca.capabilities.Endpoint
+    description: Volume Attachment Capability
     
   OperatingSystemContainerCapability:
     derived_from: tosca.capabilities.Container
+    description: Operating System Container Capability
     
   SoftwareContainerCapability:
     derived_from: tosca.capabilities.Container
+    description: Software Container Capability
   
   DatabaseEndpointCapability:
     derived_from: IPEndpointCapability
-    
-# from file Specific Types Definitions
+    description: Database Endpoint Capability
+
   MySQLDatabaseEndpointCapability:
-  # MySQLDatabaseEndpointCapability -df> DatabaseEndpointCapability -df> IPEndpointCapability
-  # -df> EndpointCapability -df> EndpointCapability
     derived_from: DatabaseEndpointCapability
+    description: MySQL Database Endpoint Capability
     
   ApacheWebApplicationContainerCapability:
     derived_from: WebApplicationContainerCapability
@@ -89,12 +93,20 @@ node_types:
     # from MoodleTypes.xsd tMoodleApplicationProperties
       AdminUser:
         type: string
+        description: Administrator
+        default: admin        
       AdminPassword:
         type: string
+        description: Administrator Password
+        default: admin
       SiteName:
         type: string
+        description: Site Name
+        default: Moodle
       SitePath:
         type: string
+        description: Site Path
+        default: moodle
     artifacts:
       # Implementation Artifacts:
       - at-MoodleApplication-install: scripts/MoodleApplication/install.sh
@@ -122,16 +134,9 @@ node_types:
         configure:
           implementaion: at-MoodleApplication-configure
     requirements:
-      - connectsTo:
-          node: MoodleDatabase
-          relationship_type: MoodleDatabaseConnection
-          capability: MySQLDatabaseEndpointCapability
-      - host:
-          node: ApacheWebServer
-          relationship_type: tosca.relationships.HostedOn
-      - dependsOn:
-          node: ApachePHPModule
-          relationship_type: tosca.relationships.DependsOn
+      - phpRuntime: PHPRuntimeCapability
+      # Original: MoodleDatabaseEndpointRequirement
+      - database: MySQLDatabaseEndpointCapability
          
   MoodleDatabase:
     # MoodleDatabase -df> MySQLDatabase -df> Database -df> RootNodeType
@@ -141,12 +146,20 @@ node_types:
     #from MoodleTypes.xsd tMoodleDatabaseProperties
       DBName:
         type: string
+        description: Database Name
+        default: moodlebd
       DBUser:
         type: string
+        description: Database User
+        default: moodle
       DBPassword:
         type: string
+        description: Database User Password
+        default: moodle
       DBPort:
         type: int
+        description: Database Port (default 3306)
+        default: 3306
     artifacts:
         #Implementation Artifacts
       - at-MoodleDatabase-configure: 
@@ -162,20 +175,20 @@ node_types:
     interfaces:
       tosca.interfaces.node.lifecycle.Standard:
         configure:
-          implementation: at-MoodleDatabase-configure
-    requirements:
-      - host:
-          node: MySQLDatabase
-          relationship_type: MySQLDatabaseHostedOnMySQL
-          
+          implementation: at-MoodleDatabase-configure          
   Server:
     derived_from: tosca.nodes.Root
     description: Server
+    # from TOSCA-v1.0-BaseTypes.xsd!
     properties:
       NumCpus:
-        type: string
+        type: int
+        description: Number of CPUs: Number of CPUs for the virtual machine
+        default: 1
+        # constraints: @MSteffl: can not figure out how to do this
       Memory:
-        type: string
+        type: int
+        description: Memory (in MB): Amount of memory for the virtual machine
     artifacts:
       - AmazonEC2VMNodeTypeImplementation_IA_ArtifactTemplate: IAs/AmazonEC2VMNodeType/org_opentosca_types_AmazonEC2VM__InterfaceAmazonEC2VM.war
           type: WAR
@@ -183,6 +196,12 @@ node_types:
     interfaces:
       InterfaceAmazonEC2VM:
         #Operation is missing
+    requirements:
+      - networks: NetworkAttachmentCapability
+      - container: ServerContainerCapability
+      - volumes: VolumeAttachmentCapability
+    capabilites:
+      os: OperatingSystemContainerCapability
       
   OperatingSystem:
     derived_from: tosca.nodes.Root
@@ -190,6 +209,10 @@ node_types:
     properties:
     artifacts:
       - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: IAs/UbuntuNodeType/org_opentosca_types_Ubuntu__InterfaceUbuntu.war
+    requirements:
+      - container: OperatingSystemContainerCapability
+    capabilites:
+      software: SoftwareContainerCapability
         
   ApacheWebServer:
     derived_from: tosca.nodes.WebServer
@@ -349,6 +372,10 @@ relationship_types:
   
   MySQLDatabaseConnection:
     derived_from: tosca.relationships.ConnectsTo
+    
+  tosca.relationships.HostedOn:
+    derived_from: tosca.relationships.DependsOn
+    valid_targets: [ tosca.capabilities.Container ]
  
   MoodleDatabaseConnection: #TODO
 #MoodleDatabaseConnection -df> MySQLDatabaseConnection -df>ConnectsTo
@@ -458,6 +485,7 @@ node_templates:
   PhpModule:
     type: ApachePHPModule
     capabilities:
+    # which way? long or short (see above)?
       PhpModule_phpapps:
         type: PHPRuntimeCapability
     requirements:
