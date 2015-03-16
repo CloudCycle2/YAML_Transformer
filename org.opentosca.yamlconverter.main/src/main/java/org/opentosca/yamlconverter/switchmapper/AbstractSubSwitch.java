@@ -197,6 +197,15 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return output.toString();
 	}
 
+	protected void createAndAddRequirementType(final String capability, final String requirementTypeName) {
+		// TODO: check if requirement type already exists and use this
+		// create requirement type for requirement or use existing one
+		final TRequirementType requirementType = new TRequirementType();
+		requirementType.setName(requirementTypeName);
+		requirementType.setRequiredCapabilityType(toTnsQName(capability));
+		getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
+	}
+
 	@Override
 	public abstract void process();
 }
