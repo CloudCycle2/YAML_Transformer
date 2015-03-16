@@ -19,6 +19,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public abstract class AbstractSubSwitch implements ISubSwitch {
+
+	private Map<String, TRequirementType> addedRequirementTypes = new HashMap<String, TRequirementType>();
 	private final Yaml2XmlSwitch parent;
 	private TTopologyTemplate topologyCache;
 
@@ -79,28 +81,43 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	protected PropertiesDefinition parsePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
 		final PropertiesDefinition result = new PropertiesDefinition();
 		// setType() works, setElement will throw an error while importing the XML to Winery
-		result.setType(new QName(Yaml2XmlSwitch.TYPESNS, typename + "Properties", "types"));
+		result.setType(new QName(Yaml2XmlSwitch.TYPES_NS, typename + "Properties", "types"));
 		generateTypeXSD(properties, typename + "Properties");
 		return result;
 	}
 
 	private void generateTypeXSD(Map<String, PropertyDefinition> properties, String name) {
 		final String tName = "t" + name;
-		this.parent.getXSDStringBuilder().append("<xs:complexType name=\"" + tName + "\">\n");
+		this.parent.getXSDStringBuilder()
+				.append("<xs:complexType name=\"")
+				.append(tName)
+				.append("\">\n");
 		this.parent.getXSDStringBuilder().append("<xs:sequence>\n");
+
 		for (final Entry<String, PropertyDefinition> entry : properties.entrySet()) {
-			this.parent.getXSDStringBuilder().append(
-					"<xs:element name=\"" + entry.getKey() + "\" type=\"xs:" + entry.getValue().getType() + "\" />\n");
+			this.parent.getXSDStringBuilder()
+					.append("<xs:element name=\"")
+					.append(entry.getKey())
+					.append("\" type=\"xs:")
+					.append(entry.getValue().getType())
+					.append("\" />\n");
 		}
-		this.parent.getXSDStringBuilder().append("</xs:sequence>\n");
-		this.parent.getXSDStringBuilder().append("</xs:complexType>\n");
-		this.parent.getXSDStringBuilder().append("<xs:element name=\"" + name + "\" type=\"" + tName + "\" />");
+
+		this.parent.getXSDStringBuilder()
+				.append("</xs:sequence>\n")
+				.append("</xs:complexType>\n");
+		this.parent.getXSDStringBuilder()
+				.append("<xs:element name=\"")
+				.append(name)
+				.append("\" type=\"")
+				.append(tName)
+				.append("\" />\n");
 	}
 
 	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodename) {
 		final AnyMap properties = new AnyMap(parseProperties(customMap));
-		properties.getOtherAttributes().put(new QName("xmlns"), Yaml2XmlSwitch.TYPESNS);
-		return new JAXBElement<AnyMap>(new QName(Yaml2XmlSwitch.TYPESNS, nodename + "Properties", "types"), AnyMap.class, properties);
+		properties.getOtherAttributes().put(new QName("xmlns"), Yaml2XmlSwitch.TYPES_NS);
+		return new JAXBElement<AnyMap>(new QName(Yaml2XmlSwitch.TYPES_NS, nodename + "Properties", "types"), AnyMap.class, properties);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -159,7 +176,6 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 						return getServiceTemplate().getInputs().get(inputvar).getDefault();
 					}
 				}
-				// TODO: *Type-defaults
 				return Yaml2XmlSwitch.DEFAULT_USER_INPUT;
 			case "get_property":
 				@SuppressWarnings("unchecked")
@@ -198,12 +214,14 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	}
 
 	protected void createAndAddRequirementType(final String capability, final String requirementTypeName) {
-		// TODO: check if requirement type already exists and use this
-		// create requirement type for requirement or use existing one
-		final TRequirementType requirementType = new TRequirementType();
-		requirementType.setName(requirementTypeName);
-		requirementType.setRequiredCapabilityType(toTnsQName(capability));
-		getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
+		// create requirement type for requirement if no has been created before
+		if (!this.addedRequirementTypes.containsKey(requirementTypeName)) {
+			final TRequirementType requirementType = new TRequirementType();
+			requirementType.setName(requirementTypeName);
+			requirementType.setRequiredCapabilityType(toTnsQName(capability));
+			this.addedRequirementTypes.put(requirementTypeName, requirementType);
+			getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
+		}
 	}
 
 	@Override

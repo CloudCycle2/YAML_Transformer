@@ -1,6 +1,7 @@
 package org.opentosca.yamlconverter.switchmapper;
 
 import org.opentosca.model.tosca.*;
+import org.opentosca.yamlconverter.main.utils.CSARUtil;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 import javax.xml.namespace.QName;
@@ -31,7 +32,11 @@ public class Yaml2XmlSwitch {
 	/**
 	 * The XML-Namespace of the types.
 	 */
-	public static String TYPESNS = "http://www.example.org/tosca/yamlgen/types";
+	public static final String TYPES_NS = "http://www.example.org/tosca/yamlgen/types";
+
+	public static final String TOSCA_IMPORT_TYPE = "http://docs.oasis-open.org/tosca/ns/2011/12";
+
+	public static final String BASE_TYPES_NS = "http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes";
 
 	/**
 	 * A counter for creating unique IDs.
@@ -89,7 +94,7 @@ public class Yaml2XmlSwitch {
 	 */
 	public String getXSD() {
 		final String pre = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" "
-				+ "targetNamespace=\"" + TYPESNS + "\" xmlns=\"" + TYPESNS + "\">\n";
+				+ "targetNamespace=\"" + TYPES_NS + "\" xmlns=\"" + TYPES_NS + "\">\n";
 		final String post = "</xs:schema>";
 		return pre + this.xsd.toString() + post;
 	}
@@ -128,8 +133,11 @@ public class Yaml2XmlSwitch {
 			sSw.process();
 		}
 
-		this.toscaResult.getImport().add(createTypeImport());
-
+		this.toscaResult.getImport().add(createTypeImport(XMLSCHEMA_NS,
+				CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TYPES_XSD_FILENAME, TYPES_NS));
+		// only add specific types, base types are imported within specific types XML document
+		this.toscaResult.getImport().add(createTypeImport(TOSCA_IMPORT_TYPE,
+				CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TOSCA_SPECIFIC_TYPE_FILENAME, BASE_TYPES_NS));
 		return this.toscaResult;
 	}
 
@@ -137,10 +145,21 @@ public class Yaml2XmlSwitch {
 			TTopologyTemplate topologyTemplate) {
 		this.toscaResult.setId(unique("root"));
 		this.toscaResult.setName(unique("Root"));
+
+		// set namespaces
 		if (yamlServiceTemplate.getTosca_default_namespace() != null && !yamlServiceTemplate.getTosca_default_namespace().isEmpty()) {
 			this.usedNamespace = yamlServiceTemplate.getTosca_default_namespace();
 		}
 		this.toscaResult.setTargetNamespace(this.usedNamespace);
+		this.toscaResult.getOtherAttributes().put(new QName("xmlns:ns1"), BASE_TYPES_NS);
+		this.toscaResult.getOtherAttributes().put(new QName("xmlns:types"), TYPES_NS);
+
+		setServiceAndTopologyTemplate(yamlServiceTemplate, serviceTemplate, topologyTemplate);
+	}
+
+	private void setServiceAndTopologyTemplate(final ServiceTemplate yamlServiceTemplate, final TServiceTemplate serviceTemplate,
+											   final TTopologyTemplate topologyTemplate) {
+		// set service and topology template
 		this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(serviceTemplate);
 		this.toscaResult.getDocumentation().add(toDocumentation(yamlServiceTemplate.getDescription()));
 		if (yamlServiceTemplate.getTemplate_author() != null && !yamlServiceTemplate.getTemplate_author().isEmpty()) {
@@ -149,7 +168,6 @@ public class Yaml2XmlSwitch {
 		if (yamlServiceTemplate.getTemplate_version() != null && !yamlServiceTemplate.getTemplate_version().isEmpty()) {
 			this.toscaResult.getDocumentation().add(toDocumentation("Template Version: " + yamlServiceTemplate.getTemplate_version()));
 		}
-		this.toscaResult.getOtherAttributes().put(new QName("xmlns:types"), TYPESNS);
 		if (yamlServiceTemplate.getTemplate_name() != null && !yamlServiceTemplate.getTemplate_name().isEmpty()) {
 			serviceTemplate.setId(unique(yamlServiceTemplate.getTemplate_name()));
 			serviceTemplate.setName(yamlServiceTemplate.getTemplate_name());
@@ -161,11 +179,11 @@ public class Yaml2XmlSwitch {
 		serviceTemplate.setTargetNamespace(this.usedNamespace);
 	}
 
-	private TImport createTypeImport() {
+	private TImport createTypeImport(final String importType, final String location, final String namespace) {
 		final TImport result = new TImport();
-		result.setImportType(XMLSCHEMA_NS);
-		result.setLocation("Definitions/types.xsd");
-		result.setNamespace(TYPESNS);
+		result.setImportType(importType);
+		result.setLocation(location);
+		result.setNamespace(namespace);
 		return result;
 	}
 

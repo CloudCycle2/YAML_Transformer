@@ -16,7 +16,7 @@ public class NSPrefixMapper extends NamespacePrefixMapper {
 
 	public NSPrefixMapper() {
 		this.prefixMap = new HashMap<String, String>();
-		this.prefixMap.put(Yaml2XmlSwitch.TYPESNS, "types");
+		this.prefixMap.put(Yaml2XmlSwitch.TYPES_NS, "types");
 		this.prefixMap.put("http://docs.oasis-open.org/tosca/ns/2011/12", "tosca");
 	}
 
