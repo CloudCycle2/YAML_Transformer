@@ -1,16 +1,25 @@
 package org.opentosca.yamlconverter.switchmapper;
 
-import org.opentosca.model.tosca.*;
-import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
-import org.opentosca.model.tosca.TNodeType.Interfaces;
-import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.opentosca.model.tosca.TArtifactReference;
+import org.opentosca.model.tosca.TArtifactTemplate;
+import org.opentosca.model.tosca.TCapabilityDefinition;
+import org.opentosca.model.tosca.TEntityTemplate;
+import org.opentosca.model.tosca.TImplementationArtifacts;
+import org.opentosca.model.tosca.TInterface;
+import org.opentosca.model.tosca.TNodeType;
+import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
+import org.opentosca.model.tosca.TNodeType.Interfaces;
+import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
+import org.opentosca.model.tosca.TNodeTypeImplementation;
+import org.opentosca.model.tosca.TOperation;
+import org.opentosca.model.tosca.TRequirementDefinition;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
 
 public class NodeTypesSubSwitch extends AbstractSubSwitch {
 
@@ -38,7 +47,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		final TImplementationArtifacts implementationArtifacts = new TImplementationArtifacts();
 		nodeTypeImplementation.setImplementationArtifacts(implementationArtifacts);
 		nodeTypeImplementation.setName(name + "Implementation");
-		nodeTypeImplementation.setNodeType(this.toTnsQName(result.getName()));
+		nodeTypeImplementation.setNodeType(toTnsQName(result.getName()));
 
 		if (value.getArtifacts() != null && !value.getArtifacts().isEmpty()) {
 			// here are only artifact definitions!!
@@ -141,7 +150,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			String artifactType = "";
 			String artifactDescription = "";
 			String artifactMimeType = "";
-			Map<String, Object> additionalProperties = null;
+			Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 			for (final Entry<String, Object> artifactEntry : artifact.entrySet()) {
 				switch (artifactEntry.getKey()) {
