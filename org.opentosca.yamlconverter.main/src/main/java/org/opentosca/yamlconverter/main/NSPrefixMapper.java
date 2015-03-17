@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.main;
 
-import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
+import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
 
 import java.util.HashMap;

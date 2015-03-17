@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.main;
 
-import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
+import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 import org.opentosca.model.tosca.Definitions;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
@@ -54,7 +54,7 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 			final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
 			if (this.nsPrefixMapper != null) {
-				jaxbMarshaller.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper", this.nsPrefixMapper);
+				jaxbMarshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", this.nsPrefixMapper);
 			} else {
 				System.out.println("Can't set property 'com.sun.xml.internal.bind.namespacePrefixMapper' " +
 						"for JAXB marshaller, because no prefix mapper is defined.");
