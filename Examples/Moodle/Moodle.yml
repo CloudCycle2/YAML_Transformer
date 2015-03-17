@@ -152,7 +152,7 @@ node_types:
         #Implementation Artifacts
       - at-MoodleDatabase-configure: scripts/MoodleDatabase/configure.sh
         type: tosca.artifacts.impl.Bash
-        description: <description>
+        description: description
     interfaces:
       tosca.interfaces.node.lifecycle.Standard:
         configure:
@@ -165,16 +165,16 @@ node_types:
     properties:
       NumCpus:
         type: int
-        description: Number of CPUs: Number of CPUs for the virtual machine
+        description: "Number of CPUs: Number of CPUs for the virtual machine"
         default: 1
         # constraints: @MSteffl: can not figure out how to do this
       Memory:
         type: int
-        description: Memory (in MB): Amount of memory for the virtual machine
+        description: "Memory (in MB): Amount of memory for the virtual machine"
     artifacts:
       - AmazonEC2VMNodeTypeImplementation_IA_ArtifactTemplate: IAs/AmazonEC2VMNodeType/org_opentosca_types_AmazonEC2VM__InterfaceAmazonEC2VM.war
         type: WAR
-        description: <description>
+        description: description
     interfaces:
       InterfaceAmazonEC2VM:
         #Operation is missing
@@ -288,7 +288,7 @@ node_types:
     capabilities:
       databases: MySQLDatabaseContainerCapability
     interfaces:
-      [tosca.interfaces.node.Lifecycle]:# TODO do I have to name the operations?
+      [tosca.interfaces.node.Lifecycle]:
         install:
           implementation: at-MySQL-install
         configure:
@@ -334,7 +334,7 @@ relationship_types:
 artifact_types: 
   # list of artifact type definitions 
   WAR:
-    description: <artifact_description>
+    description: todo
     mime_type: application/x-zip 
     file_ext: [war] 
     properties:
