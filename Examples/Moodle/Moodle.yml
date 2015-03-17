@@ -21,7 +21,7 @@ imports:
 
 capability_types:
   NetworkAttachmentCapability:
-    derived_from: tosca.capabilites.Endpoint
+    derived_from: tosca.capabilities.Endpoint
     description: Network Attachment Capability
     
   ServerContainerCapability:
@@ -151,8 +151,8 @@ node_types:
     artifacts:
         #Implementation Artifacts
       - at-MoodleDatabase-configure: scripts/MoodleDatabase/configure.sh
-          type: tosca.artifacts.impl.Bash
-          description: <description>
+        type: tosca.artifacts.impl.Bash
+        description: <description>
     interfaces:
       tosca.interfaces.node.lifecycle.Standard:
         configure:
@@ -173,8 +173,8 @@ node_types:
         description: Memory (in MB): Amount of memory for the virtual machine
     artifacts:
       - AmazonEC2VMNodeTypeImplementation_IA_ArtifactTemplate: IAs/AmazonEC2VMNodeType/org_opentosca_types_AmazonEC2VM__InterfaceAmazonEC2VM.war
-          type: WAR
-          description: <description>
+        type: WAR
+        description: <description>
     interfaces:
       InterfaceAmazonEC2VM:
         #Operation is missing
@@ -182,7 +182,7 @@ node_types:
       - networks: NetworkAttachmentCapability
       - container: ServerContainerCapability
       - volumes: VolumeAttachmentCapability
-    capabilites:
+    capabilities:
       os: OperatingSystemContainerCapability
       
   OperatingSystem:
@@ -194,7 +194,7 @@ node_types:
         type: WAR
     requirements:
       - container: OperatingSystemContainerCapability
-    capabilites:
+    capabilities:
       software: SoftwareContainerCapability
         
   ApacheWebServer:
@@ -277,10 +277,10 @@ node_types:
         start:
           implementation: at-ApacheLoadbalancerModule-start
     artifacts:
-    - at-ApacheLoadbalancerModule-configure: scripts/ApacheLoadbalancerModule/configure.sh
-      type: tosca.artifacts.impl.Bash
-    - at-ApacheLoadbalancerModule-start: scripts/ApacheLoadbalancerModule/start.sh
-      type: tosca.artifacts.impl.Bash
+      - at-ApacheLoadbalancerModule-configure: scripts/ApacheLoadbalancerModule/configure.sh
+        type: tosca.artifacts.impl.Bash
+      - at-ApacheLoadbalancerModule-start: scripts/ApacheLoadbalancerModule/start.sh
+        type: tosca.artifacts.impl.Bash
 
   MySQL:
     derived_from: tosca.nodes.DBMS
@@ -298,14 +298,14 @@ node_types:
         stop:
           implementation: at-MySQL-stop
     artifacts:
-    - at-MySQL-configure: scripts/MySQL/configure.sh
-      type: tosca.artifacts.impl.Bash
-    - at-MySQL-start: scripts/MySQL/start.sh
-      type: tosca.artifacts.impl.Bash
-    - at-MySQL-stop: scripts/MySQL/stop.sh
-      type: tosca.artifacts.impl.Bash
-    - at-MySQL-install: scripts/MySQL/install.sh
-      type: tosca.artifacts.impl.Bash
+      - at-MySQL-configure: scripts/MySQL/configure.sh
+        type: tosca.artifacts.impl.Bash
+      - at-MySQL-start: scripts/MySQL/start.sh
+        type: tosca.artifacts.impl.Bash
+      - at-MySQL-stop: scripts/MySQL/stop.sh
+        type: tosca.artifacts.impl.Bash
+      - at-MySQL-install: scripts/MySQL/install.sh
+        type: tosca.artifacts.impl.Bash
         
   MySQLDatabase:
     derived_from: tosca.nodes.Database
@@ -329,14 +329,14 @@ relationship_types:
       tosca.interfaces.relationship.Configure:  # Standard interface type for relationship, SHOULD be used
         pre_configure_target:
           implementation: scripts/MoodleDatabaseConnection/configureDatabaseEndpoint.sh
-    valid_targets: MySQLDatabaseEndpointCapability
+    valid_targets: [MySQLDatabaseEndpointCapability]
 
 artifact_types: 
   # list of artifact type definitions 
   WAR:
     description: <artifact_description>
     mime_type: application/x-zip 
-    file_ext: war 
+    file_ext: [war] 
     properties:
       ServiceEndpoint:
         type: string
