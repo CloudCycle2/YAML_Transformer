@@ -12,8 +12,7 @@ public class NodeTemplate extends YAMLElement {
 	private List<Map<String, Object>> requirements = new ArrayList<Map<String, Object>>();
 	private Map<String, Object> capabilities = new HashMap<String, Object>();
 	private Map<String, String> interfaces = new HashMap<String, String>();
-	private Map<String, Object> artifacts = new HashMap<String, Object>();
-
+	private List<Map<String, Object>> artifacts = new ArrayList<Map<String, Object>>();
 
 	public void setType(String type) {
 		if (type != null) {
@@ -56,7 +55,7 @@ public class NodeTemplate extends YAMLElement {
 	}
 
 	public Map<String, String> getInterfaces() {
-		return interfaces;
+		return this.interfaces;
 	}
 
 	public void setInterfaces(Map<String, String> interfaces) {
@@ -65,11 +64,11 @@ public class NodeTemplate extends YAMLElement {
 		}
 	}
 
-	public Map<String, Object> getArtifacts() {
-		return artifacts;
+	public List<Map<String, Object>> getArtifacts() {
+		return this.artifacts;
 	}
 
-	public void setArtifacts(Map<String, Object> artifacts) {
+	public void setArtifacts(List<Map<String, Object>> artifacts) {
 		if (artifacts != null) {
 			this.artifacts = artifacts;
 		}
