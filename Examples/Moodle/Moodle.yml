@@ -156,7 +156,8 @@ node_types:
     interfaces:
       tosca.interfaces.node.lifecycle.Standard:
         configure:
-          implementation: at-MoodleDatabase-configure          
+          implementation: at-MoodleDatabase-configure
+          
   Server:
     derived_from: tosca.nodes.Root
     description: Server
@@ -270,7 +271,7 @@ node_types:
     requirements:
       - members: HTTPEndpointCapability
     interfaces:
-      [tosca.interfaces.node.lifecycle]:
+      tosca.interfaces.node.lifecycle:
         configure:
           implementation: at-ApacheLoadbalancerModule-configure
         start:
@@ -321,7 +322,7 @@ relationship_types:
   MySQLDatabaseConnection:
     derived_from: tosca.relationships.ConnectsTo
  
-  MoodleDatabaseConnection: #TODO
+  MoodleDatabaseConnection:
 #MoodleDatabaseConnection -df> MySQLDatabaseConnection -df>ConnectsTo
     derived_from: MySQLDatabaseConnection
     interfaces:
@@ -364,8 +365,8 @@ node_templates:
       OsApache_software:
         type: SoftwareContainerCapability
     requirements:
-      - OsApache_container: OperatingSystemContainerCapability
-  
+      - OsApache_container: OperatingSystemContainerCapability 
+      
   ApacheWebServer:
     type: ApacheWebServer
     properties:
@@ -381,6 +382,7 @@ node_templates:
       - ApacheWebServer_container: SoftwareContainerCapability
       - Apache_HostedOn_OsApache: OsApache
         relationship_type: tosca.relationships.HostedOn
+        
   MoodleApp:
     type: MoodleApplication
     properties:
@@ -398,6 +400,7 @@ node_templates:
         relationship_type: tosca.relationships.DependsOn
       - MoodleApp_ConnectsTo_MoodleDb: MoodleDb
         relationship_type: MoodleDatabaseConnection
+        
   PhpModule:
     type: ApachePHPModule
     capabilities:
@@ -407,6 +410,7 @@ node_templates:
       - PhpModule_container: ApacheModuleContainerCapability
       - PhpModule_HostedOn_Apache: ApacheWebServer
         relationship_type: tosca.relationships.HostedOn
+        
   MySql:
     type: MySQL
     properties:
@@ -433,7 +437,3 @@ node_templates:
       - MoodleDb_container: MySQLDatabaseContainerCapability
       - MoodleDb_HostedOn_MySql: MySql
         relationship_type: tosca.relationships.HostedOn
-        
-    
-      
-    
