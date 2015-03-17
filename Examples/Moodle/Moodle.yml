@@ -188,7 +188,6 @@ node_types:
   OperatingSystem:
     derived_from: tosca.nodes.Root
     description: Operating System
-    properties:
     artifacts:
       - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: IAs/UbuntuNodeType/org_opentosca_types_Ubuntu__InterfaceUbuntu.war
         type: WAR
