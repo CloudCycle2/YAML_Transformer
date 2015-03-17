@@ -110,23 +110,11 @@ node_types:
     artifacts:
       # Implementation Artifacts:
       - at-MoodleApplication-install: scripts/MoodleApplication/install.sh
-          type: ScriptArtifact
-          description: Install Script
+        type: tosca.artifacts.impl.Bash
+        description: Install Script
       - at-MoodleApplication-configure: scripts/MoodleApplication/configure.sh
-          type: ScriptArtifact
-          description: Configure Script
-      # Deployment Artifacts (properties are XML attributes)
-      - at-MoodleApplication-MoodleApplication-ConfigFiles: files/config.php
-          type: FileArtifact
-          description: File config.php
-          deploy_path: /tmp/tosca/artifacts/config.php
-      - at-MoodleApplication-MoodleApplication-archive: files/moodle-2.6.1.tgz
-          type: ArchiveArtifact
-          description: Archive file moodle
-          deploy_path: /tmp/tosca/artifacts/MoodleInstall
-      - at-MoodleApplication-php-ext-packages: [missing!!!!]
-          type: OsPackageArtifact
-          description: <description>
+        type: tosca.artifacts.impl.Bash
+        description: Configure Script
     interfaces:
       tosca.interfaces.node.lifecycle.Standard:
         install:
@@ -162,16 +150,9 @@ node_types:
         default: 3306
     artifacts:
         #Implementation Artifacts
-      - at-MoodleDatabase-configure: 
-          implementation: scripts/MoodleDatabase/configure.sh
-          type: ScriptArtifact
+      - at-MoodleDatabase-configure: scripts/MoodleDatabase/configure.sh
+          type: tosca.artifacts.impl.Bash
           description: <description>
-        #Deployment Artifacts (properties are XML attributes)
-      - at-MoodleDatabase-MoodleDbContent-File: 
-          implementation: files/moodledb.sql
-          type: FileArtifact
-          description: <description>
-          deploy_path: /tmp/tosca/artifacts/moodledb.sql
     interfaces:
       tosca.interfaces.node.lifecycle.Standard:
         configure:
@@ -209,6 +190,7 @@ node_types:
     properties:
     artifacts:
       - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: IAs/UbuntuNodeType/org_opentosca_types_Ubuntu__InterfaceUbuntu.war
+        type: WAR
     requirements:
       - container: OperatingSystemContainerCapability
     capabilites:
@@ -241,29 +223,19 @@ node_types:
           implementation: at-ApacheWebServer-stop
     artifacts:
       - at-ApacheWebServer-install: scripts/ApacheWebServer/install.sh
-        type: ScriptArtifact # TODO
-        properties:
-          ScriptLanguage: sh
-          PrimaryScript: scripts/ApacheWebServer/install.sh
+        type: tosca.artifacts.impl.Bash
       - at-ApacheWebServer-configure: scripts/ApacheWebServer/configure.sh
-        type: ScriptArtifact # TODO
-        properties:
-          ScriptLanguage: sh
-          PrimaryScript: scripts/ApacheWebServer/configure.sh
+        type: tosca.artifacts.impl.Bash
       - at-ApacheWebServer-start: scripts/ApacheWebServer/start.sh
-        type: ScriptArtifact # TODO
-        properties:
-          ScriptLanguage: sh
-          PrimaryScript: scripts/ApacheWebServer/start.sh
+        type: tosca.artifacts.impl.Bash
       - at-ApacheWebServer-stop: scripts/ApacheWebServer/stop.sh
-        type: ScriptArtifact # TODO
-        properties:
-          ScriptLanguage: sh
-          PrimaryScript: scripts/ApacheWebServer/stop.sh
+        type: tosca.artifacts.impl.Bash
   
   ApacheWebApplication:
     derived_from: tosca.nodes.WebApplication
     description: Apache Web Application
+    requirements:
+      - container: ApacheWebApplicationContainerCapability
 
   ApacheModule:
     derived_from: tosca.nodes.Root
@@ -283,15 +255,9 @@ node_types:
         start: at-ApachePHPModule-start
     artifacts:
       - at-ApachePHPModule-configure: scripts/ApachePHPModule/configure.sh
-        type: ScriptArtifact # TODO
-        properties:
-          ScriptLanguage: sh
-          PrimaryScript: scripts/ApachePHPModule/configure.sh
+        type: tosca.artifacts.impl.Bash
       - at-ApachePHPModule-start: scripts/ApachePHPModule/start.sh
-        type: ScriptArtifact # TODO
-        properties:
-          ScriptLanguage: sh
-          PrimaryScript: scripts/ApachePHPModule/start.sh
+        type: tosca.artifacts.impl.Bash
 
   ApacheLoadbalancerModule:
     derived_from: ApacheModule
@@ -299,7 +265,7 @@ node_types:
     properties:
       httpdport:
         type: int
-        description: httpdocsApache WebServer Portnumber (default:80)
+        description: Apache WebServer Portnumber (default:80)
         default: 80
     requirements:
       - members: HTTPEndpointCapability
@@ -311,15 +277,9 @@ node_types:
           implementation: at-ApacheLoadbalancerModule-start
     artifacts:
     - at-ApacheLoadbalancerModule-configure: scripts/ApacheLoadbalancerModule/configure.sh
-      type: ScriptArtifact # TODO
-      properties:
-        ScriptLanguage: sh
-        PrimaryScript: scripts/ApacheLoadbalancerModule/configure.sh
+      type: tosca.artifacts.impl.Bash
     - at-ApacheLoadbalancerModule-start: scripts/ApacheLoadbalancerModule/start.sh
-      type: ScriptArtifact # TODO
-      properties:
-        ScriptLanguage: sh
-        PrimaryScript: scripts/ApacheLoadbalancerModule/start.sh
+      type: tosca.artifacts.impl.Bash
 
   MySQL:
     derived_from: tosca.nodes.DBMS
@@ -338,28 +298,16 @@ node_types:
           implementation: at-MySQL-stop
     artifacts:
     - at-MySQL-configure: scripts/MySQL/configure.sh
-      type: ScriptArtifact # TODO
-      properties:
-        ScriptLanguage: sh
-        PrimaryScript: scripts/MySQL/configure.sh
+      type: tosca.artifacts.impl.Bash
     - at-MySQL-start: scripts/MySQL/start.sh
-      type: ScriptArtifact # TODO
-      properties:
-        ScriptLanguage: sh
-        PrimaryScript: scripts/MySQL/start.sh
+      type: tosca.artifacts.impl.Bash
     - at-MySQL-stop: scripts/MySQL/stop.sh
-      type: ScriptArtifact # TODO
-      properties:
-        ScriptLanguage: sh
-        PrimaryScript: scripts/MySQL/stop.sh
+      type: tosca.artifacts.impl.Bash
     - at-MySQL-install: scripts/MySQL/install.sh
-      type: ScriptArtifact # TODO
-      properties:
-        ScriptLanguage: sh
-        PrimaryScript: scripts/MySQL/install.sh
+      type: tosca.artifacts.impl.Bash
         
   MySQLDatabase:
-    derived_from: tosca.nodes.Database # TODO: check if this is the same
+    derived_from: tosca.nodes.Database
     description: MySQL Database
     requirements:
       - container: MySQLDatabaseContainerCapability
@@ -372,10 +320,6 @@ relationship_types:
   
   MySQLDatabaseConnection:
     derived_from: tosca.relationships.ConnectsTo
-    
-  tosca.relationships.HostedOn:
-    derived_from: tosca.relationships.DependsOn
-    valid_targets: [ tosca.capabilities.Container ]
  
   MoodleDatabaseConnection: #TODO
 #MoodleDatabaseConnection -df> MySQLDatabaseConnection -df>ConnectsTo
@@ -388,34 +332,6 @@ relationship_types:
 
 artifact_types: 
   # list of artifact type definitions 
-  ScriptArtifact: 
-    description: <artifact_description> 
-    mime_type: script/sh
-    file_ext: sh
-    properties:
-      ScriptLanguage:
-        type: anyURI
-      PrimaryScript:
-        type: string
-  FileArtifact:
-    description: <artifact_description>
-    properties:
-      fileReference:
-        type: string 
-      path:
-        type: string
-  OsPackageArtifact:
-    description: <artifact_description>
-    properties:
-      packageName:
-        type: string
-  ArchiveArtifact:
-    description: <artifact_description>
-    properties:
-      archiveReference:
-        type: string
-      path:
-        type: string
   WAR:
     description: <artifact_description>
     mime_type: application/x-zip 
@@ -430,7 +346,7 @@ artifact_types:
         
 node_templates:
   VmApache:
-    type: Server # TODO: artifacts and interfaces
+    type: Server
     properties:
       NumCpus: 1
       Memory: 1024
@@ -485,7 +401,6 @@ node_templates:
   PhpModule:
     type: ApachePHPModule
     capabilities:
-    # which way? long or short (see above)?
       PhpModule_phpapps:
         type: PHPRuntimeCapability
     requirements:
