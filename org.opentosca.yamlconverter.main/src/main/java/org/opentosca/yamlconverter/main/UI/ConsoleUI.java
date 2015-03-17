@@ -29,10 +29,7 @@ public class ConsoleUI {
 	 */
 	private static boolean COW = true;
 
-	private static boolean idle = true;
-
 	public static void main(String[] args) {
-		createAutoExitThread();
 		cowsay("Hi! This is the TOSCA YAML 2 XML Cowverter! Let's start!");
 		boolean read = false;
 		String yaml = "";
@@ -139,25 +136,6 @@ public class ConsoleUI {
 		System.out.println("\n\n  exiting...");
 	}
 
-	private static void createAutoExitThread() {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(1000 * 60);
-					if (idle) {
-						System.exit(0);
-					}
-				} catch (final InterruptedException e) {
-				}
-			}
-		}).start();
-	}
-
-	private static boolean consoleAvailable() {
-		return System.console() != null;
-	}
-
 	/**
 	 * Uses Systems I/O to prompt the user for a lineinput.
 	 *
@@ -170,9 +148,9 @@ public class ConsoleUI {
 		String result = null;
 		try {
 			result = console.readLine();
-			idle = false;
 		} catch (final IOException e) {
-			e.printStackTrace();
+			// this suggests there is no console available.
+			System.exit(0);
 		}
 		return result;
 	}
