@@ -118,9 +118,9 @@ node_types:
     interfaces:
       tosca.interfaces.node.lifecycle.Standard:
         install:
-          implementaion: at-MoodleApplication-install
+          implementation: at-MoodleApplication-install
         configure:
-          implementaion: at-MoodleApplication-configure
+          implementation: at-MoodleApplication-configure
     requirements:
       - phpRuntime: PHPRuntimeCapability
       # Original: MoodleDatabaseEndpointRequirement
