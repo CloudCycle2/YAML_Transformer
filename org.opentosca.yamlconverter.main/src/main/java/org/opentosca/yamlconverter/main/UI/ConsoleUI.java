@@ -1,11 +1,5 @@
 package org.opentosca.yamlconverter.main.UI;
 
-import org.opentosca.yamlconverter.main.Parser;
-import org.opentosca.yamlconverter.main.utils.CSARUtil;
-import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
-import org.opentosca.yamlconverter.main.utils.FileUtil;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,6 +7,12 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.opentosca.yamlconverter.main.Parser;
+import org.opentosca.yamlconverter.main.utils.CSARUtil;
+import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
+import org.opentosca.yamlconverter.main.utils.FileUtil;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 
 /**
  * A simple User Interface for Console.
@@ -29,7 +29,10 @@ public class ConsoleUI {
 	 */
 	private static boolean COW = true;
 
+	private static boolean idle = true;
+
 	public static void main(String[] args) {
+		createAutoExitThread();
 		cowsay("Hi! This is the TOSCA YAML 2 XML Cowverter! Let's start!");
 		boolean read = false;
 		String yaml = "";
@@ -136,6 +139,25 @@ public class ConsoleUI {
 		System.out.println("\n\n  exiting...");
 	}
 
+	private static void createAutoExitThread() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(1000 * 60);
+					if (idle) {
+						System.exit(0);
+					}
+				} catch (final InterruptedException e) {
+				}
+			}
+		}).start();
+	}
+
+	private static boolean consoleAvailable() {
+		return System.console() != null;
+	}
+
 	/**
 	 * Uses Systems I/O to prompt the user for a lineinput.
 	 *
@@ -148,6 +170,7 @@ public class ConsoleUI {
 		String result = null;
 		try {
 			result = console.readLine();
+			idle = false;
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
