@@ -175,9 +175,6 @@ node_types:
       - AmazonEC2VMNodeTypeImplementation_IA_ArtifactTemplate: IAs/AmazonEC2VMNodeType/org_opentosca_types_AmazonEC2VM__InterfaceAmazonEC2VM.war
         type: WAR
         description: description
-    interfaces:
-      InterfaceAmazonEC2VM:
-        #Operation is missing
     requirements:
       - networks: NetworkAttachmentCapability
       - container: ServerContainerCapability
@@ -212,7 +209,7 @@ node_types:
       clients:
         type: HTTPEndpointCapability
     interfaces:
-      Lifecycle:
+      tosca.interfaces.node.Lifecycle:
         install:
           implementation: at-ApacheWebServer-install
         configure:
@@ -250,7 +247,7 @@ node_types:
       phpApps:
         type: PHPRuntimeCapability
     interfaces:
-      Lifecycle:
+      tosca.interfaces.node.Lifecycle:
         configure: at-ApachePHPModule-configure
         start: at-ApachePHPModule-start
     artifacts:
@@ -287,7 +284,7 @@ node_types:
     capabilities:
       databases: MySQLDatabaseContainerCapability
     interfaces:
-      [tosca.interfaces.node.Lifecycle]:
+      tosca.interfaces.node.Lifecycle:
         install:
           implementation: at-MySQL-install
         configure:
