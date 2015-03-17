@@ -1,0 +1,21 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+node_templates:
+  VmApache:
+    type: tosca.nodes.Compute
+    properties:
+      num_cpus: 1
+      mem_size:
+    interfaces:
+      configure_samba:
+        install:
+          description: Configures Samba server for this apache vm
+          implementation: install.bat
+    artifacts:
+      - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: org_opentosca_types_Ubuntu__InterfaceUbuntu.war
+        type: WAR
+        description: DDS
+        properties:
+          ServiceEndpoint: /services/org_opentosca_types_Ubuntu__InterfaceUbuntuPort
+          PortType: "{http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu"
+          InvocationType: SOAP/HTTP
