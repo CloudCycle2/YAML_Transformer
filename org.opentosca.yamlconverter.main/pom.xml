@@ -35,7 +35,6 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <outputDirectory>target</outputDirectory>
-                    <finalName>YAML_Transformer</finalName>
                 </configuration>
                 <executions>
                     <execution>
