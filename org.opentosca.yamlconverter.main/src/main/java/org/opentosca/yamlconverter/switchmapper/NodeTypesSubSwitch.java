@@ -4,6 +4,7 @@ import org.opentosca.model.tosca.*;
 import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
 import org.opentosca.model.tosca.TNodeType.Interfaces;
 import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
+import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
 
 import java.util.ArrayList;
@@ -31,14 +32,18 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 	private TNodeType createNodeType(NodeType value, String name) {
 		final TNodeType result = new TNodeType();
 		result.setName(name);
-		result.setTargetNamespace(getUsedNamespace());
+		result.setTargetNamespace(getTargetNamespace());
 
 		final TNodeTypeImplementation nodeTypeImplementation = new TNodeTypeImplementation();
 		final List<TArtifactTemplate> artifactTemplates = new ArrayList<TArtifactTemplate>();
 		final TImplementationArtifacts implementationArtifacts = new TImplementationArtifacts();
 		nodeTypeImplementation.setImplementationArtifacts(implementationArtifacts);
 		nodeTypeImplementation.setName(name + "Implementation");
-		nodeTypeImplementation.setNodeType(this.toTnsQName(result.getName()));
+		try {
+			nodeTypeImplementation.setNodeType(this.toTnsQName(BaseTypeMapper.getXmlNodeType(result.getName())));
+		} catch (NoBaseTypeMappingException e) {
+			nodeTypeImplementation.setNodeType(this.toTnsQName(result.getName()));
+		}
 
 		if (value.getArtifacts() != null && !value.getArtifacts().isEmpty()) {
 			// here are only artifact definitions!!
@@ -48,7 +53,11 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
 		}
 		if (value.getDerived_from() != null && !value.getDerived_from().isEmpty()) {
-			result.setDerivedFrom(parseDerivedFrom(value.getDerived_from()));
+			try {
+				result.setDerivedFrom(parseDerivedFrom(BaseTypeMapper.getXmlNodeType(value.getDerived_from())));
+			} catch (NoBaseTypeMappingException e) {
+				result.setDerivedFrom(parseDerivedFrom(value.getDerived_from()));
+			}
 		}
 		if (value.getInterfaces() != null && !value.getInterfaces().isEmpty()) {
 			final Interfaces nodeTypeInterfaces = parseNodeTypeInterfaces(value.getInterfaces());
@@ -122,6 +131,8 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 				final Map<?, ?> capability = (Map<?, ?>) capabilityEntry.getValue();
 				String capabilityType = "CAPABILITY_TYPE";
 				try {
+					capabilityType = BaseTypeMapper.getXmlCapabilityType((String) capability.get("type"));
+				} catch (final NoBaseTypeMappingException e) {
 					capabilityType = (String) capability.get("type");
 				} catch (final Exception e) {
 					System.out.println("No capability type defined or illegal value, using default.");
@@ -146,7 +157,11 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			for (final Entry<String, Object> artifactEntry : artifact.entrySet()) {
 				switch (artifactEntry.getKey()) {
 				case "type":
-					artifactType = (String) artifactEntry.getValue();
+					try {
+						artifactType = BaseTypeMapper.getXmlArtifactType((String) artifactEntry.getValue());
+					} catch (NoBaseTypeMappingException e) {
+						artifactType = (String) artifactEntry.getValue();
+					}
 					break;
 				case "description":
 					artifactDescription = (String) artifactEntry.getValue();
@@ -184,7 +199,11 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		final TArtifactTemplate artifactTemplate = new TArtifactTemplate();
 		artifactTemplate.setName(artifactName);
 		artifactTemplate.setId(artifactName);
-		artifactTemplate.setType(toTnsQName(artifactType));
+		try {
+			artifactTemplate.setType(toTnsQName(BaseTypeMapper.getXmlArtifactType(artifactType)));
+		} catch (NoBaseTypeMappingException e) {
+			artifactTemplate.setType(toTnsQName(artifactType));
+		}
 
 		final TArtifactTemplate.ArtifactReferences artifactReferences = new TArtifactTemplate.ArtifactReferences();
 		final TArtifactReference artifactReference = new TArtifactReference();

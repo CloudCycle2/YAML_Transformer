@@ -36,7 +36,11 @@ public class Yaml2XmlSwitch {
 
 	public static final String TOSCA_IMPORT_TYPE = "http://docs.oasis-open.org/tosca/ns/2011/12";
 
+	public static final String SPECIFIC_TYPES_NS = "http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes";
+
 	public static final String BASE_TYPES_NS = "http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes";
+
+	public static final String TOSCA_NS_PREFIX = "tosca";
 
 	/**
 	 * A counter for creating unique IDs.
@@ -137,7 +141,7 @@ public class Yaml2XmlSwitch {
 				CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TYPES_XSD_FILENAME, TYPES_NS));
 		// only add specific types, base types are imported within specific types XML document
 		this.toscaResult.getImport().add(createTypeImport(TOSCA_IMPORT_TYPE,
-				CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TOSCA_SPECIFIC_TYPE_FILENAME, BASE_TYPES_NS));
+				CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TOSCA_SPECIFIC_TYPE_FILENAME, SPECIFIC_TYPES_NS));
 		return this.toscaResult;
 	}
 
@@ -152,6 +156,7 @@ public class Yaml2XmlSwitch {
 		}
 		this.toscaResult.setTargetNamespace(this.usedNamespace);
 		this.toscaResult.getOtherAttributes().put(new QName("xmlns:ns1"), BASE_TYPES_NS);
+		this.toscaResult.getOtherAttributes().put(new QName("xmlns:ns2"), SPECIFIC_TYPES_NS);
 		this.toscaResult.getOtherAttributes().put(new QName("xmlns:types"), TYPES_NS);
 
 		setServiceAndTopologyTemplate(yamlServiceTemplate, serviceTemplate, topologyTemplate);

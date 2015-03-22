@@ -5,6 +5,7 @@ import com.esotericsoftware.yamlbeans.YamlWriter;
 import org.opentosca.model.tosca.*;
 import org.opentosca.model.tosca.TEntityType.DerivedFrom;
 import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
@@ -36,7 +37,7 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return this.parent.getServiceTemplate();
 	}
 
-	protected String getUsedNamespace() {
+	protected String getTargetNamespace() {
 		return this.parent.getUsedNamespace();
 	}
 
@@ -75,7 +76,15 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	}
 
 	protected QName toTnsQName(String localName) {
-		return new QName(getDefinitions().getTargetNamespace(), localName, "tns");
+		return new QName(getDefinitions().getTargetNamespace(), localName, Yaml2XmlSwitch.TOSCA_NS_PREFIX);
+	}
+
+	protected QName toBaseTypesNsQName(String name) {
+		return new QName(Yaml2XmlSwitch.BASE_TYPES_NS, name, "ns1");
+	}
+
+	protected QName toSpecificTypesNsQName(String name) {
+		return new QName(Yaml2XmlSwitch.SPECIFIC_TYPES_NS, name, "ns2");
 	}
 
 	protected PropertiesDefinition parsePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
@@ -218,7 +227,11 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		if (!this.addedRequirementTypes.containsKey(requirementTypeName)) {
 			final TRequirementType requirementType = new TRequirementType();
 			requirementType.setName(requirementTypeName);
-			requirementType.setRequiredCapabilityType(toTnsQName(capability));
+			try {
+				requirementType.setRequiredCapabilityType(toTnsQName(BaseTypeMapper.getXmlCapabilityType(capability)));
+			} catch (NoBaseTypeMappingException e) {
+				requirementType.setRequiredCapabilityType(toTnsQName(capability));
+			}
 			this.addedRequirementTypes.put(requirementTypeName, requirementType);
 			getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
 		}

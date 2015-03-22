@@ -1,6 +1,7 @@
 package org.opentosca.yamlconverter.switchmapper;
 
 import org.opentosca.model.tosca.*;
+import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 
@@ -42,7 +43,11 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		if (nodeTemplate.getDescription() != null && !nodeTemplate.getDescription().isEmpty()) {
 			result.getDocumentation().add(toDocumentation(nodeTemplate.getDescription()));
 		}
-		result.setType(toTnsQName(nodeTemplate.getType()));
+		try {
+			result.setType(toTnsQName(BaseTypeMapper.getXmlNodeType(nodeTemplate.getType())));
+		} catch (NoBaseTypeMappingException e) {
+			result.setType(toTnsQName(nodeTemplate.getType()));
+		}
 
 		// then process more difficult things
 		processCapabilitiesInNodeTemplate(nodeTemplate, result);
@@ -64,6 +69,8 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 				tCapability.setName(nodeTemplateCapability.getKey());
 				String capabilityType = "CAPABILITY_TYPE";
 				try {
+					capabilityType = BaseTypeMapper.getXmlCapabilityType((String) capabilityDefinition.get("type"));
+				} catch (final NoBaseTypeMappingException e) {
 					capabilityType = (String) capabilityDefinition.get("type");
 				} catch (final Exception e) {
 					System.out.println("No capability type defined or illegal value, using default.");
@@ -145,7 +152,11 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		for (final String key : requirement.keySet()) {
 			if (key.equals("relationship_type")) {
 				final String relationshipType = (String) requirement.get(key);
-				relationshipTemplate.setType(toTnsQName(relationshipType));
+				try {
+					relationshipTemplate.setType(toTnsQName(BaseTypeMapper.getXmlRelationshipType(relationshipType)));
+				} catch (NoBaseTypeMappingException e) {
+					relationshipTemplate.setType(toTnsQName(relationshipType));
+				}
 			} else {
 				relationshipTemplate.setId(key);
 

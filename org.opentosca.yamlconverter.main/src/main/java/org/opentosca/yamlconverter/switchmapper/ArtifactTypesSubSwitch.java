@@ -30,7 +30,7 @@ public class ArtifactTypesSubSwitch extends AbstractSubSwitch {
 		for (final Entry<String, ArtifactType> entry : artifact_types.entrySet()) {
 			final TArtifactType artifactType = new TArtifactType();
 			artifactType.setName(entry.getKey());
-			artifactType.setTargetNamespace(getUsedNamespace());
+			artifactType.setTargetNamespace(getTargetNamespace());
 
 			final ArtifactType value = entry.getValue();
 			if (value.getDerived_from() != null && !value.getDerived_from().equals("")) {

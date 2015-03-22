@@ -109,7 +109,6 @@ public final class BaseTypeMapper {
             case TOSCA_NODES + "ObjectStorage":
             case TOSCA_NODES + "BlockStorage":
             case TOSCA_NODES + "Network":
-            case TOSCA_NODES + "WebApplication.WordPress":
             default:
                 throw new NoBaseTypeMappingException(yamlNodeType);
         }
