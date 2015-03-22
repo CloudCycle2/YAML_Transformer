@@ -12,21 +12,30 @@ public class CSARUtil {
 	 * TOSCA specific constants, for XML and XSD documents
 	 */
 	private static final String TOSCA_FOLDER = "/tosca";
+	public static final String TOSCA_BASE_TYPES_DIAGRAM = TOSCA_FOLDER + "/" + "TOSCA-v1.0-BaseTypes-Diagram.xml";
+	public static final String TOSCA_SPECIFIC_TYPES_DIAGRAM = TOSCA_FOLDER + "/" + "TOSCA-v1.0-SpecificTypes-Diagram.xml";
 	public static final String TOSCA_BASE_TYPE_FILENAME = "TOSCA-v1.0-BaseTypes-Definitions.xml";
 	private static final String TOSCA_BASE_TYPES = TOSCA_FOLDER + "/" + TOSCA_BASE_TYPE_FILENAME;
 	public static final String TOSCA_SPECIFIC_TYPE_FILENAME = "TOSCA-v1.0-SpecificTypes-Definitions.xml";
 	private static final String TOSCA_SPECIFIC_TYPES = TOSCA_FOLDER + "/" + TOSCA_SPECIFIC_TYPE_FILENAME;
 	private static final String TOSCA_TYPES_FOLDER = "types";
 	private static final String TOSCA_BASE_TYPE_XSD_FILENAME = "TOSCA-v1.0-BaseTypes.xsd";
+	public static final String TOSCA_BASE_TYPES_XSD_PATH = TOSCA_TYPES_FOLDER + "/" + TOSCA_BASE_TYPE_XSD_FILENAME;
 	private static final String TOSCA_BASE_TYPES_XSD = TOSCA_FOLDER + "/" + TOSCA_BASE_TYPE_XSD_FILENAME;
 	private static final String TOSCA_SPECIFIC_TYPES_XSD_FILENAME = "TOSCA-v1.0-SpecificTypes.xsd";
+	public static final String TOSCA_SPECIFIC_TYPES_XSD_PATH = TOSCA_TYPES_FOLDER + "/" + TOSCA_SPECIFIC_TYPES_XSD_FILENAME;
 	private static final String TOSCA_SPECIFIC_TYPES_XSD = TOSCA_FOLDER + "/" + TOSCA_SPECIFIC_TYPES_XSD_FILENAME;
 	private static final String TOSCA_ARTIFACTS_XSD_FILENAME = "Artifacts.xsd";
+	public static final String TOSCA_ARTIFACTS_XSD_PATH = TOSCA_TYPES_FOLDER + "/" + TOSCA_ARTIFACTS_XSD_FILENAME;
 	private static final String TOSCA_ARTIFACTS_XSD = TOSCA_FOLDER + "/" + TOSCA_ARTIFACTS_XSD_FILENAME;
 
 	public static final String TYPES_XSD_FILENAME = "types.xsd";
 	public static final String DEFINITIONS_XML_FILENAME = "Definitions.xml";
 	public static final String DEFINITIONS_FOLDER = "Definitions";
+	public static final String DEF_BASE_TYPES = DEFINITIONS_FOLDER + "/" + TOSCA_BASE_TYPE_FILENAME;
+	public static final String DEF_BASE_TYPES_DIAGRAM = DEFINITIONS_FOLDER + "/" + "TOSCA-v1.0-BaseTypes-Diagram.xml";
+	public static final String DEF_SPECIFIC_TYPES = DEFINITIONS_FOLDER + "/" + TOSCA_SPECIFIC_TYPE_FILENAME;
+	public static final String DEF_SPECIFIC_TYPES_DIAGRAM = DEFINITIONS_FOLDER + "/" + "TOSCA-v1.0-SpecificTypes-Diagram.xml";
 	private static final String META_FILENAME = "TOSCA.meta";
 	private static final String META_FOLDER = "TOSCA-Metadata";
 	private static final String TOSCA_META_VERSION = "1.0";
@@ -79,15 +88,21 @@ public class CSARUtil {
 		FileUtil.saveStringAsFile(DEFINITIONS_FOLDER + "/" + DEFINITIONS_XML_FILENAME, xml);
 		FileUtil.saveStringAsFile(META_FOLDER + "/" + META_FILENAME, generateMetaFileContent(serviceTemplate));
 		FileUtils.copyInputStreamToFile(fileUtil.getResourceAsStream(TOSCA_BASE_TYPES),
-				new File(DEFINITIONS_FOLDER + "/" + TOSCA_BASE_TYPE_FILENAME));
+				new File(DEF_BASE_TYPES));
+		FileUtils.copyInputStreamToFile(fileUtil.getResourceAsStream(TOSCA_BASE_TYPES_DIAGRAM),
+				new File(DEF_BASE_TYPES_DIAGRAM));
 		FileUtils.copyInputStreamToFile(fileUtil.getResourceAsStream(TOSCA_SPECIFIC_TYPES),
-				new File(DEFINITIONS_FOLDER + "/" + TOSCA_SPECIFIC_TYPE_FILENAME));
+				new File(DEF_SPECIFIC_TYPES));
+		FileUtils.copyInputStreamToFile(fileUtil.getResourceAsStream(TOSCA_SPECIFIC_TYPES_DIAGRAM),
+				new File(DEF_SPECIFIC_TYPES_DIAGRAM));
 		FileUtils.copyInputStreamToFile(fileUtil.getResourceAsStream(TOSCA_BASE_TYPES_XSD),
-				new File(TOSCA_TYPES_FOLDER + "/" + TOSCA_BASE_TYPE_XSD_FILENAME));
+				new File(TOSCA_BASE_TYPES_XSD_PATH));
 		FileUtils.copyInputStreamToFile(fileUtil.getResourceAsStream(TOSCA_SPECIFIC_TYPES_XSD),
-				new File(TOSCA_TYPES_FOLDER + "/" + TOSCA_SPECIFIC_TYPES_XSD_FILENAME));
+				new File(TOSCA_SPECIFIC_TYPES_XSD_PATH));
 		FileUtils.copyInputStreamToFile(fileUtil.getResourceAsStream(TOSCA_ARTIFACTS_XSD),
-				new File(TOSCA_TYPES_FOLDER + "/" + TOSCA_ARTIFACTS_XSD_FILENAME));
+				new File(TOSCA_ARTIFACTS_XSD_PATH));
+		fileUtil.copyDirectory("/icons");
+		fileUtil.copyDirectory("/scripts");
 	}
 
 	private static String generateMetaFileContent(ServiceTemplate st) {
@@ -104,6 +119,13 @@ public class CSARUtil {
 			result.append("Created-By: " + DEFAULT_TEMPLATE_AUTHOR + "\n");
 		}
 		result.append("Entry-Definitions: " + DEFINITIONS_FOLDER + "/" + DEFINITIONS_XML_FILENAME + "\n");
+		result.append("Name: ").append(DEF_BASE_TYPES).append("\n")
+				.append("Content-Type: application/vnd.oasis.tosca.definitions\n")
+				.append("Diagram: ").append(DEF_BASE_TYPES_DIAGRAM).append("\n")
+				.append("\n")
+				.append("Name: ").append(DEF_SPECIFIC_TYPES).append("\n")
+				.append("Content-Type: application/vnd.oasis.tosca.definitions\n")
+				.append("Diagram: ").append(DEF_SPECIFIC_TYPES_DIAGRAM);
 		return result.toString();
 	}
 }

@@ -102,4 +102,9 @@ public class FileUtil {
 			}
 		}
 	}
+
+	public void copyDirectory(final String directory) {
+		// TODO: try to move one direction to another (add another method parameter)
+		System.out.println(directory);
+	}
 }
