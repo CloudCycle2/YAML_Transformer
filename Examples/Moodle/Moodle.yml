@@ -180,7 +180,8 @@ node_types:
       - container: ServerContainerCapability
       - volumes: VolumeAttachmentCapability
     capabilities:
-      os: OperatingSystemContainerCapability
+      os: 
+        type: OperatingSystemContainerCapability
       
   OperatingSystem:
     derived_from: tosca.nodes.Root
@@ -191,7 +192,8 @@ node_types:
     requirements:
       - container: OperatingSystemContainerCapability
     capabilities:
-      software: SoftwareContainerCapability
+      software: 
+        type: SoftwareContainerCapability
         
   ApacheWebServer:
     derived_from: tosca.nodes.WebServer
@@ -282,7 +284,8 @@ node_types:
     derived_from: tosca.nodes.DBMS
     description: MySQL
     capabilities:
-      databases: MySQLDatabaseContainerCapability
+      databases: 
+        type: MySQLDatabaseContainerCapability
     interfaces:
       tosca.interfaces.node.Lifecycle:
         install:
@@ -309,7 +312,8 @@ node_types:
     requirements:
       - container: MySQLDatabaseContainerCapability
     capabilities:
-      clients: MySQLDatabaseEndpointCapability
+      clients: 
+        type: MySQLDatabaseEndpointCapability
 
 relationship_types:
   MySQLDatabaseHostedOnMySQL:
