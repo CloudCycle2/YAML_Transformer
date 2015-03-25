@@ -365,7 +365,9 @@ node_templates:
       OsApache_software:
         type: SoftwareContainerCapability
     requirements:
-      - OsApache_container: OperatingSystemContainerCapability 
+      - OsApache_container: OperatingSystemContainerCapability
+      - OsApache_HostedOn_VmApache: VmApache
+        relationship_type: tosca.relationships.HostedOn
       
   ApacheWebServer:
     type: ApacheWebServer
