@@ -5,7 +5,7 @@ import com.esotericsoftware.yamlbeans.YamlWriter;
 import org.opentosca.model.tosca.*;
 import org.opentosca.model.tosca.TEntityType.DerivedFrom;
 import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
+import org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.opentosca.yamlconverter.switchmapper.typemapper.AbstractTypeMapper;
 import org.opentosca.yamlconverter.switchmapper.typemapper.BaseTypeMapper;
@@ -355,48 +355,48 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 					result = toTnsQName(initName);
 					break;
 			}
-		} catch (NoBaseTypeMappingException e) {
+		} catch (NoTypeMappingException e) {
 			result = toTnsQName(initName);
 		}
 		return result;
 	}
 
-	private QName getQNameOfArtifactType(final String initName) throws NoBaseTypeMappingException {
+	private QName getQNameOfArtifactType(final String initName) throws NoTypeMappingException {
 		try {
 			return toBaseTypesNsQName(baseTypeMapper.getXmlArtifactType(initName));
-		} catch (NoBaseTypeMappingException e) {
+		} catch (NoTypeMappingException e) {
 			return toSpecificTypesNsQName(specificTypeMapper.getXmlArtifactType(initName));
 		}
 	}
 
-	private QName getQNameOfNodeType(final String initName) throws NoBaseTypeMappingException {
+	private QName getQNameOfNodeType(final String initName) throws NoTypeMappingException {
 		try {
 			return toBaseTypesNsQName(baseTypeMapper.getXmlNodeType(initName));
-		} catch (NoBaseTypeMappingException e) {
+		} catch (NoTypeMappingException e) {
 			return toSpecificTypesNsQName(specificTypeMapper.getXmlNodeType(initName));
 		}
 	}
 
-	private QName getQNameOfInterface(final String initName) throws NoBaseTypeMappingException {
+	private QName getQNameOfInterface(final String initName) throws NoTypeMappingException {
 		try {
 			return toBaseTypesNsQName(baseTypeMapper.getXmlInterface(initName));
-		} catch (NoBaseTypeMappingException e) {
+		} catch (NoTypeMappingException e) {
 			return toSpecificTypesNsQName(specificTypeMapper.getXmlInterface(initName));
 		}
 	}
 
-	private QName getQNameOfCapabilityType(final String initName) throws NoBaseTypeMappingException {
+	private QName getQNameOfCapabilityType(final String initName) throws NoTypeMappingException {
 		try {
 			return toBaseTypesNsQName(baseTypeMapper.getXmlCapabilityType(initName));
-		} catch (NoBaseTypeMappingException e) {
+		} catch (NoTypeMappingException e) {
 			return toSpecificTypesNsQName(specificTypeMapper.getXmlCapabilityType(initName));
 		}
 	}
 
-	private QName getQNameOfRelationshipType(final String initName) throws NoBaseTypeMappingException {
+	private QName getQNameOfRelationshipType(final String initName) throws NoTypeMappingException {
 		try {
 			return toBaseTypesNsQName(baseTypeMapper.getXmlRelationshipType(initName));
-		} catch (NoBaseTypeMappingException e) {
+		} catch (NoTypeMappingException e) {
 			return toSpecificTypesNsQName(specificTypeMapper.getXmlRelationshipType(initName));
 		}
 	}

@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.switchmapper.typemapper;
 
-import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
+import org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException;
 
 /**
  * @author Sebi
@@ -12,11 +12,11 @@ public final class SpecificTypeMapper extends AbstractTypeMapper {
      *
      * @param yamlRelationshipType name of the relationship type
      * @return the name of its XML representation
-     * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlRelationshipType}
+     * @throws org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException if no mapping exists for {@code yamlRelationshipType}
      */
     @Override
-    public String getXmlRelationshipType(final String yamlRelationshipType) throws NoBaseTypeMappingException {
-        throw new NoBaseTypeMappingException();
+    public String getXmlRelationshipType(final String yamlRelationshipType) throws NoTypeMappingException {
+        throw new NoTypeMappingException();
     }
 
     /**
@@ -24,15 +24,15 @@ public final class SpecificTypeMapper extends AbstractTypeMapper {
      *
      * @param yamlCapabilityType name of the capability type
      * @return the name of its XML representation
-     * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlCapabilityType}
+     * @throws org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException if no mapping exists for {@code yamlCapabilityType}
      */
     @Override
-    public String getXmlCapabilityType(final String yamlCapabilityType) throws NoBaseTypeMappingException {
+    public String getXmlCapabilityType(final String yamlCapabilityType) throws NoTypeMappingException {
         switch (yamlCapabilityType) {
             case TOSCA_CAPABILITIES + "DatabaseEndpoint.MySQL":
                 return "MySQLDatabaseEndpointCapability";
             default:
-                throw new NoBaseTypeMappingException(yamlCapabilityType);
+                throw new NoTypeMappingException(yamlCapabilityType);
         }
     }
 
@@ -41,11 +41,11 @@ public final class SpecificTypeMapper extends AbstractTypeMapper {
      *
      * @param yamlInterfaceName name of the interface
      * @return the name of its XML representation
-     * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlInterfaceName}
+     * @throws org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException if no mapping exists for {@code yamlInterfaceName}
      */
     @Override
-    public String getXmlInterface(final String yamlInterfaceName) throws NoBaseTypeMappingException {
-        throw new NoBaseTypeMappingException();
+    public String getXmlInterface(final String yamlInterfaceName) throws NoTypeMappingException {
+        throw new NoTypeMappingException();
     }
 
     /**
@@ -53,10 +53,10 @@ public final class SpecificTypeMapper extends AbstractTypeMapper {
      *
      * @param yamlNodeType name of the node type
      * @return the name of its XML representation
-     * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlNodeType}
+     * @throws org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException if no mapping exists for {@code yamlNodeType}
      */
     @Override
-    public String getXmlNodeType(final String yamlNodeType) throws NoBaseTypeMappingException {
+    public String getXmlNodeType(final String yamlNodeType) throws NoTypeMappingException {
         switch (yamlNodeType) {
             case TOSCA_NODES + "DBMS.MySQL":
                 return "MySQL";
@@ -65,7 +65,7 @@ public final class SpecificTypeMapper extends AbstractTypeMapper {
             case TOSCA_NODES + "WebServer.Apache":
                 return "ApacheWebServer";
             default:
-                throw new NoBaseTypeMappingException(yamlNodeType);
+                throw new NoTypeMappingException(yamlNodeType);
         }
     }
 
@@ -74,10 +74,10 @@ public final class SpecificTypeMapper extends AbstractTypeMapper {
      *
      * @param yamlArtifactType name of the artifact type
      * @return the name of its XML representation
-     * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlArtifactType}
+     * @throws org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException if no mapping exists for {@code yamlArtifactType}
      */
     @Override
-    public String getXmlArtifactType(final String yamlArtifactType) throws NoBaseTypeMappingException {
-        throw new NoBaseTypeMappingException();
+    public String getXmlArtifactType(final String yamlArtifactType) throws NoTypeMappingException {
+        throw new NoTypeMappingException();
     }
 }

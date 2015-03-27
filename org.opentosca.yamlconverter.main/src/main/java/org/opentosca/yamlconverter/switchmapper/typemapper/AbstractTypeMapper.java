@@ -1,6 +1,6 @@
 package org.opentosca.yamlconverter.switchmapper.typemapper;
 
-import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
+import org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException;
 
 /**
  * @author Sebi
@@ -20,43 +20,43 @@ public abstract class AbstractTypeMapper {
      *
      * @param yamlRelationshipType name of the relationship type
      * @return the name of its XML representation
-     * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlRelationshipType}
+     * @throws org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException if no mapping exists for {@code yamlRelationshipType}
      */
-    public abstract String getXmlRelationshipType(String yamlRelationshipType) throws NoBaseTypeMappingException;
+    public abstract String getXmlRelationshipType(String yamlRelationshipType) throws NoTypeMappingException;
 
     /**
      * Selects the capability type name from XML for {@code yamlCapabilityType}.
      *
      * @param yamlCapabilityType name of the capability type
      * @return the name of its XML representation
-     * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlCapabilityType}
+     * @throws org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException if no mapping exists for {@code yamlCapabilityType}
      */
-    public abstract String getXmlCapabilityType(String yamlCapabilityType) throws NoBaseTypeMappingException;
+    public abstract String getXmlCapabilityType(String yamlCapabilityType) throws NoTypeMappingException;
 
     /**
      * Selects the interface name from XML for {@code yamlInterfaceName}.
      *
      * @param yamlInterfaceName name of the interface
      * @return the name of its XML representation
-     * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlInterfaceName}
+     * @throws org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException if no mapping exists for {@code yamlInterfaceName}
      */
-    public abstract String getXmlInterface(String yamlInterfaceName) throws NoBaseTypeMappingException;
+    public abstract String getXmlInterface(String yamlInterfaceName) throws NoTypeMappingException;
 
     /**
      * Selects the node type name from XML for {@code yamlNodeType}.
      *
      * @param yamlNodeType name of the node type
      * @return the name of its XML representation
-     * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlNodeType}
+     * @throws org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException if no mapping exists for {@code yamlNodeType}
      */
-    public abstract String getXmlNodeType(String yamlNodeType) throws NoBaseTypeMappingException;
+    public abstract String getXmlNodeType(String yamlNodeType) throws NoTypeMappingException;
 
     /**
      * Selects the artifact type name from XML for {@code yamlArtifactType}.
      *
      * @param yamlArtifactType name of the artifact type
      * @return the name of its XML representation
-     * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlArtifactType}
+     * @throws org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException if no mapping exists for {@code yamlArtifactType}
      */
-    public abstract String getXmlArtifactType(String yamlArtifactType) throws NoBaseTypeMappingException;
+    public abstract String getXmlArtifactType(String yamlArtifactType) throws NoTypeMappingException;
 }
