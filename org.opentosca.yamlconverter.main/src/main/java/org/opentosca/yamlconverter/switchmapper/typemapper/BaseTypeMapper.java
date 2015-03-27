@@ -1,4 +1,4 @@
-package org.opentosca.yamlconverter.switchmapper;
+package org.opentosca.yamlconverter.switchmapper.typemapper;
 
 import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
 
@@ -10,15 +10,7 @@ import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
  *
  * @author Sebi
  */
-public final class BaseTypeMapper {
-
-    /**
-     * Base names for YAML types.
-     */
-    private static final String TOSCA_RELATIONSHIPS = "tosca.relationships.";
-    private static final String TOSCA_CAPABILITIES = "tosca.capabilities.";
-    private static final String TOSCA_NODES = "tosca.nodes.";
-    private static final String TOSCA_ARTIFACTS = "tosca.artifacts.";
+public final class BaseTypeMapper extends AbstractTypeMapper {
 
     /**
      * Selects the relationship type name from XML for {@code yamlRelationshipType}.
@@ -27,7 +19,7 @@ public final class BaseTypeMapper {
      * @return the name of its XML representation
      * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlRelationshipType}
      */
-    public static String getXmlRelationshipType(String yamlRelationshipType) throws NoBaseTypeMappingException {
+    public String getXmlRelationshipType(String yamlRelationshipType) throws NoBaseTypeMappingException {
         switch (yamlRelationshipType) {
             case TOSCA_RELATIONSHIPS + "Root":
                 return "RootRelationshipType";
@@ -49,7 +41,7 @@ public final class BaseTypeMapper {
      * @return the name of its XML representation
      * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlCapabilityType}
      */
-    public static String getXmlCapabilityType(String yamlCapabilityType) throws NoBaseTypeMappingException {
+    public String getXmlCapabilityType(String yamlCapabilityType) throws NoBaseTypeMappingException {
         switch (yamlCapabilityType) {
             case TOSCA_CAPABILITIES + "Root":
                 return "RootCapabilityType";
@@ -61,8 +53,6 @@ public final class BaseTypeMapper {
                 return "EndpointCapability";
             case TOSCA_CAPABILITIES + "DatabaseEndpoint":
                 return "DatabaseEndpointCapability";
-            case TOSCA_CAPABILITIES + "DatabaseEndpoint.MySQL":
-                return "MySQLDatabaseEndpointCapability";
             default:
                 throw new NoBaseTypeMappingException(yamlCapabilityType);
         }
@@ -75,7 +65,7 @@ public final class BaseTypeMapper {
      * @return the name of its XML representation
      * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlInterfaceName}
      */
-    public static String getXmlInterface(String yamlInterfaceName) throws NoBaseTypeMappingException {
+    public String getXmlInterface(String yamlInterfaceName) throws NoBaseTypeMappingException {
         throw new NoBaseTypeMappingException();
     }
 
@@ -86,7 +76,7 @@ public final class BaseTypeMapper {
      * @return the name of its XML representation
      * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlNodeType}
      */
-    public static String getXmlNodeType(String yamlNodeType) throws NoBaseTypeMappingException {
+    public String getXmlNodeType(String yamlNodeType) throws NoBaseTypeMappingException {
         switch (yamlNodeType) {
             case TOSCA_NODES + "Root":
                 return "RootNodeType";
@@ -96,16 +86,10 @@ public final class BaseTypeMapper {
                 return "OperatingSystem";
             case TOSCA_NODES + "WebServer":
                 return "WebServer";
-            case TOSCA_NODES + "WebServer.Apache":
-                return "ApacheWebServer";
             case TOSCA_NODES + "WebApplication":
                 return "WebApplication";
             case TOSCA_NODES + "DBMS":
                 return "DBMS";
-            case TOSCA_NODES + "DBMS.MySQL":
-                return "MySQL";
-            case TOSCA_NODES + "Database.MySQL":
-                return "MySQLDatabase";
             case TOSCA_NODES + "ObjectStorage":
             case TOSCA_NODES + "BlockStorage":
             case TOSCA_NODES + "Network":
@@ -121,7 +105,7 @@ public final class BaseTypeMapper {
      * @return the name of its XML representation
      * @throws NoBaseTypeMappingException if no mapping exists for {@code yamlArtifactType}
      */
-    public static String getXmlArtifactType(String yamlArtifactType) throws NoBaseTypeMappingException {
+    public String getXmlArtifactType(String yamlArtifactType) throws NoBaseTypeMappingException {
         switch (yamlArtifactType) {
             case TOSCA_ARTIFACTS + "Root":
                 return "RootArtifactType";

@@ -7,6 +7,10 @@ import org.opentosca.model.tosca.TEntityType.DerivedFrom;
 import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
 import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.switchmapper.typemapper.AbstractTypeMapper;
+import org.opentosca.yamlconverter.switchmapper.typemapper.BaseTypeMapper;
+import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
+import org.opentosca.yamlconverter.switchmapper.typemapper.SpecificTypeMapper;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
@@ -24,6 +28,8 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	private Map<String, TRequirementType> addedRequirementTypes = new HashMap<String, TRequirementType>();
 	private final Yaml2XmlSwitch parent;
 	private TTopologyTemplate topologyCache;
+	private AbstractTypeMapper baseTypeMapper = new BaseTypeMapper();
+	private AbstractTypeMapper specificTypeMapper = new SpecificTypeMapper();
 
 	public AbstractSubSwitch(Yaml2XmlSwitch parentSwitch) {
 		this.parent = parentSwitch;
@@ -89,6 +95,18 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	protected DerivedFrom parseDerivedFrom(String derived_from) {
 		final DerivedFrom result = new DerivedFrom();
 		result.setTypeRef(toTnsQName(derived_from));
+		return result;
+	}
+
+	/**
+	 * Creates a {@link org.opentosca.model.tosca.TEntityType.DerivedFrom} object and sets a type reference to
+	 * {@code referenceDerivedFrom}.
+	 * @param referenceDerivedFrom a QName object representing a xml reference
+	 * @return a DerivedFrom object containing a reference of {@code referenceDerivedFrom}
+	 */
+	protected DerivedFrom parseDerivedFrom(QName referenceDerivedFrom) {
+		final DerivedFrom result = new DerivedFrom();
+		result.setTypeRef(referenceDerivedFrom);
 		return result;
 	}
 
@@ -293,13 +311,93 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		if (!this.addedRequirementTypes.containsKey(requirementTypeName)) {
 			final TRequirementType requirementType = new TRequirementType();
 			requirementType.setName(requirementTypeName);
-			try {
-				requirementType.setRequiredCapabilityType(toTnsQName(BaseTypeMapper.getXmlCapabilityType(capability)));
-			} catch (NoBaseTypeMappingException e) {
-				requirementType.setRequiredCapabilityType(toTnsQName(capability));
-			}
+			requirementType.setRequiredCapabilityType(getCorrectTypeReferenceAsQName(capability, ElementType.CAPABILITY_TYPE));
 			this.addedRequirementTypes.put(requirementTypeName, requirementType);
 			getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
+		}
+	}
+
+	/**
+	 * Depending on {@code elementType} and {@code initName}, a {@link javax.xml.namespace.QName} object is created
+	 * containing a xml reference.
+	 * {@code initName} can be a name of an existing XML base or specific type. Thus
+	 * {@link org.opentosca.yamlconverter.switchmapper.typemapper.BaseTypeMapper} and
+	 * {@link org.opentosca.yamlconverter.switchmapper.typemapper.SpecificTypeMapper} are used to try to get the correct
+	 * XML type name. If this fails, it is assumed that initName is an individual name and can be used directly as a
+	 * reference name.
+	 * @param initName name of the type to reference to
+	 * @param elementType element type of initName
+	 * @return {@link javax.xml.namespace.QName} object containing a reference to initName or its XML representation
+	 */
+	protected QName getCorrectTypeReferenceAsQName(String initName, ElementType elementType) {
+		if (initName == null || initName.isEmpty() || elementType == null) {
+			throw new IllegalArgumentException("initial type name and element type may not be null or empty!");
+		}
+		QName result = null;
+		try {
+			switch (elementType) {
+				case RELATIONSHIP_TYPE:
+					result = getQNameOfRelationshipType(initName);
+					break;
+				case CAPABILITY_TYPE:
+					result = getQNameOfCapabilityType(initName);
+					break;
+				case INTERFACE:
+					result = getQNameOfInterface(initName);
+					break;
+				case NODE_TYPE:
+					result = getQNameOfNodeType(initName);
+					break;
+				case ARTIFACT_TYPE:
+					result = getQNameOfArtifactType(initName);
+					break;
+				default:
+					result = toTnsQName(initName);
+					break;
+			}
+		} catch (NoBaseTypeMappingException e) {
+			result = toTnsQName(initName);
+		}
+		return result;
+	}
+
+	private QName getQNameOfArtifactType(final String initName) throws NoBaseTypeMappingException {
+		try {
+			return toBaseTypesNsQName(baseTypeMapper.getXmlArtifactType(initName));
+		} catch (NoBaseTypeMappingException e) {
+			return toSpecificTypesNsQName(specificTypeMapper.getXmlArtifactType(initName));
+		}
+	}
+
+	private QName getQNameOfNodeType(final String initName) throws NoBaseTypeMappingException {
+		try {
+			return toBaseTypesNsQName(baseTypeMapper.getXmlNodeType(initName));
+		} catch (NoBaseTypeMappingException e) {
+			return toSpecificTypesNsQName(specificTypeMapper.getXmlNodeType(initName));
+		}
+	}
+
+	private QName getQNameOfInterface(final String initName) throws NoBaseTypeMappingException {
+		try {
+			return toBaseTypesNsQName(baseTypeMapper.getXmlInterface(initName));
+		} catch (NoBaseTypeMappingException e) {
+			return toSpecificTypesNsQName(specificTypeMapper.getXmlInterface(initName));
+		}
+	}
+
+	private QName getQNameOfCapabilityType(final String initName) throws NoBaseTypeMappingException {
+		try {
+			return toBaseTypesNsQName(baseTypeMapper.getXmlCapabilityType(initName));
+		} catch (NoBaseTypeMappingException e) {
+			return toSpecificTypesNsQName(specificTypeMapper.getXmlCapabilityType(initName));
+		}
+	}
+
+	private QName getQNameOfRelationshipType(final String initName) throws NoBaseTypeMappingException {
+		try {
+			return toBaseTypesNsQName(baseTypeMapper.getXmlRelationshipType(initName));
+		} catch (NoBaseTypeMappingException e) {
+			return toSpecificTypesNsQName(specificTypeMapper.getXmlRelationshipType(initName));
 		}
 	}
 

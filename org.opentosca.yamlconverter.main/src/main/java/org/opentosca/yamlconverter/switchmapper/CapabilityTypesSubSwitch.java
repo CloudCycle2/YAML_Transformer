@@ -1,9 +1,10 @@
 package org.opentosca.yamlconverter.switchmapper;
 
 import org.opentosca.model.tosca.TCapabilityType;
-import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
+import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
 
+import javax.xml.namespace.QName;
 import java.util.Map.Entry;
 
 public class CapabilityTypesSubSwitch extends AbstractSubSwitch {
@@ -30,11 +31,8 @@ public class CapabilityTypesSubSwitch extends AbstractSubSwitch {
 			result.setPropertiesDefinition(parsePropertiesDefinition(capabilityType.getProperties(), capType.getKey()));
 		}
 		result.setName(capType.getKey());
-		try {
-			result.setDerivedFrom(parseDerivedFrom(BaseTypeMapper.getXmlCapabilityType(capabilityType.getDerived_from())));
-		} catch (NoBaseTypeMappingException e) {
-			result.setDerivedFrom(parseDerivedFrom(capabilityType.getDerived_from()));
-		}
+		final QName derivedFrom = getCorrectTypeReferenceAsQName(capabilityType.getDerived_from(), ElementType.CAPABILITY_TYPE);
+		result.setDerivedFrom(parseDerivedFrom(derivedFrom));
 		result.getDocumentation().add(toDocumentation(capabilityType.getDescription()));
 		return result;
 	}

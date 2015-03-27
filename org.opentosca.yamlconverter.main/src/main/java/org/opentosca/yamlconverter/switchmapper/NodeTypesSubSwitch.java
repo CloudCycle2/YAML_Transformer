@@ -4,7 +4,7 @@ import org.opentosca.model.tosca.*;
 import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
 import org.opentosca.model.tosca.TNodeType.Interfaces;
 import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
-import org.opentosca.yamlconverter.main.exceptions.NoBaseTypeMappingException;
+import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
 
 import java.util.ArrayList;
@@ -39,11 +39,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		final TImplementationArtifacts implementationArtifacts = new TImplementationArtifacts();
 		nodeTypeImplementation.setImplementationArtifacts(implementationArtifacts);
 		nodeTypeImplementation.setName(name + "Implementation");
-		try {
-			nodeTypeImplementation.setNodeType(this.toTnsQName(BaseTypeMapper.getXmlNodeType(result.getName())));
-		} catch (NoBaseTypeMappingException e) {
-			nodeTypeImplementation.setNodeType(this.toTnsQName(result.getName()));
-		}
+		nodeTypeImplementation.setNodeType(getCorrectTypeReferenceAsQName(result.getName(), ElementType.NODE_TYPE));
 
 		if (value.getArtifacts() != null && !value.getArtifacts().isEmpty()) {
 			// here are only artifact definitions!!
@@ -53,11 +49,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
 		}
 		if (value.getDerived_from() != null && !value.getDerived_from().isEmpty()) {
-			try {
-				result.setDerivedFrom(parseDerivedFrom(BaseTypeMapper.getXmlNodeType(value.getDerived_from())));
-			} catch (NoBaseTypeMappingException e) {
-				result.setDerivedFrom(parseDerivedFrom(value.getDerived_from()));
-			}
+			result.setDerivedFrom(parseDerivedFrom(getCorrectTypeReferenceAsQName(value.getDerived_from(), ElementType.NODE_TYPE)));
 		}
 		if (value.getInterfaces() != null && !value.getInterfaces().isEmpty()) {
 			final Interfaces nodeTypeInterfaces = parseNodeTypeInterfaces(value.getInterfaces());
@@ -129,15 +121,13 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			capabilityDefinition.setName(capabilityEntry.getKey());
 			if (capabilityEntry.getValue() instanceof HashMap) {
 				final Map<?, ?> capability = (Map<?, ?>) capabilityEntry.getValue();
-				String capabilityType = "CAPABILITY_TYPE";
+				String capabilityType = null;
 				try {
-					capabilityType = BaseTypeMapper.getXmlCapabilityType((String) capability.get("type"));
-				} catch (final NoBaseTypeMappingException e) {
 					capabilityType = (String) capability.get("type");
-				} catch (final Exception e) {
-					System.out.println("No capability type defined or illegal value, using default.");
+				} catch (Exception e) {
+					capabilityType = "CAPABILITY_TYPE";
 				}
-				capabilityDefinition.setCapabilityType(toTnsQName(capabilityType));
+				capabilityDefinition.setCapabilityType(getCorrectTypeReferenceAsQName(capabilityType, ElementType.CAPABILITY_TYPE));
 			}
 			result.getCapabilityDefinition().add(capabilityDefinition);
 		}
@@ -155,29 +145,26 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 			for (final Entry<String, Object> artifactEntry : artifact.entrySet()) {
+				final Object value = artifactEntry.getValue();
 				switch (artifactEntry.getKey()) {
 				case "type":
-					try {
-						artifactType = BaseTypeMapper.getXmlArtifactType((String) artifactEntry.getValue());
-					} catch (NoBaseTypeMappingException e) {
-						artifactType = (String) artifactEntry.getValue();
-					}
+					artifactType = (String) value;
 					break;
 				case "description":
-					artifactDescription = (String) artifactEntry.getValue();
+					artifactDescription = (String) value;
 					break;
 				case "mime_type":
-					artifactMimeType = (String) artifactEntry.getValue();
+					artifactMimeType = (String) value;
 					break;
 				case "properties":
-					if (artifactEntry.getValue() instanceof Map<?, ?>) {
-						additionalProperties = (Map) artifactEntry.getValue();
+					if (value instanceof Map<?, ?>) {
+						additionalProperties = (Map) value;
 					}
 					break;
 				default:
 					artifactName = artifactEntry.getKey();
-					if (artifactEntry.getValue() instanceof String) {
-						artifactFileUri = (String) artifactEntry.getValue();
+					if (value instanceof String) {
+						artifactFileUri = (String) value;
 					}
 					break;
 				}
@@ -199,11 +186,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		final TArtifactTemplate artifactTemplate = new TArtifactTemplate();
 		artifactTemplate.setName(artifactName);
 		artifactTemplate.setId(artifactName);
-		try {
-			artifactTemplate.setType(toTnsQName(BaseTypeMapper.getXmlArtifactType(artifactType)));
-		} catch (NoBaseTypeMappingException e) {
-			artifactTemplate.setType(toTnsQName(artifactType));
-		}
+		artifactTemplate.setType(getCorrectTypeReferenceAsQName(artifactType, ElementType.ARTIFACT_TYPE));
 
 		final TArtifactTemplate.ArtifactReferences artifactReferences = new TArtifactTemplate.ArtifactReferences();
 		final TArtifactReference artifactReference = new TArtifactReference();

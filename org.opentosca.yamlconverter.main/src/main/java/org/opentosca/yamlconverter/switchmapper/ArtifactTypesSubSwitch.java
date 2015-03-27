@@ -2,6 +2,7 @@ package org.opentosca.yamlconverter.switchmapper;
 
 import org.opentosca.model.tosca.TArtifactType;
 import org.opentosca.model.tosca.TExtensibleElements;
+import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ArtifactType;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class ArtifactTypesSubSwitch extends AbstractSubSwitch {
 
 			final ArtifactType value = entry.getValue();
 			if (value.getDerived_from() != null && !value.getDerived_from().equals("")) {
-				artifactType.setDerivedFrom(parseDerivedFrom(value.getDerived_from()));
+				artifactType.setDerivedFrom(parseDerivedFrom(getCorrectTypeReferenceAsQName(value.getDerived_from(), ElementType.ARTIFACT_TYPE)));
 			}
 			artifactType.setPropertiesDefinition(parsePropertiesDefinition(value.getProperties(), entry.getKey()));
 
