@@ -152,7 +152,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			String artifactType = "";
 			String artifactDescription = "";
 			String artifactMimeType = "";
-			Map<String, Object> additionalProperties = null;
+			Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 			for (final Entry<String, Object> artifactEntry : artifact.entrySet()) {
 				switch (artifactEntry.getKey()) {

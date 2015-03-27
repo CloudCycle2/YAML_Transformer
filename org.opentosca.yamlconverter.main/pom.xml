@@ -10,9 +10,7 @@
         <version>0.1</version>
     </parent>
 
-    <groupId>org.opentosca</groupId>
     <artifactId>org.opentosca.yamlconverter.main</artifactId>
-    <version>0.1</version>
 
     <build>
         <plugins>
@@ -37,8 +35,16 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <outputDirectory>target</outputDirectory>
-                    <finalName>YAML_Transformer</finalName>
                 </configuration>
+                <executions>
+                    <execution>
+					    <id>make-my-jar-with-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -51,6 +57,12 @@
             <version>0.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.opentosca</groupId>
+            <artifactId>org.opentosca.model.tosca</artifactId>
+            <version>0.0.3</version>
+        </dependency>
+		
         <!-- yaml dependencies -->
         <dependency>
             <groupId>com.esotericsoftware.yamlbeans</groupId>
@@ -94,8 +106,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.5</version>
         </dependency>
-
-
 
         <!-- test dependencies -->
         <dependency>

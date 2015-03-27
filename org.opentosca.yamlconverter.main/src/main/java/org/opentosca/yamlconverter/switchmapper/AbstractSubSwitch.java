@@ -41,6 +41,11 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return this.parent.getUsedNamespace();
 	}
 
+	/**
+	 * Returns the current topology template
+	 *
+	 * @return the template, or null if neither a cached or parsed template exists
+	 */
 	protected TTopologyTemplate getTopologyTemplate() {
 		if (this.topologyCache == null) {
 			for (final TExtensibleElements elem : getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation()) {
@@ -53,6 +58,12 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return this.topologyCache;
 	}
 
+	/**
+	 * Creates a TDocumentation with the given String and adds it to this element
+	 *
+	 * @param desc the description
+	 * @return the TDocumentation reference
+	 */
 	protected TDocumentation toDocumentation(String desc) {
 		final TDocumentation docu = new TDocumentation();
 		docu.getContent().add(desc);
@@ -69,12 +80,24 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return name.split(",")[0];
 	}
 
+	/**
+	 * Creates and sets the derived_from information on this element
+	 *
+	 * @param derived_from name of the super element
+	 * @return the DerivedFrom reference
+	 */
 	protected DerivedFrom parseDerivedFrom(String derived_from) {
 		final DerivedFrom result = new DerivedFrom();
 		result.setTypeRef(toTnsQName(derived_from));
 		return result;
 	}
 
+	/**
+	 * Creates a QName element for the given local name with the target namespace of our {@link #getDefinitions()}
+	 *
+	 * @param localName of the element
+	 * @return the QName
+	 */
 	protected QName toTnsQName(String localName) {
 		return new QName(getDefinitions().getTargetNamespace(), localName, Yaml2XmlSwitch.TOSCA_NS_PREFIX);
 	}
@@ -87,6 +110,13 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return new QName(Yaml2XmlSwitch.SPECIFIC_TYPES_NS, name, Yaml2XmlSwitch.SPECIFIC_TYPES_PREFIX);
 	}
 
+	/**
+	 * Creates and sets the PropertiesDefinition for this element and adds the element to the xsd definitions.
+	 *
+	 * @param properties of this element
+	 * @param typename of this element
+	 * @return a reference to the PropertiesDefinition
+	 */
 	protected PropertiesDefinition parsePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
 		final PropertiesDefinition result = new PropertiesDefinition();
 		// setType() works, setElement will throw an error while importing the XML to Winery
@@ -95,6 +125,12 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return result;
 	}
 
+	/**
+	 * Adds the xsd information for the element to the xsd builder.
+	 *
+	 * @param properties of the element
+	 * @param name of the element
+	 */
 	private void generateTypeXSD(Map<String, PropertyDefinition> properties, String name) {
 		final String tName = "t" + name;
 		this.parent.getXSDStringBuilder()
@@ -123,12 +159,24 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 				.append("\" />\n");
 	}
 
+	/**
+	 * Converts the given map to a jaxb-parseable {@link AnyMap}
+	 *
+	 * @param customMap given properties
+	 * @param nodename name of the element
+	 * @return the {@link JAXBElement} with the AnyMap
+	 */
 	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodename) {
 		final AnyMap properties = new AnyMap(parseProperties(customMap));
 		properties.getOtherAttributes().put(new QName("xmlns"), Yaml2XmlSwitch.TYPES_NS);
 		return new JAXBElement<AnyMap>(new QName(Yaml2XmlSwitch.TYPES_NS, nodename + "Properties", "types"), AnyMap.class, properties);
 	}
 
+	/**
+	 *
+	 * @param properties
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	private Map<String, String> parseProperties(Map<String, Object> properties) {
 		final Map<String, String> result = new HashMap<String, String>();
@@ -171,6 +219,12 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return inf;
 	}
 
+	/**
+	 * processes the get* keywords, e.g. get_property or get_input
+	 *
+	 * @param getterMap combined map of get_inputs and get_properties
+	 * @return the String denoting the userinput, or {@link Yaml2XmlSwitch#DEFAULT_USER_INPUT} if none exists
+	 */
 	private String parseGetter(Map<String, Object> getterMap) {
 		for (final Entry<String, Object> getter : getterMap.entrySet()) {
 			switch (getter.getKey()) {
@@ -210,6 +264,12 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return "";
 	}
 
+	/**
+	 * Serializes the given map to a yaml string
+	 *
+	 * @param getterMap to serialize
+	 * @return the yaml string, or <code>null</code> if an exception occurred.
+	 */
 	private String serializeYAML(Map<String, Object> getterMap) {
 		final Writer output = new StringWriter();
 		final YamlWriter writer = new YamlWriter(output);
@@ -222,6 +282,12 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return output.toString();
 	}
 
+	/**
+	 * Creates a {@link TRequirementType} and adds it to the service template
+	 * 
+	 * @param capability name of the capability
+	 * @param requirementTypeName name of the requirement
+	 */
 	protected void createAndAddRequirementType(final String capability, final String requirementTypeName) {
 		// create requirement type for requirement if no has been created before
 		if (!this.addedRequirementTypes.containsKey(requirementTypeName)) {

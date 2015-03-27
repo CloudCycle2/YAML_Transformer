@@ -13,14 +13,5 @@
         <module>org.opentosca.yamlconverter.main</module>
         <module>org.opentosca.yamlconverter.yamlmodel</module>
     </modules>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.opentosca</groupId>
-            <artifactId>org.opentosca.model.tosca</artifactId>
-            <version>0.0.3</version>
-        </dependency>
-    </dependencies>
-
     
 </project>
