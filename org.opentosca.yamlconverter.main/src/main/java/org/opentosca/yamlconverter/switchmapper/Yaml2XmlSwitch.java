@@ -41,6 +41,8 @@ public class Yaml2XmlSwitch {
 	public static final String BASE_TYPES_NS = "http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes";
 
 	public static final String TOSCA_NS_PREFIX = "tosca";
+	public static final String BASE_TYPES_PREFIX = "ns1";
+	public static final String SPECIFIC_TYPES_PREFIX = "ns2";
 
 	/**
 	 * A counter for creating unique IDs.
@@ -155,8 +157,8 @@ public class Yaml2XmlSwitch {
 			this.usedNamespace = yamlServiceTemplate.getTosca_default_namespace();
 		}
 		this.toscaResult.setTargetNamespace(this.usedNamespace);
-		this.toscaResult.getOtherAttributes().put(new QName("xmlns:ns1"), BASE_TYPES_NS);
-		this.toscaResult.getOtherAttributes().put(new QName("xmlns:ns2"), SPECIFIC_TYPES_NS);
+		this.toscaResult.getOtherAttributes().put(new QName("xmlns:" + BASE_TYPES_PREFIX), BASE_TYPES_NS);
+		this.toscaResult.getOtherAttributes().put(new QName("xmlns:" + SPECIFIC_TYPES_PREFIX), SPECIFIC_TYPES_NS);
 		this.toscaResult.getOtherAttributes().put(new QName("xmlns:types"), TYPES_NS);
 
 		setServiceAndTopologyTemplate(yamlServiceTemplate, serviceTemplate, topologyTemplate);

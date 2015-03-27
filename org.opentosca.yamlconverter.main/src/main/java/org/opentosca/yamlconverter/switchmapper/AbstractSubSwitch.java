@@ -80,11 +80,11 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	}
 
 	protected QName toBaseTypesNsQName(String name) {
-		return new QName(Yaml2XmlSwitch.BASE_TYPES_NS, name, "ns1");
+		return new QName(Yaml2XmlSwitch.BASE_TYPES_NS, name, Yaml2XmlSwitch.BASE_TYPES_PREFIX);
 	}
 
 	protected QName toSpecificTypesNsQName(String name) {
-		return new QName(Yaml2XmlSwitch.SPECIFIC_TYPES_NS, name, "ns2");
+		return new QName(Yaml2XmlSwitch.SPECIFIC_TYPES_NS, name, Yaml2XmlSwitch.SPECIFIC_TYPES_PREFIX);
 	}
 
 	protected PropertiesDefinition parsePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
