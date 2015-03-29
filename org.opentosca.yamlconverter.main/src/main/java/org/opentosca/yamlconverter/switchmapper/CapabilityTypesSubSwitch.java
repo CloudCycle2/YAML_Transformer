@@ -16,6 +16,10 @@ public class CapabilityTypesSubSwitch extends AbstractSubSwitch {
 		super(parentSwitch);
 	}
 
+	/**
+	 * For each capability type of the YAML service template, a corresponding {@link org.opentosca.model.tosca.TCapabilityType}
+	 * is created and added to the {@link #getDefinitions()} object.
+	 */
 	@Override
 	public void process() {
 		if (getServiceTemplate().getCapability_types() != null) {
