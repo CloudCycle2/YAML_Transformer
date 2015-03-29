@@ -27,12 +27,14 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	private final Yaml2XmlSwitch parent;
 	private TTopologyTemplate topologyCache;
 
-	private NamespaceUtil namespaceUtil = new NamespaceUtil(getDefinitions().getTargetNamespace());
-	private TypeMapperUtil typeMapperUtil = new TypeMapperUtil(namespaceUtil);
+	private NamespaceUtil namespaceUtil;
+	private TypeMapperUtil typeMapperUtil;
 	private PropertiesParserUtil propertiesParserUtil;
 
 	public AbstractSubSwitch(Yaml2XmlSwitch parentSwitch) {
 		this.parent = parentSwitch;
+		this.namespaceUtil = new NamespaceUtil(getDefinitions().getTargetNamespace());
+		this.typeMapperUtil = new TypeMapperUtil(namespaceUtil);
 		this.propertiesParserUtil = new PropertiesParserUtil(this.parent, getServiceTemplate());
 	}
 
