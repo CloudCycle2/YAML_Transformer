@@ -1,5 +1,9 @@
 package org.opentosca.yamlconverter.switchmapper;
 
+/**
+ * This class supports processing the imports of a YAML service template.
+ * Currently it's not implemented!
+ */
 public class ImportsSubSwitch extends AbstractSubSwitch {
 
 	public ImportsSubSwitch(Yaml2XmlSwitch parentSwitch) {
@@ -8,12 +12,7 @@ public class ImportsSubSwitch extends AbstractSubSwitch {
 
 	@Override
 	public void process() {
-		if (getServiceTemplate().getImports() != null) {
-			// for (final Entry<String, Import> importelem : elem.getImports().entrySet()) {
-			// TODO: How do we handle imports?
-			// result.getImport().add(case_Import(importelem));
-			// }
-		}
+		// No implementation!
 	}
 
 }
