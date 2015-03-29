@@ -32,8 +32,6 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	private Map<String, TRequirementType> addedRequirementTypes = new HashMap<String, TRequirementType>();
 	private final Yaml2XmlSwitch parent;
 	private TTopologyTemplate topologyCache;
-	private AbstractTypeMapper baseTypeMapper = new BaseTypeMapper();
-	private AbstractTypeMapper specificTypeMapper = new SpecificTypeMapper();
 
 	private NamespaceUtil namespaceUtil = new NamespaceUtil(getDefinitions().getTargetNamespace());
 	private TypeMapperUtil typeMapperUtil = new TypeMapperUtil(namespaceUtil);
