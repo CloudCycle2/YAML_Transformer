@@ -105,7 +105,7 @@ public class Yaml2XmlSwitch {
 		return pre + this.xsd.toString() + post;
 	}
 
-	StringBuilder getXSDStringBuilder() {
+	public StringBuilder getXSDStringBuilder() {
 		return this.xsd;
 	}
 
@@ -114,7 +114,7 @@ public class Yaml2XmlSwitch {
 	 *
 	 * @return InputVarName -> InputVarValue
 	 */
-	Map<String, String> getInputs() {
+	public Map<String, String> getInputs() {
 		return this.inputs;
 	}
 
