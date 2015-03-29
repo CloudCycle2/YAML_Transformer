@@ -9,19 +9,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * This class supports processing of relationship types of a YAML service template.
+ */
 public class RelationshipTypesSubSwitch extends AbstractSubSwitch {
 
 	public RelationshipTypesSubSwitch(Yaml2XmlSwitch parentSwitch) {
 		super(parentSwitch);
 	}
 
+	/**
+	 * Processes all YAML relationship types and creates a Tosca {@link org.opentosca.model.tosca.TRelationshipType} and
+	 * adds it to {@link #getDefinitions()} object.
+	 */
 	@Override
 	public void process() {
 		if (getServiceTemplate().getRelationship_types() != null) {
-			for (final Entry<String, RelationshipType> relType : getServiceTemplate().getRelationship_types().entrySet()) {
-				final TRelationshipType rt = createRelationshipType(relType);
-				rt.setName(relType.getKey());
-				getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(rt);
+			for (final Entry<String, RelationshipType> yamlRelationshipType : getServiceTemplate().getRelationship_types().entrySet()) {
+				final TRelationshipType relationshipType = createRelationshipType(yamlRelationshipType);
+				relationshipType.setName(yamlRelationshipType.getKey());
+				getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(relationshipType);
 			}
 		}
 	}
