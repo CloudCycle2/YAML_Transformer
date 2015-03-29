@@ -127,6 +127,21 @@ public class Yaml2XmlSwitch {
 		this.inputs = inputs;
 	}
 
+	/**
+	 * Processes the given YAML service template by creating the corresponding Tosca T* objects like
+	 * {@link org.opentosca.model.tosca.TServiceTemplate} and {@link org.opentosca.model.tosca.TTopologyTemplate}, setting
+	 * initial properties and adding the objects to {@link #toscaResult}. Also the following known sub-switches are
+	 * started: {@link org.opentosca.yamlconverter.switchmapper.CapabilityTypesSubSwitch},
+	 * {@link org.opentosca.yamlconverter.switchmapper.RelationshipTypesSubSwitch},
+	 * {@link org.opentosca.yamlconverter.switchmapper.ArtifactTypesSubSwitch},
+	 * {@link org.opentosca.yamlconverter.switchmapper.NodeTypesSubSwitch},
+	 * {@link org.opentosca.yamlconverter.switchmapper.ImportsSubSwitch},
+	 * {@link org.opentosca.yamlconverter.switchmapper.NodeTemplatesSubSwitch}.
+	 * They process the YAML service template in their own way.
+	 *
+	 * @param yamlServiceTemplate YAML service template (read from a YAML file)
+	 * @return XML representation as Tosca Definitions object from YAML service template
+	 */
 	private Definitions processServiceTemplate(ServiceTemplate yamlServiceTemplate) {
 		final TServiceTemplate serviceTemplate = new TServiceTemplate();
 		final TTopologyTemplate topologyTemplate = new TTopologyTemplate();
@@ -135,8 +150,8 @@ public class Yaml2XmlSwitch {
 		final ISubSwitch[] subSwitches = { new CapabilityTypesSubSwitch(this), new RelationshipTypesSubSwitch(this),
 				new ArtifactTypesSubSwitch(this), new NodeTypesSubSwitch(this), new ImportsSubSwitch(this),
 				new NodeTemplatesSubSwitch(this) };
-		for (final ISubSwitch sSw : subSwitches) {
-			sSw.process();
+		for (final ISubSwitch subSwitch : subSwitches) {
+			subSwitch.process();
 		}
 
 		this.toscaResult.getImport().add(createTypeImport(XMLSCHEMA_NS,
@@ -147,6 +162,13 @@ public class Yaml2XmlSwitch {
 		return this.toscaResult;
 	}
 
+	/**
+	 * Sets initial properties for {@code serviceTemplate} and {@code topologyTemplate} like namespace attributes,
+	 * id and name.
+	 * @param yamlServiceTemplate imported YAML service template
+	 * @param serviceTemplate Tosca service template
+	 * @param topologyTemplate Tosca topology template
+	 */
 	private void setInitialProperties(ServiceTemplate yamlServiceTemplate, TServiceTemplate serviceTemplate,
 			TTopologyTemplate topologyTemplate) {
 		this.toscaResult.setId(unique("root"));
@@ -164,10 +186,17 @@ public class Yaml2XmlSwitch {
 		setServiceAndTopologyTemplate(yamlServiceTemplate, serviceTemplate, topologyTemplate);
 	}
 
+	/**
+	 * Adds some documentation, attributes like id and name, connects topology template to service template and adds
+	 * service template to {@link #toscaResult}.
+	 *
+	 * @param yamlServiceTemplate YAML service template
+	 * @param serviceTemplate Tosca service template
+	 * @param topologyTemplate Tosca topology template
+	 */
 	private void setServiceAndTopologyTemplate(final ServiceTemplate yamlServiceTemplate, final TServiceTemplate serviceTemplate,
 											   final TTopologyTemplate topologyTemplate) {
 		// set service and topology template
-		this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(serviceTemplate);
 		this.toscaResult.getDocumentation().add(toDocumentation(yamlServiceTemplate.getDescription()));
 		if (yamlServiceTemplate.getTemplate_author() != null && !yamlServiceTemplate.getTemplate_author().isEmpty()) {
 			this.toscaResult.getDocumentation().add(toDocumentation("Template Author: " + yamlServiceTemplate.getTemplate_author()));
@@ -184,8 +213,16 @@ public class Yaml2XmlSwitch {
 		}
 		serviceTemplate.setTopologyTemplate(topologyTemplate);
 		serviceTemplate.setTargetNamespace(this.usedNamespace);
+		this.toscaResult.getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(serviceTemplate);
 	}
 
+	/**
+	 * Creates a {@link org.opentosca.model.tosca.TImport} object containing a reference to another xml/xsd document.
+	 * @param importType type of file to import
+	 * @param location where the file is (relative path to the xml output file)
+	 * @param namespace used namespace of referenced file
+	 * @return import object containing the parameters
+	 */
 	private TImport createTypeImport(final String importType, final String location, final String namespace) {
 		final TImport result = new TImport();
 		result.setImportType(importType);
@@ -194,6 +231,11 @@ public class Yaml2XmlSwitch {
 		return result;
 	}
 
+	/**
+	 * Creates a {@link org.opentosca.model.tosca.TDocumentation} object containing {@code desc} as content.
+	 * @param desc any description
+	 * @return documentation object containing the parameter
+	 */
 	private TDocumentation toDocumentation(String desc) {
 		final TDocumentation docu = new TDocumentation();
 		docu.getContent().add(desc);
