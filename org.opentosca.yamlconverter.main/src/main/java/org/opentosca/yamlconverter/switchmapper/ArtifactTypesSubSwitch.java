@@ -35,7 +35,7 @@ public class ArtifactTypesSubSwitch extends AbstractSubSwitch {
 
 			final ArtifactType value = entry.getValue();
 			if (value.getDerived_from() != null && !value.getDerived_from().equals("")) {
-				artifactType.setDerivedFrom(parseDerivedFrom(getCorrectTypeReferenceAsQName(value.getDerived_from(), ElementType.ARTIFACT_TYPE)));
+				artifactType.setDerivedFrom(parseDerivedFrom(getTypeMapperUtil().getCorrectTypeReferenceAsQName(value.getDerived_from(), ElementType.ARTIFACT_TYPE)));
 			}
 			artifactType.setPropertiesDefinition(parsePropertiesDefinition(value.getProperties(), entry.getKey()));
 

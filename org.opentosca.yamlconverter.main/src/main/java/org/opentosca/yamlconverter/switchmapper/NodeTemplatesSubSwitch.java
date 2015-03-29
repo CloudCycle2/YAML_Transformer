@@ -43,7 +43,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		if (nodeTemplate.getDescription() != null && !nodeTemplate.getDescription().isEmpty()) {
 			result.getDocumentation().add(toDocumentation(nodeTemplate.getDescription()));
 		}
-		result.setType(getCorrectTypeReferenceAsQName(nodeTemplate.getType(), ElementType.NODE_TYPE));
+		result.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(nodeTemplate.getType(), ElementType.NODE_TYPE));
 
 		// then process more difficult things
 		processCapabilitiesInNodeTemplate(nodeTemplate, result);
@@ -69,7 +69,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 				} catch (Exception e) {
 					capabilityType = "CAPABILITY_TYPE";
 				}
-				tCapability.setType(getCorrectTypeReferenceAsQName(capabilityType, ElementType.CAPABILITY_TYPE));
+				tCapability.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(capabilityType, ElementType.CAPABILITY_TYPE));
 				tCapability.setId(result.getId() + "_" + nodeTemplateCapability.getKey());
 				// TODO: set properties if any available
 				capabilities.getCapability().add(tCapability);
@@ -146,7 +146,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		for (final String key : requirement.keySet()) {
 			if (key.equals("relationship_type")) {
 				final String relationshipType = (String) requirement.get(key);
-				relationshipTemplate.setType(getCorrectTypeReferenceAsQName(relationshipType, ElementType.RELATIONSHIP_TYPE));
+				relationshipTemplate.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(relationshipType, ElementType.RELATIONSHIP_TYPE));
 			} else {
 				relationshipTemplate.setId(key);
 
@@ -187,7 +187,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 			final TRequirement tRequirement = new TRequirement();
 			tRequirement.setId(requirementName);
 			tRequirement.setName(requirementName);
-			tRequirement.setType(toTnsQName(requirementTypeName));
+			tRequirement.setType(getNamespaceUtil().toTnsQName(requirementTypeName));
 			resultRequirements.getRequirement().add(tRequirement);
 		} else {
 			throw new RuntimeException("This type of requirements definition is not supported." + "Convention: name = [...]Capability");

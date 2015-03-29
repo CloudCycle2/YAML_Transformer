@@ -39,7 +39,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		final TImplementationArtifacts implementationArtifacts = new TImplementationArtifacts();
 		nodeTypeImplementation.setImplementationArtifacts(implementationArtifacts);
 		nodeTypeImplementation.setName(name + "Implementation");
-		nodeTypeImplementation.setNodeType(getCorrectTypeReferenceAsQName(result.getName(), ElementType.NODE_TYPE));
+		nodeTypeImplementation.setNodeType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(result.getName(), ElementType.NODE_TYPE));
 
 		if (value.getArtifacts() != null && !value.getArtifacts().isEmpty()) {
 			// here are only artifact definitions!!
@@ -49,7 +49,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
 		}
 		if (value.getDerived_from() != null && !value.getDerived_from().isEmpty()) {
-			result.setDerivedFrom(parseDerivedFrom(getCorrectTypeReferenceAsQName(value.getDerived_from(), ElementType.NODE_TYPE)));
+			result.setDerivedFrom(parseDerivedFrom(getTypeMapperUtil().getCorrectTypeReferenceAsQName(value.getDerived_from(), ElementType.NODE_TYPE)));
 		}
 		if (value.getInterfaces() != null && !value.getInterfaces().isEmpty()) {
 			final Interfaces nodeTypeInterfaces = parseNodeTypeInterfaces(value.getInterfaces());
@@ -81,7 +81,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 				final String requirementName = (String) requirement.keySet().toArray()[0];
 				final String requirementTypeName = capability.replace("Capability", "Requirement");
 				createAndAddRequirementType(capability, requirementTypeName);
-				rd.setRequirementType(toTnsQName(requirementTypeName));
+				rd.setRequirementType(getNamespaceUtil().toTnsQName(requirementTypeName));
 				rd.setName(requirementName);
 			}
 			result.getRequirementDefinition().add(rd);
@@ -127,7 +127,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 				} catch (Exception e) {
 					capabilityType = "CAPABILITY_TYPE";
 				}
-				capabilityDefinition.setCapabilityType(getCorrectTypeReferenceAsQName(capabilityType, ElementType.CAPABILITY_TYPE));
+				capabilityDefinition.setCapabilityType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(capabilityType, ElementType.CAPABILITY_TYPE));
 			}
 			result.getCapabilityDefinition().add(capabilityDefinition);
 		}
@@ -176,8 +176,8 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 
 	private void addImplementationArtifact(TImplementationArtifacts implementationArtifacts, String artifactName, String artifactType) {
 		final TImplementationArtifacts.ImplementationArtifact implementationArtifact = new TImplementationArtifacts.ImplementationArtifact();
-		implementationArtifact.setArtifactRef(toTnsQName(artifactName));
-		implementationArtifact.setArtifactType(toTnsQName(artifactType));
+		implementationArtifact.setArtifactRef(getNamespaceUtil().toTnsQName(artifactName));
+		implementationArtifact.setArtifactType(getNamespaceUtil().toTnsQName(artifactType));
 		implementationArtifacts.getImplementationArtifact().add(implementationArtifact);
 	}
 
@@ -186,7 +186,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		final TArtifactTemplate artifactTemplate = new TArtifactTemplate();
 		artifactTemplate.setName(artifactName);
 		artifactTemplate.setId(artifactName);
-		artifactTemplate.setType(getCorrectTypeReferenceAsQName(artifactType, ElementType.ARTIFACT_TYPE));
+		artifactTemplate.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(artifactType, ElementType.ARTIFACT_TYPE));
 
 		final TArtifactTemplate.ArtifactReferences artifactReferences = new TArtifactTemplate.ArtifactReferences();
 		final TArtifactReference artifactReference = new TArtifactReference();

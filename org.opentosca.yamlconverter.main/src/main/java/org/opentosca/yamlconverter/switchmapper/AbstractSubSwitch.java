@@ -5,12 +5,12 @@ import com.esotericsoftware.yamlbeans.YamlWriter;
 import org.opentosca.model.tosca.*;
 import org.opentosca.model.tosca.TEntityType.DerivedFrom;
 import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.switchmapper.typemapper.AbstractTypeMapper;
-import org.opentosca.yamlconverter.switchmapper.typemapper.BaseTypeMapper;
-import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
-import org.opentosca.yamlconverter.switchmapper.typemapper.SpecificTypeMapper;
+import org.opentosca.yamlconverter.switchmapper.typemapper.*;
+import org.opentosca.yamlconverter.switchmapper.utils.NamespaceUtil;
+import org.opentosca.yamlconverter.switchmapper.utils.TypeMapperUtil;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
@@ -23,6 +23,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * This class provides some general attributes and methods for its subclasses. The methods support the processing of
+ * a YAML service template.
+ */
 public abstract class AbstractSubSwitch implements ISubSwitch {
 
 	private Map<String, TRequirementType> addedRequirementTypes = new HashMap<String, TRequirementType>();
@@ -30,6 +34,9 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	private TTopologyTemplate topologyCache;
 	private AbstractTypeMapper baseTypeMapper = new BaseTypeMapper();
 	private AbstractTypeMapper specificTypeMapper = new SpecificTypeMapper();
+
+	private NamespaceUtil namespaceUtil = new NamespaceUtil(getDefinitions().getTargetNamespace());
+	private TypeMapperUtil typeMapperUtil = new TypeMapperUtil(namespaceUtil);
 
 	public AbstractSubSwitch(Yaml2XmlSwitch parentSwitch) {
 		this.parent = parentSwitch;
@@ -45,6 +52,14 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 
 	protected String getTargetNamespace() {
 		return this.parent.getUsedNamespace();
+	}
+
+	protected NamespaceUtil getNamespaceUtil() {
+		return this.namespaceUtil;
+	}
+
+	protected TypeMapperUtil getTypeMapperUtil() {
+		return this.typeMapperUtil;
 	}
 
 	/**
@@ -94,7 +109,7 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	 */
 	protected DerivedFrom parseDerivedFrom(String derived_from) {
 		final DerivedFrom result = new DerivedFrom();
-		result.setTypeRef(toTnsQName(derived_from));
+		result.setTypeRef(getNamespaceUtil().toTnsQName(derived_from));
 		return result;
 	}
 
@@ -108,24 +123,6 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		final DerivedFrom result = new DerivedFrom();
 		result.setTypeRef(referenceDerivedFrom);
 		return result;
-	}
-
-	/**
-	 * Creates a QName element for the given local name with the target namespace of our {@link #getDefinitions()}
-	 *
-	 * @param localName of the element
-	 * @return the QName
-	 */
-	protected QName toTnsQName(String localName) {
-		return new QName(getDefinitions().getTargetNamespace(), localName, Yaml2XmlSwitch.TOSCA_NS_PREFIX);
-	}
-
-	protected QName toBaseTypesNsQName(String name) {
-		return new QName(Yaml2XmlSwitch.BASE_TYPES_NS, name, Yaml2XmlSwitch.BASE_TYPES_PREFIX);
-	}
-
-	protected QName toSpecificTypesNsQName(String name) {
-		return new QName(Yaml2XmlSwitch.SPECIFIC_TYPES_NS, name, Yaml2XmlSwitch.SPECIFIC_TYPES_PREFIX);
 	}
 
 	/**
@@ -181,19 +178,21 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	 * Converts the given map to a jaxb-parseable {@link AnyMap}
 	 *
 	 * @param customMap given properties
-	 * @param nodename name of the element
+	 * @param nodeName name of the element
 	 * @return the {@link JAXBElement} with the AnyMap
 	 */
-	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodename) {
+	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodeName) {
 		final AnyMap properties = new AnyMap(parseProperties(customMap));
 		properties.getOtherAttributes().put(new QName("xmlns"), Yaml2XmlSwitch.TYPES_NS);
-		return new JAXBElement<AnyMap>(new QName(Yaml2XmlSwitch.TYPES_NS, nodename + "Properties", "types"), AnyMap.class, properties);
+		return new JAXBElement<AnyMap>(new QName(Yaml2XmlSwitch.TYPES_NS, nodeName + "Properties", "types"), AnyMap.class, properties);
 	}
 
 	/**
+	 * Parses a map of properties. Each entry is checked if it contains a getter-method, like get_input or get_property.
+	 * If yes, {@link #parseGetter(java.util.Map)} is called. If no, the value is set directly.
 	 *
-	 * @param properties
-	 * @return
+	 * @param properties map of properties
+	 * @return a map with replaced get* keywords eventually
 	 */
 	@SuppressWarnings("unchecked")
 	private Map<String, String> parseProperties(Map<String, Object> properties) {
@@ -213,73 +212,87 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	/**
 	 * Checks whether the Object is a Getter or just a normal property.
 	 *
-	 * @param value
+	 * @param value the object to check for a getter
 	 * @return true if getter, false if property
 	 */
 	private boolean isGetter(Object value) {
-		if (value instanceof Map<?, ?>) {
-			return true;
-		}
-		return false;
-	}
-
-	protected TInterface getInterfaceWithOperations(Entry<String, Map<String, Map<String, String>>> entry) {
-		final TInterface inf = new TInterface();
-		inf.setName(entry.getKey());
-		// TODO: is this right?!
-		for (final Entry<String, Map<String, String>> op : entry.getValue().entrySet()) {
-			final TOperation top = new TOperation();
-			top.setName(op.getKey());
-			// value contains keys "implementation" and "description" eventually
-			// TODO: how to use implementation name??
-			inf.getOperation().add(top);
-		}
-		return inf;
+		return value instanceof Map<?, ?>;
 	}
 
 	/**
-	 * processes the get* keywords, e.g. get_property or get_input
+	 * Processes the get* keywords, e.g. get_property or get_input.
 	 *
 	 * @param getterMap combined map of get_inputs and get_properties
-	 * @return the String denoting the userinput, or {@link Yaml2XmlSwitch#DEFAULT_USER_INPUT} if none exists
+	 * @return the String denoting the user input, or {@link Yaml2XmlSwitch#DEFAULT_USER_INPUT} if none exists
 	 */
 	private String parseGetter(Map<String, Object> getterMap) {
-		for (final Entry<String, Object> getter : getterMap.entrySet()) {
+		// TODO: are multiple get* keywords allowed? if yes, this method would always return a value in the first iteration;
+		// TODO: if no, the for-loop is unnecessary.
+		for (Entry<String, Object> getter : getterMap.entrySet()) {
 			switch (getter.getKey()) {
-			case "get_input":
-				final String inputvar = (String) getter.getValue();
-				if (this.parent.getInputs().containsKey(inputvar)) {
-					return this.parent.getInputs().get(inputvar);
-				}
-				if (getServiceTemplate().getInputs().containsKey(inputvar)) {
-					if (getServiceTemplate().getInputs().get(inputvar).getDefault() != null
-							&& !getServiceTemplate().getInputs().get(inputvar).getDefault().isEmpty()) {
-						return getServiceTemplate().getInputs().get(inputvar).getDefault();
+				case "get_input":
+					return getInputValue(getter);
+				case "get_property":
+					@SuppressWarnings("unchecked")
+					final List<String> list = (List<String>) getter.getValue();
+					final String template = list.get(0);
+					final String property = list.get(1);
+					final Map<String, NodeTemplate> nodeTemplates = getServiceTemplate().getNode_templates();
+					if (nodeTemplates.containsKey(template)) {
+						if (nodeTemplates.get(template).getProperties().containsKey(property)) {
+							return (String) nodeTemplates.get(template).getProperties().get(property);
+						}
 					}
-				}
-				return Yaml2XmlSwitch.DEFAULT_USER_INPUT;
-			case "get_property":
-				@SuppressWarnings("unchecked")
-				final List<String> list = (List<String>) getter.getValue();
-				final String template = list.get(0);
-				final String property = list.get(1);
-				if (getServiceTemplate().getNode_templates().containsKey(template)) {
-					if (getServiceTemplate().getNode_templates().get(template).getProperties().containsKey(property)) {
-						return (String) getServiceTemplate().getNode_templates().get(template).getProperties().get(property);
-					}
-				}
-			case "get_ref_property":
-				return Yaml2XmlSwitch.DEFAULT_USER_INPUT;
-			default:
-				final String result = serializeYAML(getterMap);
-				if (result != null) {
-					return result;
-				} else {
+				case "get_ref_property":
 					return Yaml2XmlSwitch.DEFAULT_USER_INPUT;
-				}
+				default:
+					return getGetterDefault(getterMap);
 			}
 		}
 		return "";
+	}
+
+	/**
+	 * Get value for get_input keyword. First try to read the user input for the value (if any exists).
+	 * Otherwise try to read the default value from YAML service template (if any exists).
+	 * Otherwise use default {@link org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch#DEFAULT_USER_INPUT}.
+	 *
+	 * @param getter entry containing get_input and a value which is the name of the input
+	 * @return an input value or a default
+	 */
+	private String getInputValue(final Entry<String, Object> getter) {
+		final String getterValue = (String) getter.getValue();
+		// 1.) try to use the custom user inputs
+		final Map<String, String> userInputs = this.parent.getInputs();
+		if (userInputs.containsKey(getterValue)) {
+			return userInputs.get(getterValue);
+		}
+		// 2.) try to use the input default value defined in service template
+		final Map<String, Input> serviceTemplateInputs = getServiceTemplate().getInputs();
+		if (serviceTemplateInputs.containsKey(getterValue)) {
+			final String inputDefault = serviceTemplateInputs.get(getterValue).getDefault();
+			if (inputDefault != null && !inputDefault.isEmpty()) {
+				return inputDefault;
+			}
+		}
+		return Yaml2XmlSwitch.DEFAULT_USER_INPUT;
+	}
+
+	/**
+	 * Gets a default value. Tries to serialize {@code getterMap} by using {@link com.esotericsoftware.yamlbeans.YamlWriter}.
+	 * If this is not possible, a default is used:
+	 * {@link org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch#DEFAULT_USER_INPUT}.
+	 *
+	 * @param getterMap map containing no correct get* keyword
+	 * @return map as YAML string or default
+	 */
+	private String getGetterDefault(final Map<String, Object> getterMap) {
+		final String result = serializeYAML(getterMap);
+		if (result != null) {
+			return result;
+		} else {
+			return Yaml2XmlSwitch.DEFAULT_USER_INPUT;
+		}
 	}
 
 	/**
@@ -300,6 +313,18 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return output.toString();
 	}
 
+	protected TInterface getInterfaceWithOperations(Entry<String, Map<String, Map<String, String>>> entry) {
+		final TInterface inf = new TInterface();
+		inf.setName(entry.getKey());
+		for (final Entry<String, Map<String, String>> op : entry.getValue().entrySet()) {
+			final TOperation top = new TOperation();
+			top.setName(op.getKey());
+			// value contains keys "implementation" and "description" eventually
+			inf.getOperation().add(top);
+		}
+		return inf;
+	}
+
 	/**
 	 * Creates a {@link TRequirementType} and adds it to the service template
 	 * 
@@ -311,93 +336,9 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		if (!this.addedRequirementTypes.containsKey(requirementTypeName)) {
 			final TRequirementType requirementType = new TRequirementType();
 			requirementType.setName(requirementTypeName);
-			requirementType.setRequiredCapabilityType(getCorrectTypeReferenceAsQName(capability, ElementType.CAPABILITY_TYPE));
+			requirementType.setRequiredCapabilityType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(capability, ElementType.CAPABILITY_TYPE));
 			this.addedRequirementTypes.put(requirementTypeName, requirementType);
 			getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
-		}
-	}
-
-	/**
-	 * Depending on {@code elementType} and {@code initName}, a {@link javax.xml.namespace.QName} object is created
-	 * containing a xml reference.
-	 * {@code initName} can be a name of an existing XML base or specific type. Thus
-	 * {@link org.opentosca.yamlconverter.switchmapper.typemapper.BaseTypeMapper} and
-	 * {@link org.opentosca.yamlconverter.switchmapper.typemapper.SpecificTypeMapper} are used to try to get the correct
-	 * XML type name. If this fails, it is assumed that initName is an individual name and can be used directly as a
-	 * reference name.
-	 * @param initName name of the type to reference to
-	 * @param elementType element type of initName
-	 * @return {@link javax.xml.namespace.QName} object containing a reference to initName or its XML representation
-	 */
-	protected QName getCorrectTypeReferenceAsQName(String initName, ElementType elementType) {
-		if (initName == null || initName.isEmpty() || elementType == null) {
-			throw new IllegalArgumentException("initial type name and element type may not be null or empty!");
-		}
-		QName result = null;
-		try {
-			switch (elementType) {
-				case RELATIONSHIP_TYPE:
-					result = getQNameOfRelationshipType(initName);
-					break;
-				case CAPABILITY_TYPE:
-					result = getQNameOfCapabilityType(initName);
-					break;
-				case INTERFACE:
-					result = getQNameOfInterface(initName);
-					break;
-				case NODE_TYPE:
-					result = getQNameOfNodeType(initName);
-					break;
-				case ARTIFACT_TYPE:
-					result = getQNameOfArtifactType(initName);
-					break;
-				default:
-					result = toTnsQName(initName);
-					break;
-			}
-		} catch (NoTypeMappingException e) {
-			result = toTnsQName(initName);
-		}
-		return result;
-	}
-
-	private QName getQNameOfArtifactType(final String initName) throws NoTypeMappingException {
-		try {
-			return toBaseTypesNsQName(baseTypeMapper.getXmlArtifactType(initName));
-		} catch (NoTypeMappingException e) {
-			return toSpecificTypesNsQName(specificTypeMapper.getXmlArtifactType(initName));
-		}
-	}
-
-	private QName getQNameOfNodeType(final String initName) throws NoTypeMappingException {
-		try {
-			return toBaseTypesNsQName(baseTypeMapper.getXmlNodeType(initName));
-		} catch (NoTypeMappingException e) {
-			return toSpecificTypesNsQName(specificTypeMapper.getXmlNodeType(initName));
-		}
-	}
-
-	private QName getQNameOfInterface(final String initName) throws NoTypeMappingException {
-		try {
-			return toBaseTypesNsQName(baseTypeMapper.getXmlInterface(initName));
-		} catch (NoTypeMappingException e) {
-			return toSpecificTypesNsQName(specificTypeMapper.getXmlInterface(initName));
-		}
-	}
-
-	private QName getQNameOfCapabilityType(final String initName) throws NoTypeMappingException {
-		try {
-			return toBaseTypesNsQName(baseTypeMapper.getXmlCapabilityType(initName));
-		} catch (NoTypeMappingException e) {
-			return toSpecificTypesNsQName(specificTypeMapper.getXmlCapabilityType(initName));
-		}
-	}
-
-	private QName getQNameOfRelationshipType(final String initName) throws NoTypeMappingException {
-		try {
-			return toBaseTypesNsQName(baseTypeMapper.getXmlRelationshipType(initName));
-		} catch (NoTypeMappingException e) {
-			return toSpecificTypesNsQName(specificTypeMapper.getXmlRelationshipType(initName));
 		}
 	}
 

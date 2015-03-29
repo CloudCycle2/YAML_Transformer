@@ -30,7 +30,7 @@ public class RelationshipTypesSubSwitch extends AbstractSubSwitch {
 		final TRelationshipType result = new TRelationshipType();
 		final RelationshipType relationshipType = relType.getValue();
 		result.setName(relType.getKey());
-		result.setDerivedFrom(parseDerivedFrom(getCorrectTypeReferenceAsQName(relationshipType.getDerived_from(), ElementType.RELATIONSHIP_TYPE)));
+		result.setDerivedFrom(parseDerivedFrom(getTypeMapperUtil().getCorrectTypeReferenceAsQName(relationshipType.getDerived_from(), ElementType.RELATIONSHIP_TYPE)));
 
 		// set interfaces
 		final TRelationshipType.TargetInterfaces targetInterfaces = new TRelationshipType.TargetInterfaces();
@@ -50,7 +50,7 @@ public class RelationshipTypesSubSwitch extends AbstractSubSwitch {
 		// set valid target (only one possible, thus choose first one)
 		if (relationshipType.getValid_targets().length > 0 && relationshipType.getValid_targets()[0] != null) {
 			final TRelationshipType.ValidTarget validTarget = new TRelationshipType.ValidTarget();
-			validTarget.setTypeRef(toTnsQName(relationshipType.getValid_targets()[0]));
+			validTarget.setTypeRef(getNamespaceUtil().toTnsQName(relationshipType.getValid_targets()[0]));
 			result.setValidTarget(validTarget);
 		}
 		result.getDocumentation().add(toDocumentation(relationshipType.getDescription()));
