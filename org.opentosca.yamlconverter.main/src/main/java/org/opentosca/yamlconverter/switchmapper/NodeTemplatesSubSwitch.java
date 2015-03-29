@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * This class supports processing of node templates of a YAML service template.
+ */
 public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 
 	private final Map<TNodeTemplate, List<Map<String, Object>>> relationshipRequirements = new HashMap<TNodeTemplate, List<Map<String, Object>>>();
@@ -20,12 +23,18 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		super(parentSwitch);
 	}
 
+	/**
+	 * Processes all YAML node templates by creating a {@link org.opentosca.model.tosca.TNodeTemplate} and adding it
+	 * to {@link #getTopologyTemplate()}. In the next step, the relationship requirements are processed. This depends
+	 * on the creation of the node templates before, because relationships between node templates can only be established
+	 * when all node templates are processed completely, because the node template object is needed.
+	 */
 	@Override
 	public void process() {
 		if (getServiceTemplate().getNode_templates() != null) {
-			for (final Entry<String, NodeTemplate> nt : getServiceTemplate().getNode_templates().entrySet()) {
-				final TNodeTemplate xnode = createNodeTemplate(nt.getValue(), nt.getKey());
-				getTopologyTemplate().getNodeTemplateOrRelationshipTemplate().add(xnode);
+			for (final Entry<String, NodeTemplate> yamlNodeTemplate : getServiceTemplate().getNode_templates().entrySet()) {
+				final TNodeTemplate nodeTemplate = createNodeTemplate(yamlNodeTemplate.getValue(), yamlNodeTemplate.getKey());
+				getTopologyTemplate().getNodeTemplateOrRelationshipTemplate().add(nodeTemplate);
 			}
 			for (final Entry<TNodeTemplate, List<Map<String, Object>>> relationshipRequirement : this.relationshipRequirements.entrySet()) {
 				for (final Map<String, Object> requirement : relationshipRequirement.getValue()) {
@@ -35,11 +44,18 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		}
 	}
 
-	private TNodeTemplate createNodeTemplate(NodeTemplate nodeTemplate, String nodename) {
+	/**
+	 * Creates a node template object and processes the inner attributes like capabilities, properties and requirements.
+	 *
+	 * @param nodeTemplate YAML node template
+	 * @param nodeTemplateName name of the node template
+	 * @return node template object containing values from {@code nodeTemplate}
+	 */
+	private TNodeTemplate createNodeTemplate(NodeTemplate nodeTemplate, String nodeTemplateName) {
 		final TNodeTemplate result = new TNodeTemplate();
 		// first set simple attributes like id, name, etc.
-		result.setId(name2id(nodename));
-		result.setName(nodename);
+		result.setId(name2id(nodeTemplateName));
+		result.setName(nodeTemplateName);
 		if (nodeTemplate.getDescription() != null && !nodeTemplate.getDescription().isEmpty()) {
 			result.getDocumentation().add(toDocumentation(nodeTemplate.getDescription()));
 		}
@@ -47,7 +63,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 
 		// then process more difficult things
 		processCapabilitiesInNodeTemplate(nodeTemplate, result);
-		processPropertiesInNodeTemplate(nodeTemplate, nodename, result);
+		processPropertiesInNodeTemplate(nodeTemplate, nodeTemplateName, result);
 		if (nodeTemplate.getRequirements() != null && !nodeTemplate.getRequirements().isEmpty()) {
 			processRequirements(nodeTemplate, result);
 		}
@@ -55,6 +71,12 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		return result;
 	}
 
+	/**
+	 * Processes capabilities from YAML node template.
+	 *
+	 * @param nodeTemplate YAML node template containing capabilities
+	 * @param result Tosca node template
+	 */
 	private void processCapabilitiesInNodeTemplate(NodeTemplate nodeTemplate, TNodeTemplate result) {
 		final TNodeTemplate.Capabilities capabilities = new TNodeTemplate.Capabilities();
 
@@ -80,9 +102,16 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		}
 	}
 
-	private void processPropertiesInNodeTemplate(NodeTemplate nodeTemplate, String nodename, TNodeTemplate result) {
+	/**
+	 * Processes the node template properties by using {@link #getAnyMapForProperties(java.util.Map, String)}.
+	 *
+	 * @param nodeTemplate YAML node template containing properties
+	 * @param nodeTemplateName name of node template
+	 * @param result Tosca node template where the properties have to be stored in
+	 */
+	private void processPropertiesInNodeTemplate(NodeTemplate nodeTemplate, String nodeTemplateName, TNodeTemplate result) {
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
-		final JAXBElement<AnyMap> jaxbprop = getAnyMapForProperties(nodeTemplate.getProperties(), nodename);
+		final JAXBElement<AnyMap> jaxbprop = getAnyMapForProperties(nodeTemplate.getProperties(), nodeTemplateName);
 		prop.setAny(jaxbprop);
 		result.setProperties(prop);
 	}
@@ -136,43 +165,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 	/**
 	 * For information about what is processed, take a look at
 	 * {@link #processRequirements(org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate, org.opentosca.model.tosca.TNodeTemplate)}
-	 * 
-	 * @param result
-	 * @param requirement
-	 */
-	private void processRelationshipRequirements(final TNodeTemplate result, final Map<String, Object> requirement) {
-		final TRelationshipTemplate relationshipTemplate = new TRelationshipTemplate();
-		// set properties by using values of requirement
-		for (final String key : requirement.keySet()) {
-			if (key.equals("relationship_type")) {
-				final String relationshipType = (String) requirement.get(key);
-				relationshipTemplate.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(relationshipType, ElementType.RELATIONSHIP_TYPE));
-			} else {
-				relationshipTemplate.setId(key);
-
-				// set source element
-				final TRelationshipTemplate.SourceElement source = new TRelationshipTemplate.SourceElement();
-				source.setRef(result);
-				relationshipTemplate.setSourceElement(source);
-
-				// set target element; if no reference is found, throw exception
-				final TRelationshipTemplate.TargetElement target = new TRelationshipTemplate.TargetElement();
-				final TNodeTemplate targetTemplate = getTargetNodeTemplate(result, (String) requirement.get(key));
-				if (targetTemplate == null) {
-					throw new RuntimeException("Illegal reference. " + (String) requirement.get(key) + " is no valid NodeTemplate id.");
-				}
-				target.setRef(targetTemplate);
-				relationshipTemplate.setTargetElement(target);
-			}
-		}
-
-		getTopologyTemplate().getNodeTemplateOrRelationshipTemplate().add(relationshipTemplate);
-	}
-
-	/**
-	 * For information about what is processed, take a look at
-	 * {@link #processRequirements(org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate, org.opentosca.model.tosca.TNodeTemplate)}
-	 * 
+	 *
 	 * @param resultRequirements object storing requirements for a corresponding XML node template
 	 * @param requirement map containing requirement attributes; mapping size must be 1
 	 */
@@ -194,7 +187,50 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		}
 	}
 
-	private TNodeTemplate getTargetNodeTemplate(final TNodeTemplate result, final String nodeTemplateId) {
+	/**
+	 * For information about what is processed, take a look at
+	 * {@link #processRequirements(org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate, org.opentosca.model.tosca.TNodeTemplate)}
+	 *
+	 * @param result
+	 * @param requirement
+	 */
+	private void processRelationshipRequirements(final TNodeTemplate result, final Map<String, Object> requirement) {
+		final TRelationshipTemplate relationshipTemplate = new TRelationshipTemplate();
+		// set properties by using values of requirement
+		for (final String key : requirement.keySet()) {
+			if (key.equals("relationship_type")) {
+				final String relationshipType = (String) requirement.get(key);
+				relationshipTemplate.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(relationshipType, ElementType.RELATIONSHIP_TYPE));
+			} else {
+				relationshipTemplate.setId(key);
+
+				// set source element
+				final TRelationshipTemplate.SourceElement source = new TRelationshipTemplate.SourceElement();
+				source.setRef(result);
+				relationshipTemplate.setSourceElement(source);
+
+				// set target element; if no reference is found, throw exception
+				final TRelationshipTemplate.TargetElement target = new TRelationshipTemplate.TargetElement();
+				final TNodeTemplate targetTemplate = getTargetNodeTemplate((String) requirement.get(key));
+				if (targetTemplate == null) {
+					throw new RuntimeException("Illegal reference. " + (String) requirement.get(key) + " is no valid NodeTemplate id.");
+				}
+				target.setRef(targetTemplate);
+				relationshipTemplate.setTargetElement(target);
+			}
+		}
+
+		getTopologyTemplate().getNodeTemplateOrRelationshipTemplate().add(relationshipTemplate);
+	}
+
+	/**
+	 * Finds the {@link org.opentosca.model.tosca.TNodeTemplate} with id {@code nodeTemplateId} by searching all available
+	 * entity templates from {@link #getTopologyTemplate()} and compare the id's.
+	 *
+	 * @param nodeTemplateId id of the node template to search for
+	 * @return the node template object or null if node template couldn't be found
+	 */
+	private TNodeTemplate getTargetNodeTemplate(final String nodeTemplateId) {
 		for (final TEntityTemplate entityTemplate : getTopologyTemplate().getNodeTemplateOrRelationshipTemplate()) {
 			if (entityTemplate instanceof TNodeTemplate) {
 				final TNodeTemplate nodeTemplate = (TNodeTemplate) entityTemplate;
