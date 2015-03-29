@@ -2,6 +2,7 @@ package org.opentosca.yamlconverter.switchmapper;
 
 import org.opentosca.model.tosca.*;
 import org.opentosca.yamlconverter.main.utils.CSARUtil;
+import org.opentosca.yamlconverter.switchmapper.subswitches.*;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 import javax.xml.namespace.QName;
@@ -68,15 +69,15 @@ public class Yaml2XmlSwitch {
 
 	private String usedNamespace = NS;
 
-	Definitions getToscaResult() {
+	public Definitions getToscaResult() {
 		return this.toscaResult;
 	}
 
-	ServiceTemplate getServiceTemplate() {
+	public ServiceTemplate getServiceTemplate() {
 		return this.st;
 	}
 
-	String getUsedNamespace() {
+	public String getUsedNamespace() {
 		return this.usedNamespace;
 	}
 
@@ -131,12 +132,12 @@ public class Yaml2XmlSwitch {
 	 * Processes the given YAML service template by creating the corresponding Tosca T* objects like
 	 * {@link org.opentosca.model.tosca.TServiceTemplate} and {@link org.opentosca.model.tosca.TTopologyTemplate}, setting
 	 * initial properties and adding the objects to {@link #toscaResult}. Also the following known sub-switches are
-	 * started: {@link org.opentosca.yamlconverter.switchmapper.CapabilityTypesSubSwitch},
-	 * {@link org.opentosca.yamlconverter.switchmapper.RelationshipTypesSubSwitch},
-	 * {@link org.opentosca.yamlconverter.switchmapper.ArtifactTypesSubSwitch},
-	 * {@link org.opentosca.yamlconverter.switchmapper.NodeTypesSubSwitch},
-	 * {@link org.opentosca.yamlconverter.switchmapper.ImportsSubSwitch},
-	 * {@link org.opentosca.yamlconverter.switchmapper.NodeTemplatesSubSwitch}.
+	 * started: {@link org.opentosca.yamlconverter.switchmapper.subswitches.CapabilityTypesSubSwitch},
+	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.RelationshipTypesSubSwitch},
+	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.ArtifactTypesSubSwitch},
+	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.NodeTypesSubSwitch},
+	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.ImportsSubSwitch},
+	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.NodeTemplatesSubSwitch}.
 	 * They process the YAML service template in their own way.
 	 *
 	 * @param yamlServiceTemplate YAML service template (read from a YAML file)

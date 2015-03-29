@@ -1,7 +1,8 @@
-package org.opentosca.yamlconverter.switchmapper;
+package org.opentosca.yamlconverter.switchmapper.subswitches;
 
 import org.opentosca.model.tosca.*;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
 import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 

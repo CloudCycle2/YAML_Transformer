@@ -1,4 +1,6 @@
-package org.opentosca.yamlconverter.switchmapper;
+package org.opentosca.yamlconverter.switchmapper.subswitches;
+
+import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
 
 /**
  * This class supports processing the imports of a YAML service template.
