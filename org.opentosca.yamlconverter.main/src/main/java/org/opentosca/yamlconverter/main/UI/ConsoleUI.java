@@ -1,11 +1,5 @@
 package org.opentosca.yamlconverter.main.UI;
 
-import org.opentosca.yamlconverter.main.Parser;
-import org.opentosca.yamlconverter.main.utils.CSARUtil;
-import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
-import org.opentosca.yamlconverter.main.utils.FileUtil;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,6 +7,12 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.opentosca.yamlconverter.main.Parser;
+import org.opentosca.yamlconverter.main.utils.CSARUtil;
+import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
+import org.opentosca.yamlconverter.main.utils.FileUtil;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 
 /**
  * A simple User Interface for Console.
@@ -47,8 +47,13 @@ public class ConsoleUI {
 				filename = promptString("Where can I find a YAML-file?");
 			}
 			try {
-				yaml = fileutil.readYamlResource(filename);
-				read = true;
+				if (filename.isEmpty()) {
+					System.out.println("ERROR: Filename cannot be empty! Muh..");
+					read = false;
+				} else {
+					yaml = fileutil.readYamlResource(filename);
+					read = true;
+				}
 			} catch (final URISyntaxException e) {
 				System.out.println("ERROR: Filename not valid! Muh..");
 				read = false;
@@ -57,6 +62,10 @@ public class ConsoleUI {
 				read = false;
 			} catch (final NullPointerException e) {
 				System.out.println("ERROR: File could not be found! Muh..");
+				read = false;
+			} catch (final RuntimeException e) {
+				System.out.println("ERROR: Error while reading files! Muh...");
+				read = false;
 			}
 		}
 

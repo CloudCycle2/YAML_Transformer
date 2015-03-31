@@ -7,11 +7,16 @@ package org.opentosca.yamlconverter.main.exceptions;
  */
 public class NoTypeMappingException extends Exception {
 
-    public NoTypeMappingException() {
-        super("No mapping defined for your desired request.");
-    }
+	/**
+	 * generated serialVersionUID
+	 */
+	private static final long serialVersionUID = 1142713228334922990L;
 
-    public NoTypeMappingException(final String expectedYamlBaseType) {
-        super("No mapping defined for '"+expectedYamlBaseType+"'");
-    }
+	public NoTypeMappingException() {
+		super("No mapping defined for your desired request.");
+	}
+
+	public NoTypeMappingException(final String expectedYamlBaseType) {
+		super("No mapping defined for '" + expectedYamlBaseType + "'");
+	}
 }
