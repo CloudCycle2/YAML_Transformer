@@ -11,4 +11,9 @@ public class Equal<T> extends TypeScalar<T, T> {
 		return this.constraintArgument.equals(value);
 	}
 
+	@Override
+	public String toString() {
+		return "equal to " + this.constraintArgument;
+	}
+
 }

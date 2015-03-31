@@ -1,20 +1,22 @@
 package org.opentosca.yamlconverter.main;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.opentosca.model.tosca.Definitions;
+import org.opentosca.yamlconverter.constraints.ConstraintClause;
 import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
+import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * This implementation of {@link org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser} uses different converter
- * to convert from YAML string to YAML bean to XML bean to XML string. Methods to get an additional XSD schema, get
- * and set input parameters are provided.
+ * This implementation of {@link org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser} uses different converter to convert from YAML
+ * string to YAML bean to XML bean to XML string. Methods to get an additional XSD schema, get and set input parameters are provided.
  */
 public class Parser implements IToscaYamlParser {
 
@@ -85,6 +87,7 @@ public class Parser implements IToscaYamlParser {
 
 	/**
 	 * TODO: Clarify why this method is still used in {@link org.opentosca.yamlconverter.main.UI.ConsoleUI}
+	 *
 	 * @return
 	 */
 	public Map<String, Input> getInputRequirements() {
@@ -95,8 +98,8 @@ public class Parser implements IToscaYamlParser {
 	}
 
 	/**
-	 * This method collects all constraints and their description, adds them to {@code descriptionForUser} and returns
-	 * the string so that it can be used. If no constraints are labelled with the input, "None" will be added.
+	 * This method collects all constraints and their description, adds them to {@code descriptionForUser} and returns the string so that it
+	 * can be used. If no constraints are labelled with the input, "None" will be added.
 	 *
 	 * @param currentInput class containing an input from a YAML string/document
 	 * @param descriptionForUser current output for the input variable
@@ -105,13 +108,14 @@ public class Parser implements IToscaYamlParser {
 	private String addConstraintsToDescription(Input currentInput, String descriptionForUser) {
 		descriptionForUser += "Constraints: ";
 		if (currentInput.getConstraints().size() > 0) {
-			for (final Map<String, Object> constraints : currentInput.getConstraints()) {
-				if (constraints != null) {
-					for (final String key : constraints.keySet()) {
-						descriptionForUser += key + ": " + constraints.get(key) + ",";
-					}
+			final List<ConstraintClause<Object>> constraints = ConstraintUtils.toConstraints(currentInput);
+			for (final ConstraintClause<Object> constraint : constraints) {
+				if (constraint != null) {
+					descriptionForUser += constraint.toString() + ", ";
 				}
 			}
+			// remove the last ", "
+			descriptionForUser = descriptionForUser.substring(0, descriptionForUser.length() - 2);
 		} else {
 			descriptionForUser += "None";
 		}

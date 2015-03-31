@@ -11,4 +11,9 @@ public class LessOrEqual extends TypeScalar<Comparable<?>, Comparable<?>> {
 	public boolean isValid(Comparable value) {
 		return value.compareTo(this.constraintArgument) <= 0;
 	}
+
+	@Override
+	public String toString() {
+		return "less than or equal to " + this.constraintArgument;
+	}
 }

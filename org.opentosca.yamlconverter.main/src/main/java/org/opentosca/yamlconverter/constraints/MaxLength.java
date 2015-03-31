@@ -18,4 +18,8 @@ public class MaxLength extends TypeScalar<String, Integer> {
 		return value.length() == 0 ? null : Integer.decode(value);
 	}
 
+	@Override
+	public String toString() {
+		return "max length of " + this.constraintArgument;
+	}
 }
