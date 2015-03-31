@@ -20,4 +20,10 @@ inputs:
       - greater_than: 3
       - greater_or_equal: 4
       - valid_values: [3, 4, 5, 10, 15, 20, 25]
+  time:
+    type: timestamp
+    description: Test
+    default: 2002-12-14
+    constraints:
+      - in_range: {2000-12-14, 2020-12-14}
       

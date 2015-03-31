@@ -1,5 +1,10 @@
 package org.opentosca.yamlconverter.main;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.opentosca.yamlconverter.constraints.ConstraintClause;
@@ -7,10 +12,6 @@ import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.main.utils.PropertyType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Sebi
@@ -55,11 +56,11 @@ public class YamlBeansConverterTest extends BaseTest {
 
 	@Test
 	public void testReadYamlInputs() throws Exception {
-		final ServiceTemplate templ = this.converter.convertToYamlBean(this.testUtils.readYamlTestResource("/yaml/inputs.yaml"));
+		final ServiceTemplate templ = this.converter.convertToYamlBean(this.testUtils.readYamlTestResource("/yaml/inputs.yml"));
 		Assert.assertNotNull(templ);
 		final Map<String, Input> inputs = templ.getInputs();
 		Assert.assertNotNull(inputs);
-		Assert.assertEquals("template must have 2 inputs", 2, inputs.size());
+		Assert.assertEquals("template must have 3 inputs", 3, inputs.size());
 		final Input fooInput = inputs.get("foo");
 		Assert.assertEquals("fooInput must have the type 'string'", "string", fooInput.getType());
 		Assert.assertEquals("fooInput must have 3 constraints", 3, fooInput.getConstraints().size());
@@ -97,6 +98,28 @@ public class YamlBeansConverterTest extends BaseTest {
 
 		final Input barInput = inputs.get("bar");
 		constraints = toConstraints(barInput.getConstraints(), barInput.getType());
+
+		for (final ConstraintTest test : constraintTests) {
+			boolean valid = true;
+			for (final ConstraintClause<Object> constraint : constraints) {
+				if (!constraint.isValid(test.value)) {
+					valid = false;
+				}
+			}
+			Assert.assertTrue(test.message, valid == test.valid);
+		}
+
+		constraintTests.clear();
+		final Calendar cal = Calendar.getInstance();
+		cal.set(2002, 4, 12);
+		constraintTests.add(new ConstraintTest("must be valid", cal.getTime(), true));
+		cal.set(1990, 4, 12);
+		constraintTests.add(new ConstraintTest("must not be valid", cal.getTime(), false));
+		cal.set(3000, 4, 12);
+		constraintTests.add(new ConstraintTest("must not be valid", cal.getTime(), false));
+
+		final Input timeInput = inputs.get("time");
+		constraints = toConstraints(timeInput.getConstraints(), timeInput.getType());
 
 		for (final ConstraintTest test : constraintTests) {
 			boolean valid = true;
