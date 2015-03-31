@@ -23,7 +23,9 @@ public class ZipUtils {
 		ZipOutputStream zos = null;
 		try {
 			final File zf = new File(zipFile);
-			zf.getParentFile().mkdirs();
+			if (zf.getParentFile() != null) {
+				zf.getParentFile().mkdirs();
+			}
 			fos = new FileOutputStream(zf);
 			zos = new ZipOutputStream(fos);
 
