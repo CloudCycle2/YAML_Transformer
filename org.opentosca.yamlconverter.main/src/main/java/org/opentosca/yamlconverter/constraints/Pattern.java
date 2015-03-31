@@ -11,4 +11,8 @@ public class Pattern extends TypeRegex {
 		return this.constraintPattern.matcher(value).matches();
 	}
 
+	@Override
+	public String toString() {
+		return "matches pattern " + this.constraintPattern;
+	}
 }

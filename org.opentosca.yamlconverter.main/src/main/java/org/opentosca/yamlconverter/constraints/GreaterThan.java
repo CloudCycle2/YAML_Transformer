@@ -11,4 +11,9 @@ public class GreaterThan extends TypeScalar<Comparable<?>, Comparable<?>> {
 	public boolean isValid(Comparable value) {
 		return value.compareTo(this.constraintArgument) > 0;
 	}
+
+	@Override
+	public String toString() {
+		return "greater than " + this.constraintArgument;
+	}
 }

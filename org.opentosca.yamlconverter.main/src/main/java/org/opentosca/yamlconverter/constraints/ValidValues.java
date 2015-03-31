@@ -16,4 +16,8 @@ public class ValidValues<T> extends TypeList<T, T> {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return "one of " + this.constraintArguments;
+	}
 }

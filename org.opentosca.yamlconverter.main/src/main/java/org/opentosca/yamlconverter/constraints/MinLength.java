@@ -18,4 +18,8 @@ public class MinLength extends TypeScalar<String, Integer> {
 		return value.length() == 0 ? null : Integer.decode(value);
 	}
 
+	@Override
+	public String toString() {
+		return "min length of " + this.constraintArgument;
+	}
 }

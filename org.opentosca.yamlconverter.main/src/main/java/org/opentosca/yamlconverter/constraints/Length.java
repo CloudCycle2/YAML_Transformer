@@ -17,4 +17,9 @@ public class Length extends TypeScalar<String, Integer> {
 		// as the data type of the constraint value. The length is always integer
 		return value.length() == 0 ? null : Integer.decode(value);
 	}
+
+	@Override
+	public String toString() {
+		return "length of " + this.constraintArgument;
+	}
 }
