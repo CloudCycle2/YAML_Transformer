@@ -1,5 +1,21 @@
 package org.opentosca.yamlconverter.switchmapper;
 
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlWriter;
+import org.opentosca.model.tosca.*;
+import org.opentosca.model.tosca.TEntityType.DerivedFrom;
+import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.yamlconverter.main.exceptions.NoTypeMappingException;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.switchmapper.typemapper.AbstractTypeMapper;
+import org.opentosca.yamlconverter.switchmapper.typemapper.BaseTypeMapper;
+import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
+import org.opentosca.yamlconverter.switchmapper.typemapper.SpecificTypeMapper;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
@@ -7,29 +23,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
-import org.opentosca.model.tosca.Definitions;
-import org.opentosca.model.tosca.TDocumentation;
-import org.opentosca.model.tosca.TEntityType.DerivedFrom;
-import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
-import org.opentosca.model.tosca.TExtensibleElements;
-import org.opentosca.model.tosca.TInterface;
-import org.opentosca.model.tosca.TOperation;
-import org.opentosca.model.tosca.TRequirementType;
-import org.opentosca.model.tosca.TServiceTemplate;
-import org.opentosca.model.tosca.TTopologyTemplate;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import com.esotericsoftware.yamlbeans.YamlException;
-import com.esotericsoftware.yamlbeans.YamlWriter;
-
 public abstract class AbstractSubSwitch implements ISubSwitch {
+
+	private Map<String, TRequirementType> addedRequirementTypes = new HashMap<String, TRequirementType>();
 	private final Yaml2XmlSwitch parent;
 	private TTopologyTemplate topologyCache;
+	private AbstractTypeMapper baseTypeMapper = new BaseTypeMapper();
+	private AbstractTypeMapper specificTypeMapper = new SpecificTypeMapper();
 
 	public AbstractSubSwitch(Yaml2XmlSwitch parentSwitch) {
 		this.parent = parentSwitch;
@@ -43,7 +43,7 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		return this.parent.getServiceTemplate();
 	}
 
-	protected String getUsedNamespace() {
+	protected String getTargetNamespace() {
 		return this.parent.getUsedNamespace();
 	}
 
@@ -99,13 +99,33 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	}
 
 	/**
+	 * Creates a {@link org.opentosca.model.tosca.TEntityType.DerivedFrom} object and sets a type reference to
+	 * {@code referenceDerivedFrom}.
+	 * @param referenceDerivedFrom a QName object representing a xml reference
+	 * @return a DerivedFrom object containing a reference of {@code referenceDerivedFrom}
+	 */
+	protected DerivedFrom parseDerivedFrom(QName referenceDerivedFrom) {
+		final DerivedFrom result = new DerivedFrom();
+		result.setTypeRef(referenceDerivedFrom);
+		return result;
+	}
+
+	/**
 	 * Creates a QName element for the given local name with the target namespace of our {@link #getDefinitions()}
 	 *
 	 * @param localName of the element
 	 * @return the QName
 	 */
 	protected QName toTnsQName(String localName) {
-		return new QName(getDefinitions().getTargetNamespace(), localName, "tns");
+		return new QName(getDefinitions().getTargetNamespace(), localName, Yaml2XmlSwitch.TOSCA_NS_PREFIX);
+	}
+
+	protected QName toBaseTypesNsQName(String name) {
+		return new QName(Yaml2XmlSwitch.BASE_TYPES_NS, name, Yaml2XmlSwitch.BASE_TYPES_PREFIX);
+	}
+
+	protected QName toSpecificTypesNsQName(String name) {
+		return new QName(Yaml2XmlSwitch.SPECIFIC_TYPES_NS, name, Yaml2XmlSwitch.SPECIFIC_TYPES_PREFIX);
 	}
 
 	/**
@@ -118,7 +138,7 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	protected PropertiesDefinition parsePropertiesDefinition(Map<String, PropertyDefinition> properties, String typename) {
 		final PropertiesDefinition result = new PropertiesDefinition();
 		// setType() works, setElement will throw an error while importing the XML to Winery
-		result.setType(new QName(Yaml2XmlSwitch.TYPESNS, typename + "Properties", "types"));
+		result.setType(new QName(Yaml2XmlSwitch.TYPES_NS, typename + "Properties", "types"));
 		generateTypeXSD(properties, typename + "Properties");
 		return result;
 	}
@@ -131,15 +151,30 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	 */
 	private void generateTypeXSD(Map<String, PropertyDefinition> properties, String name) {
 		final String tName = "t" + name;
-		this.parent.getXSDStringBuilder().append("<xs:complexType name=\"" + tName + "\">\n");
+		this.parent.getXSDStringBuilder()
+				.append("<xs:complexType name=\"")
+				.append(tName)
+				.append("\">\n");
 		this.parent.getXSDStringBuilder().append("<xs:sequence>\n");
+
 		for (final Entry<String, PropertyDefinition> entry : properties.entrySet()) {
-			this.parent.getXSDStringBuilder().append(
-					"<xs:element name=\"" + entry.getKey() + "\" type=\"xs:" + entry.getValue().getType() + "\" />\n");
+			this.parent.getXSDStringBuilder()
+					.append("<xs:element name=\"")
+					.append(entry.getKey())
+					.append("\" type=\"xs:")
+					.append(entry.getValue().getType())
+					.append("\" />\n");
 		}
-		this.parent.getXSDStringBuilder().append("</xs:sequence>\n");
-		this.parent.getXSDStringBuilder().append("</xs:complexType>\n");
-		this.parent.getXSDStringBuilder().append("<xs:element name=\"" + name + "\" type=\"" + tName + "\" />\n");
+
+		this.parent.getXSDStringBuilder()
+				.append("</xs:sequence>\n")
+				.append("</xs:complexType>\n");
+		this.parent.getXSDStringBuilder()
+				.append("<xs:element name=\"")
+				.append(name)
+				.append("\" type=\"")
+				.append(tName)
+				.append("\" />\n");
 	}
 
 	/**
@@ -151,8 +186,8 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	 */
 	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodename) {
 		final AnyMap properties = new AnyMap(parseProperties(customMap));
-		properties.getOtherAttributes().put(new QName("xmlns"), Yaml2XmlSwitch.TYPESNS);
-		return new JAXBElement<AnyMap>(new QName(Yaml2XmlSwitch.TYPESNS, nodename + "Properties", "types"), AnyMap.class, properties);
+		properties.getOtherAttributes().put(new QName("xmlns"), Yaml2XmlSwitch.TYPES_NS);
+		return new JAXBElement<AnyMap>(new QName(Yaml2XmlSwitch.TYPES_NS, nodename + "Properties", "types"), AnyMap.class, properties);
 	}
 
 	/**
@@ -222,7 +257,6 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 						return getServiceTemplate().getInputs().get(inputvar).getDefault();
 					}
 				}
-				// TODO: *Type-defaults
 				return Yaml2XmlSwitch.DEFAULT_USER_INPUT;
 			case "get_property":
 				@SuppressWarnings("unchecked")
@@ -273,12 +307,98 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	 * @param requirementTypeName name of the requirement
 	 */
 	protected void createAndAddRequirementType(final String capability, final String requirementTypeName) {
-		// TODO: check if requirement type already exists and use this
-		// create requirement type for requirement or use existing one
-		final TRequirementType requirementType = new TRequirementType();
-		requirementType.setName(requirementTypeName);
-		requirementType.setRequiredCapabilityType(toTnsQName(capability));
-		getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
+		// create requirement type for requirement if no has been created before
+		if (!this.addedRequirementTypes.containsKey(requirementTypeName)) {
+			final TRequirementType requirementType = new TRequirementType();
+			requirementType.setName(requirementTypeName);
+			requirementType.setRequiredCapabilityType(getCorrectTypeReferenceAsQName(capability, ElementType.CAPABILITY_TYPE));
+			this.addedRequirementTypes.put(requirementTypeName, requirementType);
+			getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
+		}
+	}
+
+	/**
+	 * Depending on {@code elementType} and {@code initName}, a {@link javax.xml.namespace.QName} object is created
+	 * containing a xml reference.
+	 * {@code initName} can be a name of an existing XML base or specific type. Thus
+	 * {@link org.opentosca.yamlconverter.switchmapper.typemapper.BaseTypeMapper} and
+	 * {@link org.opentosca.yamlconverter.switchmapper.typemapper.SpecificTypeMapper} are used to try to get the correct
+	 * XML type name. If this fails, it is assumed that initName is an individual name and can be used directly as a
+	 * reference name.
+	 * @param initName name of the type to reference to
+	 * @param elementType element type of initName
+	 * @return {@link javax.xml.namespace.QName} object containing a reference to initName or its XML representation
+	 */
+	protected QName getCorrectTypeReferenceAsQName(String initName, ElementType elementType) {
+		if (initName == null || initName.isEmpty() || elementType == null) {
+			throw new IllegalArgumentException("initial type name and element type may not be null or empty!");
+		}
+		QName result = null;
+		try {
+			switch (elementType) {
+				case RELATIONSHIP_TYPE:
+					result = getQNameOfRelationshipType(initName);
+					break;
+				case CAPABILITY_TYPE:
+					result = getQNameOfCapabilityType(initName);
+					break;
+				case INTERFACE:
+					result = getQNameOfInterface(initName);
+					break;
+				case NODE_TYPE:
+					result = getQNameOfNodeType(initName);
+					break;
+				case ARTIFACT_TYPE:
+					result = getQNameOfArtifactType(initName);
+					break;
+				default:
+					result = toTnsQName(initName);
+					break;
+			}
+		} catch (NoTypeMappingException e) {
+			result = toTnsQName(initName);
+		}
+		return result;
+	}
+
+	private QName getQNameOfArtifactType(final String initName) throws NoTypeMappingException {
+		try {
+			return toBaseTypesNsQName(baseTypeMapper.getXmlArtifactType(initName));
+		} catch (NoTypeMappingException e) {
+			return toSpecificTypesNsQName(specificTypeMapper.getXmlArtifactType(initName));
+		}
+	}
+
+	private QName getQNameOfNodeType(final String initName) throws NoTypeMappingException {
+		try {
+			return toBaseTypesNsQName(baseTypeMapper.getXmlNodeType(initName));
+		} catch (NoTypeMappingException e) {
+			return toSpecificTypesNsQName(specificTypeMapper.getXmlNodeType(initName));
+		}
+	}
+
+	private QName getQNameOfInterface(final String initName) throws NoTypeMappingException {
+		try {
+			return toBaseTypesNsQName(baseTypeMapper.getXmlInterface(initName));
+		} catch (NoTypeMappingException e) {
+			return toSpecificTypesNsQName(specificTypeMapper.getXmlInterface(initName));
+		}
+	}
+
+	private QName getQNameOfCapabilityType(final String initName) throws NoTypeMappingException {
+		try {
+			return toBaseTypesNsQName(baseTypeMapper.getXmlCapabilityType(initName));
+		} catch (NoTypeMappingException e) {
+			return toSpecificTypesNsQName(specificTypeMapper.getXmlCapabilityType(initName));
+		}
+	}
+
+	private QName getQNameOfRelationshipType(final String initName) throws NoTypeMappingException {
+		try {
+			return toBaseTypesNsQName(baseTypeMapper.getXmlRelationshipType(initName));
+		} catch (NoTypeMappingException e) {
+			return toSpecificTypesNsQName(specificTypeMapper.getXmlRelationshipType(initName));
+		}
 	}
 
 	@Override

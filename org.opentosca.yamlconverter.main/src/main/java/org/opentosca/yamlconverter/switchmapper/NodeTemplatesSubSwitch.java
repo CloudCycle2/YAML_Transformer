@@ -2,6 +2,7 @@ package org.opentosca.yamlconverter.switchmapper;
 
 import org.opentosca.model.tosca.*;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 
 import javax.xml.bind.JAXBElement;
@@ -42,7 +43,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		if (nodeTemplate.getDescription() != null && !nodeTemplate.getDescription().isEmpty()) {
 			result.getDocumentation().add(toDocumentation(nodeTemplate.getDescription()));
 		}
-		result.setType(toTnsQName(nodeTemplate.getType()));
+		result.setType(getCorrectTypeReferenceAsQName(nodeTemplate.getType(), ElementType.NODE_TYPE));
 
 		// then process more difficult things
 		processCapabilitiesInNodeTemplate(nodeTemplate, result);
@@ -62,13 +63,13 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 				final Map<?, ?> capabilityDefinition = (Map<?, ?>) nodeTemplateCapability.getValue();
 				final TCapability tCapability = new TCapability();
 				tCapability.setName(nodeTemplateCapability.getKey());
-				String capabilityType = "CAPABILITY_TYPE";
+				String capabilityType = null;
 				try {
 					capabilityType = (String) capabilityDefinition.get("type");
-				} catch (final Exception e) {
-					System.out.println("No capability type defined or illegal value, using default.");
+				} catch (Exception e) {
+					capabilityType = "CAPABILITY_TYPE";
 				}
-				tCapability.setType(toTnsQName(capabilityType));
+				tCapability.setType(getCorrectTypeReferenceAsQName(capabilityType, ElementType.CAPABILITY_TYPE));
 				tCapability.setId(result.getId() + "_" + nodeTemplateCapability.getKey());
 				// TODO: set properties if any available
 				capabilities.getCapability().add(tCapability);
@@ -145,7 +146,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		for (final String key : requirement.keySet()) {
 			if (key.equals("relationship_type")) {
 				final String relationshipType = (String) requirement.get(key);
-				relationshipTemplate.setType(toTnsQName(relationshipType));
+				relationshipTemplate.setType(getCorrectTypeReferenceAsQName(relationshipType, ElementType.RELATIONSHIP_TYPE));
 			} else {
 				relationshipTemplate.setId(key);
 

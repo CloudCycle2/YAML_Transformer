@@ -1,5 +1,11 @@
 package org.opentosca.yamlconverter.main.UI;
 
+import org.opentosca.yamlconverter.main.Parser;
+import org.opentosca.yamlconverter.main.utils.CSARUtil;
+import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
+import org.opentosca.yamlconverter.main.utils.FileUtil;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,12 +13,6 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.opentosca.yamlconverter.main.Parser;
-import org.opentosca.yamlconverter.main.utils.CSARUtil;
-import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
-import org.opentosca.yamlconverter.main.utils.FileUtil;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 
 /**
  * A simple User Interface for Console.
