@@ -1,18 +1,27 @@
 package org.opentosca.yamlconverter.switchmapper.subswitches;
 
-import org.opentosca.model.tosca.*;
-import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
-import org.opentosca.model.tosca.TNodeType.Interfaces;
-import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
-import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
-import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.opentosca.model.tosca.TArtifactReference;
+import org.opentosca.model.tosca.TArtifactTemplate;
+import org.opentosca.model.tosca.TCapabilityDefinition;
+import org.opentosca.model.tosca.TEntityTemplate;
+import org.opentosca.model.tosca.TImplementationArtifacts;
+import org.opentosca.model.tosca.TInterface;
+import org.opentosca.model.tosca.TNodeType;
+import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
+import org.opentosca.model.tosca.TNodeType.Interfaces;
+import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
+import org.opentosca.model.tosca.TNodeTypeImplementation;
+import org.opentosca.model.tosca.TOperation;
+import org.opentosca.model.tosca.TRequirementDefinition;
+import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
+import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
 
 /**
  * This class supports processing of node types from a YAML service template.
@@ -24,9 +33,9 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 	}
 
 	/**
-	 * Processes every YAML node type and creates a corresponding {@link org.opentosca.model.tosca.TNodeType}.
-	 * Each node type is added to {@link #getDefinitions()} object as well as {@link org.opentosca.model.tosca.TArtifactTemplate}
-	 * and {@link org.opentosca.model.tosca.TNodeTypeImplementation} which will be created in the process, too.
+	 * Processes every YAML node type and creates a corresponding {@link org.opentosca.model.tosca.TNodeType}. Each node type is added to
+	 * {@link #getDefinitions()} object as well as {@link org.opentosca.model.tosca.TArtifactTemplate} and
+	 * {@link org.opentosca.model.tosca.TNodeTypeImplementation} which will be created in the process, too.
 	 */
 	@Override
 	public void process() {
@@ -39,10 +48,9 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 	}
 
 	/**
-	 * Creates a node type, node type implementation and a list of artifact templates. Sets some basic attributes and
-	 * calls {@link #parseNodeTypeAttributes(org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType, String,
-	 * org.opentosca.model.tosca.TNodeType, java.util.List, org.opentosca.model.tosca.TImplementationArtifacts)} to
-	 * process each node type attribute.
+	 * Creates a node type, node type implementation and a list of artifact templates. Sets some basic attributes and calls
+	 * {@link #parseNodeTypeAttributes(org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType, String, org.opentosca.model.tosca.TNodeType, java.util.List, org.opentosca.model.tosca.TImplementationArtifacts)}
+	 * to process each node type attribute.
 	 *
 	 * @param value YAML node type
 	 * @param name name of YAML node type
@@ -69,8 +77,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 	}
 
 	private void parseNodeTypeAttributes(final NodeType value, final String name, final TNodeType result,
-										 final List<TArtifactTemplate> artifactTemplates,
-										 final TImplementationArtifacts implementationArtifacts) {
+			final List<TArtifactTemplate> artifactTemplates, final TImplementationArtifacts implementationArtifacts) {
 		if (value.getArtifacts() != null && !value.getArtifacts().isEmpty()) {
 			// here are only artifact definitions!!
 			parseNodeTypeArtifacts(value.getArtifacts(), artifactTemplates, implementationArtifacts);
@@ -79,7 +86,8 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
 		}
 		if (value.getDerived_from() != null && !value.getDerived_from().isEmpty()) {
-			result.setDerivedFrom(parseDerivedFrom(getTypeMapperUtil().getCorrectTypeReferenceAsQName(value.getDerived_from(), ElementType.NODE_TYPE)));
+			result.setDerivedFrom(parseDerivedFrom(getTypeMapperUtil().getCorrectTypeReferenceAsQName(value.getDerived_from(),
+					ElementType.NODE_TYPE)));
 		}
 		if (value.getInterfaces() != null && !value.getInterfaces().isEmpty()) {
 			final Interfaces nodeTypeInterfaces = parseNodeTypeInterfaces(value.getInterfaces());
@@ -140,8 +148,8 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 	}
 
 	/**
-	 * Creates a {@link org.opentosca.model.tosca.TNodeType.CapabilityDefinitions} object. Eventually a default for the
-	 * capability type is used.
+	 * Creates a {@link org.opentosca.model.tosca.TNodeType.CapabilityDefinitions} object. Eventually a default for the capability type is
+	 * used.
 	 *
 	 * @param capabilities map containing capabilities with some definitions
 	 * @return an object containing all capability definitions
@@ -156,10 +164,11 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 				String capabilityType = null;
 				try {
 					capabilityType = (String) capability.get("type");
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					capabilityType = "CAPABILITY_TYPE";
 				}
-				capabilityDefinition.setCapabilityType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(capabilityType, ElementType.CAPABILITY_TYPE));
+				capabilityDefinition.setCapabilityType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(capabilityType,
+						ElementType.CAPABILITY_TYPE));
 			}
 			result.getCapabilityDefinition().add(capabilityDefinition);
 		}
@@ -167,8 +176,8 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 	}
 
 	/**
-	 * Parse node type artifacts. For each artifact a name, file uri, type and properties must be set. Description and
-	 * mime type are optional and not processed currently.
+	 * Parse node type artifacts. For each artifact a name, file uri, type and properties must be set. Description and mime type are
+	 * optional and not processed currently.
 	 *
 	 * @param artifacts
 	 * @param artifactTemplates
