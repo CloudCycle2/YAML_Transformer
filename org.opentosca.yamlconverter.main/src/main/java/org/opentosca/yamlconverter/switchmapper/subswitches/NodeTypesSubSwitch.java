@@ -1,9 +1,10 @@
-package org.opentosca.yamlconverter.switchmapper;
+package org.opentosca.yamlconverter.switchmapper.subswitches;
 
 import org.opentosca.model.tosca.*;
 import org.opentosca.model.tosca.TNodeType.CapabilityDefinitions;
 import org.opentosca.model.tosca.TNodeType.Interfaces;
 import org.opentosca.model.tosca.TNodeType.RequirementDefinitions;
+import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
 import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
 
@@ -13,22 +14,40 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * This class supports processing of node types from a YAML service template.
+ */
 public class NodeTypesSubSwitch extends AbstractSubSwitch {
 
 	public NodeTypesSubSwitch(Yaml2XmlSwitch parentSwitch) {
 		super(parentSwitch);
 	}
 
+	/**
+	 * Processes every YAML node type and creates a corresponding {@link org.opentosca.model.tosca.TNodeType}.
+	 * Each node type is added to {@link #getDefinitions()} object as well as {@link org.opentosca.model.tosca.TArtifactTemplate}
+	 * and {@link org.opentosca.model.tosca.TNodeTypeImplementation} which will be created in the process, too.
+	 */
 	@Override
 	public void process() {
 		if (getServiceTemplate().getNode_types() != null) {
-			for (final Entry<String, NodeType> nt : getServiceTemplate().getNode_types().entrySet()) {
-				final TNodeType xnode = createNodeType(nt.getValue(), nt.getKey());
-				getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(xnode);
+			for (final Entry<String, NodeType> yamlNodeType : getServiceTemplate().getNode_types().entrySet()) {
+				final TNodeType nodeType = createNodeType(yamlNodeType.getValue(), yamlNodeType.getKey());
+				getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(nodeType);
 			}
 		}
 	}
 
+	/**
+	 * Creates a node type, node type implementation and a list of artifact templates. Sets some basic attributes and
+	 * calls {@link #parseNodeTypeAttributes(org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType, String,
+	 * org.opentosca.model.tosca.TNodeType, java.util.List, org.opentosca.model.tosca.TImplementationArtifacts)} to
+	 * process each node type attribute.
+	 *
+	 * @param value YAML node type
+	 * @param name name of YAML node type
+	 * @return Tosca node type
+	 */
 	private TNodeType createNodeType(NodeType value, String name) {
 		final TNodeType result = new TNodeType();
 		result.setName(name);
@@ -39,8 +58,19 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		final TImplementationArtifacts implementationArtifacts = new TImplementationArtifacts();
 		nodeTypeImplementation.setImplementationArtifacts(implementationArtifacts);
 		nodeTypeImplementation.setName(name + "Implementation");
-		nodeTypeImplementation.setNodeType(getCorrectTypeReferenceAsQName(result.getName(), ElementType.NODE_TYPE));
+		nodeTypeImplementation.setNodeType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(result.getName(), ElementType.NODE_TYPE));
 
+		parseNodeTypeAttributes(value, name, result, artifactTemplates, implementationArtifacts);
+
+		getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().addAll(artifactTemplates);
+		getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(nodeTypeImplementation);
+
+		return result;
+	}
+
+	private void parseNodeTypeAttributes(final NodeType value, final String name, final TNodeType result,
+										 final List<TArtifactTemplate> artifactTemplates,
+										 final TImplementationArtifacts implementationArtifacts) {
 		if (value.getArtifacts() != null && !value.getArtifacts().isEmpty()) {
 			// here are only artifact definitions!!
 			parseNodeTypeArtifacts(value.getArtifacts(), artifactTemplates, implementationArtifacts);
@@ -49,7 +79,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 			result.setCapabilityDefinitions(parseNodeTypeCapabilities(value.getCapabilities()));
 		}
 		if (value.getDerived_from() != null && !value.getDerived_from().isEmpty()) {
-			result.setDerivedFrom(parseDerivedFrom(getCorrectTypeReferenceAsQName(value.getDerived_from(), ElementType.NODE_TYPE)));
+			result.setDerivedFrom(parseDerivedFrom(getTypeMapperUtil().getCorrectTypeReferenceAsQName(value.getDerived_from(), ElementType.NODE_TYPE)));
 		}
 		if (value.getInterfaces() != null && !value.getInterfaces().isEmpty()) {
 			final Interfaces nodeTypeInterfaces = parseNodeTypeInterfaces(value.getInterfaces());
@@ -65,26 +95,21 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		if (value.getDescription() != null && !value.getDescription().isEmpty()) {
 			result.getDocumentation().add(toDocumentation(value.getDescription()));
 		}
-
-		getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().addAll(artifactTemplates);
-		getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(nodeTypeImplementation);
-
-		return result;
 	}
 
 	private RequirementDefinitions parseNodeTypeRequirementDefinitions(List<Map<String, String>> requirements) {
 		final RequirementDefinitions result = new RequirementDefinitions();
 		for (final Map<String, String> requirement : requirements) {
-			final TRequirementDefinition rd = new TRequirementDefinition();
+			final TRequirementDefinition requirementDefinition = new TRequirementDefinition();
 			if (requirement.size() == 1) {
 				final String capability = (String) requirement.values().toArray()[0];
 				final String requirementName = (String) requirement.keySet().toArray()[0];
 				final String requirementTypeName = capability.replace("Capability", "Requirement");
 				createAndAddRequirementType(capability, requirementTypeName);
-				rd.setRequirementType(toTnsQName(requirementTypeName));
-				rd.setName(requirementName);
+				requirementDefinition.setRequirementType(getNamespaceUtil().toTnsQName(requirementTypeName));
+				requirementDefinition.setName(requirementName);
 			}
-			result.getRequirementDefinition().add(rd);
+			result.getRequirementDefinition().add(requirementDefinition);
 		}
 		return result;
 	}
@@ -114,6 +139,13 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		return result;
 	}
 
+	/**
+	 * Creates a {@link org.opentosca.model.tosca.TNodeType.CapabilityDefinitions} object. Eventually a default for the
+	 * capability type is used.
+	 *
+	 * @param capabilities map containing capabilities with some definitions
+	 * @return an object containing all capability definitions
+	 */
 	private CapabilityDefinitions parseNodeTypeCapabilities(Map<String, Object> capabilities) {
 		final CapabilityDefinitions result = new CapabilityDefinitions();
 		for (final Entry<String, Object> capabilityEntry : capabilities.entrySet()) {
@@ -127,13 +159,21 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 				} catch (Exception e) {
 					capabilityType = "CAPABILITY_TYPE";
 				}
-				capabilityDefinition.setCapabilityType(getCorrectTypeReferenceAsQName(capabilityType, ElementType.CAPABILITY_TYPE));
+				capabilityDefinition.setCapabilityType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(capabilityType, ElementType.CAPABILITY_TYPE));
 			}
 			result.getCapabilityDefinition().add(capabilityDefinition);
 		}
 		return result;
 	}
 
+	/**
+	 * Parse node type artifacts. For each artifact a name, file uri, type and properties must be set. Description and
+	 * mime type are optional and not processed currently.
+	 *
+	 * @param artifacts
+	 * @param artifactTemplates
+	 * @param implementationArtifacts
+	 */
 	private void parseNodeTypeArtifacts(List<Map<String, Object>> artifacts, List<TArtifactTemplate> artifactTemplates,
 			TImplementationArtifacts implementationArtifacts) {
 		for (final Map<String, Object> artifact : artifacts) {
@@ -176,8 +216,8 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 
 	private void addImplementationArtifact(TImplementationArtifacts implementationArtifacts, String artifactName, String artifactType) {
 		final TImplementationArtifacts.ImplementationArtifact implementationArtifact = new TImplementationArtifacts.ImplementationArtifact();
-		implementationArtifact.setArtifactRef(toTnsQName(artifactName));
-		implementationArtifact.setArtifactType(toTnsQName(artifactType));
+		implementationArtifact.setArtifactRef(getNamespaceUtil().toTnsQName(artifactName));
+		implementationArtifact.setArtifactType(getNamespaceUtil().toTnsQName(artifactType));
 		implementationArtifacts.getImplementationArtifact().add(implementationArtifact);
 	}
 
@@ -186,8 +226,20 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		final TArtifactTemplate artifactTemplate = new TArtifactTemplate();
 		artifactTemplate.setName(artifactName);
 		artifactTemplate.setId(artifactName);
-		artifactTemplate.setType(getCorrectTypeReferenceAsQName(artifactType, ElementType.ARTIFACT_TYPE));
+		artifactTemplate.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(artifactType, ElementType.ARTIFACT_TYPE));
 
+		setArtifactReferencesForArtifactTemplate(artifactFileUri, artifactTemplate);
+
+		final TEntityTemplate.Properties properties = new TEntityTemplate.Properties();
+		properties.setAny(getAnyMapForProperties(additionalProperties, artifactType));
+		artifactTemplate.setProperties(properties);
+
+		artifactTemplates.add(artifactTemplate);
+
+		return artifactTemplate;
+	}
+
+	private void setArtifactReferencesForArtifactTemplate(final String artifactFileUri, final TArtifactTemplate artifactTemplate) {
 		final TArtifactTemplate.ArtifactReferences artifactReferences = new TArtifactTemplate.ArtifactReferences();
 		final TArtifactReference artifactReference = new TArtifactReference();
 		final TArtifactReference.Include include = new TArtifactReference.Include();
@@ -202,14 +254,6 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 		artifactReference.getIncludeOrExclude().add(include);
 		artifactReferences.getArtifactReference().add(artifactReference);
 		artifactTemplate.setArtifactReferences(artifactReferences);
-
-		final TEntityTemplate.Properties properties = new TEntityTemplate.Properties();
-		properties.setAny(getAnyMapForProperties(additionalProperties, artifactType));
-		artifactTemplate.setProperties(properties);
-
-		artifactTemplates.add(artifactTemplate);
-
-		return artifactTemplate;
 	}
 
 }
