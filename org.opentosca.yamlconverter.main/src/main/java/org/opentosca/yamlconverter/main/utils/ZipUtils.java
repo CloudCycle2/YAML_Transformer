@@ -22,7 +22,9 @@ public class ZipUtils {
 		FileOutputStream fos = null;
 		ZipOutputStream zos = null;
 		try {
-			fos = new FileOutputStream(zipFile);
+			final File zf = new File(zipFile);
+			zf.getParentFile().mkdirs();
+			fos = new FileOutputStream(zf);
 			zos = new ZipOutputStream(fos);
 
 			System.out.println("Output to Zip : " + zipFile);
@@ -38,7 +40,7 @@ public class ZipUtils {
 					while ((len = in.read(buffer)) > 0) {
 						zos.write(buffer, 0, len);
 					}
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					e.printStackTrace();
 				} finally {
 					if (in != null) {
@@ -57,7 +59,7 @@ public class ZipUtils {
 			if (zos != null) {
 				try {
 					zos.close();
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					e.printStackTrace();
 				}
 			}
