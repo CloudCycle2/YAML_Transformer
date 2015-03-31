@@ -1,5 +1,6 @@
 package org.opentosca.yamlconverter.main.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -15,10 +16,8 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
  */
 public class ConstraintUtils {
 
-	/**
-	 * The default format of a date. TODO: What is the default format used in the spec?
-	 */
-	private static final String DATEFORMAT = "EEE MMM d HH:mm:ss zzz yyyy";
+	public final static String[] TIMEPATTERNS = { "yyyy-MM-ddtHH:mm:ss.SSXXX", "yyyy-MM-dd HH:mm:ss.SS X", "yyyy-MM-ddTHH:mm:ss.SX",
+		"yyyy-MM-dd HH:mm:ss.SS", "yyyy-MM-dd" };
 
 	/**
 	 * Converts the constraints of the {@link Input} to a {@link List} of {@link ConstraintClause}.
@@ -108,7 +107,7 @@ public class ConstraintUtils {
 			} else if (type == Byte.class) {
 				convertedValue = representedValue.length() == 0 ? null : Byte.decode(representedValue);
 			} else if (type == Date.class) {
-				convertedValue = new SimpleDateFormat(DATEFORMAT).parse(representedValue);
+				convertedValue = parseDate(representedValue);
 			}
 			return convertedValue;
 		} catch (final Exception e) {
@@ -116,5 +115,20 @@ public class ConstraintUtils {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private static Date parseDate(String representedValue) throws ParseException {
+		Date date = null;
+		for (final String pattern : TIMEPATTERNS) {
+			try {
+				date = new SimpleDateFormat(pattern).parse(representedValue);
+			} catch (final Exception e) {
+				// empty
+			}
+			if (date != null) {
+				return date;
+			}
+		}
+		return date;
 	}
 }
