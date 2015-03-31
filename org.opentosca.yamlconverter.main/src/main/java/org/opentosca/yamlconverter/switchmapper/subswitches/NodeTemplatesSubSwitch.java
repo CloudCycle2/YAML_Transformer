@@ -1,17 +1,22 @@
 package org.opentosca.yamlconverter.switchmapper.subswitches;
 
-import org.opentosca.model.tosca.*;
-import org.opentosca.yamlconverter.main.utils.AnyMap;
-import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
-import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
-
-import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.xml.bind.JAXBElement;
+
+import org.opentosca.model.tosca.TCapability;
+import org.opentosca.model.tosca.TEntityTemplate;
+import org.opentosca.model.tosca.TNodeTemplate;
+import org.opentosca.model.tosca.TRelationshipTemplate;
+import org.opentosca.model.tosca.TRequirement;
+import org.opentosca.yamlconverter.main.utils.AnyMap;
+import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
+import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 
 /**
  * This class supports processing of node templates of a YAML service template.
@@ -25,10 +30,10 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 	}
 
 	/**
-	 * Processes all YAML node templates by creating a {@link org.opentosca.model.tosca.TNodeTemplate} and adding it
-	 * to {@link #getTopologyTemplate()}. In the next step, the relationship requirements are processed. This depends
-	 * on the creation of the node templates before, because relationships between node templates can only be established
-	 * when all node templates are processed completely, because the node template object is needed.
+	 * Processes all YAML node templates by creating a {@link org.opentosca.model.tosca.TNodeTemplate} and adding it to
+	 * {@link #getTopologyTemplate()}. In the next step, the relationship requirements are processed. This depends on the creation of the
+	 * node templates before, because relationships between node templates can only be established when all node templates are processed
+	 * completely, because the node template object is needed.
 	 */
 	@Override
 	public void process() {
@@ -89,7 +94,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 				String capabilityType = null;
 				try {
 					capabilityType = (String) capabilityDefinition.get("type");
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					capabilityType = "CAPABILITY_TYPE";
 				}
 				tCapability.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(capabilityType, ElementType.CAPABILITY_TYPE));
@@ -119,15 +124,29 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 
 	/**
 	 * Process requirements from {@code nodeTemplate} and add them to {@code result}. There are two possible notations of requirements: <br />
-	 * 1) requirements: - requirementId: someCapability => will produce: <Requirements> <Requirement id="requirementId"
-	 * type="tns:someRequirement" /> </Requirements> NOTE: There is a convention for "someCapability": It must end with "Capability",
-	 * otherwise no requirement will be created! <br />
-	 * 2) requirements: - relationshipTemplateId: targetElementId relationship_type: someRelationshipType => will produce:
-	 * <RelationshipTemplate id="relationshipTemplateId" type="tns:relationshipType"> <SourceElement ref="{@code result}
-	 * .id"></SourceElement> <TargetElement ref="targetElementId"></TargetElement> </RelationshipTemplate>
-	 * 
+	 * 1) requirements: - requirementId: someCapability => will produce: <br>
+	 *
+	 * <pre>
+	 * &lt;Requirements>
+	 *    &lt;Requirement id="requirementId" type="tns:someRequirement" />
+	 * &lt;/Requirements>
+	 * </pre>
+	 *
+	 * NOTE: There is a convention for "someCapability": It must end with "Capability", otherwise no requirement will be created! <br />
+	 * 2) requirements: - relationshipTemplateId: targetElementId relationship_type: someRelationshipType => will produce:<br>
+	 *
+	 * <pre>
+	 * &lt;RelationshipTemplate id="relationshipTemplateId" type="tns:relationshipType">
+	 *    &lt;SourceElement ref="{@code result} .id">
+	 *    &lt;/SourceElement>
+	 *    &lt;TargetElement ref="targetElementId">
+	 *    &lt;/TargetElement>
+	 * &lt;/RelationshipTemplate>
+	 * </pre>
+	 *
 	 * @param nodeTemplate node template from YAML
 	 * @param result corresponding node template for XML
+	 * @throws RuntimeException if the requirement does not match "^(\w+)Capability$"
 	 */
 	private void processRequirements(final NodeTemplate nodeTemplate, final TNodeTemplate result) {
 		final TNodeTemplate.Requirements resultRequirements = new TNodeTemplate.Requirements();
@@ -143,7 +162,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 	/**
 	 * For information about what is processed, take a look at
 	 * {@link #processRequirements(org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate, org.opentosca.model.tosca.TNodeTemplate)}
-	 * 
+	 *
 	 * @param result node template object for XML
 	 * @param resultRequirements object containing requirements for {@code result}
 	 * @param requirement
@@ -201,7 +220,8 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 		for (final String key : requirement.keySet()) {
 			if (key.equals("relationship_type")) {
 				final String relationshipType = (String) requirement.get(key);
-				relationshipTemplate.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(relationshipType, ElementType.RELATIONSHIP_TYPE));
+				relationshipTemplate.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(relationshipType,
+						ElementType.RELATIONSHIP_TYPE));
 			} else {
 				relationshipTemplate.setId(key);
 
@@ -225,8 +245,8 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 	}
 
 	/**
-	 * Finds the {@link org.opentosca.model.tosca.TNodeTemplate} with id {@code nodeTemplateId} by searching all available
-	 * entity templates from {@link #getTopologyTemplate()} and compare the id's.
+	 * Finds the {@link org.opentosca.model.tosca.TNodeTemplate} with id {@code nodeTemplateId} by searching all available entity templates
+	 * from {@link #getTopologyTemplate()} and compare the id's.
 	 *
 	 * @param nodeTemplateId id of the node template to search for
 	 * @return the node template object or null if node template couldn't be found
