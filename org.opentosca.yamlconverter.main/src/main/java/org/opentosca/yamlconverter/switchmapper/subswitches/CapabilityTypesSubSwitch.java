@@ -42,10 +42,12 @@ public class CapabilityTypesSubSwitch extends AbstractSubSwitch {
 	private TCapabilityType createCapabilityType(Entry<String, CapabilityType> capType) {
 		final TCapabilityType result = new TCapabilityType();
 		final CapabilityType capabilityType = capType.getValue();
-		final QName derivedFrom = getTypeMapperUtil().getCorrectTypeReferenceAsQName(capabilityType.getDerived_from(), ElementType.CAPABILITY_TYPE);
 
 		result.setName(capType.getKey());
-		result.setDerivedFrom(parseDerivedFrom(derivedFrom));
+		if (capabilityType.getDerived_from() != null && !capabilityType.getDerived_from().isEmpty()) {
+			final QName derivedFrom = getTypeMapperUtil().getCorrectTypeReferenceAsQName(capabilityType.getDerived_from(), ElementType.CAPABILITY_TYPE);
+			result.setDerivedFrom(parseDerivedFrom(derivedFrom));
+		}
 		result.getDocumentation().add(toDocumentation(capabilityType.getDescription()));
 
 		if (capabilityType.getProperties() != null && !capabilityType.getProperties().isEmpty()) {

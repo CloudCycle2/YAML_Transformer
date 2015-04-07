@@ -6,6 +6,7 @@ import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
 import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
 
+import javax.xml.namespace.QName;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,7 +39,11 @@ public class RelationshipTypesSubSwitch extends AbstractSubSwitch {
 		final TRelationshipType result = new TRelationshipType();
 		final RelationshipType relationshipType = relType.getValue();
 		result.setName(relType.getKey());
-		result.setDerivedFrom(parseDerivedFrom(getTypeMapperUtil().getCorrectTypeReferenceAsQName(relationshipType.getDerived_from(), ElementType.RELATIONSHIP_TYPE)));
+
+		if (relationshipType.getDerived_from() != null && !relationshipType.getDerived_from().isEmpty()) {
+			final QName derivedFrom = getTypeMapperUtil().getCorrectTypeReferenceAsQName(relationshipType.getDerived_from(), ElementType.RELATIONSHIP_TYPE);
+			result.setDerivedFrom(parseDerivedFrom(derivedFrom));
+		}
 
 		// set interfaces
 		final TRelationshipType.TargetInterfaces targetInterfaces = new TRelationshipType.TargetInterfaces();
