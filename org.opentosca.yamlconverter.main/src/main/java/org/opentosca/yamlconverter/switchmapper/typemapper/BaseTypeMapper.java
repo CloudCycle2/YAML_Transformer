@@ -90,6 +90,8 @@ public final class BaseTypeMapper extends AbstractTypeMapper {
                 return "WebApplication";
             case TOSCA_NODES + "DBMS":
                 return "DBMS";
+            case TOSCA_NODES + "Database":
+                return "Database";
             case TOSCA_NODES + "ObjectStorage":
             case TOSCA_NODES + "BlockStorage":
             case TOSCA_NODES + "Network":
