@@ -1,0 +1,162 @@
+# Required TOSCA Definitions version string
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+# Optional. default namespace (schema, types version)
+tosca_default_namespace: http://types.opentosca.org
+
+# Optional name of this service template
+template_name: Websphere_DB2
+
+# Optional author of this service template
+template_author: DevPro
+
+# Optional version of this service template
+template_version: 1.0
+
+description: Service Template for Websphere on DB2
+
+capability_types:
+  DB2DatabaseEndpointCapability:
+    derived_from: DatabaseEndpointCapability
+    description: MySQL Database Endpoint Capability
+    
+  DatabaseEndpointCapability:
+    derived_from: IPEndpointCapability
+    description: Database Endpoint Capability
+
+  IPEndpointCapability:
+    derived_from: tosca.capabilities.Endpoint
+    description: IP Endpoint Capability
+    
+  DB2DatabaseContainerCapability:
+    derived_from: DatabaseContainerCapability
+    description: DB2 Database Container Capability
+    
+  DatabaseContainerCapability:
+    derived_from: tosca.capabilities.Container
+    description: Database Container Capability
+    
+relationship_types:
+  managedBy:
+    derived_from: tosca.relationships.ConnectsTo
+  
+  profiledOn:
+    derived_from: tosca.relationships.HostedOn
+
+node_types:
+  WebsphereNetworkDeployment:
+    derived_from: tosca.nodes.WebServer
+    description: Websphere Network Deployment
+    artifacts:
+      - at-WebSphereNetworkDeployment-install: scripts/websphere.sh
+        type: tosca.artifacts.impl.Bash
+    interfaces:
+      tosca.interfaces.node.lifecycle.Standard:
+        install:
+          implementation: at-MoodleApplication-install
+          
+  DB2:
+    derived_from: tosca.nodes.DBMS
+    description: DB2 DBMS
+    artifacts:
+      - at-DB2-install: scripts/db2.sh
+        type: tosca.artifacts.impl.Bash
+    interfaces:
+      tosca.interfaces.node.lifecycle.Standard:
+        install:
+          implementation: at-DB2-install
+          
+  WebsphereDatabase:
+    derived_from: tosca.nodes.Database
+    description: DB of Webpshere
+    properties:
+    #from MoodleTypes.xsd tMoodleDatabaseProperties
+      DBName:
+        type: string
+        description: Database Name
+        default: websphereDb
+      DBUser:
+        type: string
+        description: Database User
+        default: websphere
+      DBPassword:
+        type: string
+        description: Database User Password
+        default: websphere
+      DBPort:
+        type: int
+        description: Database Port (default 3306)
+        default: 3306
+    requirements:
+      - container: DB2DatabaseContainerCapability
+    capabilities:
+      clients: 
+        type: DB2DatabaseEndpointCapability
+          
+node_templates:
+  VmApache:
+    type: Server
+    properties:
+      NumCpus: 1
+      Memory: 1024
+    capabilities:
+      VmApache_WS_ND:
+        type: tosca.capabilities.Container
+      VMApache_DB2:
+        type: tosca.capabilities.DatabaseEndpoint
+    requirements:
+      - VmApache_networks: NetworkAttachmentCapability
+      - VmApache_container: ServerContainerCapability
+      - VmApache_volumes: VolumeAttachmentCapability
+  
+  WebsphereNetworkDeployment:
+    type: WebsphereNetworkDeployment
+    properties:
+    capabilities:
+    requirements:
+      - WS_ND_Database: DB2DatabaseEndpointCapability
+      - WS_ND_HostedOn_VmApache: VmApache
+        relationship_type: tosca.relationships.HostedOn
+      - WS_ND_ConnectsTo_WebsphereDb: WebsphereDb
+        relationship_type: tosca.relationships.ConnectsTo
+        
+  WebsphereDb:
+    type: WebsphereDatabase
+    properties:
+      DBName: webspheredb
+      DBUser: wspadmin
+      DBPassword: wspadmin
+      DBPort: 3306
+    capabilities:
+      WebsphereDb_clients:
+        type: DB2DatabaseEndpointCapability
+    requirements:
+      - WebsphereDb_container: MySQLDatabaseContainerCapability
+      - WebsphereDb_HostedOn_DB2: DB2
+        relationship_type: tosca.relationships.HostedOn
+    
+  DB2:
+    type: DB2
+    properties:
+    capabilities:
+      MySql_databases:
+        type: DB2DatabaseContainerCapability
+    requirements:
+      - DB2_HostedOn_VmApache: VmApache
+        relationship_type: tosca.relationships.HostedOn
+
+  
+  DeploymentManager:
+    type: tosca.nodes.WebApplication
+    requirements:
+    - DeplMan_profiledOn_WS_ND: WebsphereNetworkDeployment
+      relationship_type: profiledOn 
+  
+  AppServer:
+    type: tosca.nodes.WebServer
+    requirements:
+    - AppServer_profiledOn_WS_ND: WebsphereNetworkDeployment
+      relationship_type: profiledOn 
+    - AppServer_managedBy_DepplMan: DeploymentManager
+      relationship_type: managedBy 
+  
