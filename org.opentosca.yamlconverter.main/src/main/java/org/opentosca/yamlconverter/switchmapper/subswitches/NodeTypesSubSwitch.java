@@ -226,7 +226,7 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 	private void addImplementationArtifact(TImplementationArtifacts implementationArtifacts, String artifactName, String artifactType) {
 		final TImplementationArtifacts.ImplementationArtifact implementationArtifact = new TImplementationArtifacts.ImplementationArtifact();
 		implementationArtifact.setArtifactRef(getNamespaceUtil().toTnsQName(artifactName));
-		implementationArtifact.setArtifactType(getNamespaceUtil().toTnsQName(artifactType));
+		implementationArtifact.setArtifactType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(artifactType, ElementType.ARTIFACT_TYPE));
 		implementationArtifacts.getImplementationArtifact().add(implementationArtifact);
 	}
 

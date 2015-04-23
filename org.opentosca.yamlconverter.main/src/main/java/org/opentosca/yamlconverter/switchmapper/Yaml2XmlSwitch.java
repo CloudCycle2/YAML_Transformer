@@ -1,13 +1,23 @@
 package org.opentosca.yamlconverter.switchmapper;
 
-import org.opentosca.model.tosca.*;
-import org.opentosca.yamlconverter.main.utils.CSARUtil;
-import org.opentosca.yamlconverter.switchmapper.subswitches.*;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
-
-import javax.xml.namespace.QName;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.namespace.QName;
+
+import org.opentosca.model.tosca.Definitions;
+import org.opentosca.model.tosca.TDocumentation;
+import org.opentosca.model.tosca.TImport;
+import org.opentosca.model.tosca.TServiceTemplate;
+import org.opentosca.model.tosca.TTopologyTemplate;
+import org.opentosca.yamlconverter.main.utils.CSARUtil;
+import org.opentosca.yamlconverter.switchmapper.subswitches.ArtifactTypesSubSwitch;
+import org.opentosca.yamlconverter.switchmapper.subswitches.CapabilityTypesSubSwitch;
+import org.opentosca.yamlconverter.switchmapper.subswitches.ImportsSubSwitch;
+import org.opentosca.yamlconverter.switchmapper.subswitches.NodeTemplatesSubSwitch;
+import org.opentosca.yamlconverter.switchmapper.subswitches.NodeTypesSubSwitch;
+import org.opentosca.yamlconverter.switchmapper.subswitches.RelationshipTypesSubSwitch;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
 /**
  * This class can parse ServiceTemplates (YAML bean) to Definitions (XML bean).
@@ -44,6 +54,8 @@ public class Yaml2XmlSwitch {
 	public static final String TOSCA_NS_PREFIX = "tosca";
 	public static final String BASE_TYPES_PREFIX = "ns1";
 	public static final String SPECIFIC_TYPES_PREFIX = "ns2";
+
+	public static final String TARGET_NS_PREFIX = "target";
 
 	/**
 	 * A counter for creating unique IDs.
@@ -130,15 +142,15 @@ public class Yaml2XmlSwitch {
 
 	/**
 	 * Processes the given YAML service template by creating the corresponding Tosca T* objects like
-	 * {@link org.opentosca.model.tosca.TServiceTemplate} and {@link org.opentosca.model.tosca.TTopologyTemplate}, setting
-	 * initial properties and adding the objects to {@link #toscaResult}. Also the following known sub-switches are
-	 * started: {@link org.opentosca.yamlconverter.switchmapper.subswitches.CapabilityTypesSubSwitch},
+	 * {@link org.opentosca.model.tosca.TServiceTemplate} and {@link org.opentosca.model.tosca.TTopologyTemplate}, setting initial
+	 * properties and adding the objects to {@link #toscaResult}. Also the following known sub-switches are started:
+	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.CapabilityTypesSubSwitch},
 	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.RelationshipTypesSubSwitch},
 	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.ArtifactTypesSubSwitch},
 	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.NodeTypesSubSwitch},
 	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.ImportsSubSwitch},
-	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.NodeTemplatesSubSwitch}.
-	 * They process the YAML service template in their own way.
+	 * {@link org.opentosca.yamlconverter.switchmapper.subswitches.NodeTemplatesSubSwitch}. They process the YAML service template in their
+	 * own way.
 	 *
 	 * @param yamlServiceTemplate YAML service template (read from a YAML file)
 	 * @return XML representation as Tosca Definitions object from YAML service template
@@ -155,17 +167,18 @@ public class Yaml2XmlSwitch {
 			subSwitch.process();
 		}
 
-		this.toscaResult.getImport().add(createTypeImport(XMLSCHEMA_NS,
-				CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TYPES_XSD_FILENAME, TYPES_NS));
+		this.toscaResult.getImport().add(
+				createTypeImport(XMLSCHEMA_NS, CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TYPES_XSD_FILENAME, TYPES_NS));
 		// only add specific types, base types are imported within specific types XML document
-		this.toscaResult.getImport().add(createTypeImport(TOSCA_IMPORT_TYPE,
-				CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TOSCA_SPECIFIC_TYPE_FILENAME, SPECIFIC_TYPES_NS));
+		this.toscaResult.getImport().add(
+				createTypeImport(TOSCA_IMPORT_TYPE, CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TOSCA_SPECIFIC_TYPE_FILENAME,
+						SPECIFIC_TYPES_NS));
 		return this.toscaResult;
 	}
 
 	/**
-	 * Sets initial properties for {@code serviceTemplate} and {@code topologyTemplate} like namespace attributes,
-	 * id and name.
+	 * Sets initial properties for {@code serviceTemplate} and {@code topologyTemplate} like namespace attributes, id and name.
+	 *
 	 * @param yamlServiceTemplate imported YAML service template
 	 * @param serviceTemplate Tosca service template
 	 * @param topologyTemplate Tosca topology template
@@ -180,6 +193,7 @@ public class Yaml2XmlSwitch {
 			this.usedNamespace = yamlServiceTemplate.getTosca_default_namespace();
 		}
 		this.toscaResult.setTargetNamespace(this.usedNamespace);
+		this.toscaResult.getOtherAttributes().put(new QName("xmlns:" + TARGET_NS_PREFIX), this.usedNamespace);
 		this.toscaResult.getOtherAttributes().put(new QName("xmlns:" + BASE_TYPES_PREFIX), BASE_TYPES_NS);
 		this.toscaResult.getOtherAttributes().put(new QName("xmlns:" + SPECIFIC_TYPES_PREFIX), SPECIFIC_TYPES_NS);
 		this.toscaResult.getOtherAttributes().put(new QName("xmlns:types"), TYPES_NS);
@@ -188,15 +202,15 @@ public class Yaml2XmlSwitch {
 	}
 
 	/**
-	 * Adds some documentation, attributes like id and name, connects topology template to service template and adds
-	 * service template to {@link #toscaResult}.
+	 * Adds some documentation, attributes like id and name, connects topology template to service template and adds service template to
+	 * {@link #toscaResult}.
 	 *
 	 * @param yamlServiceTemplate YAML service template
 	 * @param serviceTemplate Tosca service template
 	 * @param topologyTemplate Tosca topology template
 	 */
 	private void setServiceAndTopologyTemplate(final ServiceTemplate yamlServiceTemplate, final TServiceTemplate serviceTemplate,
-											   final TTopologyTemplate topologyTemplate) {
+			final TTopologyTemplate topologyTemplate) {
 		// set service and topology template
 		this.toscaResult.getDocumentation().add(toDocumentation(yamlServiceTemplate.getDescription()));
 		if (yamlServiceTemplate.getTemplate_author() != null && !yamlServiceTemplate.getTemplate_author().isEmpty()) {
@@ -219,6 +233,7 @@ public class Yaml2XmlSwitch {
 
 	/**
 	 * Creates a {@link org.opentosca.model.tosca.TImport} object containing a reference to another xml/xsd document.
+	 *
 	 * @param importType type of file to import
 	 * @param location where the file is (relative path to the xml output file)
 	 * @param namespace used namespace of referenced file
@@ -234,6 +249,7 @@ public class Yaml2XmlSwitch {
 
 	/**
 	 * Creates a {@link org.opentosca.model.tosca.TDocumentation} object containing {@code desc} as content.
+	 *
 	 * @param desc any description
 	 * @return documentation object containing the parameter
 	 */
