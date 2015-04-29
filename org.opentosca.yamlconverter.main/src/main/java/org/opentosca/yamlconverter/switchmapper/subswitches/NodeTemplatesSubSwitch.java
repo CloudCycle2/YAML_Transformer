@@ -117,7 +117,8 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 	 */
 	private void processPropertiesInNodeTemplate(NodeTemplate nodeTemplate, String nodeTemplateName, TNodeTemplate result) {
 		final TEntityTemplate.Properties prop = new TEntityTemplate.Properties();
-		final JAXBElement<AnyMap> jaxbprop = getAnyMapForProperties(nodeTemplate.getProperties(), nodeTemplate.getType());
+		final JAXBElement<AnyMap> jaxbprop = getAnyMapForProperties(nodeTemplate.getProperties(), getTypeMapperUtil()
+				.getCorrectTypeReferenceAsQNameForProperties(nodeTemplate.getType(), ElementType.NODE_TYPE));
 		prop.setAny(jaxbprop);
 		result.setProperties(prop);
 	}
