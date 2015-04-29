@@ -1,8 +1,22 @@
 package org.opentosca.yamlconverter.switchmapper.subswitches;
 
-import org.opentosca.model.tosca.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
+import org.opentosca.model.tosca.Definitions;
+import org.opentosca.model.tosca.TDocumentation;
 import org.opentosca.model.tosca.TEntityType.DerivedFrom;
 import org.opentosca.model.tosca.TEntityType.PropertiesDefinition;
+import org.opentosca.model.tosca.TExtensibleElements;
+import org.opentosca.model.tosca.TInterface;
+import org.opentosca.model.tosca.TOperation;
+import org.opentosca.model.tosca.TRequirementType;
+import org.opentosca.model.tosca.TServiceTemplate;
+import org.opentosca.model.tosca.TTopologyTemplate;
 import org.opentosca.yamlconverter.main.utils.AnyMap;
 import org.opentosca.yamlconverter.switchmapper.ISubSwitch;
 import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
@@ -13,30 +27,24 @@ import org.opentosca.yamlconverter.switchmapper.utils.TypeMapperUtil;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 /**
- * This class provides some general attributes and methods for its subclasses. The methods support the processing of
- * a YAML service template.
+ * This class provides some general attributes and methods for its subclasses. The methods support the processing of a YAML service
+ * template.
  */
 public abstract class AbstractSubSwitch implements ISubSwitch {
 
-	private Map<String, TRequirementType> addedRequirementTypes = new HashMap<String, TRequirementType>();
+	private final Map<String, TRequirementType> addedRequirementTypes = new HashMap<String, TRequirementType>();
 	private final Yaml2XmlSwitch parent;
 	private TTopologyTemplate topologyCache;
 
-	private NamespaceUtil namespaceUtil;
-	private TypeMapperUtil typeMapperUtil;
-	private PropertiesParserUtil propertiesParserUtil;
+	private final NamespaceUtil namespaceUtil;
+	private final TypeMapperUtil typeMapperUtil;
+	private final PropertiesParserUtil propertiesParserUtil;
 
 	public AbstractSubSwitch(Yaml2XmlSwitch parentSwitch) {
 		this.parent = parentSwitch;
 		this.namespaceUtil = new NamespaceUtil(getDefinitions().getTargetNamespace());
-		this.typeMapperUtil = new TypeMapperUtil(namespaceUtil);
+		this.typeMapperUtil = new TypeMapperUtil(this.namespaceUtil);
 		this.propertiesParserUtil = new PropertiesParserUtil(this.parent, getServiceTemplate());
 	}
 
@@ -112,8 +120,8 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	}
 
 	/**
-	 * Creates a {@link org.opentosca.model.tosca.TEntityType.DerivedFrom} object and sets a type reference to
-	 * {@code referenceDerivedFrom}.
+	 * Creates a {@link org.opentosca.model.tosca.TEntityType.DerivedFrom} object and sets a type reference to {@code referenceDerivedFrom}.
+	 *
 	 * @param referenceDerivedFrom a QName object representing a xml reference
 	 * @return a DerivedFrom object containing a reference of {@code referenceDerivedFrom}
 	 */
@@ -124,8 +132,8 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	}
 
 	/**
-	 * Creates and sets the PropertiesDefinition for this element and adds the element to the xsd definitions.
-	 * Uses {@link #propertiesParserUtil} to do this.
+	 * Creates and sets the PropertiesDefinition for this element and adds the element to the xsd definitions. Uses
+	 * {@link #propertiesParserUtil} to do this.
 	 *
 	 * @param properties of this element
 	 * @param typename of this element
@@ -142,15 +150,14 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	 * @param nodeName name of the element
 	 * @return the {@link JAXBElement} with the AnyMap
 	 */
-	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final String nodeName) {
+	protected JAXBElement<AnyMap> getAnyMapForProperties(final Map<String, Object> customMap, final QName nodeName) {
 		return this.propertiesParserUtil.getAnyMapForProperties(customMap, nodeName);
 	}
 
 	/**
-	 * Converts {@code entry} to a {@link org.opentosca.model.tosca.TInterface} object.
-	 * {@code entry} is a map of operation definitions containing an operation name and maybe some other attributes like
-	 * description. {@link org.opentosca.model.tosca.TInterface} only supports the interface and operation name, so that
-	 * other attributes like description are not used and "thrown away".
+	 * Converts {@code entry} to a {@link org.opentosca.model.tosca.TInterface} object. {@code entry} is a map of operation definitions
+	 * containing an operation name and maybe some other attributes like description. {@link org.opentosca.model.tosca.TInterface} only
+	 * supports the interface and operation name, so that other attributes like description are not used and "thrown away".
 	 *
 	 * @param entry containing one interface name as key and operation definitions as object
 	 * @return interface object with operations
@@ -168,7 +175,7 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 
 	/**
 	 * Creates a {@link TRequirementType} and adds it to the service template
-	 * 
+	 *
 	 * @param capability name of the capability
 	 * @param requirementTypeName name of the requirement
 	 */
@@ -177,7 +184,8 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		if (!this.addedRequirementTypes.containsKey(requirementTypeName)) {
 			final TRequirementType requirementType = new TRequirementType();
 			requirementType.setName(requirementTypeName);
-			requirementType.setRequiredCapabilityType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(capability, ElementType.CAPABILITY_TYPE));
+			requirementType.setRequiredCapabilityType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(capability,
+					ElementType.CAPABILITY_TYPE));
 			this.addedRequirementTypes.put(requirementTypeName, requirementType);
 			getDefinitions().getServiceTemplateOrNodeTypeOrNodeTypeImplementation().add(requirementType);
 		}

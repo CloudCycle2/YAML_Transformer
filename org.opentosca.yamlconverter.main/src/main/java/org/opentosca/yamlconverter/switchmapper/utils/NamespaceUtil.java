@@ -28,10 +28,14 @@ public class NamespaceUtil {
 		return new QName(this.targetNamespace, localName, Yaml2XmlSwitch.TARGET_NS_PREFIX);
 	}
 
+	public QName toTypeNSQName(String localName) {
+		return new QName(Yaml2XmlSwitch.TYPES_NS, localName, "types");
+	}
+
 	/**
 	 * Creates a QName element for the given local name with target namespace for base types
 	 * {@link org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch#BASE_TYPES_NS}
-	 * 
+	 *
 	 * @param localName local name of the element to reference
 	 * @return QName object
 	 */
@@ -42,7 +46,7 @@ public class NamespaceUtil {
 	/**
 	 * Creates a QName element for the given local name with target namespace for specific types
 	 * {@link org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch#SPECIFIC_TYPES_NS}
-	 * 
+	 *
 	 * @param localName local name of the element to reference
 	 * @return QName object
 	 */
