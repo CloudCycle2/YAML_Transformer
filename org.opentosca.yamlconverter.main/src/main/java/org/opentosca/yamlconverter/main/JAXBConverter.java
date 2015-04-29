@@ -116,7 +116,7 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 				System.err.println("Schema file " + FILE_NAME_TOSCA_V1_0_XSD + " for the report not found");
 			} catch (final SAXException e) {
 				// Error during parsing the schema file
-				System.err.println("Schema file " + FILE_NAME_TOSCA_V1_0_XSD + "for the report could not be parsed:");
+				System.err.println("Schema file " + FILE_NAME_TOSCA_V1_0_XSD + " for the report could not be parsed:");
 				e.printStackTrace();
 			}
 		}
