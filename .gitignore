@@ -3,7 +3,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 bin
-
+org.opentosca.yamlconverter.main/output
 
 # Package Files #
 *.war
