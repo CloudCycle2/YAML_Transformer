@@ -169,10 +169,13 @@ public class Yaml2XmlSwitch {
 
 		this.toscaResult.getImport().add(
 				createTypeImport(XMLSCHEMA_NS, CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TYPES_XSD_FILENAME, TYPES_NS));
-		// only add specific types, base types are imported within specific types XML document
-		this.toscaResult.getImport().add(
-				createTypeImport(TOSCA_IMPORT_TYPE, CSARUtil.DEFINITIONS_FOLDER + "/" + CSARUtil.TOSCA_SPECIFIC_TYPE_FILENAME,
-						SPECIFIC_TYPES_NS));
+		// add every type, or opentosca container won't accept it
+		this.toscaResult.getImport().add(createTypeImport(TOSCA_IMPORT_TYPE, CSARUtil.TOSCA_SPECIFIC_TYPE_FILENAME, SPECIFIC_TYPES_NS));
+		this.toscaResult.getImport().add(createTypeImport(TOSCA_IMPORT_TYPE, CSARUtil.TOSCA_BASE_TYPE_FILENAME, BASE_TYPES_NS));
+
+		this.toscaResult.getImport().add(createTypeImport(XMLSCHEMA_NS, "../" + CSARUtil.TOSCA_BASE_TYPES_XSD_PATH, SPECIFIC_TYPES_NS));
+		this.toscaResult.getImport().add(createTypeImport(XMLSCHEMA_NS, "../" + CSARUtil.TOSCA_SPECIFIC_TYPES_XSD_PATH, BASE_TYPES_NS));
+
 		return this.toscaResult;
 	}
 
