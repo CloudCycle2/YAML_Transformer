@@ -104,6 +104,13 @@ node_types:
     - EnterpriseWar.war: artifacttemplates/http%253A%252F%252Fwww.example.com%252FToscaTypes/EnterpriseWar.war/files/EnterpriseDemo.war
       type: WAR
       description: War file for EnterpriseDemo
+    requirements:
+      - con_45: LinuxOperatingSystem
+        relationship_type: tosca.relationships.HostedOn
+  EnterpriseAppNodeType:
+    properties:
+  SampleDBNodeType:
+    properties:
   
 artifact_types: 
 # list of artifact type definitions 
@@ -141,7 +148,28 @@ node_templates:
       sshUser: ubuntu
       sshKey:
       script: uname -a
+    requirements:
+      - con_57: InstallOpenStackVMTemplate
+        relationship_type: tosca.relationships.HostedOn
   DB2NodeType:
     type: DB2NodeType
+    requirements:
+      - con_31: LinuxOperatingSystem
+        relationship_type: tosca.relationships.HostedOn
   WebsphereNodeType:
     type: WebsphereNodeType
+    requirements:
+      - con_31: LinuxOperatingSystem
+        relationship_type: tosca.relationships.HostedOn
+  EnterpriseAppNodeType:
+    type: EnterpriseAppNodeType
+    requirements:
+      - con_50: WebsphereNodeType
+        relationship_type: tosca.relationships.HostedOn
+      - con_73: SampleDBNodeType
+        relationship_type: tosca.relationships.ConnectsTo
+  SampleDBNodeType:
+    type: SampleDBNodeType
+    requirements:
+      - con_61: DB2NodeType
+        relationship_type: tosca.relationships.HostedOn
