@@ -1,0 +1,147 @@
+# Required TOSCA Definitions version string
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+# Optional. default namespace (schema, types version)
+tosca_default_namespace: http://types.opentosca.org
+
+# Optional name of this service template
+template_name: Enterprise_Demo
+
+# Optional author of this service template
+template_author: DevPro
+
+# Optional version of this service template
+template_version: 1.0
+
+description: Service Template for Websphere on DB2
+
+node_types:
+  InstallOpenStackVM:
+    derived_from: VMApache
+    description: test
+    properties:
+      credentials:
+        type: string
+      endpointsAPI:
+        type: string
+      keypair:
+        type: string
+      minDisk:
+        type: string
+      minRAM:
+        type: string
+      flavorId:
+        type: string
+      imageId:
+        type: string
+      imageName:
+        type: string
+      floatingIp:
+        type: string
+      serverId:
+        type: string
+      privKey:
+        type: string
+    interfaces:
+      Custom_InstallVM:
+        InstallVMwithCustomKeypair:
+          implementation: InstallOpenStackVM_IA
+        InstallVMWithGeneratedKeypair:
+          implementation: InstallOpenStackVM_IA
+        InstallVMwithVustomFlavor:
+          implementation: InstallOpenStackVM_IA
+        InstallVMwithCustomImage:
+          implementation: InstallOpenStackVM_IA
+    artifacts:
+    - InstallOpenStackVM_IA: InstallOpenStackVM_Custom_InstallVM.war 
+      type: WAR 
+      description: <artifact_description>
+      properties:
+        serviceEndpoint: /services/InstallOpenStackVM_Custom_InstallVMPort
+        portType: http://types.opentosca.org}InstallOpenStackVM_Custom_InstallVM
+        invocationType: SAOP/HTTP
+        
+  OperatingSystem:
+    description: Operating System
+    derived_from: tosca.nodes.Root
+    properties:
+      hostname:
+        type: string
+      sshUser:
+        type: string
+      sshKey:
+        type: string
+      script:
+        type: string 
+    artifacts:
+    - UbuntuNodeTypeImplementation_IA_ArtifactTemplate: artifacttemplates/http%253A%252F%252Fwww.example.com%252Ftosca%252FTypes%252FMoodle/UbuntuNodeTypeImplementation_IA_ArtifactTemplate/files/org_opentosca_types_Ubuntu__InterfaceUbuntu.war
+      type: War
+      description: War file for Ubuntu
+      properties:
+        serviceEndpoint: /services/org_opentosca_types_Ubuntu__InterfaceUbuntuPort
+        portType: http://opentosca.org/types}org_opentosca_types_Ubuntu__InterfaceUbuntu
+        invocationType: SAOP/HTTP
+  DB2NodeType:
+    properties:
+    artifacts:
+    # Implementation Artifacts:
+    - DB2Install.sh: artifacttemplates/http%253A%252F%252Ftypes.opentosca.org/DB2Install.sh/files/db2.sh
+      type: tosca.artifacts.impl.Bash
+      description: Install Script
+  WebsphereNodeType:
+    properties:
+    artifacts:
+    # Implementation Artifacts:
+    - InstallWebsphere.sh: artifacttemplates/http%253A%252F%252Fwww.example.com%252FToscaTypes/InstallWebsphere.sh/files/websphere.sh
+      type: tosca.artifacts.impl.Bash
+      description: Install Script
+    - DeployWar.sh: artifacttemplates/http%253A%252F%252Fwww.example.com%252FToscaTypes/DeployWar.sh/files/wardeploy.sh
+      type: tosca.artifacts.impl.Bash
+      description: Deploy Script
+    - webapp_deployAppCommand: artifacttemplates/http%253A%252F%252Fwww.example.com%252FToscaTypes/webapp_deployAppCommand/files/deploy
+      type: tosca.artifacts.impl.Bash
+      description: Deploy Command
+    - EnterpriseWar.war: artifacttemplates/http%253A%252F%252Fwww.example.com%252FToscaTypes/EnterpriseWar.war/files/EnterpriseDemo.war
+      type: WAR
+      description: War file for EnterpriseDemo
+  
+artifact_types: 
+# list of artifact type definitions 
+  WAR: 
+    description: <artifact_description> 
+    mime_type: application/x-zip 
+    file_ext: [war] 
+    properties:
+      ServiceEndpoint:
+        type: string
+      PortType:
+        type: string
+      InvocationType:
+        type: string
+  
+node_templates:
+  InstallOpenStackVMTemplate:
+    type: InstallOpenStackVM
+    properties:
+      credentials: default
+      endpointsAPI: default
+      keypair:
+      minDisk: 
+      minRAM: 
+      flavorId: 53be14b8-8e9f-4556-b858-93a0996669a1
+      imageId:
+      imageName: WBSPHR DB2 INSTMGR
+      floatingIp:
+      serverId:
+      privKey:
+  LinuxOperatingSystem:
+    type: OperatingSystem
+    properties:
+      hostname:
+      sshUser: ubuntu
+      sshKey:
+      script: uname -a
+  DB2NodeType:
+    type: DB2NodeType
+  WebsphereNodeType:
+    type: WebsphereNodeType
