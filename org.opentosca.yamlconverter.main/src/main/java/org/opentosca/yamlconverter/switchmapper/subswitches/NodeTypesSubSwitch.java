@@ -116,7 +116,8 @@ public class NodeTypesSubSwitch extends AbstractSubSwitch {
 				final String requirementName = (String) requirement.keySet().toArray()[0];
 				final String requirementTypeName = capability.replace("Capability", "Requirement");
 				createAndAddRequirementType(capability, requirementTypeName);
-				requirementDefinition.setRequirementType(getNamespaceUtil().toTnsQName(requirementTypeName));
+				requirementDefinition.setRequirementType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(requirementTypeName,
+						ElementType.REQUIREMENT_TYPE));
 				requirementDefinition.setName(requirementName);
 			}
 			result.getRequirementDefinition().add(requirementDefinition);
