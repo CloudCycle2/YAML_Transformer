@@ -7,10 +7,11 @@ package org.opentosca.yamlconverter.switchmapper.typemapper;
  */
 public enum ElementType {
 
-    RELATIONSHIP_TYPE,
-    CAPABILITY_TYPE,
-    INTERFACE,
-    NODE_TYPE,
-    ARTIFACT_TYPE
+	RELATIONSHIP_TYPE,
+	CAPABILITY_TYPE,
+	INTERFACE,
+	NODE_TYPE,
+	ARTIFACT_TYPE,
+	REQUIREMENT_TYPE
 
 }

@@ -201,7 +201,7 @@ public class NodeTemplatesSubSwitch extends AbstractSubSwitch {
 			final TRequirement tRequirement = new TRequirement();
 			tRequirement.setId(requirementName);
 			tRequirement.setName(requirementName);
-			tRequirement.setType(getNamespaceUtil().toTnsQName(requirementTypeName));
+			tRequirement.setType(getTypeMapperUtil().getCorrectTypeReferenceAsQName(requirementTypeName, ElementType.REQUIREMENT_TYPE));
 			resultRequirements.getRequirement().add(tRequirement);
 		} else {
 			throw new RuntimeException("This type of requirements definition is not supported." + "Convention: name = [...]Capability");
