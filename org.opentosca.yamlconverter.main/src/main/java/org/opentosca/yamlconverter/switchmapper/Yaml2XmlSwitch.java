@@ -1,6 +1,8 @@
 package org.opentosca.yamlconverter.switchmapper;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
@@ -76,6 +78,12 @@ public class Yaml2XmlSwitch {
 	 * InputVarName -> InputVarValue
 	 */
 	private Map<String, String> inputs = new HashMap<>();
+
+	private final List<String> requirementTypes = new LinkedList<String>();
+
+	public List<String> getRequirementTypeList() {
+		return this.requirementTypes;
+	}
 
 	private Definitions toscaResult = new Definitions();
 
@@ -277,4 +285,5 @@ public class Yaml2XmlSwitch {
 		}
 		return prefix + id;
 	}
+
 }
