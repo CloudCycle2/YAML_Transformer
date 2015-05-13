@@ -104,9 +104,6 @@ node_types:
     - EnterpriseWar.war: artifacttemplates/http%253A%252F%252Fwww.example.com%252FToscaTypes/EnterpriseWar.war/files/EnterpriseDemo.war
       type: WAR
       description: War file for EnterpriseDemo
-    requirements:
-      - con_45: LinuxOperatingSystem
-        relationship_type: tosca.relationships.HostedOn
   EnterpriseAppNodeType:
     properties:
   SampleDBNodeType:
@@ -159,7 +156,7 @@ node_templates:
   WebsphereNodeType:
     type: WebsphereNodeType
     requirements:
-      - con_31: LinuxOperatingSystem
+      - con_45: LinuxOperatingSystem
         relationship_type: tosca.relationships.HostedOn
   EnterpriseAppNodeType:
     type: EnterpriseAppNodeType
