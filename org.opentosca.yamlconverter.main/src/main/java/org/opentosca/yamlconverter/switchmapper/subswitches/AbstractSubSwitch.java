@@ -191,6 +191,14 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		}
 	}
 
+	protected boolean requirementTypeIsDefinied(String requirementName) {
+		return this.parent.getRequirementTypeList().contains(requirementName);
+	}
+
+	protected void defineRequirementType(String requirementName) {
+		this.parent.getRequirementTypeList().add(requirementName);
+	}
+
 	@Override
 	public abstract void process();
 }
