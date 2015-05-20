@@ -1,5 +1,10 @@
 package org.opentosca.yamlconverter.constraints;
 
+/**
+ * Constraint that checks if string has minimum length.
+ *
+ *
+ */
 public class MinLength extends TypeScalar<String, Integer> {
 
 	public MinLength(Class<String> dataType, Object constraintObject) {

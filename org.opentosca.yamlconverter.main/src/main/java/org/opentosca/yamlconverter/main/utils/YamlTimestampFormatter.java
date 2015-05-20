@@ -23,7 +23,6 @@ public class YamlTimestampFormatter {
 	// @formatter:on
 
 	private YamlTimestampFormatter() {
-
 	}
 
 	/**

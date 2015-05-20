@@ -21,6 +21,8 @@ import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 
 /**
+ * Util for parsing properties.
+ * 
  * @author Sebi
  */
 public class PropertiesParserUtil {
@@ -64,7 +66,7 @@ public class PropertiesParserUtil {
 
 		for (final Map.Entry<String, PropertyDefinition> entry : properties.entrySet()) {
 			this.parent.getXSDStringBuilder().append("<xs:element name=\"").append(entry.getKey()).append("\" type=\"xs:")
-			.append(entry.getValue().getType()).append("\" />\n");
+					.append(entry.getValue().getType()).append("\" />\n");
 		}
 
 		this.parent.getXSDStringBuilder().append("</xs:sequence>\n").append("</xs:complexType>\n");

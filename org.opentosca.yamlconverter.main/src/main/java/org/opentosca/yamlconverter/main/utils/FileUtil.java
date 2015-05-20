@@ -1,14 +1,14 @@
 package org.opentosca.yamlconverter.main.utils;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 public class FileUtil {
 	/**
@@ -20,7 +20,7 @@ public class FileUtil {
 	 * @throws IOException
 	 */
 	public String readYamlResource(String filepath) throws URISyntaxException, IOException {
-		URL urlToFile = getClass().getResource(filepath);
+		final URL urlToFile = getClass().getResource(filepath);
 		if (urlToFile != null) {
 			System.out.println("Try to read YAML file from classpath.");
 			return IOUtils.toString(getClass().getResourceAsStream(filepath), "UTF-8");
@@ -30,6 +30,12 @@ public class FileUtil {
 		}
 	}
 
+	/**
+	 * Makes an {@link InputStream} of a file given by filename.
+	 * 
+	 * @param file Filename of the file
+	 * @return {@link InputStream} of file
+	 */
 	public InputStream getResourceAsStream(String file) {
 		return getClass().getResourceAsStream(file);
 	}
@@ -45,6 +51,12 @@ public class FileUtil {
 		FileUtils.writeStringToFile(new File(filename), content);
 	}
 
+	/**
+	 * Deletes given Directory.
+	 * 
+	 * @param dir The {@link File}-Object of the directory.
+	 * @throws IOException if unable to delete.
+	 */
 	public static void deleteDirectory(File dir) throws IOException {
 		if (!dir.exists()) {
 			return;
@@ -58,6 +70,12 @@ public class FileUtil {
 		}
 	}
 
+	/**
+	 * Deletes all files inside directory.
+	 * 
+	 * @param directory The directory which contents should be deleted.
+	 * @throws IOException
+	 */
 	public static void cleanDirectory(final File directory) throws IOException {
 		if (!directory.exists()) {
 			final String message = directory + " does not exist";
@@ -88,6 +106,12 @@ public class FileUtil {
 		}
 	}
 
+	/**
+	 * Deletes {@link File}, whether it is a directory or not.
+	 * 
+	 * @param file The file to delete.
+	 * @throws IOException
+	 */
 	public static void forceDelete(final File file) throws IOException {
 		if (file.isDirectory()) {
 			deleteDirectory(file);
@@ -101,10 +125,5 @@ public class FileUtil {
 				throw new IOException(message);
 			}
 		}
-	}
-
-	public void copyDirectory(final String directory) {
-		// TODO: try to move one direction to another (add another method parameter)
-		System.out.println(directory);
 	}
 }

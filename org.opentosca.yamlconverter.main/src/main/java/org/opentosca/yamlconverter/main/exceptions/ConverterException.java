@@ -6,7 +6,10 @@ package org.opentosca.yamlconverter.main.exceptions;
  */
 public class ConverterException extends Exception {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * generated
+	 */
+	private static final long serialVersionUID = 4475509585300112934L;
 
 	public ConverterException(Exception e) {
 		super(e);

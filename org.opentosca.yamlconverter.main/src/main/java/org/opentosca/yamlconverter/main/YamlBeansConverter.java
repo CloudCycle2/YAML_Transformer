@@ -1,15 +1,27 @@
 package org.opentosca.yamlconverter.main;
 
+import java.io.StringWriter;
+import java.io.Writer;
+
+import org.opentosca.yamlconverter.main.exceptions.ConverterException;
+import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ArtifactType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityDefinition;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.CapabilityType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Group;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.Output;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.PropertyDefinition;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.RelationshipType;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
+import org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement;
+
 import com.esotericsoftware.yamlbeans.YamlConfig;
 import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
-import org.opentosca.yamlconverter.main.exceptions.ConverterException;
-import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
-import org.opentosca.yamlconverter.yamlmodel.yaml.element.*;
-
-import java.io.StringWriter;
-import java.io.Writer;
 
 /**
  * This Converter uses YamlBeans to convert YAML to YAML beans (bi-directional).
@@ -20,10 +32,9 @@ import java.io.Writer;
 public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
 	/**
-	 * Convert {@code yamlString} to {@link org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate}
-	 * using {@link com.esotericsoftware.yamlbeans.YamlReader}.
-	 * Makes use of {@link #adjustConfig(com.esotericsoftware.yamlbeans.YamlConfig)} to set some properties for
-	 * {@link com.esotericsoftware.yamlbeans.YamlConfig}.
+	 * Convert {@code yamlString} to {@link org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate} using
+	 * {@link com.esotericsoftware.yamlbeans.YamlReader}. Makes use of {@link #adjustConfig(com.esotericsoftware.yamlbeans.YamlConfig)} to
+	 * set some properties for {@link com.esotericsoftware.yamlbeans.YamlConfig}.
 	 *
 	 * @param yamlString A Tosca YAML in a String
 	 * @return service template containing values from {@code yamlString}
@@ -45,12 +56,10 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 
 	/**
 	 * Convert {@link org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement} to a string using
-	 * {@link com.esotericsoftware.yamlbeans.YamlWriter}.
-	 * Makes use of {@link #adjustConfig(com.esotericsoftware.yamlbeans.YamlConfig)} to set properties for
-	 * {@link com.esotericsoftware.yamlbeans.YamlConfig}.
+	 * {@link com.esotericsoftware.yamlbeans.YamlWriter}. Makes use of {@link #adjustConfig(com.esotericsoftware.yamlbeans.YamlConfig)} to
+	 * set properties for {@link com.esotericsoftware.yamlbeans.YamlConfig}.
 	 *
-	 * @param yamlRoot child element of {@link org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement}
-	 *                 containing values
+	 * @param yamlRoot child element of {@link org.opentosca.yamlconverter.yamlmodel.yaml.element.YAMLElement} containing values
 	 * @return {@code yamlRoot} as YAML string
 	 * @throws ConverterException
 	 */
@@ -71,7 +80,12 @@ public class YamlBeansConverter implements IToscaYaml2YamlBeanConverter {
 		return output.toString();
 	}
 
-	public void adjustConfig(YamlConfig config) {
+	/**
+	 * Adjusts the {@link YamlConfig} to our UseCase.
+	 * 
+	 * @param config The initial {@link YamlConfig}
+	 */
+	private void adjustConfig(YamlConfig config) {
 		config.setPropertyElementType(ServiceTemplate.class, "inputs", Input.class);
 		config.setPropertyElementType(ServiceTemplate.class, "node_templates", NodeTemplate.class);
 		config.setPropertyElementType(ServiceTemplate.class, "node_types", NodeType.class);

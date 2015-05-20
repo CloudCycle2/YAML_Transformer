@@ -39,10 +39,17 @@ public class JAXBConverter implements IToscaXml2XmlBeanConverter {
 	private Schema toscaXSD = null;
 	private NamespacePrefixMapper nsPrefixMapper = null;
 
+	/**
+	 * JAXBConverter without special namespace prefix-mapper.
+	 */
 	public JAXBConverter() {
-
 	}
 
+	/**
+	 * JAXBConverter with special namespace prefix-mapper.
+	 * 
+	 * @param nsPre A special namespace prefix-mapper.
+	 */
 	public JAXBConverter(NamespacePrefixMapper nsPre) {
 		this.nsPrefixMapper = nsPre;
 	}

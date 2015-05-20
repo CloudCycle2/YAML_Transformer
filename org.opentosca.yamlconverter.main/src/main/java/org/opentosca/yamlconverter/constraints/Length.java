@@ -1,5 +1,9 @@
 package org.opentosca.yamlconverter.constraints;
 
+/**
+ * Constraint that checks if String has a certain length.
+ *
+ */
 public class Length extends TypeScalar<String, Integer> {
 
 	public Length(Class<String> dataType, Object constraintObject) {
