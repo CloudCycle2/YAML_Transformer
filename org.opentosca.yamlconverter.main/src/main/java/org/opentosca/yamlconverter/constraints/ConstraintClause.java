@@ -55,6 +55,11 @@ public abstract class ConstraintClause<T> {
 		return constraints;
 	}
 
+	/**
+	 * Creates a {@link ConstraintClause} with the give dataType.
+	 * 
+	 * @param dataType The data type of the {@link ConstraintClause}
+	 */
 	public ConstraintClause(Class<?> dataType) {
 		this.dataType = dataType;
 	}

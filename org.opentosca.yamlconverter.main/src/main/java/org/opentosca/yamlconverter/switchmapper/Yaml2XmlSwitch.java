@@ -81,6 +81,11 @@ public class Yaml2XmlSwitch {
 
 	private final List<String> requirementTypes = new LinkedList<String>();
 
+	/**
+	 * Returns list of requirementTypes contained.
+	 *
+	 * @return
+	 */
 	public List<String> getRequirementTypeList() {
 		return this.requirementTypes;
 	}
@@ -89,14 +94,29 @@ public class Yaml2XmlSwitch {
 
 	private String usedNamespace = NS;
 
+	/**
+	 * The result of the switching.
+	 *
+	 * @return {@link Definitions}
+	 */
 	public Definitions getToscaResult() {
 		return this.toscaResult;
 	}
 
+	/**
+	 * The initial {@link ServiceTemplate}.
+	 * 
+	 * @return {@link ServiceTemplate}
+	 */
 	public ServiceTemplate getServiceTemplate() {
 		return this.st;
 	}
 
+	/**
+	 * The namespace that is used.
+	 * 
+	 * @return usedNamespace
+	 */
 	public String getUsedNamespace() {
 		return this.usedNamespace;
 	}

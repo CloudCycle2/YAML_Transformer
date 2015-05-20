@@ -9,6 +9,8 @@ import org.opentosca.yamlconverter.switchmapper.typemapper.ElementType;
 import org.opentosca.yamlconverter.switchmapper.typemapper.SpecificTypeMapper;
 
 /**
+ * Util for mapping types.
+ * 
  * @author Sebi
  */
 public class TypeMapperUtil {

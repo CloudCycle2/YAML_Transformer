@@ -11,6 +11,10 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 
+/**
+ * XMLElement for serialising any Properties-element.
+ *
+ */
 @XmlRootElement(name = "Properties")
 public class AnyMap extends HashMap<String, String> {
 

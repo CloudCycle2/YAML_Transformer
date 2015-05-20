@@ -23,7 +23,6 @@ import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 public class Parser implements IToscaYamlParser {
 
 	private final IToscaYaml2YamlBeanConverter yamlConverter = new YamlBeansConverter();
-	// TODO: make use of the interface, i.e. IToscaYaml2XmlConverter yamlXmlConverter = ...;
 	private final SwitchMapperConverter yamlXmlConverter = new SwitchMapperConverter();
 	private final IToscaXml2XmlBeanConverter xmlConverter = new JAXBConverter(new NSPrefixMapper());
 
@@ -134,6 +133,11 @@ public class Parser implements IToscaYamlParser {
 		this.yamlXmlConverter.setInputs(input);
 	}
 
+	/**
+	 * Returns the parsed {@link ServiceTemplate}.
+	 * 
+	 * @return parsed {@link ServiceTemplate}
+	 */
 	public ServiceTemplate getServiceTemplate() {
 		return this.serviceTempl;
 	}

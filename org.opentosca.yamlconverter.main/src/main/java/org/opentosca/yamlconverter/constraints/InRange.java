@@ -1,5 +1,9 @@
 package org.opentosca.yamlconverter.constraints;
 
+/**
+ * Constraint that checks if argument is in range.
+ *
+ */
 public class InRange extends TypeDualScalar<Comparable<?>, Comparable<?>> {
 
 	public InRange(Class<Comparable<?>> dataType, Object constraintObject) {

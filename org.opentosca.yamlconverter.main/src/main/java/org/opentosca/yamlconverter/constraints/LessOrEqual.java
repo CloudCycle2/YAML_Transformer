@@ -1,5 +1,10 @@
 package org.opentosca.yamlconverter.constraints;
 
+/**
+ * Constraint that checks if arguments are <=.
+ *
+ *
+ */
 public class LessOrEqual extends TypeScalar<Comparable<?>, Comparable<?>> {
 
 	public LessOrEqual(Class<Comparable<?>> dataType, Object constraintObject) {

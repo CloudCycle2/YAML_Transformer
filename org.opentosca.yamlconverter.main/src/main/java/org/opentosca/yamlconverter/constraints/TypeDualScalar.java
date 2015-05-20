@@ -2,6 +2,12 @@ package org.opentosca.yamlconverter.constraints;
 
 import java.util.Map;
 
+/**
+ * Abstract ConstraintClause consisting of 2 arguments.
+ *
+ * @param <T>
+ * @param <R>
+ */
 public abstract class TypeDualScalar<T, R> extends ConstraintClause<T> {
 	protected final R constraintArgument1;
 	protected final R constraintArgument2;

@@ -1,5 +1,10 @@
 package org.opentosca.yamlconverter.constraints;
 
+/**
+ * Constraint that checks of arguments are equal.
+ *
+ * @param <T> Type of arguments
+ */
 public class Equal<T> extends TypeScalar<T, T> {
 
 	public Equal(Class<T> dataType, Object constraintObject) {

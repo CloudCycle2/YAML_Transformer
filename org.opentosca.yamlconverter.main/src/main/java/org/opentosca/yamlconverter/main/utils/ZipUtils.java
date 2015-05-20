@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * Utility for zipping files.
+ *
+ */
 public class ZipUtils {
 
 	private final List<File> fileList;
@@ -17,6 +21,11 @@ public class ZipUtils {
 		this.fileList = new ArrayList<File>();
 	}
 
+	/**
+	 * Zip alle files to the given filename.
+	 * 
+	 * @param zipFile Filename of resulting zipFile
+	 */
 	public void zipIt(String zipFile) {
 		final byte[] buffer = new byte[1024];
 		FileOutputStream fos = null;
@@ -68,13 +77,16 @@ public class ZipUtils {
 		}
 	}
 
+	/**
+	 * Adds File or Directory (recursive) to List of files to zip.
+	 * 
+	 * @param node top level node of file/directory.
+	 */
 	public void generateFileList(File node) {
 		// add file only
 		if (node.isFile()) {
 			this.fileList.add(node);
-		}
-
-		if (node.isDirectory()) {
+		} else if (node.isDirectory()) {
 			final File[] files = node.listFiles();
 			if (files != null) {
 				for (final File file : files) {

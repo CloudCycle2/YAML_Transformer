@@ -1,5 +1,10 @@
 package org.opentosca.yamlconverter.constraints;
 
+/**
+ * Constraint that checks if arguments are greater.
+ *
+ *
+ */
 public class GreaterThan extends TypeScalar<Comparable<?>, Comparable<?>> {
 
 	public GreaterThan(Class<Comparable<?>> dataType, Object constraintObject) {

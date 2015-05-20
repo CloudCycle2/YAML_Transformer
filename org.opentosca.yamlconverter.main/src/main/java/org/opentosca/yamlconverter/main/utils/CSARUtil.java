@@ -92,8 +92,6 @@ public class CSARUtil {
 		FileUtils.copyInputStreamToFile(fileUtil.getResourceAsStream(TOSCA_BASE_TYPES_XSD), new File(TOSCA_BASE_TYPES_XSD_PATH));
 		FileUtils.copyInputStreamToFile(fileUtil.getResourceAsStream(TOSCA_SPECIFIC_TYPES_XSD), new File(TOSCA_SPECIFIC_TYPES_XSD_PATH));
 		FileUtils.copyInputStreamToFile(fileUtil.getResourceAsStream(TOSCA_ARTIFACTS_XSD), new File(TOSCA_ARTIFACTS_XSD_PATH));
-		fileUtil.copyDirectory("/icons");
-		fileUtil.copyDirectory("/scripts");
 	}
 
 	private static String generateMetaFileContent(ServiceTemplate st) {
@@ -107,9 +105,9 @@ public class CSARUtil {
 		}
 		result.append("Entry-Definitions: " + DEFINITIONS_FOLDER + "/" + DEFINITIONS_XML_FILENAME + "\n");
 		result.append("Name: ").append(DEF_BASE_TYPES).append("\n").append("Content-Type: application/vnd.oasis.tosca.definitions\n")
-		.append("Diagram: ").append(DEF_BASE_TYPES_DIAGRAM).append("\n").append("\n").append("Name: ").append(DEF_SPECIFIC_TYPES)
-				.append("\n").append("Content-Type: application/vnd.oasis.tosca.definitions\n").append("Diagram: ")
-				.append(DEF_SPECIFIC_TYPES_DIAGRAM);
+				.append("Diagram: ").append(DEF_BASE_TYPES_DIAGRAM).append("\n").append("\n").append("Name: ").append(DEF_SPECIFIC_TYPES)
+		.append("\n").append("Content-Type: application/vnd.oasis.tosca.definitions\n").append("Diagram: ")
+		.append(DEF_SPECIFIC_TYPES_DIAGRAM);
 		return result.toString();
 	}
 }

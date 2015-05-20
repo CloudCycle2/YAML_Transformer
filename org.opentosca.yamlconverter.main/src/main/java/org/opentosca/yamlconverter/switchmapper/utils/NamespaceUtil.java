@@ -5,6 +5,8 @@ import javax.xml.namespace.QName;
 import org.opentosca.yamlconverter.switchmapper.Yaml2XmlSwitch;
 
 /**
+ * Util to maintain namespaces.
+ * 
  * @author Sebi
  */
 public class NamespaceUtil {
@@ -28,6 +30,12 @@ public class NamespaceUtil {
 		return new QName(this.targetNamespace, localName, Yaml2XmlSwitch.TARGET_NS_PREFIX);
 	}
 
+	/**
+	 * Creates a QName element for the given local name with the pre-defined type namespace.
+	 *
+	 * @param localName local name of the element
+	 * @return the QName
+	 */
 	public QName toTypeNSQName(String localName) {
 		return new QName(Yaml2XmlSwitch.TYPES_NS, localName, "types");
 	}

@@ -41,6 +41,11 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 	private final TypeMapperUtil typeMapperUtil;
 	private final PropertiesParserUtil propertiesParserUtil;
 
+	/**
+	 * Initialise the {@link AbstractSubSwitch} with its parent switch.
+	 *
+	 * @param parentSwitch The parent switch
+	 */
 	public AbstractSubSwitch(Yaml2XmlSwitch parentSwitch) {
 		this.parent = parentSwitch;
 		this.namespaceUtil = new NamespaceUtil(getDefinitions().getTargetNamespace());
@@ -48,22 +53,47 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		this.propertiesParserUtil = new PropertiesParserUtil(this.parent, getServiceTemplate());
 	}
 
+	/**
+	 * Get result from parent switch.
+	 *
+	 * @return
+	 */
 	protected Definitions getDefinitions() {
 		return this.parent.getToscaResult();
 	}
 
+	/**
+	 * Get initial ServiceTemplate from parent switch.
+	 *
+	 * @return
+	 */
 	protected ServiceTemplate getServiceTemplate() {
 		return this.parent.getServiceTemplate();
 	}
 
+	/**
+	 * Get target namespace from parent switch.
+	 *
+	 * @return
+	 */
 	protected String getTargetNamespace() {
 		return this.parent.getUsedNamespace();
 	}
 
+	/**
+	 * Get {@link NamespaceUtil} to use.
+	 *
+	 * @return
+	 */
 	protected NamespaceUtil getNamespaceUtil() {
 		return this.namespaceUtil;
 	}
 
+	/**
+	 * Get {@link TypeMapperUtil} for use.
+	 *
+	 * @return
+	 */
 	protected TypeMapperUtil getTypeMapperUtil() {
 		return this.typeMapperUtil;
 	}
@@ -191,10 +221,21 @@ public abstract class AbstractSubSwitch implements ISubSwitch {
 		}
 	}
 
+	/**
+	 * Checks of requirement type is already defined.
+	 *
+	 * @param requirementName name of the requirement type
+	 * @return true if defined, false else
+	 */
 	protected boolean requirementTypeIsDefinied(String requirementName) {
 		return this.parent.getRequirementTypeList().contains(requirementName);
 	}
 
+	/**
+	 * Save that requirement type is defined.
+	 *
+	 * @param requirementName the name of the requirement type
+	 */
 	protected void defineRequirementType(String requirementName) {
 		this.parent.getRequirementTypeList().add(requirementName);
 	}

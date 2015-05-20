@@ -1,5 +1,9 @@
 package org.opentosca.yamlconverter.constraints;
 
+/**
+ * Constraints that check if String has maximum length.
+ *
+ */
 public class MaxLength extends TypeScalar<String, Integer> {
 
 	public MaxLength(Class<String> dataType, Object constraintObject) {
