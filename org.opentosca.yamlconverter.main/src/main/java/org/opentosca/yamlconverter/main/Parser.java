@@ -1,5 +1,6 @@
 package org.opentosca.yamlconverter.main;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.opentosca.yamlconverter.main.exceptions.ConverterException;
 import org.opentosca.yamlconverter.main.interfaces.IToscaXml2XmlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
+import org.opentosca.yamlconverter.main.utils.CSARUtil;
 import org.opentosca.yamlconverter.main.utils.ConstraintUtils;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
@@ -134,6 +136,11 @@ public class Parser implements IToscaYamlParser {
 
 	public ServiceTemplate getServiceTemplate() {
 		return this.serviceTempl;
+	}
+
+	@Override
+	public void makeCsar(String path) throws IOException {
+		CSARUtil.createCSAR(this.serviceTempl, getXML(), getXSD(), path);
 	}
 
 }
