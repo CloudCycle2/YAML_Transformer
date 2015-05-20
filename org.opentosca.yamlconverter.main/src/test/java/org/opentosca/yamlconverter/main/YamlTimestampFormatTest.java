@@ -1,4 +1,4 @@
-package org.opentosca.yamlconverter.main.util;
+package org.opentosca.yamlconverter.main;
 
 import static org.junit.Assert.fail;
 
@@ -9,9 +9,10 @@ import java.util.TimeZone;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.opentosca.yamlconverter.main.util.BaseTest;
 import org.opentosca.yamlconverter.main.utils.YamlTimestampFormatter;
 
-public class YamlTimestampFormatTest {
+public class YamlTimestampFormatTest extends BaseTest {
 
 	@Test
 	public void parse() {

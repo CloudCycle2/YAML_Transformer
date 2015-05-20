@@ -9,12 +9,45 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.opentosca.yamlconverter.constraints.ConstraintClause;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
+import org.opentosca.yamlconverter.main.interfaces.IToscaYamlParser;
+import org.opentosca.yamlconverter.main.util.BaseTest;
 import org.opentosca.yamlconverter.main.utils.PropertyType;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.Input;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 
-public class YamlConstraintsTest extends BaseTest {
+public class YamlInputTest extends BaseTest {
 	private final IToscaYaml2YamlBeanConverter converter = new YamlBeansConverter();
+	private final IToscaYamlParser parser = new Parser();
+
+	@Test
+	public void testReadYamlInputs_useInputs() throws Exception {
+		final ServiceTemplate templ = this.converter.convertToYamlBean(this.testUtils.readYamlTestResource("/yaml/useInputs.yml"));
+		Assert.assertNotNull(templ);
+		final Object memSize = templ.getNode_templates().get("my_server").getProperties().get("mem_size");
+		Assert.assertNotNull(memSize);
+		Assert.assertTrue(((Map<String, Object>) memSize).containsKey("get_input"));
+	}
+
+	@Test
+	public void testGetInputRequirements() throws Exception {
+		final String yamlInput = this.testUtils.readYamlTestResource("/yaml/inputs.yml");
+		this.parser.parse(yamlInput);
+		final Map<String, String> inputs = this.parser.getInputRequirementsText();
+		Assert.assertNotNull(inputs);
+		Assert.assertEquals(3, inputs.size());
+		Assert.assertTrue("must contain an input with key 'foo'", inputs.containsKey("foo"));
+	}
+
+	@Test
+	public void testGetInputRequirements_WithoutConstraints() throws Exception {
+		final String yamlInput = this.testUtils.readYamlTestResource("/yaml/inputs_emptyConstraints.yml");
+		this.parser.parse(yamlInput);
+		final Map<String, String> inputs = this.parser.getInputRequirementsText();
+		Assert.assertNotNull(inputs);
+		Assert.assertEquals(1, inputs.size());
+		Assert.assertTrue("must contain an input with key 'foo'", inputs.containsKey("foo"));
+		Assert.assertTrue("constraints are not in description", inputs.get("foo").toLowerCase().contains("constraints: none"));
+	}
 
 	@Test
 	public void testReadYamlInputs() throws Exception {
