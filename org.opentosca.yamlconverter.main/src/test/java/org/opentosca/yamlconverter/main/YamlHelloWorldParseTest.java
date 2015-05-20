@@ -6,6 +6,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 import org.opentosca.yamlconverter.main.interfaces.IToscaYaml2YamlBeanConverter;
+import org.opentosca.yamlconverter.main.util.BaseTest;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.NodeTemplate;
 import org.opentosca.yamlconverter.yamlmodel.yaml.element.ServiceTemplate;
 

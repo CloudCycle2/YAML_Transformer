@@ -1,8 +1,7 @@
-package org.opentosca.yamlconverter.main;
+package org.opentosca.yamlconverter.main.util;
 
 import org.junit.After;
 import org.junit.Before;
-import org.opentosca.yamlconverter.main.util.TestUtils;
 
 /**
  * @author Sebi
