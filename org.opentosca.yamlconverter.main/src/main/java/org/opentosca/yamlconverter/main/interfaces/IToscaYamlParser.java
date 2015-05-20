@@ -4,9 +4,16 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * This interface is the main interface to parse a YAML document and get its XML representation as a response. Method call order: 1.)
- * {@link #parse(String)} 2.) {@link #getInputRequirementsText()} 3.) {@link #setInputValues(java.util.Map)} 4.) {@link #getXML()} 5.)
- * {@link #getXSD()} 6. {@link #makeCsar(String)}
+ * This interface is the main interface to parse a YAML document and get its XML representation as a response. Method call order:
+ *
+ * <pre>
+ * 1.) {@link #parse(String)}
+ * 2.) {@link #getInputRequirementsText()}
+ * 3.) {@link #setInputValues(java.util.Map)}
+ * 4.) {@link #getXML()}
+ * 5.) {@link #getXSD()}
+ * 6.) {@link #makeCsar(String)}
+ * </pre>
  *
  * Method calls 2, 3, 5 and 6 are not necessary, but recommended.
  */
@@ -26,16 +33,20 @@ public interface IToscaYamlParser {
 	public void parse(String yamlString);
 
 	/**
-	 * Get the parsed YAML as a XML document as String. Requires previous call of {@link #parse(String)}. Optional method calls: call
-	 * {@link #getInputRequirementsText()} to retrieve inputs and {@link #setInputValues(java.util.Map)} to set values for YAML inputs.
+	 * Get the parsed YAML as a XML document as String. <br>
+	 * Requires previous call of {@link #parse(String)}. <br>
+	 * Optional method calls: call {@link #getInputRequirementsText()} to retrieve inputs and {@link #setInputValues(java.util.Map)} to set
+	 * values for YAML inputs.
 	 *
 	 * @return parsed XML as String
 	 */
 	public String getXML();
 
 	/**
-	 * Get the corresponding XSD as a String. Requires previous call of {@link #parse(String)}. Optional method calls: call
-	 * {@link #getInputRequirementsText()} to retrieve inputs and {@link #setInputValues(java.util.Map)} to set values for YAML inputs.
+	 * Get the corresponding XSD as a String. <br>
+	 * Requires previous call of {@link #parse(String)}. <br>
+	 * Optional method calls: call {@link #getInputRequirementsText()} to retrieve inputs and {@link #setInputValues(java.util.Map)} to set
+	 * values for YAML inputs.
 	 *
 	 * @return parsed XSD
 	 */
