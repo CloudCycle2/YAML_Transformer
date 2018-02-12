@@ -9,5 +9,5 @@ Documentation is published at https://github.com/CloudCycle2/YAML_Transformer/wi
 The wiki includes many things about all project aspects whereas the documentation folder contains how a YAML document is transformed to XML.
 This is important if you want to use the YAML Transformer and would like to know the representation of YAML elements in XML.
 
-# License
+## License
 Apache-2.0.
